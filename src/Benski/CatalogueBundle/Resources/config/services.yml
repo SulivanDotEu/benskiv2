@@ -1,0 +1,7 @@
+parameters:
+#    benski_catalogue.example.class: Benski\CatalogueBundle\Example
+
+services:
+#    benski_catalogue.example:
+#        class: %benski_catalogue.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

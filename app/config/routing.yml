@@ -1,0 +1,7 @@
+benski_catalogue:
+    resource: "@BenskiCatalogueBundle/Resources/config/routing.yml"
+    prefix:   /
+
+BenskiCatalogueBundle_destination:
+        resource: "@BenskiCatalogueBundle/Resources/config/routing/destination.yml"
+        prefix:   /destination

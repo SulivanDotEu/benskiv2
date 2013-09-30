@@ -1,0 +1,30 @@
+destination:
+    pattern:  /
+    defaults: { _controller: "BenskiCatalogueBundle:Destination:index" }
+
+destination_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "BenskiCatalogueBundle:Destination:show" }
+
+destination_new:
+    pattern:  /new
+    defaults: { _controller: "BenskiCatalogueBundle:Destination:new" }
+
+destination_create:
+    pattern:  /create
+    defaults: { _controller: "BenskiCatalogueBundle:Destination:create" }
+    requirements: { _method: post }
+
+destination_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "BenskiCatalogueBundle:Destination:edit" }
+
+destination_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "BenskiCatalogueBundle:Destination:update" }
+    requirements: { _method: post|put }
+
+destination_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "BenskiCatalogueBundle:Destination:delete" }
+    requirements: { _method: post|delete }
