@@ -528,8 +528,7 @@ class appDevDebugProjectContainer extends Container
      */
     protected function getDoctrine_Orm_DefaultEntityManagerService()
     {
-        $a = new \Doctrine\Common\Cache\ArrayCache();
-        $a->setNamespace('sf2orm_default_5e6938eecde7c840efebe66f368f5ac9');
+        $a = $this->get('annotation_reader');
 
         $b = new \Doctrine\Common\Cache\ArrayCache();
         $b->setNamespace('sf2orm_default_5e6938eecde7c840efebe66f368f5ac9');
@@ -537,23 +536,29 @@ class appDevDebugProjectContainer extends Container
         $c = new \Doctrine\Common\Cache\ArrayCache();
         $c->setNamespace('sf2orm_default_5e6938eecde7c840efebe66f368f5ac9');
 
-        $d = new \Doctrine\ORM\Mapping\Driver\DriverChain();
-        $d->addDriver(new \Doctrine\ORM\Mapping\Driver\AnnotationDriver($this->get('annotation_reader'), array(0 => 'E:\\Mes programmes\\wamp\\www\\benskiv2\\src\\Benski\\CatalogueBundle\\Entity')), 'Benski\\CatalogueBundle\\Entity');
+        $d = new \Doctrine\Common\Cache\ArrayCache();
+        $d->setNamespace('sf2orm_default_5e6938eecde7c840efebe66f368f5ac9');
 
-        $e = new \Doctrine\ORM\Configuration();
-        $e->setEntityNamespaces(array('BenskiCatalogueBundle' => 'Benski\\CatalogueBundle\\Entity'));
-        $e->setMetadataCacheImpl($a);
-        $e->setQueryCacheImpl($b);
-        $e->setResultCacheImpl($c);
-        $e->setMetadataDriverImpl($d);
-        $e->setProxyDir('E:/Mes programmes/wamp/www/benskiv2/app/cache/dev/doctrine/orm/Proxies');
-        $e->setProxyNamespace('Proxies');
-        $e->setAutoGenerateProxyClasses(true);
-        $e->setClassMetadataFactoryName('Doctrine\\ORM\\Mapping\\ClassMetadataFactory');
-        $e->setDefaultRepositoryClassName('Doctrine\\ORM\\EntityRepository');
-        $e->setNamingStrategy(new \Doctrine\ORM\Mapping\DefaultNamingStrategy());
+        $e = new \Doctrine\ORM\Mapping\Driver\AnnotationDriver($a, array(0 => 'E:\\Mes programmes\\wamp\\www\\benskiv2\\src\\Benski\\CatalogueBundle\\Entity', 1 => 'E:\\Mes programmes\\wamp\\www\\benskiv2\\src\\Benski\\CommonBundle\\Entity'));
 
-        $this->services['doctrine.orm.default_entity_manager'] = $instance = call_user_func(array('Doctrine\\ORM\\EntityManager', 'create'), $this->get('doctrine.dbal.default_connection'), $e);
+        $f = new \Doctrine\ORM\Mapping\Driver\DriverChain();
+        $f->addDriver($e, 'Benski\\CatalogueBundle\\Entity');
+        $f->addDriver($e, 'Benski\\CommonBundle\\Entity');
+
+        $g = new \Doctrine\ORM\Configuration();
+        $g->setEntityNamespaces(array('BenskiCatalogueBundle' => 'Benski\\CatalogueBundle\\Entity', 'BenskiCommonBundle' => 'Benski\\CommonBundle\\Entity'));
+        $g->setMetadataCacheImpl($b);
+        $g->setQueryCacheImpl($c);
+        $g->setResultCacheImpl($d);
+        $g->setMetadataDriverImpl($f);
+        $g->setProxyDir('E:/Mes programmes/wamp/www/benskiv2/app/cache/dev/doctrine/orm/Proxies');
+        $g->setProxyNamespace('Proxies');
+        $g->setAutoGenerateProxyClasses(true);
+        $g->setClassMetadataFactoryName('Doctrine\\ORM\\Mapping\\ClassMetadataFactory');
+        $g->setDefaultRepositoryClassName('Doctrine\\ORM\\EntityRepository');
+        $g->setNamingStrategy(new \Doctrine\ORM\Mapping\DefaultNamingStrategy());
+
+        $this->services['doctrine.orm.default_entity_manager'] = $instance = call_user_func(array('Doctrine\\ORM\\EntityManager', 'create'), $this->get('doctrine.dbal.default_connection'), $g);
 
         $this->get('doctrine.orm.default_manager_configurator')->configure($instance);
 
@@ -1801,7 +1806,7 @@ class appDevDebugProjectContainer extends Container
         $g->createUser(new \Symfony\Component\Security\Core\User\User('user', 'userpass', array(0 => 'ROLE_USER')));
         $g->createUser(new \Symfony\Component\Security\Core\User\User('admin', 'adminpass', array(0 => 'ROLE_ADMIN')));
 
-        return $this->services['security.firewall.map.context.main'] = new \Symfony\Bundle\SecurityBundle\Security\FirewallContext(array(0 => new \Symfony\Component\Security\Http\Firewall\ChannelListener($f, new \Symfony\Component\Security\Http\EntryPoint\RetryAuthenticationEntryPoint(80, 443), $a), 1 => new \Symfony\Component\Security\Http\Firewall\ContextListener($b, array(0 => $g), 'main', $a, $this->get('event_dispatcher', ContainerInterface::NULL_ON_INVALID_REFERENCE)), 2 => new \Symfony\Component\Security\Http\Firewall\AnonymousAuthenticationListener($b, '52492b088d9ed', $a), 3 => new \Symfony\Component\Security\Http\Firewall\AccessListener($b, $this->get('security.access.decision_manager'), $f, $this->get('security.authentication.manager'), $a)), new \Symfony\Component\Security\Http\Firewall\ExceptionListener($b, $this->get('security.authentication.trust_resolver'), new \Symfony\Component\Security\Http\HttpUtils($c, $c), 'main', NULL, NULL, NULL, $a));
+        return $this->services['security.firewall.map.context.main'] = new \Symfony\Bundle\SecurityBundle\Security\FirewallContext(array(0 => new \Symfony\Component\Security\Http\Firewall\ChannelListener($f, new \Symfony\Component\Security\Http\EntryPoint\RetryAuthenticationEntryPoint(80, 443), $a), 1 => new \Symfony\Component\Security\Http\Firewall\ContextListener($b, array(0 => $g), 'main', $a, $this->get('event_dispatcher', ContainerInterface::NULL_ON_INVALID_REFERENCE)), 2 => new \Symfony\Component\Security\Http\Firewall\AnonymousAuthenticationListener($b, '52494c73eced1', $a), 3 => new \Symfony\Component\Security\Http\Firewall\AccessListener($b, $this->get('security.access.decision_manager'), $f, $this->get('security.authentication.manager'), $a)), new \Symfony\Component\Security\Http\Firewall\ExceptionListener($b, $this->get('security.authentication.trust_resolver'), new \Symfony\Component\Security\Http\HttpUtils($c, $c), 'main', NULL, NULL, NULL, $a));
     }
 
     /**
@@ -2825,6 +2830,7 @@ class appDevDebugProjectContainer extends Container
         $instance->addPath('E:\\Mes programmes\\wamp\\www\\benskiv2\\vendor\\symfony\\swiftmailer-bundle\\Symfony\\Bundle\\SwiftmailerBundle/Resources/views', 'Swiftmailer');
         $instance->addPath('E:\\Mes programmes\\wamp\\www\\benskiv2\\vendor\\doctrine\\doctrine-bundle\\Doctrine\\Bundle\\DoctrineBundle/Resources/views', 'Doctrine');
         $instance->addPath('E:\\Mes programmes\\wamp\\www\\benskiv2\\src\\Benski\\CatalogueBundle/Resources/views', 'BenskiCatalogue');
+        $instance->addPath('E:\\Mes programmes\\wamp\\www\\benskiv2\\src\\Benski\\CommonBundle/Resources/views', 'BenskiCommon');
         $instance->addPath('E:\\Mes programmes\\wamp\\www\\benskiv2\\vendor\\symfony\\symfony\\src\\Symfony\\Bundle\\WebProfilerBundle/Resources/views', 'WebProfiler');
         $instance->addPath('E:\\Mes programmes\\wamp\\www\\benskiv2\\vendor\\sensio\\distribution-bundle\\Sensio\\Bundle\\DistributionBundle/Resources/views', 'SensioDistribution');
         $instance->addPath('E:/Mes programmes/wamp/www/benskiv2/app/Resources/views');
@@ -3077,7 +3083,7 @@ class appDevDebugProjectContainer extends Container
      */
     protected function getSecurity_Authentication_ManagerService()
     {
-        $this->services['security.authentication.manager'] = $instance = new \Symfony\Component\Security\Core\Authentication\AuthenticationProviderManager(array(0 => new \Symfony\Component\Security\Core\Authentication\Provider\AnonymousAuthenticationProvider('52492b088d9ed')), true);
+        $this->services['security.authentication.manager'] = $instance = new \Symfony\Component\Security\Core\Authentication\AuthenticationProviderManager(array(0 => new \Symfony\Component\Security\Core\Authentication\Provider\AnonymousAuthenticationProvider('52494c73eced1')), true);
 
         $instance->setEventDispatcher($this->get('event_dispatcher'));
 
@@ -3236,6 +3242,7 @@ class appDevDebugProjectContainer extends Container
                 'DoctrineBundle' => 'Doctrine\\Bundle\\DoctrineBundle\\DoctrineBundle',
                 'SensioFrameworkExtraBundle' => 'Sensio\\Bundle\\FrameworkExtraBundle\\SensioFrameworkExtraBundle',
                 'BenskiCatalogueBundle' => 'Benski\\CatalogueBundle\\BenskiCatalogueBundle',
+                'BenskiCommonBundle' => 'Benski\\CommonBundle\\BenskiCommonBundle',
                 'WebProfilerBundle' => 'Symfony\\Bundle\\WebProfilerBundle\\WebProfilerBundle',
                 'SensioDistributionBundle' => 'Sensio\\Bundle\\DistributionBundle\\SensioDistributionBundle',
                 'SensioGeneratorBundle' => 'Sensio\\Bundle\\GeneratorBundle\\SensioGeneratorBundle',

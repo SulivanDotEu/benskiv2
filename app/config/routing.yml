@@ -1,3 +1,7 @@
+benski_common:
+    resource: "@BenskiCommonBundle/Resources/config/routing.yml"
+    prefix:   /
+
 benski_catalogue:
     resource: "@BenskiCatalogueBundle/Resources/config/routing.yml"
     prefix:   /
@@ -5,3 +9,11 @@ benski_catalogue:
 BenskiCatalogueBundle_destination:
         resource: "@BenskiCatalogueBundle/Resources/config/routing/destination.yml"
         prefix:   /destination
+        
+BenskiCatalogueBundle_date:
+        resource: "@BenskiCatalogueBundle/Resources/config/routing/date.yml"
+        prefix:   /date
+        
+BenskiCatalogueBundle_packdescriptor:
+        resource: "@BenskiCatalogueBundle/Resources/config/routing/packdescriptor.yml"
+        prefix:   /packdescriptor

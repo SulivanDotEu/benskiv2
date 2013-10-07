@@ -65,14 +65,21 @@ class __TwigTemplate_f3d9b031e1f8a03cdcc37a808ad79611 extends Twig_Template
                                     <li class=\"dropdown\">
                                         <a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\">
 
-                                            <i class=\"icon-calendar\">
-                                            </i> Catalogue 
-                                            <b class=\"caret\"></b>
+                                            <i class=\"icon-calendar\"></i> Catalogue<b class=\"caret\"></b>
                                         </a>
                                         <ul class=\"dropdown-menu\">
-                                            <li class=\"\"><a href=\"\"><i class=\"icon-list-alt\"></i> Lister</a></li>
-                                            <li class=\"\"><a href=\"\"><i class=\"icon-list-alt\"></i> Lister</a></li>
-                                            <li class=\"\"><a href=\"\"><i class=\"icon-list-alt\"></i> Lister</a></li>
+                                            <li class=\"\"><a href=\"";
+        // line 43
+        echo $this->env->getExtension('routing')->getPath("destination");
+        echo "\"><i class=\"icon-map-marker\"></i> Destination</a></li>
+                                            <li class=\"\"><a href=\"";
+        // line 44
+        echo $this->env->getExtension('routing')->getPath("sejour");
+        echo "\"><i class=\"icon-calendar\"></i> Séjour</a></li>
+                                            <li class=\"\"><a href=\"";
+        // line 45
+        echo $this->env->getExtension('routing')->getPath("appartement");
+        echo "\"><i class=\"icon-home\"></i> Appartement</a></li>
                                             <li class=\"\"><a href=\"\"><i class=\"icon-list-alt\"></i> Lister</a></li>
                                         </ul>
                                     </li>
@@ -96,23 +103,23 @@ class __TwigTemplate_f3d9b031e1f8a03cdcc37a808ad79611 extends Twig_Template
                     <div class=\"row\">
                         <div class=\"span8\">
 ";
-        // line 70
+        // line 68
         $this->displayBlock('header', $context, $blocks);
-        // line 75
+        // line 73
         echo "                            </div>
                             <div class=\"span4\">       
 
                     ";
-        // line 79
+        // line 77
         echo "                                Connecté en tant que ";
         echo " - <a href=\"";
         echo "\">Déconnexion</a>
 ";
-        // line 81
+        // line 79
         echo "                                <a href=\"";
         echo "\">Connexion</a>
 ";
-        // line 83
+        // line 81
         echo "                            </div>
 
                         </div>
@@ -121,22 +128,22 @@ class __TwigTemplate_f3d9b031e1f8a03cdcc37a808ad79611 extends Twig_Template
                 <div class=\"container-fluid\" id=\"mainContainer\">
                     <div class=\"row-fluid\">
                     ";
-        // line 90
+        // line 88
         $this->displayBlock('container', $context, $blocks);
-        // line 119
+        // line 117
         echo "                            </div>
 
                             <hr>
 
                             <footer>
-                                <p>Natagora &AMP; Benjamin Ellis © 2013 and beyond.</p>
+                                <p>Benski &AMP; Benjamin Ellis © 2013 and beyond.</p>
                             </footer>
                         </div>
 
   ";
-        // line 128
+        // line 126
         $this->displayBlock('javascripts', $context, $blocks);
-        // line 133
+        // line 131
         echo "
                     </body>
                 </html>";
@@ -168,51 +175,51 @@ class __TwigTemplate_f3d9b031e1f8a03cdcc37a808ad79611 extends Twig_Template
     ";
     }
 
-    // line 70
+    // line 68
     public function block_header($context, array $blocks = array())
     {
-        // line 71
+        // line 69
         echo "
                                 <h1>Benski</h1>
                                 <p>Des séjours en altitude de qualités pour la famille et les amis.</p>
                 ";
     }
 
-    // line 90
+    // line 88
     public function block_container($context, array $blocks = array())
     {
-        // line 91
+        // line 89
         $this->displayBlock('container_header', $context, $blocks);
-        // line 115
+        // line 113
         echo "          ";
         $this->displayBlock('body', $context, $blocks);
-        // line 117
+        // line 115
         echo "                                </div>
                         ";
     }
 
-    // line 91
+    // line 89
     public function block_container_header($context, array $blocks = array())
     {
-        // line 92
+        // line 90
         echo "                            <div id=\"content\" class=\"span12\">
                                 <div class=\"row-fluid\">
                                     <div class=\"span8\">
                                         <ul class=\"breadcrumb\">
 
                         ";
-        // line 97
+        // line 95
         $this->displayBlock('breadcrumb', $context, $blocks);
-        // line 101
+        // line 99
         echo "
                                         </ul>
                                     </div>
                                     <div class=\"span4\">
                                         <div class=\"pull-right\">
                                         ";
-        // line 106
+        // line 104
         $this->displayBlock('container_header_right', $context, $blocks);
-        // line 108
+        // line 106
         echo "                                            </div>
                                         </div>  
                                     </div>
@@ -222,38 +229,38 @@ class __TwigTemplate_f3d9b031e1f8a03cdcc37a808ad79611 extends Twig_Template
                                         ";
     }
 
-    // line 97
+    // line 95
     public function block_breadcrumb($context, array $blocks = array())
     {
-        // line 98
+        // line 96
         echo "                                            <li><a href=\"#\">Benski.be</a> <span class=\"divider\">/</span></li>
                                             <li><a href=\"#\">Administration</a> <span class=\"divider\">/</span></li>
                             ";
     }
 
-    // line 106
+    // line 104
     public function block_container_header_right($context, array $blocks = array())
     {
-        // line 107
+        // line 105
         echo "                                    ";
     }
 
-    // line 115
+    // line 113
     public function block_body($context, array $blocks = array())
     {
-        // line 116
+        // line 114
         echo "          ";
     }
 
-    // line 128
+    // line 126
     public function block_javascripts($context, array $blocks = array())
     {
-        // line 129
+        // line 127
         echo "    ";
-        // line 130
+        // line 128
         echo "                        <script src=\"//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js\"></script>
                         <script type=\"text/javascript\" src=\"";
-        // line 131
+        // line 129
         echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("js/bootstrap.js"), "html", null, true);
         echo "\"></script>
   ";
@@ -264,8 +271,13 @@ class __TwigTemplate_f3d9b031e1f8a03cdcc37a808ad79611 extends Twig_Template
         return "::layout.html.twig";
     }
 
+    public function isTraitable()
+    {
+        return false;
+    }
+
     public function getDebugInfo()
     {
-        return array (  257 => 131,  254 => 130,  252 => 129,  249 => 128,  245 => 116,  242 => 115,  238 => 107,  235 => 106,  229 => 98,  226 => 97,  216 => 108,  214 => 106,  207 => 101,  205 => 97,  198 => 92,  195 => 91,  190 => 117,  187 => 115,  185 => 91,  182 => 90,  175 => 71,  172 => 70,  166 => 20,  162 => 19,  158 => 18,  155 => 17,  152 => 16,  146 => 14,  140 => 133,  138 => 128,  127 => 119,  125 => 90,  116 => 83,  112 => 81,  107 => 79,  102 => 75,  100 => 70,  50 => 22,  48 => 16,  43 => 14,  32 => 5,  28 => 2,);
+        return array (  264 => 129,  261 => 128,  259 => 127,  256 => 126,  252 => 114,  249 => 113,  245 => 105,  242 => 104,  236 => 96,  233 => 95,  223 => 106,  221 => 104,  214 => 99,  212 => 95,  205 => 90,  202 => 89,  197 => 115,  194 => 113,  192 => 89,  189 => 88,  182 => 69,  179 => 68,  173 => 20,  169 => 19,  165 => 18,  162 => 17,  159 => 16,  153 => 14,  147 => 131,  145 => 126,  134 => 117,  132 => 88,  123 => 81,  119 => 79,  114 => 77,  109 => 73,  107 => 68,  81 => 45,  77 => 44,  73 => 43,  50 => 22,  48 => 16,  43 => 14,  32 => 5,  28 => 2,);
     }
 }

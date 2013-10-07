@@ -1,3 +1,8 @@
-benski_catalogue_homepage:
-    pattern:  /hello/{name}
-    defaults: { _controller: BenskiCatalogueBundle:Default:index }
+BenskiCatalogueBundle_sejour:
+        resource: "@BenskiCatalogueBundle/Resources/config/routing/sejour.yml"
+        prefix:   /sejour
+
+
+BenskiCatalogueBundle_appartement:
+        resource: "@BenskiCatalogueBundle/Resources/config/routing/appartement.yml"
+        prefix:   /appartement

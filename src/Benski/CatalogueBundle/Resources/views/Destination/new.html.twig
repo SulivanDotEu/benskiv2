@@ -1,7 +1,21 @@
-{% extends '::base.html.twig' %}
+{% extends 'BenskiCatalogueBundle:Destination:layout.html.twig' %}
+
+
+
+{% block header %}
+<h1>Destination creation</h1>
+{% endblock %}
+
+{% block breadcrumb %}
+{{ parent() }}
+<li class="active">new entity</li>
+{% endblock %}
+
+
+
+
 
 {% block body -%}
-    <h1>Destination creation</h1>
 
     {{ form(form) }}
 

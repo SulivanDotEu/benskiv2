@@ -17,6 +17,7 @@
       <parameter key="DoctrineBundle">Doctrine\Bundle\DoctrineBundle\DoctrineBundle</parameter>
       <parameter key="SensioFrameworkExtraBundle">Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle</parameter>
       <parameter key="BenskiCatalogueBundle">Benski\CatalogueBundle\BenskiCatalogueBundle</parameter>
+      <parameter key="BenskiCommonBundle">Benski\CommonBundle\BenskiCommonBundle</parameter>
       <parameter key="WebProfilerBundle">Symfony\Bundle\WebProfilerBundle\WebProfilerBundle</parameter>
       <parameter key="SensioDistributionBundle">Sensio\Bundle\DistributionBundle\SensioDistributionBundle</parameter>
       <parameter key="SensioGeneratorBundle">Sensio\Bundle\GeneratorBundle\SensioGeneratorBundle</parameter>
@@ -1527,7 +1528,7 @@
       <argument type="collection">
         <argument type="service">
           <service class="Symfony\Component\Security\Core\Authentication\Provider\AnonymousAuthenticationProvider" public="false">
-            <argument>52492b088d9ed</argument>
+            <argument>52494c73eced1</argument>
           </service>
         </argument>
       </argument>
@@ -1698,7 +1699,7 @@
         <argument type="service">
           <service class="Symfony\Component\Security\Http\Firewall\AnonymousAuthenticationListener" public="false">
             <argument type="service" id="security.context"/>
-            <argument>52492b088d9ed</argument>
+            <argument>52494c73eced1</argument>
             <argument type="service" id="monolog.logger.security" on-invalid="null"/>
           </service>
         </argument>
@@ -2095,6 +2096,7 @@
           <call method="setEntityNamespaces">
             <argument type="collection">
               <argument key="BenskiCatalogueBundle">Benski\CatalogueBundle\Entity</argument>
+              <argument key="BenskiCommonBundle">Benski\CommonBundle\Entity</argument>
             </argument>
           </call>
           <call method="setMetadataCacheImpl">
@@ -2133,10 +2135,23 @@
                       <argument type="service" id="annotation_reader"/>
                       <argument type="collection">
                         <argument>E:\Mes programmes\wamp\www\benskiv2\src\Benski\CatalogueBundle\Entity</argument>
+                        <argument>E:\Mes programmes\wamp\www\benskiv2\src\Benski\CommonBundle\Entity</argument>
                       </argument>
                     </service>
                   </argument>
                   <argument>Benski\CatalogueBundle\Entity</argument>
+                </call>
+                <call method="addDriver">
+                  <argument type="service">
+                    <service class="Doctrine\ORM\Mapping\Driver\AnnotationDriver" public="false">
+                      <argument type="service" id="annotation_reader"/>
+                      <argument type="collection">
+                        <argument>E:\Mes programmes\wamp\www\benskiv2\src\Benski\CatalogueBundle\Entity</argument>
+                        <argument>E:\Mes programmes\wamp\www\benskiv2\src\Benski\CommonBundle\Entity</argument>
+                      </argument>
+                    </service>
+                  </argument>
+                  <argument>Benski\CommonBundle\Entity</argument>
                 </call>
               </service>
             </argument>
@@ -2522,6 +2537,10 @@
       <call method="addPath">
         <argument>E:\Mes programmes\wamp\www\benskiv2\src\Benski\CatalogueBundle/Resources/views</argument>
         <argument>BenskiCatalogue</argument>
+      </call>
+      <call method="addPath">
+        <argument>E:\Mes programmes\wamp\www\benskiv2\src\Benski\CommonBundle/Resources/views</argument>
+        <argument>BenskiCommon</argument>
       </call>
       <call method="addPath">
         <argument>E:\Mes programmes\wamp\www\benskiv2\vendor\symfony\symfony\src\Symfony\Bundle\WebProfilerBundle/Resources/views</argument>

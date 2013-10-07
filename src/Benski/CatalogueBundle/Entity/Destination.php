@@ -3,6 +3,8 @@
 namespace Benski\CatalogueBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Benski\CommonBundle\Entity\VersionedObject;
+
 
 /**
  * Destination
@@ -10,8 +12,14 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="Benski\CatalogueBundle\Entity\DestinationRepository")
  */
-class Destination
+class Destination extends VersionedObject
 {
+   
+   public function __toString() {
+      return $this->getNom();
+   }
+
+   
     /**
      * @var integer
      *
@@ -91,4 +99,7 @@ class Destination
     {
         return $this->pays;
     }
+
+
+
 }
