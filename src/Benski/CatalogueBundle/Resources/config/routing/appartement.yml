@@ -1,0 +1,30 @@
+appartement:
+    pattern:  /
+    defaults: { _controller: "BenskiCatalogueBundle:Appartement:index" }
+
+appartement_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "BenskiCatalogueBundle:Appartement:show" }
+
+appartement_new:
+    pattern:  /new
+    defaults: { _controller: "BenskiCatalogueBundle:Appartement:new" }
+
+appartement_create:
+    pattern:  /create
+    defaults: { _controller: "BenskiCatalogueBundle:Appartement:create" }
+    requirements: { _method: post }
+
+appartement_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "BenskiCatalogueBundle:Appartement:edit" }
+
+appartement_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "BenskiCatalogueBundle:Appartement:update" }
+    requirements: { _method: post|put }
+
+appartement_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "BenskiCatalogueBundle:Appartement:delete" }
+    requirements: { _method: post|delete }

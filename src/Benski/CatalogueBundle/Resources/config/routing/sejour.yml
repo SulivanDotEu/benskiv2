@@ -1,0 +1,30 @@
+sejour:
+    pattern:  /
+    defaults: { _controller: "BenskiCatalogueBundle:Sejour:index" }
+
+sejour_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "BenskiCatalogueBundle:Sejour:show" }
+
+sejour_new:
+    pattern:  /new
+    defaults: { _controller: "BenskiCatalogueBundle:Sejour:new" }
+
+sejour_create:
+    pattern:  /create
+    defaults: { _controller: "BenskiCatalogueBundle:Sejour:create" }
+    requirements: { _method: post }
+
+sejour_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "BenskiCatalogueBundle:Sejour:edit" }
+
+sejour_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "BenskiCatalogueBundle:Sejour:update" }
+    requirements: { _method: post|put }
+
+sejour_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "BenskiCatalogueBundle:Sejour:delete" }
+    requirements: { _method: post|delete }

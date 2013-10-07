@@ -1,0 +1,30 @@
+{% extends 'BenskiCatalogueBundle:Appartement:layout.html.twig' %}
+
+
+{% block header %}
+<h1>Appartement creation</h1>
+{% endblock %}
+
+
+
+{% block breadcrumb %}
+{{ parent() }}
+<li class="active">new entity</li>
+{% endblock %}
+
+
+
+
+{% block body -%}
+    <h1>Appartement creation</h1>
+
+    {{ form(form) }}
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('appartement') }}">
+            Back to the list
+        </a>
+    </li>
+</ul>
+{% endblock %}

@@ -1,0 +1,53 @@
+{% extends 'BenskiCatalogueBundle:Appartement:layout.html.twig' %}
+
+
+{% block breadcrumb %}
+{{ parent() }}
+<li class="active">Show</li>
+{% endblock %}
+
+{% block header %}
+<h1>Appartement</h1>
+{% endblock %}
+
+
+
+{% block body -%}
+
+    <table class="table table-striped">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ entity.id }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ entity.nom }}</td>
+            </tr>
+            <tr>
+                <th>Qualite</th>
+                <td>{{ entity.qualite }}</td>
+            </tr>
+            <tr>
+                <th>Nombrelits</th>
+                <td>{{ entity.nombreLits }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+{% endblock %}
+
+
+
+{% block container_header_right %}
+<div class="btn-group">
+   <a class="btn " href="{{ path('appartement') }}">
+      <i class="icon-chevron-left"></i> 
+      Back to the list
+   </a>
+   <a class="btn " href="{{ path('appartement_edit', { 'id': entity.id }) }}">
+      <i class="icon-pencil"></i> Edit</a>
+</a>
+
+</div>
+{% endblock %}

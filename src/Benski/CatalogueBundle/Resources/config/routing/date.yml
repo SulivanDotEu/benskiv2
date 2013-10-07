@@ -1,0 +1,30 @@
+date:
+    pattern:  /
+    defaults: { _controller: "BenskiCatalogueBundle:Date:index" }
+
+date_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "BenskiCatalogueBundle:Date:show" }
+
+date_new:
+    pattern:  /new
+    defaults: { _controller: "BenskiCatalogueBundle:Date:new" }
+
+date_create:
+    pattern:  /create
+    defaults: { _controller: "BenskiCatalogueBundle:Date:create" }
+    requirements: { _method: post }
+
+date_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "BenskiCatalogueBundle:Date:edit" }
+
+date_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "BenskiCatalogueBundle:Date:update" }
+    requirements: { _method: post|put }
+
+date_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "BenskiCatalogueBundle:Date:delete" }
+    requirements: { _method: post|delete }

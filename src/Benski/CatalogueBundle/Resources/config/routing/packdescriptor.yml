@@ -1,0 +1,30 @@
+packdescriptor:
+    pattern:  /
+    defaults: { _controller: "BenskiCatalogueBundle:PackDescriptor:index" }
+
+packdescriptor_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "BenskiCatalogueBundle:PackDescriptor:show" }
+
+packdescriptor_new:
+    pattern:  /new
+    defaults: { _controller: "BenskiCatalogueBundle:PackDescriptor:new" }
+
+packdescriptor_create:
+    pattern:  /create
+    defaults: { _controller: "BenskiCatalogueBundle:PackDescriptor:create" }
+    requirements: { _method: post }
+
+packdescriptor_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "BenskiCatalogueBundle:PackDescriptor:edit" }
+
+packdescriptor_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "BenskiCatalogueBundle:PackDescriptor:update" }
+    requirements: { _method: post|put }
+
+packdescriptor_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "BenskiCatalogueBundle:PackDescriptor:delete" }
+    requirements: { _method: post|delete }

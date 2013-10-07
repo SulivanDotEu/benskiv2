@@ -1,0 +1,25 @@
+{% extends 'BenskiCatalogueBundle:Sejour:layout.html.twig' %}
+
+
+{% block header %}
+<h1>Sejour creation</h1>
+{% endblock %}
+
+{% block breadcrumb %}
+{{ parent() }}
+<li class="active">new entity</li>
+{% endblock %}
+
+
+{% block body -%}
+
+    {{ form(form) }}
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('sejour') }}">
+            Back to the list
+        </a>
+    </li>
+</ul>
+{% endblock %}
