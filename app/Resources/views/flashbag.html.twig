@@ -1,0 +1,19 @@
+{# empty Twig template #}
+
+{% for m in app.session.flashbag.get('notification') %}
+
+<div class="alert alert-{{ m.type }}">
+   <button type="button" class="close" data-dismiss="alert">&times;</button>
+        {% if m.title is defined %}
+   <b>{{ m.title }}</b>
+        {% endif %}
+   {{ m.content }}
+   <br>
+
+          {% if m.exception_dump is defined %}
+   <i>
+            {{ m.exception_dump }}
+      </i>
+        {% endif %}
+   </div>
+{% endfor %}

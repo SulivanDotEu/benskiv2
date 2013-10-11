@@ -1,0 +1,10 @@
+option:
+    pattern:  /
+    defaults: { _controller: "BenskiCatalogueBundle:AbstractOption:index" }
+
+option_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "BenskiCatalogueBundle:AbstractOption:show" }
+
+
+

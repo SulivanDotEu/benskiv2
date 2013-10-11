@@ -1,0 +1,52 @@
+{% extends 'BenskiCatalogueBundle:AbstractOption:layout.html.twig' %}
+
+{% block breadcrumb %}
+{{ parent() }}
+<li class="active">Show</li>
+{% endblock %}
+
+{% block header %}
+<h1>Option</h1>
+{% endblock %}
+
+{% block body -%}
+<h1>AbstractOption</h1>
+
+<table class="table table-striped">
+   <tbody>
+      <tr>
+         <th>Id</th>
+         <td>{{ entity.id }}</td>
+      </tr>
+      <tr>
+         <th>Nom</th>
+         <td>{{ entity.nom }}</td>
+      </tr>
+      <tr>
+         <th>Description</th>
+         <td>{{ entity.description }}</td>
+      </tr>
+      <tr>
+         <th>Type</th>
+         <td>{{ entity.type }}</td>
+      </tr>
+      <tr>
+         <th>Explication</th>
+         <td>{{ entity.explication }}</td>
+      </tr>
+   </tbody>
+</table>
+
+{% endblock %}
+
+    {% block container_header_right %}
+<div class="btn-group">
+   <a class="btn " href="{{ path('option') }}">
+      <i class="icon-chevron-left"></i> 
+      Back to the list
+   </a>
+
+</a>
+
+</div>
+{% endblock %}

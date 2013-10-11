@@ -22,6 +22,9 @@
     </head>
 
     <body>
+       {#
+       {{  render(controller('BenskiCommonBundle:Administration:getMenu')) }}
+#}
         <div class="navbar navbar-static-top">
             <div class="navbar-inner">
                 <div class="container">
@@ -88,6 +91,7 @@
                     {% block container %}
 {% block container_header %}
                             <div id="content" class="span12">
+                               {% include "::flashbag.html.twig" %}
                                 <div class="row-fluid">
                                     <div class="span8">
                                         <ul class="breadcrumb">
@@ -106,10 +110,7 @@
                                             </div>
                                         </div>  
                                     </div>
-
-
-
-                                        {% endblock %}
+                         {% endblock %}
           {% block body %}
           {% endblock %}
                                 </div>
