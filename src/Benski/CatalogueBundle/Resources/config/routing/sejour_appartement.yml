@@ -1,0 +1,30 @@
+sejour_appartement:
+    pattern:  /
+    defaults: { _controller: "BenskiCatalogueBundle:SejourAppartement:index" }
+
+sejour_appartement_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "BenskiCatalogueBundle:SejourAppartement:show" }
+
+sejour_appartement_bind:
+    pattern:  /bind/{id}
+    defaults: { _controller: "BenskiCatalogueBundle:SejourAppartement:bind" }
+
+sejour_appartement_create:
+    pattern:  /create
+    defaults: { _controller: "BenskiCatalogueBundle:SejourAppartement:create" }
+    requirements: { _method: post }
+
+sejour_appartement_edit:
+    pattern:  /edit/{appartement}/{sejour}
+    defaults: { _controller: "BenskiCatalogueBundle:SejourAppartement:edit" }
+
+sejour_appartement_update:
+    pattern:  /update/{appartement}/{sejour}
+    defaults: { _controller: "BenskiCatalogueBundle:SejourAppartement:update" }
+    requirements: { _method: post|put }
+
+sejour_appartement_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "BenskiCatalogueBundle:SejourAppartement:delete" }
+    requirements: { _method: post|delete }
