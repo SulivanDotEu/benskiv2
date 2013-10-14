@@ -22,6 +22,7 @@
     </head>
 
     <body>
+        
         <div class="navbar navbar-static-top">
             <div class="navbar-inner">
                 <div class="container">
@@ -40,27 +41,23 @@
                                             <i class="icon-calendar"></i> Catalogue<b class="caret"></b>
                                         </a>
                                         <ul class="dropdown-menu">
+                                            {% block menuFactory %}
                                             <li class=""><a href="{{path('destination')}}"><i class="icon-map-marker"></i> Destination</a></li>
                                             <li class=""><a href="{{path('sejour')}}"><i class="icon-calendar"></i> Séjour</a></li>
                                             <li class=""><a href="{{path('appartement')}}"><i class="icon-home"></i> Appartement</a></li>
                                             <li class=""><a href=""><i class="icon-list-alt"></i> Lister</a></li>
+                                            {% endblock %}
                                         </ul>
                                     </li>
                                 </ul>
-                                
-
-
-                            </ul>
-                           
-                            
-
-
-
+                           </ul>
                         </div><!--/.nav-collapse -->
-
                     </div>
                 </div>
             </div>
+            
+            
+            
             <div id="header" class="">
                 <div class="container">
                     <div class="row">

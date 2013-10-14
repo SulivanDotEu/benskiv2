@@ -5,6 +5,8 @@ namespace Benski\CatalogueBundle\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
+use Benski\CommonBundle\Resources\MenuElt;
+use Benski\CommonBundle\Resources\MenuFactory;
 use Benski\CatalogueBundle\Entity\Appartement;
 use Benski\CatalogueBundle\Form\AppartementType;
 
@@ -25,8 +27,12 @@ class AppartementController extends Controller
 
         $entities = $em->getRepository('BenskiCatalogueBundle:Appartement')->findAll();
 
+        $menuFactory = $this->container->get('benski_common.menuFactory');
+        
+        
         return $this->render('BenskiCatalogueBundle:Appartement:index.html.twig', array(
             'entities' => $entities,
+            'menuFactory' => $menuFactory,
         ));
     }
     /**
