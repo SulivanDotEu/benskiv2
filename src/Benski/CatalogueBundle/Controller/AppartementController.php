@@ -15,6 +15,7 @@ use Benski\CatalogueBundle\Form\AppartementType;
 class AppartementController extends Controller
 {
 
+   
     /**
      * Lists all Appartement entities.
      *
