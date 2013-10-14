@@ -1,0 +1,81 @@
+{% extends 'BenskiCatalogueBundle:OptionChoixMultiple:layout.html.twig' %}
+
+{% block body -%}
+<h1>OptionChoixMultiple</h1>
+
+<table class="table table-striped">
+    <tbody>
+        <tr>
+            <th>Nom</th>
+            <td>{{ entity.nom }}</td>
+        </tr>
+        <tr>
+            <th>Description</th>
+            <td>{{ entity.description }}</td>
+        </tr>
+        <tr>
+            <th>Type</th>
+            <td>{{ entity.type }}</td>
+        </tr>
+        <tr>
+            <th>Explication</th>
+            <td>{{ entity.explication }}</td>
+        </tr>
+        <tr>
+            <th>Id</th>
+            <td>{{ entity.id }}</td>
+        </tr>
+        <tr>
+            <th>Choixpardefaut</th>
+            <td>{{ entity.choixParDefaut }}</td>
+        </tr>
+
+        <tr>
+            <th>Version</th>
+            <td>{{ entity.version }}</td>
+        </tr>
+        <tr>
+            <th>Published</th>
+            <td>{{ entity.published }}</td>
+        </tr>
+    </tbody>
+</table>
+
+<ul class="record_actions">
+    <li>
+        <a href="{{ path('optionchoixmultiple') }}">
+            Back to the list
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('optionchoixmultiple_edit', { 'id': entity.id }) }}">
+            Edit
+        </a>
+    </li>
+    <li>{{ form(delete_form) }}</li>
+</ul>
+<h2>Choix</h2>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Intitule</th>
+            <th>Description</th>
+            <th>Prix</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for choix in entity.choix%}
+    <tr>
+         <td>{{ choix.id}}</td>
+         <td>{{ choix.intitule}}</td>
+         <td>{{choix.description}}</td>
+         <td>{{choix.prix}}</td>
+         <td>TODO</td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}

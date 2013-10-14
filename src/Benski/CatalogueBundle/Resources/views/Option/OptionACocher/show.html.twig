@@ -1,0 +1,64 @@
+{% extends 'BenskiCatalogueBundle:Option/OptionACocher:layout.html.twig' %}
+
+{% block body -%}
+    <h1>Option\OptionACocher</h1>
+
+    <table class="table table-striped">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ entity.id }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ entity.nom }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ entity.description }}</td>
+            </tr>
+            <tr>
+                <th>Type</th>
+                <td>{{ entity.type }}</td>
+            </tr>
+            <tr>
+                <th>Explication</th>
+                <td>{{ entity.explication }}</td>
+            </tr>
+            <tr>
+                <th>Version</th>
+                <td>{{ entity.version }}</td>
+            </tr>
+            <tr>
+                <th>Published</th>
+                <td>{{ entity.published }}</td>
+            </tr>
+            <tr>
+                <th>Intitule</th>
+                <td>{{ entity.intitule }}</td>
+            </tr>
+            <tr>
+                <th>Pardefault</th>
+                <td>{{ entity.parDefault }}</td>
+            </tr>
+            <tr>
+                <th>Inforequis</th>
+                <td>{{ entity.infoRequis }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('option_optionacocher') }}">
+            Back to the list
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('option_optionacocher_edit', { 'id': entity.id }) }}">
+            Edit
+        </a>
+    </li>
+    <li>{{ form(delete_form) }}</li>
+</ul>
+{% endblock %}

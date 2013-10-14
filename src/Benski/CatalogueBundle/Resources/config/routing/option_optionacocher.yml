@@ -1,0 +1,30 @@
+option_optionacocher:
+    pattern:  /
+    defaults: { _controller: "BenskiCatalogueBundle:Option\OptionACocher:index" }
+
+option_optionacocher_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "BenskiCatalogueBundle:Option\OptionACocher:show" }
+
+option_optionacocher_new:
+    pattern:  /new
+    defaults: { _controller: "BenskiCatalogueBundle:Option\OptionACocher:new" }
+
+option_optionacocher_create:
+    pattern:  /create
+    defaults: { _controller: "BenskiCatalogueBundle:Option\OptionACocher:create" }
+    requirements: { _method: post }
+
+option_optionacocher_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "BenskiCatalogueBundle:Option\OptionACocher:edit" }
+
+option_optionacocher_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "BenskiCatalogueBundle:Option\OptionACocher:update" }
+    requirements: { _method: post|put }
+
+option_optionacocher_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "BenskiCatalogueBundle:Option\OptionACocher:delete" }
+    requirements: { _method: post|delete }

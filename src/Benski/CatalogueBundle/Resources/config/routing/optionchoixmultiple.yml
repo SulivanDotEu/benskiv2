@@ -1,0 +1,30 @@
+optionchoixmultiple:
+    pattern:  /
+    defaults: { _controller: "BenskiCatalogueBundle:OptionChoixMultiple:index" }
+
+optionchoixmultiple_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "BenskiCatalogueBundle:OptionChoixMultiple:show" }
+
+optionchoixmultiple_new:
+    pattern:  /new
+    defaults: { _controller: "BenskiCatalogueBundle:OptionChoixMultiple:new" }
+
+optionchoixmultiple_create:
+    pattern:  /create
+    defaults: { _controller: "BenskiCatalogueBundle:OptionChoixMultiple:create" }
+    requirements: { _method: post }
+
+optionchoixmultiple_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "BenskiCatalogueBundle:OptionChoixMultiple:edit" }
+
+optionchoixmultiple_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "BenskiCatalogueBundle:OptionChoixMultiple:update" }
+    requirements: { _method: post|put }
+
+optionchoixmultiple_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "BenskiCatalogueBundle:OptionChoixMultiple:delete" }
+    requirements: { _method: post|delete }
