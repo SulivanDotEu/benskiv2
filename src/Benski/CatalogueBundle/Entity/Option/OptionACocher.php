@@ -32,14 +32,14 @@ class OptionACocher extends AbstractOption
     /**
      * @var boolean
      *
-     * @ORM\Column(name="parDefault", type="boolean")
+     * @ORM\Column(name="parDefault", type="boolean", nullable=true)
      */
     private $parDefault;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="infoRequis", type="text")
+     * @ORM\Column(name="infoRequis", type="text", nullable=true)
      */
     private $infoRequis;
 
@@ -51,7 +51,7 @@ class OptionACocher extends AbstractOption
      */
     public function getId()
     {
-        return $this->id;
+        return parent::getId();
     }
 
     /**

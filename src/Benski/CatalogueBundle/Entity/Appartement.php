@@ -5,6 +5,7 @@ namespace Benski\CatalogueBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Benski\CommonBundle\Entity\VersionedObject;
 
+
 /**
  * Appartement
  *

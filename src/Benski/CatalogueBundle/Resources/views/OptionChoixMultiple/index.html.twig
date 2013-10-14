@@ -22,7 +22,7 @@
             <tr>
                 <td><a href="{{ path('optionchoixmultiple_show', { 'id': entity.id }) }}">{{ entity.nom }}</a></td>
                 <td>{{ entity.description }}</td>
-                <td>{{ entity.type }}</td>
+            <td>{{ ("option.type."~entity.type)|trans }}</td>
                 <td>{{ entity.explication }}</td>
                 <td>{{ entity.id }}</td>
                 <td>{{ entity.choixParDefaut }}</td>
