@@ -18,3 +18,11 @@ BenskiCatalogueBundle_sejour_appartement:
 BenskiCatalogueBundle_option:
         resource: "@BenskiCatalogueBundle/Resources/config/routing/abstractoption.yml"
         prefix:   /option
+        
+BenskiCatalogueBundle_optionchoixmultiple:
+        resource: "@BenskiCatalogueBundle/Resources/config/routing/optionchoixmultiple.yml"
+        prefix:   /optionchoixmultiple
+        
+BenskiCatalogueBundle_optionacocher:
+        resource: "@BenskiCatalogueBundle/Resources/config/routing/option_optionacocher.yml"
+        prefix:   /optionacocher
