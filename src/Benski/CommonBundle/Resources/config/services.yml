@@ -1,3 +1,5 @@
 services:
      benski_common.menuFactory:
         class: Benski\CommonBundle\Object\MenuFactory
+        tags: 
+          - {name : menuFactory}
