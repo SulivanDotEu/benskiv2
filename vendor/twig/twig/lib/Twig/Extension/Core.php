@@ -168,6 +168,7 @@ class Twig_Extension_Core extends Twig_Extension
             // escaping
             new Twig_SimpleFilter('escape', 'twig_escape_filter', array('needs_environment' => true, 'is_safe_callback' => 'twig_escape_filter_is_safe')),
             new Twig_SimpleFilter('e', 'twig_escape_filter', array('needs_environment' => true, 'is_safe_callback' => 'twig_escape_filter_is_safe')),
+             'get_class' => new Twig_Filter_Function('twig_get_class_filter'),
         );
 
         if (function_exists('mb_get_info')) {
@@ -1352,4 +1353,13 @@ function twig_array_batch($items, $size, $fill = null)
     }
 
     return $result;
+}
+
+function twig_get_class_filter($object)
+{
+    if (!is_object($object)) {
+        return false;
+    }
+
+    return get_class($object);
 }

@@ -13,7 +13,11 @@ BenskiCatalogueBundle_destination:
 
 BenskiCatalogueBundle_sejour_appartement:
         resource: "@BenskiCatalogueBundle/Resources/config/routing/sejour_appartement.yml"
-        prefix:   /sejourappartement
+        prefix:   /sejour-appartement
+        
+BenskiCatalogueBundle_sejour_pack:
+        resource: "@BenskiCatalogueBundle/Resources/config/routing/sejour_pack.yml"
+        prefix:   /sejour-pack
 
 BenskiCatalogueBundle_option:
         resource: "@BenskiCatalogueBundle/Resources/config/routing/abstractoption.yml"
@@ -26,3 +30,7 @@ BenskiCatalogueBundle_optionchoixmultiple:
 BenskiCatalogueBundle_optionacocher:
         resource: "@BenskiCatalogueBundle/Resources/config/routing/option_optionacocher.yml"
         prefix:   /optionacocher
+        
+BenskiCatalogueBundle_pack:
+        resource: "@BenskiCatalogueBundle/Resources/config/routing/pack.yml"
+        prefix:   /pack

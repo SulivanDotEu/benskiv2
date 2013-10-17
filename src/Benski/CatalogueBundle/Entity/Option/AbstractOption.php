@@ -53,8 +53,12 @@ class AbstractOption extends VersionedObject {
      * @ORM\Column(name="explication", type="text", nullable=true)
      */
     private $explication;
+    
+    public function __toString() {
+       return $this->getId().") ".$this->getNom();
+    }
 
-    /**
+        /**
      * Set nom
      *
      * @param string $nom

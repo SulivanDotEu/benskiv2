@@ -13,8 +13,13 @@ use Benski\CatalogueBundle\Entity\SejourAppartement;
  * @ORM\Entity
  */
 class Sejour {
+   
+   public function __toString() {
+      return $this->getNom()." du ".$this->getDateDebut()->format('d/m/Y').
+              " au ".$this->getDateFin()->format('d/m/Y');
+   }
 
-   function __construct() {
+      function __construct() {
       $this->dateDebut = new \DateTime('NOW');
       $this->dateFin = new \DateTime('NOW');
    }
@@ -55,6 +60,13 @@ class Sejour {
     * @var type 
     */
    private $appartements;
+   
+   /**
+    * @ORM\OneToMany(targetEntity="Benski\CatalogueBundle\Entity\SejourPack", mappedBy="sejour")
+    * 
+    * @var type 
+    */
+   private $packs;
 
    /**
     * Get id

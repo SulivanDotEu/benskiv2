@@ -14,16 +14,16 @@ use Benski\CommonBundle\Entity\VersionedObject;
 class SejourAppartement extends VersionedObject {
 
    /**
-    * @var \stdClass
+    * @var Appartement
     * @ORM\Id
-    * @ORM\ManyToOne(targetEntity = "Benski\CatalogueBundle\Entity\Appartement")
+    * @ORM\ManyToOne(targetEntity = "Benski\CatalogueBundle\Entity\Appartement", inversedBy="sejours")
     */
    private $appartement;
 
    /**
     * @var \stdClass
     * @ORM\Id
-    * @ORM\ManyToOne(targetEntity = "Benski\CatalogueBundle\Entity\Sejour", inversedBy="appartement")
+    * @ORM\ManyToOne(targetEntity = "Benski\CatalogueBundle\Entity\Sejour", inversedBy="appartements")
     */
    private $sejour;
 
@@ -69,9 +69,10 @@ class SejourAppartement extends VersionedObject {
     *
     * @return integer 
     */
+   /*
    public function getId() {
       return $this->id;
-   }
+   }*/
 
    /**
     * Set appartement

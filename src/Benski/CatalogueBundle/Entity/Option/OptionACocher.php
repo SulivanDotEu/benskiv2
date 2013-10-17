@@ -44,6 +44,7 @@ class OptionACocher extends AbstractOption
     private $infoRequis;
 
 
+    
     /**
      * Get id
      *

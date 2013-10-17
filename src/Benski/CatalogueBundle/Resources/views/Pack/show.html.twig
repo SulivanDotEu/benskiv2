@@ -1,0 +1,188 @@
+{% extends 'BenskiCatalogueBundle:Pack:layout.html.twig' %}
+
+
+{% block breadcrumb %}
+{{ parent() }}
+<li class="active">Show</li>
+{% endblock %}
+
+
+{% block header %}
+<h1>Pack </h1>
+{% endblock %}
+
+
+{% block container_header_right %}
+<div class="btn-group">
+   <a class="btn " href="{{ path('pack') }}">
+      <i class="icon-chevron-left"></i> 
+      Back to the list
+   </a>
+   <a class="btn " href="{{ path('pack_edit', { 'id': entity.id }) }}">
+      <i class="icon-pencil"></i> Edit</a>
+</a>
+
+</div>
+{% endblock %}
+
+
+{% block body -%}
+<ul class="nav nav-tabs">
+   <li class="active">
+      <a href="#pack" data-toggle="tab"><i class="icon-folder-open"></i> Pack</a>
+   </li>
+   <li>
+      <a href="#option" data-toggle="tab"><i class="icon-list"></i> Options
+      </a>
+   </li>
+   <li class="dropdown">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-briefcase"></i> Options 
+         <span class="label label-info">{{ entity.packOptions|length }}</span>
+         <b class="caret"></b></a>
+      <ul class="dropdown-menu">
+         <li><a href="#option" data-toggle="tab"><i class="icon-th"></i> All</a></li>
+         <li class="divider"></li>
+         <li><a href="#acocher" data-toggle="tab"><i class="icon-check"></i> à cocher</a></li>
+         <li><a href="#choixmultiple" data-toggle="tab"><i class="icon-list"></i> choix multiples</a></li>
+      </ul>
+   </li>
+   <li>
+      <a href="#sejour" data-toggle="tab"><i class="icon-calendar"></i> Sejours
+         <span class="label label-info">4</span></a>
+   </li>
+</ul>
+
+<div class="tab-content">
+   <div class="tab-pane active" id="pack">
+      <!-- PACK --- --- --- -- --- --- --- -->
+      <table class="table table-striped">
+         <tbody>
+            <tr>
+               <th>Id</th>
+               <td>{{ entity.id }}</td>
+            </tr>
+            <tr>
+               <th>Nom</th>
+               <td>{{ entity.nom }}</td>
+            </tr>
+            <tr>
+               <th>Qualite</th>
+               <td>{{ entity.qualite }}</td>
+            </tr>
+            <tr>
+               <th>Prix</th>
+               <td>{{ entity.prix }}</td>
+            </tr>
+         </tbody>
+      </table>
+   </div>
+   <div class="tab-pane" id="option">
+      <!-- OPTION --- --- --- -- --- --- --- -->
+      <div class="">
+         <a class="btn btn-primary" href="{{ path('pack_bind_option_form', { 'packId': entity.id }) }}">
+            <i class="icon-magnet icon-white"></i>
+            Associer une option
+         </a></div>
+
+      {% set entities = entity.packOptions() %}
+      <table class="table table-striped table-condensed">
+         <thead>
+            <tr>
+               <th>Id</th>
+               <th>Nom</th>
+               <th>{{ "Type"|trans}}</th>
+               <th>Type</th>
+               <th>Actions</th>
+            </tr>
+         </thead>
+         <tbody>
+        {% for entity in entities %}
+               <tr>
+                  <td><a href="{{ path('option_show', { 'id': entity.option.id }) }}">{{ entity.option.id }}</a></td>
+                  <td>{{ entity.option.nom }}</td>
+                  <td>{{ ("option.type."~entity.option.type)|trans }}</td>
+                  <td>{{ entity|get_class }}</td>
+                  <td>
+                     <ul>
+                        <li>
+                           <a href="{{ path('option_show', { 'id': entity.option.id }) }}">show</a>
+                        </li>
+                     </ul>
+                  </td>
+               </tr>
+        {% endfor %}
+            </tbody>
+         </table>
+
+
+      </div>
+      <div class="tab-pane" id="acocher">
+         <!-- OPTION --- --- --- -- --- --- --- -->
+         <h4>A cocher</h4>
+         <div class="">
+            <a class="btn btn-primary" href="{{ path('pack_bind_option_form', { 'packId': entity.id }) }}">
+               <i class="icon-magnet icon-white"></i>
+               Associer une option
+            </a></div>
+
+      {% set entities = entity.getPackOptionACocher() %}
+         <table class="table table-striped table-condensed">
+            <thead>
+               <tr>
+                  <th>Id</th>
+                  <th>Nom</th>
+                  <th>{{ "Type"|trans}}</th>
+                  <th>Prix</th>
+                  <th>Par défaut</th>
+                  <th>Actions</th>
+               </tr>
+            </thead>
+            <tbody>
+        {% for entity in entities %}
+                  <tr>
+                     <td><a href="{{ path('option_show', { 'id': entity.option.id }) }}">{{ entity.option.id }}</a></td>
+                     <td>{{ entity.option.nom }}</td>
+                     <td>{{ ("option.type."~entity.option.type)|trans }}</td>
+                     <td>{{ entity.prix }} €</td>
+                     <td>{% if entity.cocheParDefaut == true %}
+                        Oui
+                        {% else %}Non
+{% endif %}
+                     </td>
+                     <td>
+                        <ul>
+                           <li>
+                              <a href="{{ path('option_show', { 'id': entity.option.id }) }}">show</a>
+                           </li>
+                        </ul>
+                     </td>
+                  </tr>
+        {% endfor %}
+               </tbody>
+            </table>
+         </div>
+         <div class="tab-pane" id="sejour">
+            <!-- SEJOUR --- --- --- -- --- --- --- -->
+            <table class="table table-striped">
+               <thead>
+                  <tr>
+                     <th>Id</th>
+                     <th>Nom</th>
+                     <th>Qualite</th>
+                  </tr>
+               </thead>
+               <tbody>
+                  <tr>
+                     <td>todo</td>
+                     <td>todo</td>
+                     <td>todo</td>
+                  </tr>
+               </tbody>
+            </table>
+
+         </div>
+      </div>
+
+
+
+{% endblock %}
