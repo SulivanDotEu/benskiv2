@@ -1,0 +1,25 @@
+{% extends 'BenskiCatalogueBundle:Appartement:layout.html.twig' %}
+
+
+{% block header %}
+<h1>Ajouter un pack au sejour</h1>
+{% endblock %}
+
+{% block breadcrumb %}
+{{ parent() }}
+<li class="active">bind pack</li>
+{% endblock %}
+
+
+{% block body -%}
+
+    {{ form(form) }}
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('sejour') }}">
+            Back to the list
+        </a>
+    </li>
+</ul>
+{% endblock %}

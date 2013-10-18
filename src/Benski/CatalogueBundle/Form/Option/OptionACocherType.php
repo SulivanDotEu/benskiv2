@@ -14,13 +14,9 @@ class OptionACocherType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $parentType = new AbstractOptionType();
+      $parentType->buildForm($builder, $options);
         $builder
-            ->add('nom')
-            ->add('description')
-            ->add('type')
-            ->add('explication')
-            ->add('version')
-            ->add('published')
             ->add('intitule')
             ->add('parDefault')
             ->add('infoRequis')

@@ -25,7 +25,7 @@
                 <td><a href="{{ path('option_optionacocher_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
                 <td>{{ entity.nom }}</td>
                 <td>{{ entity.description }}</td>
-                <td>{{ entity.type }}</td>
+            <td>{{ ("option.type."~entity.type)|trans }}</td>
                 <td>{{ entity.explication }}</td>
                 <td>{{ entity.version }}</td>
                 <td>{{ entity.published }}</td>

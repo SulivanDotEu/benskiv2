@@ -60,6 +60,13 @@ class Sejour {
     * @var type 
     */
    private $appartements;
+   
+   /**
+    * @ORM\OneToMany(targetEntity="Benski\CatalogueBundle\Entity\SejourPack", mappedBy="sejour")
+    * 
+    * @var type 
+    */
+   private $packs;
 
    /**
     * Get id
@@ -165,5 +172,38 @@ class Sejour {
     public function getAppartements()
     {
         return $this->appartements;
+    }
+
+    /**
+     * Add packs
+     *
+     * @param \Benski\CatalogueBundle\Entity\SejourPack $packs
+     * @return Sejour
+     */
+    public function addPack(\Benski\CatalogueBundle\Entity\SejourPack $packs)
+    {
+        $this->packs[] = $packs;
+    
+        return $this;
+    }
+
+    /**
+     * Remove packs
+     *
+     * @param \Benski\CatalogueBundle\Entity\SejourPack $packs
+     */
+    public function removePack(\Benski\CatalogueBundle\Entity\SejourPack $packs)
+    {
+        $this->packs->removeElement($packs);
+    }
+
+    /**
+     * Get packs
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getPacks()
+    {
+        return $this->packs;
     }
 }

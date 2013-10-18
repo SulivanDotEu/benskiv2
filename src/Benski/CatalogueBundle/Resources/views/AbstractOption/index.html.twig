@@ -19,7 +19,7 @@
          <th>Id</th>
          <th>Nom</th>
          <th>Description</th>
-         <th>Type</th>
+         <th>{{ "Type"|trans}}</th>
          <th>Explication</th>
          <th>Actions</th>
       </tr>
@@ -30,7 +30,7 @@
             <td><a href="{{ path('option_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
             <td>{{ entity.nom }}</td>
             <td>{{ entity.description }}</td>
-            <td>{{ entity.type }}</td>
+            <td>{{ ("option.type."~entity.type)|trans }}</td>
             <td>{{ entity.explication }}</td>
             <td>
                <ul>

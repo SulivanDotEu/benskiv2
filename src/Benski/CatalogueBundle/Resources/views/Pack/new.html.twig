@@ -1,0 +1,27 @@
+{% extends 'BenskiCatalogueBundle:Pack:layout.html.twig' %}
+
+
+{% block header %}
+<h1>Pack creation</h1>
+{% endblock %}
+
+{% block breadcrumb %}
+{{ parent() }}
+<li class="active">new entity</li>
+{% endblock %}
+
+
+
+{% block body -%}
+    <h1>Pack creation</h1>
+
+    {{ form(form) }}
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('pack') }}">
+            Back to the list
+        </a>
+    </li>
+</ul>
+{% endblock %}
