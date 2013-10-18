@@ -1821,7 +1821,7 @@ class appDevDebugProjectContainer extends Container
         $g->createUser(new \Symfony\Component\Security\Core\User\User('user', 'userpass', array(0 => 'ROLE_USER')));
         $g->createUser(new \Symfony\Component\Security\Core\User\User('admin', 'adminpass', array(0 => 'ROLE_ADMIN')));
 
-        return $this->services['security.firewall.map.context.main'] = new \Symfony\Bundle\SecurityBundle\Security\FirewallContext(array(0 => new \Symfony\Component\Security\Http\Firewall\ChannelListener($f, new \Symfony\Component\Security\Http\EntryPoint\RetryAuthenticationEntryPoint(80, 443), $a), 1 => new \Symfony\Component\Security\Http\Firewall\ContextListener($b, array(0 => $g), 'main', $a, $this->get('event_dispatcher', ContainerInterface::NULL_ON_INVALID_REFERENCE)), 2 => new \Symfony\Component\Security\Http\Firewall\AnonymousAuthenticationListener($b, '525eaba030174', $a), 3 => new \Symfony\Component\Security\Http\Firewall\AccessListener($b, $this->get('security.access.decision_manager'), $f, $this->get('security.authentication.manager'), $a)), new \Symfony\Component\Security\Http\Firewall\ExceptionListener($b, $this->get('security.authentication.trust_resolver'), new \Symfony\Component\Security\Http\HttpUtils($c, $c), 'main', NULL, NULL, NULL, $a));
+        return $this->services['security.firewall.map.context.main'] = new \Symfony\Bundle\SecurityBundle\Security\FirewallContext(array(0 => new \Symfony\Component\Security\Http\Firewall\ChannelListener($f, new \Symfony\Component\Security\Http\EntryPoint\RetryAuthenticationEntryPoint(80, 443), $a), 1 => new \Symfony\Component\Security\Http\Firewall\ContextListener($b, array(0 => $g), 'main', $a, $this->get('event_dispatcher', ContainerInterface::NULL_ON_INVALID_REFERENCE)), 2 => new \Symfony\Component\Security\Http\Firewall\AnonymousAuthenticationListener($b, '525ff6b87bb91', $a), 3 => new \Symfony\Component\Security\Http\Firewall\AccessListener($b, $this->get('security.access.decision_manager'), $f, $this->get('security.authentication.manager'), $a)), new \Symfony\Component\Security\Http\Firewall\ExceptionListener($b, $this->get('security.authentication.trust_resolver'), new \Symfony\Component\Security\Http\HttpUtils($c, $c), 'main', NULL, NULL, NULL, $a));
     }
 
     /**
@@ -2847,6 +2847,7 @@ class appDevDebugProjectContainer extends Container
         $instance->addPath('/Users/Lolo/Dropbox/Workspace/benskiv2/src/Benski/CatalogueBundle/Resources/views', 'BenskiCatalogue');
         $instance->addPath('/Users/Lolo/Dropbox/Workspace/benskiv2/src/Benski/CommonBundle/Resources/views', 'BenskiCommon');
         $instance->addPath('/Users/Lolo/Dropbox/Workspace/benskiv2/src/Benski/NewsBundle/Resources/views', 'BenskiNews');
+        $instance->addPath('/Users/Lolo/Dropbox/Workspace/benskiv2/src/Benski/UserBundle/Resources/views', 'BenskiUser');
         $instance->addPath('/Users/Lolo/Dropbox/Workspace/benskiv2/vendor/symfony/symfony/src/Symfony/Bundle/WebProfilerBundle/Resources/views', 'WebProfiler');
         $instance->addPath('/Users/Lolo/Dropbox/Workspace/benskiv2/vendor/sensio/distribution-bundle/Sensio/Bundle/DistributionBundle/Resources/views', 'SensioDistribution');
         $instance->addPath('/Users/Lolo/Dropbox/Workspace/benskiv2/app/Resources/views');
@@ -3099,7 +3100,7 @@ class appDevDebugProjectContainer extends Container
      */
     protected function getSecurity_Authentication_ManagerService()
     {
-        $this->services['security.authentication.manager'] = $instance = new \Symfony\Component\Security\Core\Authentication\AuthenticationProviderManager(array(0 => new \Symfony\Component\Security\Core\Authentication\Provider\AnonymousAuthenticationProvider('525eaba030174')), true);
+        $this->services['security.authentication.manager'] = $instance = new \Symfony\Component\Security\Core\Authentication\AuthenticationProviderManager(array(0 => new \Symfony\Component\Security\Core\Authentication\Provider\AnonymousAuthenticationProvider('525ff6b87bb91')), true);
 
         $instance->setEventDispatcher($this->get('event_dispatcher'));
 
@@ -3245,7 +3246,7 @@ class appDevDebugProjectContainer extends Container
             'kernel.root_dir' => '/Users/Lolo/Dropbox/Workspace/benskiv2/app',
             'kernel.environment' => 'dev',
             'kernel.debug' => true,
-            'kernel.name' => 'ap_',
+            'kernel.name' => 'app',
             'kernel.cache_dir' => '/Users/Lolo/Dropbox/Workspace/benskiv2/app/cache/dev',
             'kernel.logs_dir' => '/Users/Lolo/Dropbox/Workspace/benskiv2/app/logs',
             'kernel.bundles' => array(
@@ -3260,6 +3261,7 @@ class appDevDebugProjectContainer extends Container
                 'BenskiCatalogueBundle' => 'Benski\\CatalogueBundle\\BenskiCatalogueBundle',
                 'BenskiCommonBundle' => 'Benski\\CommonBundle\\BenskiCommonBundle',
                 'BenskiNewsBundle' => 'Benski\\NewsBundle\\BenskiNewsBundle',
+                'BenskiUserBundle' => 'Benski\\UserBundle\\BenskiUserBundle',
                 'WebProfilerBundle' => 'Symfony\\Bundle\\WebProfilerBundle\\WebProfilerBundle',
                 'SensioDistributionBundle' => 'Sensio\\Bundle\\DistributionBundle\\SensioDistributionBundle',
                 'SensioGeneratorBundle' => 'Sensio\\Bundle\\GeneratorBundle\\SensioGeneratorBundle',
