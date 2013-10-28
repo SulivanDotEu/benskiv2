@@ -13,15 +13,20 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Benski\NewsBundle\Entity\News;
 use Benski\NewsBundle\Form\NewsType;
 
+use JMS\SecurityExtraBundle\Annotation\Secure;
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
+
+
 class NewsController extends Controller {
 
     /**
      * Lists all News entities
-     * 
      */
     
     public function indexAction() 
     {
+        
+        
         $em = $this->getDoctrine()->getManager();
         $entities = $em->getRepository('BenskiNewsBundle:News')->findAll();
         
@@ -32,10 +37,11 @@ class NewsController extends Controller {
     }
     /**
      * Creates a new Appartement entity.
-     *
      */
     public function createAction(Request $request)
     {
+        
+        
         $entity = new News();
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
@@ -59,13 +65,14 @@ class NewsController extends Controller {
 
     /**
     * Creates a form to create a Appartement entity.
-    *
     * @param Appartement $entity The entity
     *
     * @return \Symfony\Component\Form\Form The form
     */
     private function createCreateForm(News $entity)
     {
+        
+        
         $form = $this->createForm(new NewsType(), $entity, array(
             'action' => $this->generateUrl('news_create'),
             'method' => 'POST',
@@ -77,10 +84,11 @@ class NewsController extends Controller {
 
     /**
      * Displays a form to create a new Appartement entity.
-     *
      */
     public function newAction()
     {
+        
+        
         $entity = new News();
         $form = $this->createCreateForm($entity);
         
@@ -94,10 +102,11 @@ class NewsController extends Controller {
 
     /**
      * Finds and displays a Appartement entity.
-     *
      */
     public function showAction($id)
     {
+        
+        
         $em = $this->getDoctrine()->getManager();
         $entity = $em->getRepository('BenskiNewsBundle:News')->find($id);
         
@@ -117,10 +126,11 @@ class NewsController extends Controller {
 
     /**
      * Displays a form to edit an existing Appartement entity.
-     *
      */
     public function editAction($id)
     {
+        
+        
         $em = $this->getDoctrine()->getManager();
         $entity = $em->getRepository('BenskiNewsBundle:News')->find($id);
         
@@ -140,13 +150,14 @@ class NewsController extends Controller {
 
     /**
     * Creates a form to edit a Appartement entity.
-    *
     * @param Appartement $entity The entity
     *
     * @return \Symfony\Component\Form\Form The form
     */
     private function createEditForm(News $entity)
     {
+        
+        
         $form = $this->createForm(new NewsType(), $entity, array(
             'action' => $this->generateUrl('news_update', array('id' => $entity->getId())),
             'method' => 'PUT',
@@ -157,10 +168,11 @@ class NewsController extends Controller {
     }
     /**
      * Edits an existing Appartement entity.
-     *
      */
     public function updateAction(Request $request, $id)
     {
+        
+        
         $em = $this->getDoctrine()->getManager();
         $entity = $em->getRepository('BenskiNewsBundle:News')->find($id);
         
@@ -171,24 +183,25 @@ class NewsController extends Controller {
         
         $deleteForm = $this->createDeleteForm($id);
         $editForm = $this->createEditForm($entity);
-        $editForm->handleRequest();
+        $editForm->handleRequest($request);
         
         if ($editForm->isValid()){
             $em->flush();
-            return $this->render('BenskiNewsBundle:News:edit.html.twig', array(
+            return $this->redirect($this->generateUrl('news_edit', array('id' => $id)));
+        }
+           return $this->render('BenskiNewsBundle:News:edit.html.twig', array(
                 'entity' => $entity,
                 'edit_form' => $editForm->createView(),
                 'delete_form' => $deleteForm->createView(),
             ));
-        }
         
     }
     /**
      * Deletes a Appartement entity.
-     *
      */
     public function deleteAction(Request $request, $id)
     {
+        
         $form = $this->createDeleteForm($id);
         $form->handleRequest($request);
         
@@ -209,13 +222,14 @@ class NewsController extends Controller {
 
     /**
      * Creates a form to delete a Appartement entity by id.
-     *
      * @param mixed $id The entity id
      *
      * @return \Symfony\Component\Form\Form The form
      */
     private function createDeleteForm($id)
     {
+        
+        
         return $this->createFormBuilder()
                 ->setAction($this->generateUrl('news_delete', array('id' =>$id)))
                 ->setMethod('DELETE')

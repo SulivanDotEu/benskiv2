@@ -1,10 +1,5 @@
 {# app/Resources/views/layout.html.twig #}
 
-
-{# app/Resources/views/layout.html.twig #}
-
-
-
 <!DOCTYPE html>
 <html>
    <head>
@@ -20,15 +15,10 @@
     {% endblock %}
    </head>
 
-<<<<<<< HEAD
+
     <body>
 
-=======
-   <body>
->>>>>>> f7fe19e7ecc27fb1a6df483f4a75b11c73297cca
-       {#
-       {{  render(controller('BenskiCommonBundle:Administration:getMenu')) }}
-#}
+       {#{{  render(controller('BenskiCommonBundle:Administration:getMenu')) }}#}
          <div class="navbar navbar-static-top">
             <div class="navbar-inner">
                <div class="container">
@@ -39,11 +29,9 @@
                   </a>
                   <div class="nav-collapse">
                      <ul class="nav">
-                        <li class=""><a href="#"><i class="icon-home"></i> Accueil</a></li>
-                        <ul class="nav">
-<<<<<<< HEAD
                                 <li class=""><a href="#"><i class="icon-home"></i> Accueil</a></li>
                                 <li class=""><a href="{{path('news')}}"><i class="icon-comment"></i> News</a></li>
+                                <li class=""><a href="{{path('user')}}"><i class="icon-user"></i> Utilisateur</a></li>
                                 <ul class="nav">
                                     <li class="dropdown">
                                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -61,69 +49,7 @@
                                     </li>
                                 </ul>
                                 
-                           </ul>
-                        </div><!--/.nav-collapse -->
-                    </div>
-                </div>
-            </div>
-            
-            
-            
-            <div id="header" class="">
-                <div class="container">
-                    <div class="row">
-                        <div class="span8">
-=======
-                           <li class="dropdown">
-                              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-
-                                 <i class="icon-calendar"></i> Catalogue<b class="caret"></b>
-                              </a>
-                              <ul class="dropdown-menu">
-                                 <li class=""><a href="{{path('destination')}}"><i class="icon-map-marker"></i> Destination</a></li>
-                                 <li class=""><a href="{{path('sejour')}}"><i class="icon-calendar"></i> Séjour</a></li>
-                                 <li class=""><a href="{{path('appartement')}}"><i class="icon-home"></i> Appartement</a></li>
-                                 <li class=""><a href=""><i class="icon-list-alt"></i> Lister</a></li>
-                                 <li class="divider"></li>
-                                 <li class="dropdown-submenu">
-                                    <a tabindex="-1" href="{{path('option')}}"><i class="icon-plus-sign"></i>  Options</a>
-                                    <ul class="dropdown-menu">
-                                       <li class=""><a href="{{path('option_optionacocher')}}"><i class="icon-check"></i> A cocher</a></li>
-                                       <li class=""><a href="{{path('optionchoixmultiple')}}"><i class="icon-list"></i> A choix multiples</a></li>
-                                       <li class="divider"></li>
-                                       <li class=""><a href="{{path('pack')}}"><i class="icon-folder-open"></i> Pack d'options</a></li>
-                                    </ul>
-                                 </li>
-                              </ul>
-                           </li>
-
-                        </ul>
-
-
-                        <ul class="nav">
-                           <li class="dropdown">
-                              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-
-                                 <i class="icon-road"></i> Reservation<b class="caret"></b>
-                              </a>
-                              <ul class="dropdown-menu">
-                                 <li class=""><a href="{{path('destination')}}"><i class="icon-map-marker"></i> Lister</a></li>
-                                 <li class="divider"></li>
-                                 <li class=""><a href="{{path('sejour')}}"><i class="icon-shopping-cart"></i> Panier</a></li>
-                                
-                                
-                              </ul>
-                           </li>
-
-                        </ul>
-
-
-                     </ul>
-
-
-
-
-
+                           </ul>           
                   </div><!--/.nav-collapse -->
 
                </div>
@@ -133,22 +59,21 @@
             <div class="container">
                <div class="row">
                   <div class="span8">
->>>>>>> f7fe19e7ecc27fb1a6df483f4a75b11c73297cca
-{% block header %}
+
+                {% block header %}
 
                         <h1>Benski</h1>
                         <p>Des séjours en altitude de qualités pour la famille et les amis.</p>
                 {% endblock %}
                      </div>
-                     <div class="span4">       
-
-                    {#% if is_granted("IS_AUTHENTICATED_REMEMBERED") %#}
-                        Connecté en tant que {#{ app.user.username }#} - <a href="{#{ path('fos_user_security_logout') }#}">Déconnexion</a>
-{#% else %#}
-                        <a href="{#{ path('fos_user_security_login') }#}">Connexion</a>
-{#% endif %#}
+                     <div class="span4">         
+                        {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                            Connecté en tant que {{ app.user.username }} - 
+                             <a href="{{ path('fos_user_security_logout') }}">Déconnexion</a>
+                        {% else %}
+                            <a href="{{ path('fos_user_security_login') }}">Connexion</a>
+                        {% endif %}
                      </div>
-
                   </div>
                </div>
             </div>

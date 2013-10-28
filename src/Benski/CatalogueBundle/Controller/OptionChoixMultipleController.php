@@ -8,6 +8,10 @@ use Benski\CatalogueBundle\Entity\Option\OptionChoixMultiple;
 use Benski\CatalogueBundle\Form\OptionChoixMultipleType;
 use Benski\CatalogueBundle\Form\Option\ChoixOptionMultipleType;
 
+use JMS\SecurityExtraBundle\Annotation\Secure;
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
+
+
 /**
  * OptionChoixMultiple controller.
  *
@@ -16,9 +20,15 @@ class OptionChoixMultipleController extends Controller {
 
     /**
      * Lists all OptionChoixMultiple entities.
-     *
+     * @Secure(roles="ROLE_ADMIN")
      */
     public function indexAction() {
+        
+        if (!$this->get('security.context')->isGranted('ROLE_ADMIN')) 
+        {
+            throw new AccessDeniedHttpException('Accès limité aux administrateurs');
+        }
+        
         $em = $this->getDoctrine()->getManager();
 
         $entities = $em->getRepository('BenskiCatalogueBundle:Option\OptionChoixMultiple')->findAll();
@@ -30,9 +40,15 @@ class OptionChoixMultipleController extends Controller {
 
     /**
      * Creates a new OptionChoixMultiple entity.
-     *
+     * @Secure(roles="ROLE_ADMIN")
      */
     public function createAction(Request $request) {
+        
+        if (!$this->get('security.context')->isGranted('ROLE_ADMIN')) 
+        {
+            throw new AccessDeniedHttpException('Accès limité aux administrateurs');
+        }
+        
         $entity = new OptionChoixMultiple();
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
@@ -57,7 +73,7 @@ class OptionChoixMultipleController extends Controller {
 
     /**
      * Creates a form to create a OptionChoixMultiple entity.
-     *
+     * @Secure(roles="ROLE_ADMIN")
      * @param OptionChoixMultiple $entity The entity
      *
      * @return \Symfony\Component\Form\Form The form
@@ -76,9 +92,15 @@ class OptionChoixMultipleController extends Controller {
 
     /**
      * Displays a form to create a new OptionChoixMultiple entity.
-     *
+     * @Secure(roles="ROLE_ADMIN")
      */
     public function newAction() {
+        
+        if (!$this->get('security.context')->isGranted('ROLE_ADMIN')) 
+        {
+            throw new AccessDeniedHttpException('Accès limité aux administrateurs');
+        }
+        
         $entity = new OptionChoixMultiple();
         $form = $this->createCreateForm($entity);
 
@@ -90,9 +112,15 @@ class OptionChoixMultipleController extends Controller {
 
     /**
      * Finds and displays a OptionChoixMultiple entity.
-     *
+     * @Secure(roles="ROLE_ADMIN")
      */
     public function showAction($id) {
+        
+        if (!$this->get('security.context')->isGranted('ROLE_ADMIN')) 
+        {
+            throw new AccessDeniedHttpException('Accès limité aux administrateurs');
+        }
+        
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('BenskiCatalogueBundle:Option\OptionChoixMultiple')->find($id);
@@ -110,9 +138,15 @@ class OptionChoixMultipleController extends Controller {
 
     /**
      * Displays a form to edit an existing OptionChoixMultiple entity.
-     *
+     * @Secure(roles="ROLE_ADMIN")
      */
     public function editAction($id) {
+        
+        if (!$this->get('security.context')->isGranted('ROLE_ADMIN')) 
+        {
+            throw new AccessDeniedHttpException('Accès limité aux administrateurs');
+        }
+        
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('BenskiCatalogueBundle:Option\OptionChoixMultiple')->find($id);
@@ -133,7 +167,7 @@ class OptionChoixMultipleController extends Controller {
 
     /**
      * Creates a form to edit a OptionChoixMultiple entity.
-     *
+     * @Secure(roles="ROLE_ADMIN")
      * @param OptionChoixMultiple $entity The entity
      *
      * @return \Symfony\Component\Form\Form The form
@@ -155,9 +189,15 @@ class OptionChoixMultipleController extends Controller {
 
     /**
      * Edits an existing OptionChoixMultiple entity.
-     *
+     * @Secure(roles="ROLE_ADMIN")
      */
     public function updateAction(Request $request, $id) {
+        
+        if (!$this->get('security.context')->isGranted('ROLE_ADMIN')) 
+        {
+            throw new AccessDeniedHttpException('Accès limité aux administrateurs');
+        }
+        
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('BenskiCatalogueBundle:Option\OptionChoixMultiple')->find($id);
@@ -185,9 +225,15 @@ class OptionChoixMultipleController extends Controller {
 
     /**
      * Deletes a OptionChoixMultiple entity.
-     *
+     * @Secure(roles="ROLE_ADMIN")
      */
     public function deleteAction(Request $request, $id) {
+        
+        if (!$this->get('security.context')->isGranted('ROLE_ADMIN')) 
+        {
+            throw new AccessDeniedHttpException('Accès limité aux administrateurs');
+        }
+        
         $form = $this->createDeleteForm($id);
         $form->handleRequest($request);
 
@@ -208,7 +254,7 @@ class OptionChoixMultipleController extends Controller {
 
     /**
      * Creates a form to delete a OptionChoixMultiple entity by id.
-     *
+     * @Secure(roles="ROLE_ADMIN")
      * @param mixed $id The entity id
      *
      * @return \Symfony\Component\Form\Form The form

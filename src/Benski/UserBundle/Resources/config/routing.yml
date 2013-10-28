@@ -1,3 +1,4 @@
-benski_user_homepage:
-    pattern:  /hello/{name}
-    defaults: { _controller: BenskiUserBundle:Default:index }
+BenskiUserBundle_user:
+        resource: "@BenskiUserBundle/Resources/config/routing/user.yml"
+        prefix:   /user
+        
