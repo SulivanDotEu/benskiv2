@@ -67,7 +67,25 @@ class Sejour {
     * @var type 
     */
    private $packs;
+   
+   public function getAllAppartementsByDestination($destination){
+      $temp = array();
+      foreach ($this->getAppartements()->getValues() as $appartement){
+         if($appartement->getAppartement()->getDestination() == $destination){
+            $temp[] = $appartement;
+         }
+      }
+      return $temp;
+   }
 
+   public function getSejourAppartementByAppartement($appartementToCompare){
+      foreach ($this->getAppartements()->getValues() as $appartement){
+         if($appartement->getAppartement() == $appartementToCompare){
+            return $appartement;
+         }
+      }
+   }
+   
    /**
     * Get id
     *

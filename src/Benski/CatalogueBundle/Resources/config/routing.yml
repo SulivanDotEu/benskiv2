@@ -1,36 +1,40 @@
 BenskiCatalogueBundle_sejour:
         resource: "@BenskiCatalogueBundle/Resources/config/routing/sejour.yml"
-        prefix:   /sejour
+        prefix:   /admin/sejour
 
 
 BenskiCatalogueBundle_appartement:
         resource: "@BenskiCatalogueBundle/Resources/config/routing/appartement.yml"
-        prefix:   /appartement
+        prefix:   /admin/appartement
 
 BenskiCatalogueBundle_destination:
         resource: "@BenskiCatalogueBundle/Resources/config/routing/destination.yml"
-        prefix:   /destination
+        prefix:   /admin/destination
 
 BenskiCatalogueBundle_sejour_appartement:
         resource: "@BenskiCatalogueBundle/Resources/config/routing/sejour_appartement.yml"
-        prefix:   /sejour-appartement
+        prefix:   /admin/sejour-appartement
         
 BenskiCatalogueBundle_sejour_pack:
         resource: "@BenskiCatalogueBundle/Resources/config/routing/sejour_pack.yml"
-        prefix:   /sejour-pack
+        prefix:   /admin/sejour-pack
 
 BenskiCatalogueBundle_option:
         resource: "@BenskiCatalogueBundle/Resources/config/routing/abstractoption.yml"
-        prefix:   /option
+        prefix:   /admin/option
         
 BenskiCatalogueBundle_optionchoixmultiple:
         resource: "@BenskiCatalogueBundle/Resources/config/routing/optionchoixmultiple.yml"
-        prefix:   /optionchoixmultiple
+        prefix:   /admin/optionchoixmultiple
         
 BenskiCatalogueBundle_optionacocher:
         resource: "@BenskiCatalogueBundle/Resources/config/routing/option_optionacocher.yml"
-        prefix:   /optionacocher
+        prefix:   /admin/optionacocher
         
 BenskiCatalogueBundle_pack:
         resource: "@BenskiCatalogueBundle/Resources/config/routing/pack.yml"
-        prefix:   /pack
+        prefix:   /admin/pack
+        
+BenskiCatalogueBundle_public:
+        resource: "@BenskiCatalogueBundle/Resources/config/routing/public.yml"
+        prefix:   /

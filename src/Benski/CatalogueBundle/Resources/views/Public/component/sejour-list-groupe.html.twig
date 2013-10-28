@@ -1,0 +1,19 @@
+{% if sejour is not defined %}
+{% set sejour = null %}
+{% endif %}
+
+<div class="list-group myListGroup">
+{% for element in sejours %}
+      <a href="{{ path('catalogue_public_logement',
+                   { 'destination': destination.id, 'sejour' : element.id }) }}
+         " class="list-group-item 
+          {% if element == sejour %} active {% endif %}
+         ">
+            <p class="pull-right prix" > à partir de <span class="prix">1000€</span></p>
+            <div class="pull-left"><span class="glyphicon glyphicon-bookmark"></span> </div>
+
+            <h4 class="list-group-item-heading" >{{ element.nom }}</h4>
+            <p class="list-group-item-text">Du {{ element.dateDebut|date('d/m/Y') }} au {{ element.dateFin|date('d/m/Y') }}</p>
+         </a>
+{% endfor %}
+      </div>

@@ -16,6 +16,10 @@ class PackOptionACocherType extends AbstractType {
       $builder
               ->add('cocheParDefaut')
               ->add('prix')
+              ->add('prix', 'money', array(
+             'divisor' => 100,
+             'label' => 'Prix',
+         ));
       ;
       
    }

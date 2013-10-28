@@ -14,7 +14,7 @@ class ChoixOptionMultiple
 {
     
     public function __toString() {
-        return $this->getId().' - '.$this->getIntitule().' : '.$this->getPrix();
+        return $this->getId().' - '.$this->getIntitule();
     }
 
     

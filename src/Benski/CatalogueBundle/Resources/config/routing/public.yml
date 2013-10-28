@@ -1,0 +1,20 @@
+## YAML Template.
+public_index:
+    pattern:  /
+    defaults: { _controller: "BenskiCatalogueBundle:noadmin/Public:index" }
+
+catalogue_public_sejour:
+    pattern:  /catalogue/{destination}
+    defaults: { _controller: "BenskiCatalogueBundle:noadmin/Public:afficherSejour" }
+    
+catalogue_public_logement:
+    pattern:  /catalogue/{destination}/{sejour}
+    defaults: { _controller: "BenskiCatalogueBundle:noadmin/Public:afficherLogement" }
+
+catalogue_public_prix_logement:
+    pattern:  /catalogue/{destination}/{sejour}/{appartement}
+    defaults: { _controller: "BenskiCatalogueBundle:noadmin/Public:afficherPrixLogement" }
+
+catalogue_public_pack:
+    pattern:  /catalogue/{destination}/{sejour}/{appartement}/pour-{nbrPersonnes}-personnes
+    defaults: { _controller: "BenskiCatalogueBundle:noadmin/Public:afficherOption" }

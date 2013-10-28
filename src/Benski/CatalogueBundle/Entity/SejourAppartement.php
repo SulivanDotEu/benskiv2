@@ -40,6 +40,11 @@ class SejourAppartement extends VersionedObject {
     * @ORM\Column(name="stock", type="integer")
     */
    private $stock;
+   
+   function getPrixMinimum(){
+      $nbrLit = $this->getAppartement()->getNombreLits();
+      return $this->getPrix()[$nbrLit];
+   }
 
    function __construct() {
       $this->setPrix(array());

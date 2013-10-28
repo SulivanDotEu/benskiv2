@@ -1,0 +1,107 @@
+{% extends 'BenskiCatalogueBundle::Public/layout.html.twig' %}
+
+{% block breadcrumb %}
+{{ parent() }}
+<li>Catalogue</li>
+<li><a href="#" class="active">{{ destination.nom }}</a></li>
+<li><a href="#" class="active">{{ sejour.nom }}</a></li>
+{% endblock %}
+
+
+{% block parent_container -%}
+
+
+
+<div class="container" >
+   <div class="row process-catalogue" style=" ">
+      <div class="col-sm-3 " style="">
+
+         <div class="panel panel-default text-center myPanel ok">
+            <div class="ok" ><span class="glyphicon glyphicon-ok"></span></div>
+            <span class="glyphicon glyphicon-chevron-right arrow"></span>
+            <div class="panel-header2"><h4 style="   "><span class="glyphicon glyphicon-map-marker"></span> Destination</h4></div>
+            <div class="panel-body" style="padding-right: 5px; padding-right: 5px">
+
+
+               <p style="font-size: 25px; font-weight: bolder" >
+                  Risoul</p>
+
+
+            </div>
+         </div>
+      </div>
+      <div class="col-sm-3 " style="">
+
+         <div class="panel panel-default text-center  myPanel ok" >
+            <div class="ok" ><span class="glyphicon glyphicon-ok"></span></div>
+
+
+            <span class="glyphicon glyphicon-chevron-right arrow"></span>
+
+            <div class="panel-header2"><h4><span class="glyphicon glyphicon-calendar"></span> Date</h4></div>
+
+            <div class="panel-body" style="font-weight: bold; font-size: 18px">
+               Du {{ sejour.dateDebut|date('d/m/Y') }}<br>
+               au {{ sejour.dateFin|date('d/m/Y') }} 
+            </div>
+            <!---<div class="panel-body" style="font-weight: bold; font-size: 16px">
+                Du 21/10/2013<br>
+               au 28/10/2013 
+               faites votre choix <span class="glyphicon glyphicon-arrow-down"></span>
+            </div>-->
+         </div>
+      </div>
+      <div class="col-sm-3 " style="">
+
+         <div class="panel panel-default text-center myPanel active " style="">
+            <span class="glyphicon glyphicon-chevron-right arrow"></span>
+
+            <div class="panel-header2"><h4><span class="glyphicon glyphicon-home"></span> Logement</h4></div>
+            <div class="panel-body" style="">
+
+               faites votre choix <span class="glyphicon glyphicon-arrow-down"></span>
+            </div>
+         </div>
+      </div>
+      <div class="col-sm-3 " style="">
+
+         <div class="panel panel-default text-center myPanel" >
+
+            <div class="panel-header2"><h4><span class="glyphicon glyphicon-gift"></span> Options</h4></div>
+            <div class="panel-body" >
+
+            </div>
+         </div>
+      </div>
+
+
+
+
+   </div>
+
+
+
+
+   <div class="row"  >
+      <div class="col-sm-12">
+         <div class="page-header" style="">
+            <h1>Nos séjours <small>Choisissez votre date</small></h1>
+         </div>
+      </div>
+   </div>
+
+   <div class="row"  >
+      <div class="col-sm-6">
+         {% include 'BenskiCatalogueBundle:Public:component/sejour-list-groupe.html.twig' %}
+         </div>
+         <div class="col-sm-6 text-center">
+
+            {% include 'BenskiCatalogueBundle:Public:component/logement-list-group.html.twig' %}
+
+                  </div>
+
+               </div>
+            </div>
+
+
+{% endblock %}

@@ -1,0 +1,133 @@
+{% extends 'BenskiCatalogueBundle::Public/layout.html.twig' %}
+
+{% block breadcrumb %}
+{{ parent() }}
+<li>Catalogue</li>
+<li><a href="#" class="active">{{ destination.nom }}</a></li>
+<li><a href="#" class="active">{{ sejour.nom }}</a></li>
+{% endblock %}
+
+
+{% block parent_container -%}
+
+
+
+<div class="container" >
+   <div class="row process-catalogue" style=" ">
+      <div class="col-sm-3 " style="">
+
+         <div class="panel panel-default text-center myPanel ok">
+            <div class="ok" ><span class="glyphicon glyphicon-ok"></span></div>
+            <span class="glyphicon glyphicon-chevron-right arrow"></span>
+            <div class="panel-header2"><h4 style="   "><span class="glyphicon glyphicon-map-marker"></span> Destination</h4></div>
+            <div class="panel-body" style="padding-right: 5px; padding-right: 5px">
+
+
+               <p style="font-size: 25px; font-weight: bolder" >
+                  Risoul</p>
+
+
+            </div>
+         </div>
+      </div>
+      <div class="col-sm-3 " style="">
+
+         <div class="panel panel-default text-center  myPanel ok" >
+
+            <div class="ok" ><span class="glyphicon glyphicon-ok"></span></div>
+
+            <span class="glyphicon glyphicon-chevron-right arrow"></span>
+
+            <div class="panel-header2"><h4><span class="glyphicon glyphicon-calendar"></span> Date</h4></div>
+
+            <div class="panel-body" style="font-weight: bold; font-size: 18px">
+               Du {{ sejour.dateDebut|date('d/m/Y') }}<br>
+               au {{ sejour.dateFin|date('d/m/Y') }} 
+            </div>
+            <!---<div class="panel-body" style="font-weight: bold; font-size: 16px">
+                Du 21/10/2013<br>
+               au 28/10/2013 
+               faites votre choix <span class="glyphicon glyphicon-arrow-down"></span>
+            </div>-->
+         </div>
+      </div>
+      <div class="col-sm-3 " style="">
+
+         <div class="panel panel-default text-center myPanel active " style="">
+            <span class="glyphicon glyphicon-chevron-right arrow"></span>
+
+            <div class="panel-header2"><h4><span class="glyphicon glyphicon-home"></span> Logement</h4></div>
+            <div class="panel-body" style="">
+               <div class="panel-body2" style="padding-right: 5px;
+                    padding-right: 5px">
+                       {{ appartement.nom }}<br>
+                      {% for i in range(1, appartement.qualite) %}<span class="glyphicon glyphicon-star"></span>{% endfor %}
+                       <br>
+
+
+                       <b style="font-weight: bolder">???</b> <span class="glyphicon glyphicon-user"></span>  x <b>???€</b> 
+                    </div>
+               </div>
+            </div>
+         </div>
+         <div class="col-sm-3 " style="">
+
+            <div class="panel panel-default text-center myPanel" >
+
+               <div class="panel-header2"><h4><span class="glyphicon glyphicon-gift"></span> Options</h4></div>
+               <div class="panel-body" >
+
+               </div>
+            </div>
+         </div>
+
+
+
+
+      </div>
+
+
+
+
+      <div class="row"  >
+         <div class="col-sm-12">
+            <div class="page-header" style="">
+               <h1>Nos séjours <small>Choisissez votre date</small></h1>
+            </div>
+         </div>
+      </div>
+
+      <div class="row"  >
+
+         <div class="col-sm-6 text-center">
+            {% include 'BenskiCatalogueBundle:Public:component/logement-list-group.html.twig' %}
+ </div>
+
+                  <div class="col-sm-6 ">
+                     <div class="list-group choix-nbr-personnes">
+
+                        {% for i in range(sejourAppartement.appartement.nombreLits, 1) %}
+                        <a href="{{ path('catalogue_public_pack',
+                   { 'destination': destination.id, 'sejour' : sejour.id, 'appartement': appartement.id, 'nbrPersonnes':i }) }}                           
+                           " class="list-group-item {% if i == sejourAppartement.appartement.nombreLits %}best{%endif%}" style="">
+                              <div class="row">
+                                 <div class="col-xs-1 text-left"><span class="glyphicon glyphicon-star"></span></div>
+                                 <div class="col-xs-5 text-right">Réserver pour <b>{{i}}</b> <span class="glyphicon glyphicon-user"></span></div>
+
+                                 <div class="col-xs-5 text-left"> <b>{{ sejourAppartement.prixParPersonne(i)/100|number_format  }}</b> <span class="glyphicon glyphicon-euro"></span> par <span class="glyphicon glyphicon-user"></span></div>
+                                 <div class="col-xs-1 text-left"> <span class="glyphicon glyphicon-chevron-right"></span></div>
+                              </div>
+                           </a>
+                        {% endfor %}
+                          
+
+                        </div>
+
+                     </div>
+
+                  </div>
+               </div>
+
+
+
+{% endblock %}

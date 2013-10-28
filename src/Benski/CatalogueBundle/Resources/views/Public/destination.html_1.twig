@@ -1,0 +1,808 @@
+{% extends 'BenskiCatalogueBundle::Public/layout.html.twig' %}
+
+{% block breadcrumb %}
+{{ parent() }}
+<li>Catalogue</li>
+<li><a href="#" class="active">Risoul</a></li>
+{% endblock %}
+
+
+{% block parent_container -%}
+<div class="container" >
+
+
+
+   <div class="container" >
+      <div class="row process-catalogue" style=" ">
+         <div class="col-sm-3 " style="">
+
+            <div class="panel panel-default text-center myPanel ok">
+               <div class="ok" ><span class="glyphicon glyphicon-ok"></span></div>
+               <span class="glyphicon glyphicon-chevron-right arrow"></span>
+               <div class="panel-header2"><h4 style="   "><span class="glyphicon glyphicon-map-marker"></span> Destination</h4></div>
+               <div class="panel-body" style="padding-right: 5px; padding-right: 5px">
+
+
+                  <p style="font-size: 25px; font-weight: bolder" >
+                     Risoul</p>
+
+
+               </div>
+            </div>
+         </div>
+         <div class="col-sm-3 " style="">
+
+            <div class="panel panel-default text-center  myPanel active" >
+
+
+               <span class="glyphicon glyphicon-chevron-right arrow"></span>
+
+               <div class="panel-header2"><h4><span class="glyphicon glyphicon-calendar"></span> Date</h4></div>
+
+               <div class="panel-body" style="">
+
+                  faites votre choix <span class="glyphicon glyphicon-arrow-down"></span>
+               </div>
+               <!---<div class="panel-body" style="font-weight: bold; font-size: 16px">
+                   Du 21/10/2013<br>
+                  au 28/10/2013 
+                  faites votre choix <span class="glyphicon glyphicon-arrow-down"></span>
+               </div>-->
+            </div>
+         </div>
+         <div class="col-sm-3 " style="">
+
+            <div class="panel panel-default text-center myPanel " style="">
+               <span class="glyphicon glyphicon-chevron-right arrow"></span>
+
+               <div class="panel-header2"><h4><span class="glyphicon glyphicon-home"></span> Logement</h4></div>
+               <div class="panel-body">
+
+               </div>
+            </div>
+         </div>
+         <div class="col-sm-3 " style="">
+
+            <div class="panel panel-default text-center myPanel" >
+
+               <div class="panel-header2"><h4><span class="glyphicon glyphicon-gift"></span> Options</h4></div>
+               <div class="panel-body" >
+
+               </div>
+            </div>
+         </div>
+
+
+
+
+      </div>
+
+
+
+
+      <div class="row"  >
+         <div class="col-sm-12">
+            <div class="page-header" style="">
+               <h1>Nos séjours <small>Choisissez votre date</small></h1>
+            </div>
+         </div>
+      </div>
+
+      <div class="row"  >
+         <div class="col-sm-6">
+            <div class="list-group myListGroup">
+               {% for sejour in sejours %}
+               <a href="#" class="list-group-item ">
+                  <p class="pull-right prix" > à partir de <span class="prix">1000€</span></p>
+                  <div class="pull-left"><span class="glyphicon glyphicon-bookmark"></span> </div>
+
+                  <h4 class="list-group-item-heading" >{{ sejour.nom }}</h4>
+                  <p class="list-group-item-text">Du {{ sejour.dateDebut|date('Y/m/d') }} au {{ sejour.dateFin|date('Y/m/d') }}</p>
+               </a>
+                  {% endfor %}
+                  
+               <a href="#" class="list-group-item ">
+                  <p class="pull-right prix" > à partir de <span class="prix">325€</span></p>
+                  <p class="list-group-item-text">Du samedi 28 Décembre 2013 au samedi 4 Janvier</p>
+               </a>
+               <a href="#" class="list-group-item ">
+                  <p class="pull-right prix" > à partir de <span class="prix">325€</span></p>
+                  <p class="list-group-item-text">Du samedi 28 Décembre 2013 au samedi 4 Janvier</p>
+               </a>
+               <a href="#" class="list-group-item ">
+                  <p class="pull-right prix" > à partir de <span class="prix">325€</span></p>
+                  <p class="list-group-item-text">Du samedi 28 Décembre 2013 au samedi 4 Janvier</p>
+               </a>
+               <a href="#" class="list-group-item ">
+                  <p class="pull-right prix" > à partir de <span class="prix">325€</span></p>
+                  <p class="list-group-item-text">Du samedi 28 Décembre 2013 au samedi 4 Janvier</p>
+               </a>
+               <a href="#" class="list-group-item ">
+                  <p class="pull-right prix" > à partir de <span class="prix">325€</span></p>
+                  <p class="list-group-item-text">Du samedi 28 Décembre 2013 au samedi 4 Janvier</p>
+               </a>
+
+
+               <a href="#" class="list-group-item ">
+                  <p class="pull-right prix" > à partir de <span class="prix">325€</span></p>
+                  <div class="pull-left"><span class="glyphicon glyphicon-bookmark"></span> </div>
+
+                  <h4 class="list-group-item-heading" >Première semaine de Paques</h4>
+                  <p class="list-group-item-text">Du samedi 21 Décembre 2013 au samedi 28 Décembre</p>
+               </a>
+               <a href="#" class="list-group-item ">
+                  <p class="pull-right prix" > à partir de <span class="prix">325€</span></p>
+                  <div class="pull-left"><span class="glyphicon glyphicon-bookmark"></span> </div>
+
+                  <h4 class="list-group-item-heading" >Deuxième semaine de Paques</h4>
+                  <p class="list-group-item-text">Du samedi 21 Décembre 2013 au samedi 28 Décembre</p>
+               </a>
+
+            </div>
+         </div>
+         <div class="col-sm-6 text-center">
+            <div class="list-group">
+
+               <a href="#" class="list-group-item active">
+                  <div class="row">
+                     <div class="col-xs-4 text-left">Appartement</div>
+                     <div class="col-xs-3">
+                        <span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span>
+                     </div>
+                     <div class="col-xs-2">
+                        4
+                        <span class="glyphicon glyphicon-user"></span>
+                     </div>
+                     <div class="col-xs-3"> 325 <span class="glyphicon glyphicon-euro"></span> par <span class="glyphicon glyphicon-user"></span></div>
+                  </div>
+               </a>
+               <a href="#" class="list-group-item ">
+                  <div class="row">
+                     <div class="col-xs-4 text-left">Appartement</div>
+                     <div class="col-xs-3">
+                        <span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span>
+                     </div>
+                     <div class="col-xs-2">
+                        4
+                        <span class="glyphicon glyphicon-user"></span>
+                     </div>
+                     <div class="col-xs-3"> 385 <span class="glyphicon glyphicon-euro"></span> par <span class="glyphicon glyphicon-user"></span></div>
+                  </div>
+               </a>
+               <a href="#" class="list-group-item ">
+                  <div class="row">
+                     <div class="col-xs-4 text-left">Appartement</div>
+                     <div class="col-xs-3">
+                        <span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span>
+                     </div>
+                     <div class="col-xs-2">
+                        4
+                        <span class="glyphicon glyphicon-user"></span>
+                     </div>
+                     <div class="col-xs-3"> 575 <span class="glyphicon glyphicon-euro"></span> par <span class="glyphicon glyphicon-user"></span></div>
+                  </div>
+               </a>
+               <a href="#" class="list-group-item ">
+                  <div class="row">
+                     <div class="col-xs-4 text-left">Appartement</div>
+                     <div class="col-xs-3">
+                        <span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span>
+                     </div>
+                     <div class="col-xs-2">
+                        6
+                        <span class="glyphicon glyphicon-user"></span>
+                     </div>
+                     <div class="col-xs-3"> 300 <span class="glyphicon glyphicon-euro"></span> par <span class="glyphicon glyphicon-user"></span></div>
+                  </div>
+               </a>
+               <a href="#" class="list-group-item ">
+                  <div class="row">
+                     <div class="col-xs-4 text-left">Appartement</div>
+                     <div class="col-xs-3">
+                        <span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span>
+                     </div>
+                     <div class="col-xs-2">
+                        6
+                        <span class="glyphicon glyphicon-user"></span>
+                     </div>
+                     <div class="col-xs-3"> 350 <span class="glyphicon glyphicon-euro"></span> par <span class="glyphicon glyphicon-user"></span></div>
+                  </div>
+               </a>
+               <a href="#" class="list-group-item ">
+                  <div class="row">
+                     <div class="col-xs-4 text-left">Appartement</div>
+                     <div class="col-xs-3">
+                        <span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span>
+                     </div>
+                     <div class="col-xs-2">
+                        6
+                        <span class="glyphicon glyphicon-user"></span>
+                     </div>
+                     <div class="col-xs-3"> 450 <span class="glyphicon glyphicon-euro"></span> par <span class="glyphicon glyphicon-user"></span></div>
+                  </div>
+               </a>
+               <a href="#" class="list-group-item ">
+                  <div class="row">
+                     <div class="col-xs-4 text-left">Studio</div>
+                     <div class="col-xs-3">
+                        <span class="glyphicon glyphicon-star"></span>
+                     </div>
+                     <div class="col-xs-2">
+                        4
+                        <span class="glyphicon glyphicon-user"></span>
+                     </div>
+                     <div class="col-xs-3"> 300 <span class="glyphicon glyphicon-euro"></span> par <span class="glyphicon glyphicon-user"></span></div>
+                  </div>
+               </a>
+               <a href="#" class="list-group-item ">
+                  <div class="row">
+                     <div class="col-xs-4 text-left">Studio</div>
+                     <div class="col-xs-3">
+                        <span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span>
+                     </div>
+                     <div class="col-xs-2">
+                        4
+                        <span class="glyphicon glyphicon-user"></span>
+                     </div>
+                     <div class="col-xs-3"> 345 <span class="glyphicon glyphicon-euro"></span> par <span class="glyphicon glyphicon-user"></span></div>
+                  </div>
+               </a>
+               <a href="#" class="list-group-item ">
+                  <div class="row">
+                     <div class="col-xs-4 text-left">Studio</div>
+                     <div class="col-xs-3">
+                        <span class="glyphicon glyphicon-star"></span>
+                     </div>
+                     <div class="col-xs-2">
+                        4
+                        <span class="glyphicon glyphicon-user"></span>
+                     </div>
+                     <div class="col-xs-3"> 400 <span class="glyphicon glyphicon-euro"></span> par <span class="glyphicon glyphicon-user"></span></div>
+                  </div>
+               </a>
+               <a href="#" class="list-group-item ">
+                  <div class="row">
+                     <div class="col-xs-4 text-left">Appartement 3 pièces</div>
+                     <div class="col-xs-3">
+                        <span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span>
+                     </div>
+                     <div class="col-xs-2">
+                        8
+                        <span class="glyphicon glyphicon-user"></span>
+                     </div>
+                     <div class="col-xs-3"> 400 <span class="glyphicon glyphicon-euro"></span> par <span class="glyphicon glyphicon-user"></span></div>
+                  </div>
+               </a>
+               <a href="#" class="list-group-item ">
+                  <div class="row">
+                     <div class="col-xs-4 text-left">Appartement 3 pièces</div>
+                     <div class="col-xs-3">
+                        <span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span>
+                     </div>
+                     <div class="col-xs-2">
+                        8
+                        <span class="glyphicon glyphicon-user"></span>
+                     </div>
+                     <div class="col-xs-3"> 360 <span class="glyphicon glyphicon-euro"></span> par <span class="glyphicon glyphicon-user"></span></div>
+                  </div>
+               </a>
+               <a href="#" class="list-group-item ">
+                  <div class="row">
+                     <div class="col-xs-4 text-left">Appartement + piscine</div>
+                     <div class="col-xs-3">
+                        <span class="glyphicon glyphicon-star"></span>
+                     </div>
+                     <div class="col-xs-2">
+                        8
+                        <span class="glyphicon glyphicon-user"></span>
+                     </div>
+                     <div class="col-xs-3"> 450 <span class="glyphicon glyphicon-euro"></span> par <span class="glyphicon glyphicon-user"></span></div>
+                  </div>
+               </a>
+
+            </div>
+
+         </div>
+
+      </div>
+   </div>
+
+   <div class="container" >
+
+
+
+      <div class="row"  >
+         <div class="col-sm-12">
+            <div class="page-header" style="">
+               <h1>Nos offres <small>step 2</small></h1>
+            </div>
+         </div>
+      </div>
+      <div class="row"  >
+
+         <div class="col-sm-6 text-center">
+            <div class="list-group">
+
+               <a href="#" class="list-group-item">
+                  <div class="row">
+                     <div class="col-xs-5 text-left">Appartement</div>
+                     <div class="col-xs-2">
+                        <span class="glyphicon glyphicon-star"></span>
+                        <span class="glyphicon glyphicon-star"></span>
+                     </div>
+                     <div class="col-xs-2">
+                        4
+                        <span class="glyphicon glyphicon-user"></span>
+                     </div>
+                     <div class="col-xs-3"> 325 <span class="glyphicon glyphicon-euro"></span> par <span class="glyphicon glyphicon-user"></span></div>
+                  </div>
+               </a>
+               <a href="#" class="list-group-item ">
+                  <div class="row">
+                     <div class="col-xs-5 text-left">Appartement</div>
+                     <div class="col-xs-2">
+                        <span class="glyphicon glyphicon-star"></span>
+                        <span class="glyphicon glyphicon-star"></span>
+                        <span class="glyphicon glyphicon-star"></span>
+                     </div>
+                     <div class="col-xs-2">
+                        4
+                        <span class="glyphicon glyphicon-user"></span>
+                     </div>
+                     <div class="col-xs-3"> 385 <span class="glyphicon glyphicon-euro"></span> par <span class="glyphicon glyphicon-user"></span></div>
+                  </div>
+               </a>
+               <a href="#" class="list-group-item ">
+                  <div class="row">
+                     <div class="col-xs-5 text-left">Appartement</div>
+                     <div class="col-xs-2">
+                        <span class="glyphicon glyphicon-star"></span>
+                        <span class="glyphicon glyphicon-star"></span>
+                        <span class="glyphicon glyphicon-star"></span>
+                        <span class="glyphicon glyphicon-star"></span>
+                        <span class="glyphicon glyphicon-star"></span>
+                     </div>
+                     <div class="col-xs-2">
+                        4
+                        <span class="glyphicon glyphicon-user"></span>
+                     </div>
+                     <div class="col-xs-3"> 575 <span class="glyphicon glyphicon-euro"></span> par <span class="glyphicon glyphicon-user"></span></div>
+                  </div>
+               </a>
+               <a href="#" class="list-group-item ">
+                  <div class="row">
+                     <div class="col-xs-5 text-left">Appartement</div>
+                     <div class="col-xs-2">
+                        <span class="glyphicon glyphicon-star"></span>
+                        <span class="glyphicon glyphicon-star"></span>
+                     </div>
+                     <div class="col-xs-2">
+                        6
+                        <span class="glyphicon glyphicon-user"></span>
+                     </div>
+                     <div class="col-xs-3"> 300 <span class="glyphicon glyphicon-euro"></span> par <span class="glyphicon glyphicon-user"></span></div>
+                  </div>
+               </a>
+               <a href="#" class="list-group-item ">
+                  <div class="row">
+                     <div class="col-xs-5 text-left">Appartement</div>
+                     <div class="col-xs-2">
+                        <span class="glyphicon glyphicon-star"></span>
+                        <span class="glyphicon glyphicon-star"></span>
+                        <span class="glyphicon glyphicon-star"></span>
+                     </div>
+                     <div class="col-xs-2">
+                        6
+                        <span class="glyphicon glyphicon-user"></span>
+                     </div>
+                     <div class="col-xs-3"> 350 <span class="glyphicon glyphicon-euro"></span> par <span class="glyphicon glyphicon-user"></span></div>
+                  </div>
+               </a>
+               <a href="#" class="list-group-item ">
+                  <div class="row">
+                     <div class="col-xs-5 text-left">Appartement</div>
+                     <div class="col-xs-2">
+                        <span class="glyphicon glyphicon-star"></span>
+                        <span class="glyphicon glyphicon-star"></span>
+                        <span class="glyphicon glyphicon-star"></span>
+                        <span class="glyphicon glyphicon-star"></span>
+                        <span class="glyphicon glyphicon-star"></span>
+                     </div>
+                     <div class="col-xs-2">
+                        6
+                        <span class="glyphicon glyphicon-user"></span>
+                     </div>
+                     <div class="col-xs-3"> 450 <span class="glyphicon glyphicon-euro"></span> par <span class="glyphicon glyphicon-user"></span></div>
+                  </div>
+               </a>
+               <a href="#" class="list-group-item ">
+                  <div class="row">
+                     <div class="col-xs-5 text-left">Studio</div>
+                     <div class="col-xs-2">
+                        <span class="glyphicon glyphicon-star"></span>
+                     </div>
+                     <div class="col-xs-2">
+                        4
+                        <span class="glyphicon glyphicon-user"></span>
+                     </div>
+                     <div class="col-xs-3"> 300 <span class="glyphicon glyphicon-euro"></span> par <span class="glyphicon glyphicon-user"></span></div>
+                  </div>
+               </a>
+               <a href="#" class="list-group-item ">
+                  <div class="row">
+                     <div class="col-xs-5 text-left">Studio</div>
+                     <div class="col-xs-2">
+                        <span class="glyphicon glyphicon-star"></span>
+                        <span class="glyphicon glyphicon-star"></span>
+                        <span class="glyphicon glyphicon-star"></span>
+                     </div>
+                     <div class="col-xs-2">
+                        4
+                        <span class="glyphicon glyphicon-user"></span>
+                     </div>
+                     <div class="col-xs-3"> 345 <span class="glyphicon glyphicon-euro"></span> par <span class="glyphicon glyphicon-user"></span></div>
+                  </div>
+               </a>
+               <a href="#" class="list-group-item ">
+                  <div class="row">
+                     <div class="col-xs-5 text-left">Studio</div>
+                     <div class="col-xs-2">
+                        <span class="glyphicon glyphicon-star"></span>
+                     </div>
+                     <div class="col-xs-2">
+                        4
+                        <span class="glyphicon glyphicon-user"></span>
+                     </div>
+                     <div class="col-xs-3"> 400 <span class="glyphicon glyphicon-euro"></span> par <span class="glyphicon glyphicon-user"></span></div>
+                  </div>
+               </a>
+               <a href="#" class="list-group-item active ">
+                  <div class="row">
+                     <div class="col-xs-5 text-left">Appartement 3 pièces</div>
+                     <div class="col-xs-2">
+                        <span class="glyphicon glyphicon-star"></span>
+                        <span class="glyphicon glyphicon-star"></span>
+                        <span class="glyphicon glyphicon-star"></span>
+                     </div>
+                     <div class="col-xs-2">
+                        8
+                        <span class="glyphicon glyphicon-user"></span>
+                     </div>
+                     <div class="col-xs-3"> 400 <span class="glyphicon glyphicon-euro"></span> par <span class="glyphicon glyphicon-user"></span></div>
+                  </div>
+               </a>
+               <a href="#" class="list-group-item ">
+                  <div class="row">
+                     <div class="col-xs-5 text-left">Appartement 3 pièces</div>
+                     <div class="col-xs-2">
+                        <span class="glyphicon glyphicon-star"></span>
+                        <span class="glyphicon glyphicon-star"></span>
+                        <span class="glyphicon glyphicon-star"></span>
+                        <span class="glyphicon glyphicon-star"></span>
+                        <span class="glyphicon glyphicon-star"></span>
+                     </div>
+                     <div class="col-xs-2">
+                        8
+                        <span class="glyphicon glyphicon-user"></span>
+                     </div>
+                     <div class="col-xs-3"> 360 <span class="glyphicon glyphicon-euro"></span> par <span class="glyphicon glyphicon-user"></span></div>
+                  </div>
+               </a>
+               <a href="#" class="list-group-item ">
+                  <div class="row">
+                     <div class="col-xs-5 text-left">Appartement avec piscine</div>
+                     <div class="col-xs-2">
+                        <span class="glyphicon glyphicon-star"></span>
+                     </div>
+                     <div class="col-xs-2">
+                        8
+                        <span class="glyphicon glyphicon-user"></span>
+                     </div>
+                     <div class="col-xs-3"> 450 <span class="glyphicon glyphicon-euro"></span> par <span class="glyphicon glyphicon-user"></span></div>
+                  </div>
+               </a>
+
+            </div>
+
+         </div>
+
+         <div class="col-sm-6 ">
+            <div class="list-group">
+
+
+               <a href="#" class="list-group-item " style="
+                  text-shadow: 0 -1px 0 #30A9A9;
+                  background-image: -webkit-gradient(linear,left 0,left 100%,from(#42CABF),to(#2FA7A7));
+                  background-image: -webkit-linear-gradient(top,#42CABF,0%,#2FA7A7,100%);
+                  background-image: -moz-linear-gradient(top,#42CABF 0,#2FA7A7 100%);
+                  background-image: linear-gradient(to bottom,#42CABF 0,#2FA7A7 100%);
+                  background-repeat: repeat-x;
+                  border-color: #32B3B3;
+                  z-index: 2;
+                  color: #ffffff;
+                  background-color: #42CACA;
+                  ">
+                     <div class="row">
+                        <div class="col-xs-1 text-left"><span class="glyphicon glyphicon-star"></span></div>
+                        <div class="col-xs-5 text-right">Réserver pour <b>8</b> <span class="glyphicon glyphicon-user"></span></div>
+
+                        <div class="col-xs-5 text-left"> 385 <span class="glyphicon glyphicon-euro"></span> par <span class="glyphicon glyphicon-user"></span></div>
+                        <div class="col-xs-1 text-left"> <span class="glyphicon glyphicon-chevron-right"></span></div>
+                     </div>
+                  </a>
+                  <a href="#" class="list-group-item ">
+                     <div class="row">
+                        <div class="col-xs-1 text-left"><span class="glyphicon glyphicon-star"></span></div>
+                        <div class="col-xs-5 text-right">Réserver pour <b>7</b> <span class="glyphicon glyphicon-user"></span></div>
+
+                        <div class="col-xs-5 text-left"> 385 <span class="glyphicon glyphicon-euro"></span> par <span class="glyphicon glyphicon-user"></span></div>
+                        <div class="col-xs-1 text-left"> <span class="glyphicon glyphicon-chevron-right"></span></div>
+                     </div>
+                  </a>
+                  <a href="#" class="list-group-item ">
+                     <div class="row">
+                        <div class="col-xs-6 text-right">Réserver pour <b>6</b> <span class="glyphicon glyphicon-user"></span></div>
+
+                        <div class="col-xs-6 text-left"> 385 <span class="glyphicon glyphicon-euro"></span> par <span class="glyphicon glyphicon-user"></span></div>
+                     </div>
+                  </a>
+                  <a href="#" class="list-group-item ">
+                     <div class="row">
+                        <div class="col-xs-6 text-right">Réserver pour <b>5</b> <span class="glyphicon glyphicon-user"></span></div>
+
+                        <div class="col-xs-6 text-left"> 385 <span class="glyphicon glyphicon-euro"></span> par <span class="glyphicon glyphicon-user"></span></div>
+                     </div>
+                  </a>
+                  <a href="#" class="list-group-item ">
+                     <div class="row">
+                        <div class="col-xs-6 text-right">Réserver pour <b>4</b> <span class="glyphicon glyphicon-user"></span></div>
+
+                        <div class="col-xs-6 text-left"> 385 <span class="glyphicon glyphicon-euro"></span> par <span class="glyphicon glyphicon-user"></span></div>
+                     </div>
+                  </a>
+                  <a href="#" class="list-group-item ">
+                     <div class="row">
+                        <div class="col-xs-6 text-right">Réserver pour <b>3</b> <span class="glyphicon glyphicon-user"></span></div>
+
+                        <div class="col-xs-6 text-left"> 385 <span class="glyphicon glyphicon-euro"></span> par <span class="glyphicon glyphicon-user"></span></div>
+                     </div>
+                  </a>
+                  <a href="#" class="list-group-item ">
+                     <div class="row">
+                        <div class="col-xs-6 text-right">Réserver pour <b>2</b> <span class="glyphicon glyphicon-user"></span></div>
+
+                        <div class="col-xs-6 text-left"> 385 <span class="glyphicon glyphicon-euro"></span> par <span class="glyphicon glyphicon-user"></span></div>
+                     </div>
+                  </a>
+                  <a href="#" class="list-group-item ">
+                     <div class="row">
+                        <div class="col-xs-6 text-right">Réserver pour <b>1</b> <span class="glyphicon glyphicon-user"></span></div>
+
+                        <div class="col-xs-6 text-left"> 385 <span class="glyphicon glyphicon-euro"></span> par <span class="glyphicon glyphicon-user"></span></div>
+                     </div>
+                  </a>
+
+
+               </div>
+
+            </div>
+
+         </div>
+
+
+
+
+
+
+
+
+
+
+
+
+         <div class="row"  >
+            <div class="col-sm-12">
+               <div class="page-header" style="">
+                  <h1>Nos offres <small>step 3</small></h1>
+               </div>
+            </div>
+         </div>
+
+
+         <div class="row"  >
+
+            <div class="col-sm-4 text-center">
+               <div class="list-group">
+
+
+                  <a href="#" class="list-group-item ">
+                     <div class="row">
+                        <div class="col-xs-6 text-right">Pack 
+                           <span class="glyphicon glyphicon-star"></span>
+                        </div>
+                        <div class="col-xs-5 text-left">
+                           <b>0€</b>
+                        </div>
+
+                        <div class="pull-right" style="padding-right: 10px"> <span class="glyphicon glyphicon-chevron-right"></span></div>
+                     </div>
+                  </a>
+                  <a href="#" class="list-group-item ">
+                     <div class="row">
+                        <div class="col-xs-6 text-right">Pack 
+                           <span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span>
+                        </div>
+                        <div class="col-xs-5 text-left">
+                           <b>100€</b>
+                        </div>
+
+                        <div class="pull-right" style="padding-right: 10px"> <span class="glyphicon glyphicon-chevron-right"></span></div>
+                     </div>
+                  </a>
+                  <a href="#" class="list-group-item ">
+                     <div class="row">
+                        <div class="col-xs-6 text-right">Pack 
+                           <span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span>
+                        </div>
+                        <div class="col-xs-5 text-left">
+                           <b>150€</b>
+                        </div>
+
+                        <div class="pull-right" style="padding-right: 10px"> <span class="glyphicon glyphicon-chevron-right"></span></div>
+                     </div>
+                  </a>
+                  <a href="#" class="list-group-item ">
+                     <div class="row">
+                        <div class="col-xs-6 text-right">Pack 
+                           <span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span></span><span class="glyphicon glyphicon-star"></span>
+                        </div>
+                        <div class="col-xs-5 text-left">
+                           <b>200€</b>
+                        </div>
+
+                        <div class="pull-right" style="padding-right: 10px"> <span class="glyphicon glyphicon-chevron-right"></span></div>
+                     </div>
+                  </a>
+                  <a href="#" class="list-group-item ">
+                     <div class="row">
+                        <div class="col-xs-6 text-right">Pack 
+                           <span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span>
+                        </div>
+                        <div class="col-xs-5 text-left">
+                           <b>250€</b>
+                        </div>
+
+                        <div class="pull-right" style="padding-right: 10px"> <span class="glyphicon glyphicon-chevron-right"></span></div>
+                     </div>
+                  </a>
+
+
+               </div>
+
+            </div>
+
+            <div class="col-sm-8 ">
+               <script>
+                                            
+                  </script>
+                  <h3>Pack haut de gamme
+                     <span class="glyphicon glyphicon-star"></span>
+                     <span class="glyphicon glyphicon-star"></span>
+                     <span class="glyphicon glyphicon-star"></span>
+                     <span class="glyphicon glyphicon-star"></span>
+                     <span class="glyphicon glyphicon-star"></span>
+                  </h3>
+                  <hr>
+
+                  <span class="pull-right" style="padding: 10px 15px; background-color:  ">Pack <span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span>
+                     <span style="margin-left: 10px"><b>250€</b></span>
+                  </span>   
+                  <ul id="myTab" class="nav nav-tabs" style="margin-bottom: 10px">
+
+                     <li class="active"><a href="#home" data-toggle="tab">Présentation</a></li>
+                     <li class=""><a href="#profile" data-toggle="tab">Résumé</a></li>
+                     <li class="dropdown">
+                        <a href="#" id="myTabDrop1" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
+                        <ul class="dropdown-menu" role="menu" aria-labelledby="myTabDrop1">
+                           <li class=""><a href="#dropdown1" tabindex="-1" data-toggle="tab">liste</a></li>
+                           <li><a href="#dropdown2" tabindex="-1" data-toggle="tab">@mdo</a></li>
+                        </ul>
+                     </li>
+                  </ul>
+
+                  <div id="myTabContent" class="tab-content">
+
+                     <div class="tab-pane fade active in" id="home">
+
+                        <h4 class="text-center"><span class="glyphicon glyphicon-gift"></span> Inclus dans votre pack</h4>
+
+                        <dl class="dl-horizontal">
+                           <dt>Ski</dt>
+                           <dd>Diamand de la vega del arte juste pour le teste do you enjoy it? Really? Oh yeah !</dd>
+                           <dt>Surf</dt>
+                           <dd>Diamand</dd>
+                           <dt>Internet (wi-fi)</dt>
+                           <dd><span class="glyphicon glyphicon-ok" style="color: green"></span></dd>
+                           <dt>Fast pass</dt>
+                           <dd><span class="glyphicon glyphicon-ok" style="color: green"></span></dd>
+                           <dt>Piscine privative</dt>
+                           <dd><span class="glyphicon glyphicon-ok" style="color: green"></span></dd>
+                           <dt>Bière à volonté</dt>
+                           <dd><span class="glyphicon glyphicon-ok" style="color: green"></span></dd>
+                           <dt>Casque sport</dt>
+                           <dd><span class="glyphicon glyphicon-ok" style="color: green"></span></dd>
+
+
+
+                           <dt>Restaurants <span id="popover1" class="glyphicon glyphicon-info-sign" style="color: #428bca"
+                                                 data-container="body" 
+                                                 data-toggle="popover" 
+                                                 data-placement="top" 
+                                                 data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus." 
+                                                 data-original-title="test"
+                                                 title="tata"
+                                                 ></span></dt>
+                           <dd><span class="glyphicon glyphicon-ok" style="color: green"></span></dd>
+                           <dt>Transport</dt>
+                           <dd><span class="glyphicon glyphicon-ok" style="color: green"></span></dd>
+                        </dl>
+                        <div class="row">
+
+                           <div class="col-sm-6  pull-left">
+                              <h4 class="text-center"><span class="glyphicon glyphicon-star"></span> Votre piscine privative</h4>
+                              <p>
+                                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut euismod lectus nec sem semper, vitae egestas eros convallis. In bibendum ullamcorper condimentum. Sed consequat turpis dolor. Ut sit amet porta risus. Sed vitae posuere leo. Nulla nisl lorem, imperdiet ac erat sit amet, tristique luctus risus. Sed ut porta nulla, vel placerat ligula. Aenean eget tincidunt erat, et auctor enim. Vestibulum placerat diam metus, quis scelerisque metus dictum sed. Phasellus sem neque, suscipit vel ultricies vel, eleifend non purus. Proin eget mauris id tortor eleifend pulvinar. Nunc facilisis tortor suscipit erat lacinia tincidunt. Duis eu fermentum erat. Nam tristique pharetra arcu sed tempus. Donec pharetra fermentum lorem ut gravida. Nunc vitae ornare eros.
+                              </p>
+                              <h4 class="text-center"><span class="glyphicon glyphicon-star"></span> Votre piscine privative</h4>
+                              <p>
+                                 Aenean tristique diam quis luctus laoreet. Sed molestie cursus justo quis blandit. Phasellus ullamcorper vehicula semper. Nam ac venenatis eros. Morbi eu sem mi. Suspendisse arcu ligula, porta eget massa eu, accumsan tempus turpis. Sed sem felis, pretium et enim eget, dignissim venenatis purus. Morbi iaculis dui non eros laoreet suscipit. Nam felis leo, consectetur in blandit vel, malesuada quis ante. Nam elementum purus purus, et facilisis est gravida ut. Sed at euismod enim. Donec convallis mi nec malesuada eleifend. Donec vulputate bibendum placerat. Integer quis aliquam sem. Aenean at tellus leo. Mauris vitae massa felis.
+                              </p>
+
+
+                           </div>
+                           <div class="col-sm-6  pull-left">
+
+                              <h4 class="text-center"><span class="glyphicon glyphicon-star"></span> Fast pass pour les télésièges</h4>
+                              <p>
+                                 Quisque euismod justo et augue tempus, vel congue massa placerat. Etiam ut lobortis ligula, at aliquet lectus. Mauris ullamcorper leo eu elit faucibus ultricies. Phasellus imperdiet metus at tortor iaculis aliquam. Etiam a ipsum suscipit, rutrum velit nec, tempor justo. Nulla ipsum tortor, commodo viverra ipsum nec, sollicitudin mollis neque. Mauris ac velit non dui gravida venenatis a rhoncus magna. Duis sed diam eget eros bibendum adipiscing vel eu ligula. Nullam molestie felis nisl, at facilisis justo accumsan vel. Quisque et consequat sem, ac facilisis sem.
+
+
+                              <h4 class="text-center"><span class="glyphicon glyphicon-star"></span> Fast pass pour les télésièges</h4>
+                              <p>
+                                 Cras mollis pulvinar tellus quis varius. Aenean luctus sem justo, at luctus nisi hendrerit non. Suspendisse potenti. Sed vel nulla viverra, aliquam quam sed, volutpat enim. Fusce sed viverra odio. Etiam consequat ullamcorper diam nec eleifend. Vestibulum ultrices iaculis justo, et elementum purus condimentum ac.
+
+
+                           </div>
+
+                        </div>
+                     </div>
+                     <div class="tab-pane fade" id="profile">
+                        <p>Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid. Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table craft beer twee. Qui photo booth letterpress, commodo enim craft beer mlkshk aliquip jean shorts ullamco ad vinyl cillum PBR. Homo nostrud organic, assumenda labore aesthetic magna delectus mollit. Keytar helvetica VHS salvia yr, vero magna velit sapiente labore stumptown. Vegan fanny pack odio cillum wes anderson 8-bit, sustainable jean shorts beard ut DIY ethical culpa terry richardson biodiesel. Art party scenester stumptown, tumblr butcher vero sint qui sapiente accusamus tattooed echo park.</p>
+                     </div>
+                     <div class="tab-pane fade" id="dropdown1">
+                        <p>Etsy mixtape wayfarers, ethical wes anderson tofu before they sold out mcsweeney's organic lomo retro fanny pack lo-fi farm-to-table readymade. Messenger bag gentrify pitchfork tattooed craft beer, iphone skateboard locavore carles etsy salvia banksy hoodie helvetica. DIY synth PBR banksy irony. Leggings gentrify squid 8-bit cred pitchfork. Williamsburg banh mi whatever gluten-free, carles pitchfork biodiesel fixie etsy retro mlkshk vice blog. Scenester cred you probably haven't heard of them, vinyl craft beer blog stumptown. Pitchfork sustainable tofu synth chambray yr.</p>
+                     </div>
+                     <div class="tab-pane fade" id="dropdown2">
+                        <p>Trust fund seitan letterpress, keytar raw denim keffiyeh etsy art party before they sold out master cleanse gluten-free squid scenester freegan cosby sweater. Fanny pack portland seitan DIY, art party locavore wolf cliche high life echo park Austin. Cred vinyl keffiyeh DIY salvia PBR, banh mi before they sold out farm-to-table VHS viral locavore cosby sweater. Lomo wolf viral, mustache readymade thundercats keffiyeh craft beer marfa ethical. Wolf salvia freegan, sartorial keffiyeh echo park vegan.</p>
+                     </div>
+                  </div>
+
+
+               </div>
+
+            </div>
+
+
+
+
+
+
+
+
+
+
+
+         </div>
+      </div>
+
+{% endblock %}

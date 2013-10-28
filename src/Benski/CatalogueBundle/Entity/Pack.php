@@ -69,6 +69,17 @@ class Pack {
       }
       return $temp;
    }
+   
+   public function getPackOptionChoixMultiple(){
+      $temp = array();
+      foreach ($this->getPackOptions() as $packOption) {
+         $option = $packOption->getOption();
+         if($option instanceof Option\OptionChoixMultiple){
+            $temp[] = $packOption;
+         }
+      }
+      return $temp;
+   }
 
    /**
     * Get id

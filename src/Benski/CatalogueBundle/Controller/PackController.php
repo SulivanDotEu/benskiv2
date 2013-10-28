@@ -7,7 +7,11 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Benski\CatalogueBundle\Entity\Pack;
 use Benski\CatalogueBundle\Form\PackType;
 use Benski\CatalogueBundle\Form\PackOptionACocherType;
-use \Benski\CatalogueBundle\Entity\Option\AbstractOption;
+use Benski\CatalogueBundle\Entity\Option\AbstractOption;
+use Benski\CatalogueBundle\Form\PackOptionChoixMutlipleType;
+use Benski\CatalogueBundle\Entity\PackOptionChoixMultiple;
+use Benski\CatalogueBundle\Entity\Option\OptionChoixMultiple;
+use Benski\CatalogueBundle\Entity\PrixOptionChoixMultiple;
 
 /**
  * Pack controller.
@@ -35,14 +39,35 @@ class PackController extends Controller {
    public function createFormBindOption($entity) {
       if ($entity instanceof \Benski\CatalogueBundle\Entity\Option\OptionACocher)
          $form = $this->createFormBindOptionACocher($entity);
-
-
-      $form->add('abstractOption', 'entity', array(
-          'read_only' => true,
-          'class' => 'BenskiCatalogueBundle:Option\AbstractOption',
-      ));
+      if ($entity instanceof \Benski\CatalogueBundle\Entity\Option\OptionChoixMultiple)
+         $form = $this->createFormBindOptionChoixMutliple($entity);
       $form->add('submit', 'submit', array('label' => 'Create'));
       return $form;
+   }
+
+   public function createFormBindOptionChoixMutliple($entity) {
+      $option = $entity;
+      /* @var $option \Benski\CatalogueBundle\Entity\Option\OptionChoixMultiple */
+      $entity = new \Benski\CatalogueBundle\Entity\PackOptionChoixMultiple();
+      $entity->setAbstractOption($option);
+      $form = $this->createFormBuilder(null, array(
+          'action' => $this->generateUrl('pack_bind_option_create', array(
+              'packId' => $this->packId,
+              'id' => $option->getId(),
+          )),
+          'method' => 'POST',
+              ));
+
+      foreach ($option->getChoix() as $choix) {
+         /* @var $choix \Benski\CatalogueBundle\Entity\Option\ChoixOptionMultiple */
+         $form->add($choix->getId() . '', 'money', array(
+             'divisor' => 100,
+             'label' => 'Prix pour "' . $choix->getIntitule() . '"',
+             'data' => $choix->getPrix(),
+         ));
+      }
+
+      return $form->getForm();
    }
 
    public function createFormBindOptionACocher($entity) {
@@ -56,6 +81,10 @@ class PackController extends Controller {
           )),
           'method' => 'POST',
               ));
+      $form->add('abstractOption', 'entity', array(
+          'read_only' => true,
+          'class' => 'BenskiCatalogueBundle:Option\AbstractOption',
+      ));
 
       return $form;
    }
@@ -85,17 +114,46 @@ class PackController extends Controller {
 
       if ($form->isValid()) {
          $entity = $form->getData();
-         /* @var $entity \Benski\CatalogueBundle\Entity\PackOption */
          $em = $this->getDoctrine()->getManager();
          $pack = $em->getRepository('BenskiCatalogueBundle:Pack')->find($packId);
-         $entity->setPack($pack);
-         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Pack entity.');
+         if ($option instanceof \Benski\CatalogueBundle\Entity\Option\OptionChoixMultiple)
+            $this->createBindOptionChoixMultipleAction($pack, $option, $form);
+         /* @var $entity \Benski\CatalogueBundle\Entity\PackOption */
+         else {
+            $entity->setPack($pack);
+            if (!$entity) {
+               throw $this->createNotFoundException('Unable to find Pack entity.');
+            }
+            $em->persist($entity);
+            $em->flush();
          }
-         $em->persist($entity);
-         $em->flush();
          return $this->redirect($this->generateUrl('pack_show', array('id' => $pack->getId())));
       }
+   }
+
+   public function createBindOptionChoixMultipleAction($pack, AbstractOption $option, $form) {
+      $data = $form->getData();
+      if (!$option instanceof \Benski\CatalogueBundle\Entity\Option\OptionChoixMultiple)
+         throw new \Exception('PackControllerException : createBindOptionChoixMultipleAction
+            avec une option d\un type différent de \Benski\CatalogueBundle\Entity\Option\OptionChoixMultiple');
+      /* @var $option OptionChoixMultiple */
+      $entity = new PackOptionChoixMultiple();
+      $entity->setAbstractOption($option);
+      $entity->setPack($pack);
+      foreach ($option->getChoix() as $choix) {
+         $prix = $data[$choix->getId()];
+         $prixOption = new PrixOptionChoixMultiple();
+         $prixOption->setPrix($prix);
+         $prixOption->setPackOption($entity);
+         $prixOption->setChoix($choix);
+         $entity->addPrixOption($prixOption);
+      }
+
+      $em = $this->getDoctrine()->getManager();
+      $em->persist($entity);
+      //var_dump($entity);
+      //die();
+      $em->flush();
    }
 
    /**

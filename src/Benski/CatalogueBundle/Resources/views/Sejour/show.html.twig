@@ -64,6 +64,7 @@
 
       <table class="table table-condensed">
          <thead>
+         <th>Id</th>
          <th>Destination</th>
          <th>Appartement</th>
          <th>Qualite</th>
@@ -78,6 +79,7 @@
    {% for appart in entity.appartements %}
       {% set rowspan = appart.appartement.nombreLits%}
                <tr>
+                  <td rowspan="{{rowspan}}">{{ appart.appartement.id }}</td>
                   <td rowspan="{{rowspan}}">{{ appart.appartement.destination }}</td>
                   <td rowspan="{{rowspan}}">{{ appart.appartement.nom }}</td>
                   <td rowspan="{{rowspan}}">
