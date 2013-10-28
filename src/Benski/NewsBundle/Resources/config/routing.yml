@@ -1,0 +1,4 @@
+BenskiNewsBundle_news:
+        resource: "@BenskiNewsBundle/Resources/config/routing/news.yml"
+        prefix:   /news
+        

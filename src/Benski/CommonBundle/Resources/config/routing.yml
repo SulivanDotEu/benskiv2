@@ -1,3 +1,4 @@
-benski_common_homepage:
-    pattern:  /hello/{name}
-    defaults: { _controller: BenskiCommonBundle:Default:index }
+# Route vers l'index - Faite pour le menuFactory
+benski_common_home:
+    pattern:  /
+    defaults: { _controller: BenskiCommonBundle:Common:index }

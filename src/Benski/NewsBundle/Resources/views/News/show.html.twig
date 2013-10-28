@@ -1,0 +1,58 @@
+{% extends 'BenskiNewsBundle:News:layout.html.twig' %}
+
+
+{% block breadcrumb %}
+{{ parent() }}
+<li class="active">Show</li>
+{% endblock %}
+
+{% block header %}
+<h1>News</h1>
+{% endblock %}
+
+
+
+{% block body -%}
+
+    <table class="table table-striped">
+        <tbody>
+            <tr>
+                <th>Titre</th>
+                <td>{{ entity.titre }}</td>
+            </tr>
+            <tr>
+                <th>Contenu</th>
+                <td>{{ entity.contenu }}</td>
+            </tr>
+            <tr>
+                <th>Resumé</th>
+                <td>{{ entity.resume }}</td>
+            </tr>            
+            <tr>
+                <th>Auteur</th>
+                <td>{{ entity.titre }}</td>
+            </tr>
+            <tr>
+                <th>Tags</th>
+                <td>{{ entity.tag }}</td>
+            </tr>            
+        </tbody>
+    </table>
+
+
+{% endblock %}
+
+
+
+{% block container_header_right %}
+<div class="btn-group">
+   <a class="btn " href="{{ path('news') }}">
+      <i class="icon-chevron-left"></i> 
+      Back to the list
+   </a>
+   <a class="btn " href="{{ path('news_edit', { 'id': entity.id }) }}">
+      <i class="icon-pencil"></i> Edit</a>
+</a>
+
+</div>
+{% endblock %}

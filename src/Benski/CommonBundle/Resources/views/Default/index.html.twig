@@ -1,1 +1,29 @@
-Hello {{ name }}!
+{% extends 'BenskiCommonBundle:Default:layout.html.twig' %}
+
+
+{% block header %}
+<h1>Accueil</h1>
+{% endblock %}
+
+
+{% block breadcrumb %}
+{{ parent() }}
+<li class="active">Accueil</li>
+{% endblock %}
+
+
+{% block body -%}
+    
+    {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+        <h1>CONGRATULATION ! Connection OK !</h1>
+        Connecté en tant que <strong>{{ app.user.username }}</strong>. <br />
+    {% else %}
+        <h1>CONGRATULATION ! Déconnection OK...</h1>
+    {% endif %}
+    
+    Page d'accueil à compléter (dashboard)...
+            
+    
+    
+{% endblock %}
+

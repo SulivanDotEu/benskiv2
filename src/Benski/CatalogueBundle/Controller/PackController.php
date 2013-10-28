@@ -13,6 +13,10 @@ use Benski\CatalogueBundle\Entity\PackOptionChoixMultiple;
 use Benski\CatalogueBundle\Entity\Option\OptionChoixMultiple;
 use Benski\CatalogueBundle\Entity\PrixOptionChoixMultiple;
 
+
+use JMS\SecurityExtraBundle\Annotation\Secure;
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
+
 /**
  * Pack controller.
  *
@@ -21,7 +25,17 @@ class PackController extends Controller {
 
    private $packId;
 
+   /**
+    * @Secure(roles="ROLE_ADMIN")
+    * @return type
+    */
    public function createFormSelectOption() {
+       
+        if (!$this->get('security.context')->isGranted('ROLE_ADMIN')) 
+        {
+            throw new AccessDeniedHttpException('Accès limité aux administrateurs');
+        }
+        
       $builder = $this->createFormBuilder(null, array(
                   'action' => $this->generateUrl('pack_bind_option_form', array(
                       'packId' => $this->packId,
@@ -36,7 +50,18 @@ class PackController extends Controller {
       return $builder->getForm();
    }
 
+   /**
+    * @Secure(roles="ROLE_ADMIN")
+    * @param \Benski\CatalogueBundle\Controller\OptionACocher $entity
+    * @return type
+    */
    public function createFormBindOption($entity) {
+       
+        if (!$this->get('security.context')->isGranted('ROLE_ADMIN')) 
+        {
+            throw new AccessDeniedHttpException('Accès limité aux administrateurs');
+        }
+        
       if ($entity instanceof \Benski\CatalogueBundle\Entity\Option\OptionACocher)
          $form = $this->createFormBindOptionACocher($entity);
       if ($entity instanceof \Benski\CatalogueBundle\Entity\Option\OptionChoixMultiple)
@@ -45,6 +70,7 @@ class PackController extends Controller {
       return $form;
    }
 
+<<<<<<< HEAD
    public function createFormBindOptionChoixMutliple($entity) {
       $option = $entity;
       /* @var $option \Benski\CatalogueBundle\Entity\Option\OptionChoixMultiple */
@@ -70,7 +96,20 @@ class PackController extends Controller {
       return $form->getForm();
    }
 
+=======
+   /**
+    * @Secure(roles="ROLE_ADMIN")
+    * @param \Benski\CatalogueBundle\Entity\PackOptionACocher $entity
+    * @return type
+    */
+>>>>>>> dfda8615ae501cddbdd735b781f3e48dc205dec7
    public function createFormBindOptionACocher($entity) {
+       
+        if (!$this->get('security.context')->isGranted('ROLE_ADMIN')) 
+        {
+            throw new AccessDeniedHttpException('Accès limité aux administrateurs');
+        }
+        
       $option = $entity;
       $entity = new \Benski\CatalogueBundle\Entity\PackOptionACocher();
       $entity->setAbstractOption($option);
@@ -89,7 +128,19 @@ class PackController extends Controller {
       return $form;
    }
 
+   /**
+    * @Secure(roles="ROLE_ADMIN")
+    * @param type $packId
+    * @param \Symfony\Component\HttpFoundation\Request $request
+    * @return type
+    */
    public function bindOptionFormAction($packId, Request $request) {
+       
+        if (!$this->get('security.context')->isGranted('ROLE_ADMIN')) 
+        {
+            throw new AccessDeniedHttpException('Accès limité aux administrateurs');
+        }
+        
       $this->packId = $packId;
       $form = $this->createFormSelectOption();
       $form->handleRequest($request);
@@ -105,7 +156,21 @@ class PackController extends Controller {
               ));
    }
 
+   /**
+    * @Secure(roles="ROLE_ADMIN")
+    * @param type $packId
+    * @param \Benski\CatalogueBundle\Entity\Option\AbstractOption $option
+    * @param \Symfony\Component\HttpFoundation\Request $request
+    * @return type
+    * @throws type
+    */
    public function createBindOptionAction($packId, AbstractOption $option, Request $request) {
+       
+        if (!$this->get('security.context')->isGranted('ROLE_ADMIN')) 
+        {
+            throw new AccessDeniedHttpException('Accès limité aux administrateurs');
+        }
+        
       $this->packId = $packId;
 
 
@@ -158,9 +223,15 @@ class PackController extends Controller {
 
    /**
     * Lists all Pack entities.
-    *
+    * @Secure(roles="ROLE_ADMIN")
     */
    public function indexAction() {
+       
+        if (!$this->get('security.context')->isGranted('ROLE_ADMIN')) 
+        {
+            throw new AccessDeniedHttpException('Accès limité aux administrateurs');
+        }
+        
       $em = $this->getDoctrine()->getManager();
 
       $entities = $em->getRepository('BenskiCatalogueBundle:Pack')->findAll();
@@ -172,9 +243,15 @@ class PackController extends Controller {
 
    /**
     * Creates a new Pack entity.
-    *
+    * @Secure(roles="ROLE_ADMIN")
     */
    public function createAction(Request $request) {
+       
+        if (!$this->get('security.context')->isGranted('ROLE_ADMIN')) 
+        {
+            throw new AccessDeniedHttpException('Accès limité aux administrateurs');
+        }
+        
       $entity = new Pack();
       $form = $this->createCreateForm($entity);
       $form->handleRequest($request);
@@ -195,7 +272,7 @@ class PackController extends Controller {
 
    /**
     * Creates a form to create a Pack entity.
-    *
+    * @Secure(roles="ROLE_ADMIN")
     * @param Pack $entity The entity
     *
     * @return \Symfony\Component\Form\Form The form
@@ -213,9 +290,15 @@ class PackController extends Controller {
 
    /**
     * Displays a form to create a new Pack entity.
-    *
+    * @Secure(roles="ROLE_ADMIN")
     */
    public function newAction() {
+       
+        if (!$this->get('security.context')->isGranted('ROLE_ADMIN')) 
+        {
+            throw new AccessDeniedHttpException('Accès limité aux administrateurs');
+        }
+        
       $entity = new Pack();
       $form = $this->createCreateForm($entity);
 
@@ -227,9 +310,15 @@ class PackController extends Controller {
 
    /**
     * Finds and displays a Pack entity.
-    *
+    * @Secure(roles="ROLE_ADMIN")
     */
    public function showAction($id) {
+       
+        if (!$this->get('security.context')->isGranted('ROLE_ADMIN')) 
+        {
+            throw new AccessDeniedHttpException('Accès limité aux administrateurs');
+        }
+        
       $em = $this->getDoctrine()->getManager();
 
       $entity = $em->getRepository('BenskiCatalogueBundle:Pack')->find($id);
@@ -247,9 +336,15 @@ class PackController extends Controller {
 
    /**
     * Displays a form to edit an existing Pack entity.
-    *
+    * @Secure(roles="ROLE_ADMIN")
     */
    public function editAction($id) {
+       
+        if (!$this->get('security.context')->isGranted('ROLE_ADMIN')) 
+        {
+            throw new AccessDeniedHttpException('Accès limité aux administrateurs');
+        }
+        
       $em = $this->getDoctrine()->getManager();
 
       $entity = $em->getRepository('BenskiCatalogueBundle:Pack')->find($id);
@@ -270,7 +365,7 @@ class PackController extends Controller {
 
    /**
     * Creates a form to edit a Pack entity.
-    *
+    * @Secure(roles="ROLE_ADMIN")
     * @param Pack $entity The entity
     *
     * @return \Symfony\Component\Form\Form The form
@@ -288,9 +383,15 @@ class PackController extends Controller {
 
    /**
     * Edits an existing Pack entity.
-    *
+    * @Secure(roles="ROLE_ADMIN")
     */
    public function updateAction(Request $request, $id) {
+       
+        if (!$this->get('security.context')->isGranted('ROLE_ADMIN')) 
+        {
+            throw new AccessDeniedHttpException('Accès limité aux administrateurs');
+        }
+        
       $em = $this->getDoctrine()->getManager();
 
       $entity = $em->getRepository('BenskiCatalogueBundle:Pack')->find($id);
@@ -318,9 +419,15 @@ class PackController extends Controller {
 
    /**
     * Deletes a Pack entity.
-    *
+    * @Secure(roles="ROLE_ADMIN")
     */
    public function deleteAction(Request $request, $id) {
+       
+        if (!$this->get('security.context')->isGranted('ROLE_ADMIN')) 
+        {
+            throw new AccessDeniedHttpException('Accès limité aux administrateurs');
+        }
+        
       $form = $this->createDeleteForm($id);
       $form->handleRequest($request);
 
@@ -341,7 +448,7 @@ class PackController extends Controller {
 
    /**
     * Creates a form to delete a Pack entity by id.
-    *
+    * @Secure(roles="ROLE_ADMIN")
     * @param mixed $id The entity id
     *
     * @return \Symfony\Component\Form\Form The form

@@ -1,0 +1,4 @@
+BenskiUserBundle_user:
+        resource: "@BenskiUserBundle/Resources/config/routing/user.yml"
+        prefix:   /user
+        

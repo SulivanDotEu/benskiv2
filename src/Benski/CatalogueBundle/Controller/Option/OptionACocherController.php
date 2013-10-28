@@ -8,6 +8,10 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Benski\CatalogueBundle\Entity\Option\OptionACocher;
 use Benski\CatalogueBundle\Form\Option\OptionACocherType;
 
+use JMS\SecurityExtraBundle\Annotation\Secure;
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
+
+
 /**
  * Option\OptionACocher controller.
  *
@@ -21,6 +25,11 @@ class OptionACocherController extends Controller
      */
     public function indexAction()
     {
+        if (!$this->get('security.context')->isGranted('ROLE_ADMIN')) 
+        {
+            throw new AccessDeniedHttpException('Accès limité aux administrateurs');
+        }
+        
         $em = $this->getDoctrine()->getManager();
 
         $entities = $em->getRepository('BenskiCatalogueBundle:Option\OptionACocher')->findAll();
@@ -35,6 +44,11 @@ class OptionACocherController extends Controller
      */
     public function createAction(Request $request)
     {
+        if (!$this->get('security.context')->isGranted('ROLE_ADMIN')) 
+        {
+            throw new AccessDeniedHttpException('Accès limité aux administrateurs');
+        }
+        
         $entity = new OptionACocher();
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
@@ -78,6 +92,11 @@ class OptionACocherController extends Controller
      */
     public function newAction()
     {
+        if (!$this->get('security.context')->isGranted('ROLE_ADMIN')) 
+        {
+            throw new AccessDeniedHttpException('Accès limité aux administrateurs');
+        }
+        
         $entity = new OptionACocher();
         $form   = $this->createCreateForm($entity);
 
@@ -93,6 +112,11 @@ class OptionACocherController extends Controller
      */
     public function showAction($id)
     {
+        if (!$this->get('security.context')->isGranted('ROLE_ADMIN')) 
+        {
+            throw new AccessDeniedHttpException('Accès limité aux administrateurs');
+        }
+        
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('BenskiCatalogueBundle:Option\OptionACocher')->find($id);
@@ -114,6 +138,11 @@ class OptionACocherController extends Controller
      */
     public function editAction($id)
     {
+        if (!$this->get('security.context')->isGranted('ROLE_ADMIN')) 
+        {
+            throw new AccessDeniedHttpException('Accès limité aux administrateurs');
+        }
+        
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('BenskiCatalogueBundle:Option\OptionACocher')->find($id);
@@ -141,6 +170,11 @@ class OptionACocherController extends Controller
     */
     private function createEditForm(OptionACocher $entity)
     {
+        if (!$this->get('security.context')->isGranted('ROLE_ADMIN')) 
+        {
+            throw new AccessDeniedHttpException('Accès limité aux administrateurs');
+        }
+        
         $form = $this->createForm(new OptionACocherType(), $entity, array(
             'action' => $this->generateUrl('option_optionacocher_update', array('id' => $entity->getId())),
             'method' => 'PUT',
@@ -156,6 +190,11 @@ class OptionACocherController extends Controller
      */
     public function updateAction(Request $request, $id)
     {
+        if (!$this->get('security.context')->isGranted('ROLE_ADMIN')) 
+        {
+            throw new AccessDeniedHttpException('Accès limité aux administrateurs');
+        }
+        
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('BenskiCatalogueBundle:Option\OptionACocher')->find($id);
@@ -186,6 +225,11 @@ class OptionACocherController extends Controller
      */
     public function deleteAction(Request $request, $id)
     {
+        if (!$this->get('security.context')->isGranted('ROLE_ADMIN')) 
+        {
+            throw new AccessDeniedHttpException('Accès limité aux administrateurs');
+        }
+        
         $form = $this->createDeleteForm($id);
         $form->handleRequest($request);
 

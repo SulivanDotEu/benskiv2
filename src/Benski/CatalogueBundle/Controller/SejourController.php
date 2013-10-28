@@ -8,6 +8,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Benski\CatalogueBundle\Entity\Sejour;
 use Benski\CatalogueBundle\Form\SejourType;
 
+use JMS\SecurityExtraBundle\Annotation\Secure;
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 /**
  * Sejour controller.
  *
@@ -17,10 +19,15 @@ class SejourController extends Controller
 
     /**
      * Lists all Sejour entities.
-     *
+     * @Secure(roles="ROLE_ADMIN")
      */
     public function indexAction()
     {
+        if (!$this->get('security.context')->isGranted('ROLE_ADMIN')) 
+        {
+            throw new AccessDeniedHttpException('Accès limité aux administrateurs');
+        }
+        
         $em = $this->getDoctrine()->getManager();
 
         $entities = $em->getRepository('BenskiCatalogueBundle:Sejour')->findAll();
@@ -31,10 +38,15 @@ class SejourController extends Controller
     }
     /**
      * Creates a new Sejour entity.
-     *
+     * @Secure(roles="ROLE_ADMIN")
      */
     public function createAction(Request $request)
     {
+        if (!$this->get('security.context')->isGranted('ROLE_ADMIN')) 
+        {
+            throw new AccessDeniedHttpException('Accès limité aux administrateurs');
+        }
+        
         $entity = new Sejour();
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
@@ -55,7 +67,7 @@ class SejourController extends Controller
 
     /**
     * Creates a form to create a Sejour entity.
-    *
+    * @Secure(roles="ROLE_ADMIN")
     * @param Sejour $entity The entity
     *
     * @return \Symfony\Component\Form\Form The form
@@ -74,10 +86,15 @@ class SejourController extends Controller
 
     /**
      * Displays a form to create a new Sejour entity.
-     *
+     * @Secure(roles="ROLE_ADMIN")
      */
     public function newAction()
     {
+        if (!$this->get('security.context')->isGranted('ROLE_ADMIN')) 
+        {
+            throw new AccessDeniedHttpException('Accès limité aux administrateurs');
+        }
+        
         $entity = new Sejour();
         $form   = $this->createCreateForm($entity);
 
@@ -89,10 +106,15 @@ class SejourController extends Controller
 
     /**
      * Finds and displays a Sejour entity.
-     *
+     * @Secure(roles="ROLE_ADMIN")
      */
     public function showAction($id)
     {
+        if (!$this->get('security.context')->isGranted('ROLE_ADMIN')) 
+        {
+            throw new AccessDeniedHttpException('Accès limité aux administrateurs');
+        }
+        
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('BenskiCatalogueBundle:Sejour')->find($id);
@@ -110,10 +132,15 @@ class SejourController extends Controller
 
     /**
      * Displays a form to edit an existing Sejour entity.
-     *
+     * @Secure(roles="ROLE_ADMIN")
      */
     public function editAction($id)
     {
+        if (!$this->get('security.context')->isGranted('ROLE_ADMIN')) 
+        {
+            throw new AccessDeniedHttpException('Accès limité aux administrateurs');
+        }
+        
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('BenskiCatalogueBundle:Sejour')->find($id);
@@ -134,13 +161,18 @@ class SejourController extends Controller
 
     /**
     * Creates a form to edit a Sejour entity.
-    *
+    * @Secure(roles="ROLE_ADMIN")
     * @param Sejour $entity The entity
     *
     * @return \Symfony\Component\Form\Form The form
     */
     private function createEditForm(Sejour $entity)
     {
+        if (!$this->get('security.context')->isGranted('ROLE_ADMIN')) 
+        {
+            throw new AccessDeniedHttpException('Accès limité aux administrateurs');
+        }
+        
         $form = $this->createForm(new SejourType(), $entity, array(
             'action' => $this->generateUrl('sejour_update', array('id' => $entity->getId())),
             'method' => 'PUT',
@@ -152,10 +184,15 @@ class SejourController extends Controller
     }
     /**
      * Edits an existing Sejour entity.
-     *
+     * @Secure(roles="ROLE_ADMIN")
      */
     public function updateAction(Request $request, $id)
     {
+        if (!$this->get('security.context')->isGranted('ROLE_ADMIN')) 
+        {
+            throw new AccessDeniedHttpException('Accès limité aux administrateurs');
+        }
+        
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('BenskiCatalogueBundle:Sejour')->find($id);
@@ -182,10 +219,15 @@ class SejourController extends Controller
     }
     /**
      * Deletes a Sejour entity.
-     *
+     * @Secure(roles="ROLE_ADMIN")
      */
     public function deleteAction(Request $request, $id)
     {
+        if (!$this->get('security.context')->isGranted('ROLE_ADMIN')) 
+        {
+            throw new AccessDeniedHttpException('Accès limité aux administrateurs');
+        }
+        
         $form = $this->createDeleteForm($id);
         $form->handleRequest($request);
 
@@ -206,7 +248,7 @@ class SejourController extends Controller
 
     /**
      * Creates a form to delete a Sejour entity by id.
-     *
+     * @Secure(roles="ROLE_ADMIN")
      * @param mixed $id The entity id
      *
      * @return \Symfony\Component\Form\Form The form

@@ -1,7 +1,5 @@
-parameters:
-#    benski_common.example.class: Benski\CommonBundle\Example
-
 services:
-#    benski_common.example:
-#        class: %benski_common.example.class%
-#        arguments: [@service_id, "plain_value", %parameter%]
+     benski_common.menuFactory:
+        class: Benski\CommonBundle\Object\MenuFactory
+        tags: 
+          - {name : menuFactory}

@@ -1,0 +1,5 @@
+_assetic:
+    resource: .
+    type: assetic
+_app:
+    resource: 'E:/Mes programmes/wamp/www/benskiv2/app/config/routing_dev.yml'

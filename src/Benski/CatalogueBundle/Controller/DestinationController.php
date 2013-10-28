@@ -8,6 +8,10 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Benski\CatalogueBundle\Entity\Destination;
 use Benski\CatalogueBundle\Form\DestinationType;
 
+use JMS\SecurityExtraBundle\Annotation\Secure;
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
+
+
 /**
  * Destination controller.
  *
@@ -17,10 +21,16 @@ class DestinationController extends Controller
 
     /**
      * Lists all Destination entities.
-     *
+     * @Secure(roles="ROLE_ADMIN")
      */
     public function indexAction()
     {
+        
+        if (!$this->get('security.context')->isGranted('ROLE_ADMIN')) 
+        {
+            throw new AccessDeniedHttpException('Accès limité aux administrateurs');
+        }
+        
         $em = $this->getDoctrine()->getManager();
 
         $entities = $em->getRepository('BenskiCatalogueBundle:Destination')->findAll();
@@ -29,12 +39,19 @@ class DestinationController extends Controller
             'entities' => $entities,
         ));
     }
+    
     /**
      * Creates a new Destination entity.
-     *
+     * @Secure(roles="ROLE_ADMIN")
      */
     public function createAction(Request $request)
     {
+        
+        if (!$this->get('security.context')->isGranted('ROLE_ADMIN')) 
+        {
+            throw new AccessDeniedHttpException('Accès limité aux administrateurs');
+        }
+        
         $entity = new Destination();
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
@@ -55,7 +72,7 @@ class DestinationController extends Controller
 
     /**
     * Creates a form to create a Destination entity.
-    *
+    * @Secure(roles="ROLE_ADMIN")
     * @param Destination $entity The entity
     *
     * @return \Symfony\Component\Form\Form The form
@@ -74,10 +91,16 @@ class DestinationController extends Controller
 
     /**
      * Displays a form to create a new Destination entity.
-     *
+     * @Secure(roles="ROLE_ADMIN")
      */
     public function newAction()
     {
+        
+        if (!$this->get('security.context')->isGranted('ROLE_ADMIN')) 
+        {
+            throw new AccessDeniedHttpException('Accès limité aux administrateurs');
+        }
+        
         $entity = new Destination();
         $form   = $this->createCreateForm($entity);
 
@@ -89,10 +112,16 @@ class DestinationController extends Controller
 
     /**
      * Finds and displays a Destination entity.
-     *
+     * @Secure(roles="ROLE_ADMIN")
      */
     public function showAction($id)
     {
+        
+        if (!$this->get('security.context')->isGranted('ROLE_ADMIN')) 
+        {
+            throw new AccessDeniedHttpException('Accès limité aux administrateurs');
+        }
+        
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('BenskiCatalogueBundle:Destination')->find($id);
@@ -110,10 +139,16 @@ class DestinationController extends Controller
 
     /**
      * Displays a form to edit an existing Destination entity.
-     *
+     * @Secure(roles="ROLE_ADMIN")
      */
     public function editAction($id)
     {
+        
+        if (!$this->get('security.context')->isGranted('ROLE_ADMIN')) 
+        {
+            throw new AccessDeniedHttpException('Accès limité aux administrateurs');
+        }
+        
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('BenskiCatalogueBundle:Destination')->find($id);
@@ -134,7 +169,7 @@ class DestinationController extends Controller
 
     /**
     * Creates a form to edit a Destination entity.
-    *
+    * @Secure(roles="ROLE_ADMIN")
     * @param Destination $entity The entity
     *
     * @return \Symfony\Component\Form\Form The form
@@ -152,10 +187,16 @@ class DestinationController extends Controller
     }
     /**
      * Edits an existing Destination entity.
-     *
+     * @Secure(roles="ROLE_ADMIN")
      */
     public function updateAction(Request $request, $id)
     {
+        
+        if (!$this->get('security.context')->isGranted('ROLE_ADMIN')) 
+        {
+            throw new AccessDeniedHttpException('Accès limité aux administrateurs');
+        }
+        
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('BenskiCatalogueBundle:Destination')->find($id);
@@ -182,10 +223,16 @@ class DestinationController extends Controller
     }
     /**
      * Deletes a Destination entity.
-     *
+     * @Secure(roles="ROLE_ADMIN")
      */
     public function deleteAction(Request $request, $id)
     {
+        
+        if (!$this->get('security.context')->isGranted('ROLE_ADMIN')) 
+        {
+            throw new AccessDeniedHttpException('Accès limité aux administrateurs');
+        }
+        
         $form = $this->createDeleteForm($id);
         $form->handleRequest($request);
 
@@ -206,7 +253,7 @@ class DestinationController extends Controller
 
     /**
      * Creates a form to delete a Destination entity by id.
-     *
+     * @Secure(roles="ROLE_ADMIN")
      * @param mixed $id The entity id
      *
      * @return \Symfony\Component\Form\Form The form
