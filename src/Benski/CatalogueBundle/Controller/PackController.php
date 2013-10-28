@@ -69,8 +69,8 @@ class PackController extends Controller {
       $form->add('submit', 'submit', array('label' => 'Create'));
       return $form;
    }
-
-<<<<<<< HEAD
+   
+   
    public function createFormBindOptionChoixMutliple($entity) {
       $option = $entity;
       /* @var $option \Benski\CatalogueBundle\Entity\Option\OptionChoixMultiple */
@@ -96,13 +96,11 @@ class PackController extends Controller {
       return $form->getForm();
    }
 
-=======
    /**
     * @Secure(roles="ROLE_ADMIN")
     * @param \Benski\CatalogueBundle\Entity\PackOptionACocher $entity
     * @return type
     */
->>>>>>> dfda8615ae501cddbdd735b781f3e48dc205dec7
    public function createFormBindOptionACocher($entity) {
        
         if (!$this->get('security.context')->isGranted('ROLE_ADMIN')) 
