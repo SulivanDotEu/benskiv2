@@ -17,6 +17,7 @@ class AppKernel extends Kernel
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new FOS\UserBundle\FOSUserBundle(),
+            new JMS\AopBundle\JMSAopBundle(),
             new Benski\CatalogueBundle\BenskiCatalogueBundle(),
             new Benski\CommonBundle\BenskiCommonBundle(),
             new Benski\NewsBundle\BenskiNewsBundle(),

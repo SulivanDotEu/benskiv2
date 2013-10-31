@@ -1,3 +1,0 @@
-user:
-    pattern:  /
-    defaults: { _controller: "BenskiUserBundle:User:index" }

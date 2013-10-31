@@ -1,7 +1,3 @@
-benski_user:
-    resource: "@BenskiUserBundle/Resources/config/routing.yml"
-    prefix:   /
-
 benski_news:
     resource: "@BenskiNewsBundle/Resources/config/routing.yml"
     prefix:   /
