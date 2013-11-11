@@ -1969,12 +1969,6 @@
         <argument>fr</argument>
         <argument>messages</argument>
       </call>
-      <call method="addResource">
-        <argument>xlf</argument>
-        <argument>E:\Mes programmes\wamp\www\benskiv2\src\Benski\UserBundle/Resources/translations\messages.fr.xlf</argument>
-        <argument>fr</argument>
-        <argument>messages</argument>
-      </call>
     </service>
     <service id="translation.loader.php" class="Symfony\Component\Translation\Loader\PhpFileLoader">
       <tag name="translation.loader" alias="php"/>
@@ -2732,7 +2726,7 @@
         </argument>
         <argument type="service">
           <service class="Symfony\Component\Security\Core\Authentication\Provider\AnonymousAuthenticationProvider" public="false">
-            <argument>5270fb29547d4</argument>
+            <argument>52724b06b932f</argument>
           </service>
         </argument>
       </argument>
@@ -3058,7 +3052,7 @@
         <argument type="service">
           <service class="Symfony\Component\Security\Http\Firewall\AnonymousAuthenticationListener" public="false">
             <argument type="service" id="security.context"/>
-            <argument>5270fb29547d4</argument>
+            <argument>52724b06b932f</argument>
             <argument type="service" id="monolog.logger.security" on-invalid="null"/>
           </service>
         </argument>
