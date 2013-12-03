@@ -1,0 +1,29 @@
+{% extends 'BenskiCatalogueBundle:Destination:layout.html.twig' %}
+
+
+
+{% block header %}
+<h1>Destination creation</h1>
+{% endblock %}
+
+{% block breadcrumb %}
+{{ parent() }}
+<li class="active">new entity</li>
+{% endblock %}
+
+
+
+
+
+{% block body -%}
+
+    {{ form(form) }}
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('destination') }}">
+            Back to the list
+        </a>
+    </li>
+</ul>
+{% endblock %}
