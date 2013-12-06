@@ -2,7 +2,6 @@ BenskiCatalogueBundle_sejour:
         resource: "@BenskiCatalogueBundle/Resources/config/routing/sejour.yml"
         prefix:   /admin/sejour
 
-
 BenskiCatalogueBundle_appartement:
         resource: "@BenskiCatalogueBundle/Resources/config/routing/appartement.yml"
         prefix:   /admin/appartement

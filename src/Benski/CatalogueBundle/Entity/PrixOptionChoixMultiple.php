@@ -19,21 +19,23 @@ class PrixOptionChoixMultiple {
     * @ORM\Id
     * @ORM\GeneratedValue(strategy="AUTO")
     */
-   private $id;
+   protected $id;
 
    /**
     * @var integer
     *
     * @ORM\Column(name="prix", type="integer")
     */
-   private $prix;
+   protected $prix;
 
    /**
     * @var Benski\CatalogueBundle\Entity\Option\ChoixOptionMultiple
     *
-    * @ORM\ManyToOne(targetEntity = "Benski\CatalogueBundle\Entity\Option\ChoixOptionMultiple", fetch="EAGER")
+    * @ORM\ManyToOne(
+    *       targetEntity = "Benski\CatalogueBundle\Entity\Option\ChoixOptionMultiple",
+    *       fetch="EAGER")
     */
-   private $choix;
+   protected $choix;
 
    /**
     * @var Benski\CatalogueBundle\Entity\PrixOptionChoixMultiple
@@ -44,7 +46,7 @@ class PrixOptionChoixMultiple {
     *   @ORM\JoinColumn(name="abstractOption_id", referencedColumnName="abstractOption_id")
     * })
     */
-   private $packOption;
+   protected $packOption;
 
    /**
     * Get id

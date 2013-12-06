@@ -25,7 +25,7 @@ class ChoixOptionMultiple
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
+    protected $id;
 
     /**
      * @var string
@@ -33,28 +33,28 @@ class ChoixOptionMultiple
      * @ORM\ManyToOne(targetEntity="Benski\CatalogueBundle\Entity\Option\OptionChoixMultiple", inversedBy="choix", cascade={"all"})
      * @ORM\JoinColumn(onDelete="CASCADE")
      */
-    private $optionChoixMultiple;
+    protected $optionChoixMultiple;
 
     /**
      * @var string
      *
      * @ORM\Column(name="intitule", type="string", length=255)
      */
-    private $intitule;
+    protected $intitule;
 
     /**
      * @var string
      *
      * @ORM\Column(name="description", type="text", nullable=true)
      */
-    private $description;
+    protected $description;
 
     /**
      * @var integer
      *
      * @ORM\Column(name="prix", type="integer")
      */
-    private $prix;
+    protected $prix;
 
     
     
@@ -163,5 +163,14 @@ class ChoixOptionMultiple
     public function getOptionChoixMultiple()
     {
         return $this->optionChoixMultiple;
+    }
+    
+    public function equals($object){
+        if ($object == null) return false;
+        if (!$object instanceof ChoixOptionMultiple) return false;
+        if ($object == $this) return true;
+        if($this->getId() == null) return false;
+        if ($this->getId() != $object->getId()) return false;
+        return true;
     }
 }

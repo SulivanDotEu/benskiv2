@@ -24,28 +24,28 @@ class AbstractOption extends VersionedObject {
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
+    protected $id;
     
     /**
      * @var string
      *
      * @ORM\Column(name="nom", type="string", length=255)
      */
-    private $nom;
+    protected $nom;
 
     /**
      * @var string
      *
      * @ORM\Column(name="description", type="text", nullable=true)
      */
-    private $description;
+    protected $description;
 
     /**
      * @var integer
      *
      * @ORM\Column(name="type", type="smallint")
      */
-    private $type;
+    protected $type;
 
     /**
      * @var string
@@ -53,6 +53,13 @@ class AbstractOption extends VersionedObject {
      * @ORM\Column(name="explication", type="text", nullable=true)
      */
     private $explication;
+    
+    public function equals($option){
+        if($option == null) return false;
+        if(!$option instanceof AbstractOption) return false;
+        if($this->getId() == $option->getId() ) return true;
+        return false;
+    }
     
     public function __toString() {
        return $this->getId().") ".$this->getNom();
@@ -142,11 +149,6 @@ class AbstractOption extends VersionedObject {
         return $this->explication;
     }
     
-    
-
-    
-
-
     /**
      * Get id
      *

@@ -22,6 +22,7 @@ class AppKernel extends Kernel
             new Benski\CommonBundle\BenskiCommonBundle(),
             new Benski\NewsBundle\BenskiNewsBundle(),
             new Benski\UserBundle\BenskiUserBundle(),
+            new Benski\ReservationBundle\BenskiReservationBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

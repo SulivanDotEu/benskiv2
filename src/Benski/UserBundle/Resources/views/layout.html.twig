@@ -4,7 +4,7 @@
 {% extends "::layout.html.twig" %}
  
 {% block title %}
-  Blog - {{ parent() }}
+  {{ parent() }} - Utilisateurs
 {% endblock %}
  
 {% block body %}
@@ -13,7 +13,7 @@
 
  
   {# On définit un nouveau bloc, que les vues du bundle pourront remplir #}
-  {% block bundle_body %}
+  {% block fos_user_content %}
   
   {% endblock %}
  

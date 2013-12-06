@@ -18,31 +18,33 @@ class SejourAppartement extends VersionedObject {
     * @ORM\Id
     * @ORM\ManyToOne(targetEntity = "Benski\CatalogueBundle\Entity\Appartement", inversedBy="sejours")
     */
-   private $appartement;
+   protected $appartement;
 
    /**
     * @var \stdClass
     * @ORM\Id
     * @ORM\ManyToOne(targetEntity = "Benski\CatalogueBundle\Entity\Sejour", inversedBy="appartements")
     */
-   private $sejour;
+   protected $sejour;
 
    /**
     * @var integer
     *
     * @ORM\Column(name="prix", type="array")
     */
-   private $prix;
+   protected $prix;
 
    /**
     * @var integer
     *
     * @ORM\Column(name="stock", type="integer")
     */
-   private $stock;
+   protected $stock;
    
    function getPrixMinimum(){
       $nbrLit = $this->getAppartement()->getNombreLits();
+      
+      if($this->getPrix() == null ) return 0;
       return $this->getPrix()[$nbrLit];
    }
 

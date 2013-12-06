@@ -19,14 +19,14 @@ class PackOptionACocher extends PackOption
      *
      * @ORM\Column(name="cocheParDefaut", type="boolean", nullable=true)
      */
-    private $cocheParDefaut;
+    protected $cocheParDefaut;
 
     /**
      * @var integer
      *
      * @ORM\Column(name="prix", type="integer")
      */
-    private $prix;
+    protected $prix;
 
 
     /**

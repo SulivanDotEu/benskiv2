@@ -23,14 +23,14 @@ class PackOption
     * @ORM\Id
     * @ORM\ManyToOne(targetEntity = "Benski\CatalogueBundle\Entity\Pack", inversedBy="packOptions")
     */
-   private $pack;
+   protected $pack;
 
     /**
     * @var AbstractOption
     * @ORM\Id
     * @ORM\ManyToOne(targetEntity = "Benski\CatalogueBundle\Entity\Option\AbstractOption")
     */
-    private $abstractOption;
+    protected $abstractOption;
 
 
     public function getOption(){

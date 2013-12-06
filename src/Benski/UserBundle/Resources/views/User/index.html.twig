@@ -1,4 +1,4 @@
-{% extends 'BenskiCatalogueBundle:Destination:layout.html.twig' %}
+{% extends 'BenskiUserBundle::layout.html.twig' %}
 
 
 {% block header %}
@@ -24,24 +24,28 @@
    <thead>
       <tr>
          <th>Id</th>
+         <th>Login</th>
+         <th>Prénom</th>
          <th>Nom</th>
-         <th>Pays</th>
-         <th>Publié</th>
+         <th>Adresse</th>
+         <th>Dernière connexion</th>
          <th>Actions</th>
       </tr>
    </thead>
    <tbody>
         {% for entity in entities %}
          <tr>
-            <td><a href="{{ path('destination_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
-            <td>{{ entity.nom }}</td>
-            <td>{{ entity.pays }}</td>
-            <td>{{ entity.isPublished }}</td>
+            <td><a href="">{{ entity.id }}</a></td>
+            <td>{{ entity.username }}</td>
+            <td>{{ entity.person.firstName }}</td>
+            <td>{{ entity.person.lastName }}</td>
+            <td>{{ entity.person.address.city }}</td>
+            <td></td>
             <td>
                <div class="btn-group">
-                  <a class="btn" href="{{ path('destination_show', { 'id': entity.id }) }} ">
+                  <a class="btn" href="">
                      <i class="icon-eye-open"></i> Show</a>
-                  <a class="btn" href="{{ path('destination_edit', { 'id': entity.id }) }}">
+                  <a class="btn" href="">
                      <i class="icon-pencil"></i> Edit</a>
                </div>
 

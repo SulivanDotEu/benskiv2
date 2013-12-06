@@ -20,14 +20,14 @@ class SejourPack
     * @ORM\Id
     * @ORM\ManyToOne(targetEntity = "Benski\CatalogueBundle\Entity\Sejour", inversedBy="packs")
     */
-    private $sejour;
+    protected $sejour;
 
     /**
     * @var Pack
     * @ORM\Id
     * @ORM\ManyToOne(targetEntity = "Benski\CatalogueBundle\Entity\Pack", inversedBy="sejours")
     */
-    private $pack;
+    protected $pack;
 
 
 

@@ -20,28 +20,28 @@ class OptionACocher extends AbstractOption
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
+    protected $id;
 
     /**
      * @var string
      *
      * @ORM\Column(name="intitule", type="string", length=255)
      */
-    private $intitule;
+    protected $intitule;
 
     /**
      * @var boolean
      *
      * @ORM\Column(name="parDefault", type="boolean", nullable=true)
      */
-    private $parDefault;
+    protected $parDefault;
 
     /**
      * @var string
      *
      * @ORM\Column(name="infoRequis", type="text", nullable=true)
      */
-    private $infoRequis;
+    protected $infoRequis;
 
 
     

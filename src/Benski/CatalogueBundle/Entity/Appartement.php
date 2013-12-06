@@ -4,7 +4,7 @@ namespace Benski\CatalogueBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Benski\CommonBundle\Entity\VersionedObject;
-
+use Benski\CatalogueBundle\Entity\Sejour;
 
 /**
  * Appartement
@@ -27,41 +27,53 @@ class Appartement extends VersionedObject {
     * @ORM\Id
     * @ORM\GeneratedValue(strategy="AUTO")
     */
-   private $id;
+   protected $id;
 
    /**
     * @var Benski\CatalogueBundle\Entity\Destination
     * @ORM\ManyToOne(targetEntity = "Benski\CatalogueBundle\Entity\Destination")
     */
-   private $destination;
+   protected $destination;
 
    /**
     * @var string
     *
     * @ORM\Column(name="nom", type="string", length=255)
     */
-   private $nom;
+   protected $nom;
 
    /**
     * @var integer
     *
     * @ORM\Column(name="qualite", type="smallint")
     */
-   private $qualite;
+   protected $qualite;
 
    /**
     * @var integer
     *
     * @ORM\Column(name="nombreLits", type="smallint")
     */
-   private $nombreLits;
+   protected $nombreLits;
 
    /**
     * @ORM\OneToMany(targetEntity="Benski\CatalogueBundle\Entity\SejourAppartement", mappedBy="appartement")
     * 
     * @var type 
     */
-   private $sejours;
+   protected $sejours;
+   
+   public function getPrix(Sejour $sejour, $nombrePersonnes){
+       $sejoursAppartements = $this->getSejours();
+       foreach ($sejoursAppartements as $link) {
+           /* @var $link SejourAppartement */
+           if($link->getSejour()->equals($sejour)){
+               $prix = $link->prixParPersonne($nombrePersonnes);
+               return $prix;
+           }
+       }
+       throw new \LogicException('Observation d\'un appartement n\'appartenant pas au séjour fourni');
+   }
 
    /**
     * Get id

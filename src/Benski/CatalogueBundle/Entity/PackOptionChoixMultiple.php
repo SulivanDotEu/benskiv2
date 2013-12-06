@@ -18,9 +18,13 @@ class PackOptionChoixMultiple extends PackOption
    /**
     * @var Benski\CatalogueBundle\Entity\PrixOptionChoixMultiple
     *
-    * @ORM\OneToMany(targetEntity = "Benski\CatalogueBundle\Entity\PrixOptionChoixMultiple", mappedBy="packOption", cascade={"all"})
+    * @ORM\OneToMany(
+    *       targetEntity = "Benski\CatalogueBundle\Entity\PrixOptionChoixMultiple",
+    *       mappedBy="packOption",
+    *       cascade={"all"},
+    *       fetch="EAGER")
     */
-   private $prixOption;
+   protected $prixOption;
     /**
      * Constructor
      */

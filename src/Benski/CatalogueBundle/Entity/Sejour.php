@@ -31,42 +31,44 @@ class Sejour {
     * @ORM\Id
     * @ORM\GeneratedValue(strategy="AUTO")
     */
-   private $id;
+   protected $id;
 
    /**
     * @var string
     *
     * @ORM\Column(name="nom", type="string", length=255)
     */
-   private $nom;
+   protected $nom;
 
    /**
     * @var \stdClass
     *
     * @ORM\Column(name="dateDebut", type="datetime")
     */
-   private $dateDebut;
+   protected $dateDebut;
 
    /**
     * @var \DateTime
     *
     * @ORM\Column(name="dateFin", type="datetime")
     */
-   private $dateFin;
+   protected $dateFin;
 
    /**
     * @ORM\OneToMany(targetEntity="Benski\CatalogueBundle\Entity\SejourAppartement", mappedBy="sejour")
     * 
     * @var type 
     */
-   private $appartements;
+   protected $appartements;
    
    /**
-    * @ORM\OneToMany(targetEntity="Benski\CatalogueBundle\Entity\SejourPack", mappedBy="sejour")
+    * @ORM\OneToMany(targetEntity="Benski\CatalogueBundle\Entity\SejourPack",
+    *       mappedBy="sejour",
+    *       fetch="EAGER")
     * 
     * @var type 
     */
-   private $packs;
+   protected $packs;
    
    public function getAllAppartementsByDestination($destination){
       $temp = array();
@@ -223,5 +225,10 @@ class Sejour {
     public function getPacks()
     {
         return $this->packs;
+    }
+    
+    public function equals(Sejour $var){
+        if($var->getId() == $this->getId()) return true;
+        return false;
     }
 }

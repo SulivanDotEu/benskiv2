@@ -2,11 +2,11 @@
 
 namespace Benski\UserBundle\Form;
 
-use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use FOS\UserBundle\Form\Type\RegistrationFormType as BaseType;
 
-class UserType extends AbstractType
+class RegistrationFormType extends BaseType
 {
         /**
      * @param FormBuilderInterface $builder
@@ -20,25 +20,13 @@ class UserType extends AbstractType
         // Ajoutez vos champs ici, revoilà notre champ *location* :
         // $builder->add('location');
 
-        /*
+        
         $builder
-            ->add('username')
-            ->add('usernameCanonical')
-            ->add('email')
-            ->add('emailCanonical')
-            ->add('enabled')
-            ->add('salt')
-            ->add('password')
-            ->add('lastLogin')
-            ->add('locked')
-            ->add('expired')
-            ->add('expiresAt')
-            ->add('confirmationToken')
-            ->add('passwordRequestedAt')
-            ->add('roles')
-            ->add('credentialsExpired')
-            ->add('credentialsExpireAt')
-        ;*/
+            ->add('Person', new PersonType())
+            ->remove('username')
+                
+
+        ;
     }
     
     /**
@@ -56,6 +44,6 @@ class UserType extends AbstractType
      */
     public function getName()
     {
-        return 'benski_userbundle_user';
+        return 'benski_user_profile';
     }
 }

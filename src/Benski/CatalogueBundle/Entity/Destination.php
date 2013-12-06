@@ -27,21 +27,21 @@ class Destination extends VersionedObject
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
+    protected $id;
 
     /**
      * @var string
      *
      * @ORM\Column(name="nom", type="string", length=255)
      */
-    private $nom;
+    protected $nom;
 
     /**
      * @var string
      *
      * @ORM\Column(name="pays", type="string", length=255)
      */
-    private $pays;
+    protected $pays;
 
 
     /**
@@ -100,6 +100,10 @@ class Destination extends VersionedObject
         return $this->pays;
     }
 
+    public function equals(Destination $var){
+        if($var->getId() == $this->getId()) return true;
+        return false;
+    }
 
 
 }

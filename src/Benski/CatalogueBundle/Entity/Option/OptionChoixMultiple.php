@@ -20,7 +20,7 @@ class OptionChoixMultiple extends AbstractOption {
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
+    protected $id;
 
     /**
      * @var \stdClass
@@ -28,15 +28,20 @@ class OptionChoixMultiple extends AbstractOption {
      * @ORM\OneToOne(targetEntity="Benski\CatalogueBundle\Entity\Option\ChoixOptionMultiple", cascade={"remove"})
      * @ORM\JoinColumn(nullable=true)
      */
-    private $choixParDefaut;
+    protected $choixParDefaut;
 
     /**
      * @var \stdClass
      *
-     * @ORM\OneToMany(targetEntity="Benski\CatalogueBundle\Entity\Option\ChoixOptionMultiple", cascade={"all"}, mappedBy="optionChoixMultiple")
+     * @ORM\OneToMany(
+     *      targetEntity="Benski\CatalogueBundle\Entity\Option\ChoixOptionMultiple",
+     *      cascade={"all"},
+     *      mappedBy="optionChoixMultiple",
+     *      fetch="EAGER")
      * 
      */
-    private $choix;
+    protected $choix;
+    
 
     /**
      * Get id

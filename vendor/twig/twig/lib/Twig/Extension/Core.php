@@ -187,6 +187,7 @@ class Twig_Extension_Core extends Twig_Extension
             // iteration and runtime
             new Twig_SimpleFilter('default', '_twig_default_filter', array('node_class' => 'Twig_Node_Expression_Filter_Default')),
             new Twig_SimpleFilter('keys', 'twig_get_array_keys_filter'),
+            new Twig_SimpleFilter('get_class', 'twig_get_class_filter'),
 
             // escaping
             new Twig_SimpleFilter('escape', 'twig_escape_filter', array('needs_environment' => true, 'is_safe_callback' => 'twig_escape_filter_is_safe')),
@@ -230,9 +231,11 @@ class Twig_Extension_Core extends Twig_Extension
             new Twig_SimpleTest('odd', null, array('node_class' => 'Twig_Node_Expression_Test_Odd')),
             new Twig_SimpleTest('defined', null, array('node_class' => 'Twig_Node_Expression_Test_Defined')),
             new Twig_SimpleTest('sameas', null, array('node_class' => 'Twig_Node_Expression_Test_Sameas')),
+            new Twig_SimpleTest('same as', null, array('node_class' => 'Twig_Node_Expression_Test_Sameas')),
             new Twig_SimpleTest('none', null, array('node_class' => 'Twig_Node_Expression_Test_Null')),
             new Twig_SimpleTest('null', null, array('node_class' => 'Twig_Node_Expression_Test_Null')),
             new Twig_SimpleTest('divisibleby', null, array('node_class' => 'Twig_Node_Expression_Test_Divisibleby')),
+            new Twig_SimpleTest('divisible by', null, array('node_class' => 'Twig_Node_Expression_Test_Divisibleby')),
             new Twig_SimpleTest('constant', null, array('node_class' => 'Twig_Node_Expression_Test_Constant')),
             new Twig_SimpleTest('empty', 'twig_test_empty'),
             new Twig_SimpleTest('iterable', 'twig_test_iterable'),
@@ -293,12 +296,11 @@ class Twig_Extension_Core extends Twig_Extension
     {
         $stream = $parser->getStream();
         $name = $stream->expect(Twig_Token::NAME_TYPE)->getValue();
+        $class = $this->getTestNodeClass($parser, $name, $node->getLine());
         $arguments = null;
         if ($stream->test(Twig_Token::PUNCTUATION_TYPE, '(')) {
             $arguments = $parser->getExpressionParser()->parseArguments(true);
         }
-
-        $class = $this->getTestNodeClass($parser, $name, $node->getLine());
 
         return new $class($node, $name, $arguments, $parser->getCurrentToken()->getLine());
     }
@@ -307,7 +309,21 @@ class Twig_Extension_Core extends Twig_Extension
     {
         $env = $parser->getEnvironment();
         $testMap = $env->getTests();
-        if (!isset($testMap[$name])) {
+        $testName = null;
+        if (isset($testMap[$name])) {
+            $testName = $name;
+        } elseif ($parser->getStream()->test(Twig_Token::NAME_TYPE)) {
+            // try 2-words tests
+            $name = $name.' '.$parser->getCurrentToken()->getValue();
+
+            if (isset($testMap[$name])) {
+                $parser->getStream()->next();
+
+                $testName = $name;
+            }
+        }
+
+        if (null === $testName) {
             $message = sprintf('The test "%s" does not exist', $name);
             if ($alternatives = $env->computeAlternatives($name, array_keys($env->getTests()))) {
                 $message = sprintf('%s. Did you mean "%s"', $message, implode('", "', $alternatives));
@@ -793,6 +809,34 @@ function twig_get_array_keys_filter($array)
 
     return array_keys($array);
 }
+
+/**
+ * Returns the class name for the given object.
+ *
+ * It is useful when you want deal with inherance object:
+ *
+ * <pre>
+ *  {{ object|get_class }}
+ *
+ *  {% if object|get_class == "Namespace\\Class" %}
+ *      {# ... #}
+ *  {% endif%}
+ * </pre>
+ *
+ * @param object $object An object
+ *
+ * @return array The class name
+ */
+function twig_get_class_filter($object)
+{
+    if (!is_object($object)) {
+        return false;
+    }
+
+    return get_class($object);
+}
+
+
 
 /**
  * Reverses a variable.
@@ -1403,3 +1447,4 @@ function twig_array_batch($items, $size, $fill = null)
 
     return $result;
 }
+

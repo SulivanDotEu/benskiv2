@@ -106,3 +106,26 @@
    color: #ffffff;
    background-color: #42CACA;
 }
+
+/* --- NAV : OK --- */
+
+.list-group > .list-group-item.ok {
+   text-shadow: 0 -1px 0 #30A935;
+   background-image: -webkit-gradient(linear,left 0,left 100%,from(#42CA6E),to(#32B351));
+   background-image: -webkit-linear-gradient(top,#42CA6E,0%,#32B351,100%);
+   background-image: -moz-linear-gradient(top,#42CA6E 0,#32B351 100%);
+   background-image: linear-gradient(to bottom,#42CA6E 0,#32B351 100%);
+   background-repeat: repeat-x;
+   border-color: #32B35B;
+   z-index: 2;
+   color: white;
+   background-color: #32B351;
+}
+
+.list-group > .list-group-item.ok > .list-group-item-text{
+    color: #E1F7E6;
+}
+
+.list-group > .list-group-item.ok > .list-group-item-heading{
+    color: #ffffff;
+}

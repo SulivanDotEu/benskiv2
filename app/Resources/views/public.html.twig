@@ -7,138 +7,140 @@
 
 <!DOCTYPE html>
 <html>
-   <head>
-      <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-      <title>{% block title %}Benski{% endblock %}</title>
+        <title>{% block title %}Benski{% endblock %}</title>
 
     {% block stylesheets %}
 
-      <link rel="stylesheet" href="{{ asset('css/public.css') }}" type="text/css" />
-      <link rel="stylesheet" href="{{ asset('bs3/css/bootstrap.min.css') }}" type="text/css" />
-      <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-theme.min.css">
+        <link rel="stylesheet" href="{{ asset('css/public.css') }}" type="text/css" />
+        <link rel="stylesheet" href="{{ asset('bs3/css/bootstrap.min.css') }}" type="text/css" />
+        <link rel="stylesheet" href="{{ asset('bs3/js/bootstrap.js') }}" type="text/css" />
+        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-theme.min.css">
     {% endblock %}
-   </head>
+    </head>
 
-   <body style="padding-top: 50px">
+    <body style="padding-top: 50px">
        {#
        {{  render(controller('BenskiCommonBundle:Administration:getMenu')) }}
 #}
-         <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="container" >
-               <div class="navbar-header">
-                  <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-                     <span class="sr-only">Toggle navigation</span>
-                     <span class="icon-bar"></span>
-                     <span class="icon-bar"></span>
-                     <span class="icon-bar"></span>
-                  </button>
-                  <a class="navbar-brand" href="#">Benski</a>
-               </div>
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">Benski</a>
+                </div>
 
 
-               <!-- Collect the nav links, forms, and other content for toggling -->
-               <div class="collapse navbar-collapse navbar-ex1-collapse">
-                  <ul class="nav navbar-nav">
-                     <li class="active"><a href="#">Home</a></li>
-                     <li><a href="#">Nos offres</a></li>
-                     <li><a href="#">Actualités</a></li>
-                     <li><a href="#">Nos partenaires</a></li>
-                     <li><a href="#">Contact</a></li>
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse navbar-ex1-collapse">
+                    <ul class="nav navbar-nav">
+                        <li class="active"><a href="#">Home</a></li>
+                        <li><a href="#">Nos offres</a></li>
+                        <li><a href="#">Actualités</a></li>
+                        <li><a href="#">Nos partenaires</a></li>
+                        <li><a href="#">Contact</a></li>
 
-                  </ul>
+                    </ul>
 
-                  <ul class="nav navbar-nav navbar-right">
-                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                           <li><a href="#">Action</a></li>
-                           <li><a href="#">Another action</a></li>
-                           <li><a href="#">Something else here</a></li>
-                           <li><a href="#">Separated link</a></li>
-                        </ul>
-                     </li>
-                  </ul>
-               </div><!-- /.navbar-collapse -->
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">Action</a></li>
+                                <li><a href="#">Another action</a></li>
+                                <li><a href="#">Something else here</a></li>
+                                <li><a href="#">Separated link</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div><!-- /.navbar-collapse -->
             </div>
-         </nav>
-         <div id="header" class="" style="border-bottom: 0px black solid; margin-bottom: 20px; background-color: #428bca;
-              background-image: url('{{ asset('img/header-1.jpg') }}');
-              background-position: center; background-repeat: repeat;
-              min-height: 250px">
-                 <div class="container" >
-                    <div class="row" style="color: white; min-height: 100%;">
-                       <div class="col-sm-4 ">
+        </nav>
+        <div id="header" class="" style="border-bottom: 0px black solid; margin-bottom: 20px; background-color: #428bca;
+             background-image: url('{{ asset('img/header-1.jpg') }}');
+             background-position: center; background-repeat: repeat;
+             min-height: 250px">
+            <div class="container" >
+                <div class="row" style="color: white; min-height: 100%;">
+                    <div class="col-sm-4 ">
 {% block header %}
-                             <div style="
-                                  min-height: 250px;
-                                  background-color: rgba(255, 255, 255, 0.7);
-                                  padding: 10px 25px 10px 25px;
-                                  box-shadow: 8px 0px 0px rgba(0, 0, 0, 0.5);
-                                  text-shadow: 2px 2px 0px rgba(255, 255, 255, 0.5);
-                                  color: black">
-                                     <h1><span class="glyphicon glyphicon-star"></span> Benski</h1>
-                                     <p class="lead">Des séjours en altitude de qualités pour la famille et les amis.</p>
-                                  </div>               
+                        <div style="
+                             min-height: 250px;
+                             background-color: rgba(255, 255, 255, 0.7);
+                             padding: 10px 25px 10px 25px;
+                             box-shadow: 8px 0px 0px rgba(0, 0, 0, 0.5);
+                             text-shadow: 2px 2px 0px rgba(255, 255, 255, 0.5);
+                             color: black">
+                            <h1><span class="glyphicon glyphicon-star"></span> Benski</h1>
+                            <p class="lead">Des séjours en altitude de qualités pour la famille et les amis.</p>
+                        </div>               
  {% endblock %}
-                             </div>
-                             <div class="col-sm-offset-4 col-sm-4">       
+                    </div>
+                    <div class="col-sm-offset-4 col-sm-4">       
 
 
-                             </div>
-
-                          </div>
-                       </div>
                     </div>
 
-                    <div class="container">
-                       <ol class="breadcrumb">
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <ol class="breadcrumb">
                         {% block breadcrumb %}
-                             <li><a href="#">Benski.be</a></li>
+                <li><a href="#">Benski.be</a></li>
                             {% endblock %}
-                          </ol>
-                       </div>
+            </ol>
+        </div>
          {% block parent_container %}
-                       <div class="container" id="mainContainer ">
-                          <div class="row">
+        <div class="container" id="mainContainer ">
+            <div class="row">
                     {% block container %}
                   {% block container_header %}
-                                <div id="content" class="col-sm-12">
+                <div id="content" class="col-sm-12">
                                {% include "::flashbag.html.twig" %}
 
 
 
-                                   </div>
+                </div>
                          {% endblock %}
           {% block body %}
 
           {% endblock %}
-                                </div>
+            </div>
                         {% endblock %}
-                             </div>
+        </div>
           {% endblock %}
 
-                             <hr>
+        <hr>
 
-                             <footer>
-                                <p>Benski &AMP; Benjamin Ellis © 2013 and beyond.</p>
-                             </footer>
-                          </div>
+        <footer>
+            <p>Benski &AMP; Benjamin Ellis © 2013 and beyond.</p>
+        </footer>
+    </div>
 
   {% block javascripts %}
     {# Ajoutez ces lignes JavaScript si vous comptez vous servir des fonctionnalités du bootstrap Twitter #}
-                          <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-                          <script type="text/javascript" src="{{ asset('bs3/js/bootstrap.min.js') }}"></script>
-                          <script>
-  $(function () {
-    $('#myTab a:last').tab('show');
-    $('#popover1').popover();
-  })
-
-                             </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script type="text/javascript" src="{{ asset('bs3/js/bootstrap.min.js') }}"></script>
+    <script>
+        $(function() {
+            $('#myTab a:last').tab('show');
+            $('#popover1').popover();
+        });
+    </script>
+    {% block javascripts_content %}
+  {% endblock %}
   {% endblock %}
 
-                          </body>
-                       </html>
+</body>
+</html>
