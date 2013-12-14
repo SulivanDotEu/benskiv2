@@ -381,7 +381,7 @@ class ProcessReservationSejourController extends Controller {
     private function mergeExistantEntitiesInReservationSejour(ReservationSejour $reservationSejour) {
         $paiements = $reservationSejour->getPaiements();
         foreach ($paiements as $paiement) {
-            //$this->mergeExistantEntitiesInPaiement($paiement);
+            $this->mergeExistantEntitiesInPaiement($paiement);
         }
         $em = $this->getDoctrine()->getManager();
 
@@ -403,7 +403,7 @@ class ProcessReservationSejourController extends Controller {
         $appartement = $em->merge($appartementReserve->getAppartement());
         $appartementReserve->setAppartement($appartement);
 
-        var_dump($appartementReserve);
+        
         $this->mergeExistantEntitiesInPackReserve($appartementReserve->getPackReserve());
 
         foreach ($appartementReserve->getOptionsReserves() as $optionReserve) {
@@ -417,6 +417,7 @@ class ProcessReservationSejourController extends Controller {
 
     // PARTICIPANT
     private function mergeExistantEntitiesInPackReserve($packReserve) {
+        var_dump($packReserve->getPack());
         $em = $this->getDoctrine()->getManager();
         /* @var $packReserve \Benski\ReservationBundle\Entity\PackReserve */
         $pack = $em->merge($packReserve->getPack());

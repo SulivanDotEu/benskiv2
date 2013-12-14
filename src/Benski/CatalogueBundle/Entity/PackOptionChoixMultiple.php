@@ -38,7 +38,7 @@ class PackOptionChoixMultiple extends PackOption
         foreach ($prixOption as $elt){
             /* @var $elt PrixOptionChoixMultiple */
             if($elt->getChoix()->getId() == $choix->getId())
-                return $elt->getPrix ();
+                return $elt->getPrix();
         }
     }
 

@@ -36,8 +36,7 @@ class PrixOptionChoixMultiple {
     * @var Benski\CatalogueBundle\Entity\Option\ChoixOptionMultiple
     *
     * @ORM\ManyToOne(
-    *       targetEntity = "Benski\CatalogueBundle\Entity\Option\ChoixOptionMultiple",
-    *       fetch="EAGER")
+    *       targetEntity = "Benski\CatalogueBundle\Entity\Option\ChoixOptionMultiple")
     */
    protected $choix;
 
