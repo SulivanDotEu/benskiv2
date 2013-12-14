@@ -1,0 +1,87 @@
+<?php
+
+namespace Benski\ReservationBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * SejourReserve
+ *
+ * @ORM\Table()
+ * @ORM\Entity(repositoryClass="Benski\ReservationBundle\Entity\SejourReserveRepository")
+ * @ORM\HasLifecycleCallbacks
+ */
+class SejourReserve {
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var \stdClass
+     *
+     * @ORM\OneToOne(
+     *      targetEntity="Benski\ReservationBundle\ReservationSejour",
+     *      mappedBy="sejourReserve"
+     *      )
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $reservation;
+
+    /**
+     * @var \stdClass
+     *
+     * @ORM\OneToOne(
+     *      targetEntity="Benski\CatalogueBundle\Sejour"
+     * )
+     * @ORM\JoinColumn(
+     *      nullable=false
+     * )
+     * 
+     */
+    private $sejour;
+
+    /**
+     * @var \stdClass
+     *
+     * @ORM\OneToOne(
+     *      targetEntity="Benski\CatalogueBundle\Destination"
+     * )
+     * @ORM\JoinColumn(
+     *      nullable=false
+     * )
+     */
+    private $destination;
+
+
+    /**
+     * @var \stdClass
+     *
+     * @ORM\Column(name="optionsReserves", type="object")
+     */
+    //private $optionsReserves;
+
+    /**
+     * @var \stdClass
+     *
+     * @ORM\OneToMany(
+     *      targetEntity="Benski\ReservationBundle\Entity\AppartementReserve",
+     *      mappedBy="sejourReserve"
+     * )
+     */
+    private $appartementsReserves;
+
+    /**
+     * Constructor
+     */
+    public function __construct() {
+        $this->appartementsReserves = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+
+}

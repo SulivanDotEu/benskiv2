@@ -1,0 +1,15 @@
+{% extends 'BenskiReservationBundle:ReservationImpl:layout.html.twig' %}
+
+{% block body -%}
+    <h1>ReservationImpl creation</h1>
+
+    {{ form(form) }}
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('admin_reservation') }}">
+            Back to the list
+        </a>
+    </li>
+</ul>
+{% endblock %}

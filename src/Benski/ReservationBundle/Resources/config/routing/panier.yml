@@ -1,0 +1,15 @@
+panier_ajouter_sejour:
+    pattern:  /ajouter/sejour-{sejour}/destination-{destination}/appartement-{appartement}/pack-{pack}/pour-{nbrPersonnes}-personnes
+    defaults: { _controller: BenskiReservationBundle:Panier:ajouterSejourReserve }
+
+panier_afficher:
+    pattern: /afficher
+    defaults: { _controller: BenskiReservationBundle:Panier:afficher }
+
+panier_reset:
+    pattern: /reset
+    defaults: { _controller: BenskiReservationBundle:Panier:reset }
+    
+panier_supprimer_appartement_reserve:
+    pattern: /supprimer-appartement-{numero}/sejour-{sejour}/destination-{destination}
+    defaults: { _controller: BenskiReservationBundle:Panier:supprimerAppartementReserve }

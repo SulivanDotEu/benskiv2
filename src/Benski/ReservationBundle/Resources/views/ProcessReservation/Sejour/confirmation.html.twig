@@ -1,0 +1,198 @@
+{% extends 'BenskiReservationBundle::public.html.twig' %}
+{% import 'BenskiReservationBundle::macro.html.twig' as fo %}
+
+
+
+
+{% block body %}
+
+
+
+<div class="col-sm-9">
+
+    <h1>Reservez votre séjour</h1>
+    <hr>
+    <div class="alert alert-success">Vous avez choisi les options concernant vos groupes avec succès! Maintenant, le formulaire ci-dessous vous demande de choisir les options relatives aux participants de chaque groupe.</div>
+
+            {% for ar in entity.appartementsReserves %}
+    <h2>{{ar.appartement.nom }}
+        <small>
+                    {% for i in 1..(ar.appartement.qualite) %}
+            <span class="glyphicon glyphicon-star"></span>
+                    {% endfor %} - {{ ar.nombrePersonnes}} personne(s) - 
+            <a href="#" class="prixParPersonne" >{{ (ar.getPrix()/100)|number_format() }} €</a>
+        </small>
+    </h2>
+    <hr>
+    <ul>
+                    {% for option in ar.optionsReserves %}
+                    {% if option.isSelected %}
+        <li>{{ option.getIntitule }} ({{ fo.int2prix(option.prix) }}€)</li>
+                    {% endif %}
+                    {% endfor %}
+    </ul>
+            {% for participant in ar.participants %}
+            {% set id = ar.numero~"-"~participant.numero%}
+    <h3>Participant n°{{ participant.numero }}</h3>
+    <div class="row">
+        <div class="col-sm-8">
+            <dl class="dl-horizontal">
+                <dt>Nom</dt>
+                <dd>{{ participant.personne.firstName }} {{ participant.personne.lastName }}</dd>
+                <dt>Email</dt>
+                <dd>{{ participant.personne.email }}</dd>
+                      {% if (participant.personne.address.isEmpty == true) %}
+                <dt>Adresse</dt>
+                <dd>
+{{participant.personne.address.number}} {{participant.personne.address.street}}
+                    <br>
+                    {{participant.personne.address.city}}, {{participant.personne.address.zipCode}}<br>
+                    {{participant.personne.address.country}}
+            </dl>
+                {% endif %}
+
+
+        </div>
+        <div class="col-sm-4">
+            <h4>Options</h4>
+            <ul>
+                    {% for option in participant.optionsReserves %}
+                    {% if option.isSelected %}
+                <li>{{ option.getIntitule }} ({{ fo.int2prix(option.prix) }}€)</li>
+                    {% endif %}
+                    {% endfor %}
+            </ul>
+        </div>
+    </div>
+
+            {% endfor %}
+            {% endfor %}
+
+    <h1>Total</h1>
+    <hr>
+    <table class="table table-bordered">
+
+        <tbody>
+                {% for ar in entity.appartementsReserves %}
+            <tr>
+                <th>{{ar.appartement.nom }}
+                    <small>
+                    {% for i in 1..(ar.appartement.qualite) %}
+                        <span class="glyphicon glyphicon-star"></span>
+                    {% endfor %}
+                    </small></th>
+                <th>Logement</th>
+                <th>Option</th>
+                <th>Total</th>
+            </tr> 
+                {% for participant in ar.participants %}
+            <tr>
+                <td>{{participant.personne.firstName}} {{participant.personne.lastName}}</td>
+                <td>{{fo.int2prix(ar.prix)}} €</td>
+                <td>{{fo.int2prix(participant.getTotalOptions)}} €</td>
+                <td>{{fo.int2prix(participant.getTotal)}} €</td>
+            </tr>
+                {% endfor %}
+            <tr>
+                <td colspan="3">Options de groupe</td>
+                <td><strong>{{fo.int2prix(ar.getTotalOptions())}} €</strong></td>
+            </tr>
+            <tr>
+                <td colspan="2">Prix du pack </td>
+                <td>{{ar.nombrePersonnes}} x
+ {{fo.int2prix(ar.packReserve.prix)}} €</td>
+                <td><strong> {{fo.int2prix(ar.packReserve.getTotal)}} €</strong></td>
+            </tr>
+            <tr>
+                <td colspan="3">Sous total</td>
+                <td><strong>{{fo.int2prix(ar.getTotal())}} €</strong></td>
+            </tr>
+                {% endfor %}
+
+            <tr class="active">
+                <th colspan="3">Total de votre séjour</th>
+                <td><strong>{{fo.int2prix(entity.getTotal())}} €</strong></td>
+            </tr>
+        </tbody>
+    </table>
+
+
+    <div class="form-group">
+        <div class=" col-sm-12">
+            <a href="{{ path('benski_reservation_sejour_enregistrement', {'destination': destination.id, 'sejour': sejour.id}) }}"
+               type="submit" class="btn btn-primary btn-lg btn-block">
+                Continuer
+            </a>
+        </div>
+    </div>
+
+</div>
+
+<div class="col-sm-3">
+    <div class="list-group myListGroup">
+        <a class="list-group-item ok" href="{{ path('catalogue_public_sejour', {'destination':destination.id}) }}">
+            <div class="pull-left"><span class="glyphicon glyphicon-book"></span> </div>
+
+            <h4 class="list-group-item-heading">Sejour</h4>
+            <p class="list-group-item-text">
+                Risoul
+                <br>
+                    {{ entity.getNombreAppartement }} Appartement(s)<br>
+                    {{ entity.getNombresPersonnes }} Personne(s) 
+            </p>
+        </a>
+
+        <a href="{{ path('benski_reservation_sejour_form_option_groupe',
+            {'destination':destination.id, 'sejour':sejour.id}) }}"
+           class="list-group-item ok">
+            <div class="pull-left"><span class="glyphicon glyphicon-chevron-right"></span> </div>
+
+            <h4 class="list-group-item-heading">Etape 1</h4>
+            <p class="list-group-item-text">Choix des options de groupe</p>
+        </a>
+
+        <a href="{{ path('benski_reservation_sejour_form_option_individuelle',
+            {'destination':destination.id, 'sejour':sejour.id}) }}" class="list-group-item ok">
+            <div class="pull-left"><span class="glyphicon glyphicon-bookmark"></span> </div>
+
+            <h4 class="list-group-item-heading">Etape 2</h4>
+            <p class="list-group-item-text">Choix des options individuelles</p>
+        </a>
+        <a href="{{ path('benski_reservation_sejour_form_identification_participant',
+            {'destination':destination.id, 'sejour':sejour.id}) }}" class="list-group-item ok">
+            <div class="pull-left"><span class="glyphicon glyphicon-user"></span> </div>
+
+            <h4 class="list-group-item-heading">Etape 3</h4>
+            <p class="list-group-item-text">Inscriptions des participants</p>
+        </a>
+        <span  class="list-group-item active">
+            <div class="pull-left"><span class="glyphicon glyphicon-flag"></span> </div>
+
+            <h4 class="list-group-item-heading">Confirmation</h4>
+        </span>
+        <span  class="list-group-item ">
+            <div class="pull-left"><span class="glyphicon glyphicon-send"></span> </div>
+
+            <h4 class="list-group-item-heading">Paiement</h4>
+        </span>
+    </div>
+
+
+
+</div>
+
+
+
+
+
+
+{% endblock %}
+
+{% block javascripts_content %}
+<script type = "text/javascript" >
+    $(function() {
+        $('.prixParPersonne').tooltip({title: 'Les prix sont entendus par personne'});
+
+    });
+</script>
+  {% endblock %}

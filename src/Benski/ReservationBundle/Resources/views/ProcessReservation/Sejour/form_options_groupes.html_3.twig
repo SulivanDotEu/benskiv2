@@ -1,0 +1,268 @@
+{% extends 'BenskiReservationBundle::public.html.twig' %}
+
+
+
+{% import 'BenskiReservationBundle::macro.html.twig' as fo %}
+
+
+
+
+
+
+{% block body %}
+<pre>
+    {{ (entity|get_class) }}
+</pre>
+
+
+
+<form class="form-horizontal" role="form">
+    <div class="row">
+        <div class="col-sm-9">
+            <h1>Reservez votre séjour</h1>
+            <hr>
+            <div class="alert alert-info">Dans un premier temps, le site vous demande de choisir 
+                les options que vous désirez. Ces options dépendent du pack</div>
+           
+            {% for ar in entity.appartementsReserves %}
+            <h2>{{ar.appartement.nom }}
+                <small>
+                    {% for i in 1..(ar.appartement.qualite) %}
+                    <span class="glyphicon glyphicon-star"></span>
+                    {% endfor %}
+
+                    - {{ ar.nombrePersonnes}} personne(s) - 
+{{ (ar.getPrix()/100)|number_format(2) }} €
+                </small>
+
+            </h2>
+            <hr>
+            {% for option in ar.optionsReserves %}
+                {{ fo.form_option(option, ar) }}
+            {% endfor %}
+            {% endfor %}
+
+
+            <h2>Appartement + piscine 
+                <small>
+                    <span class="glyphicon glyphicon-star"></span>
+                    <span class="glyphicon glyphicon-star"></span>
+                    <span class="glyphicon glyphicon-star"></span>
+                    <span class="glyphicon glyphicon-star"></span>
+                    - 6 personnes - 450 euro
+                </small>
+
+            </h2>
+            <hr>
+            <h4>Choix des ski</h4>
+            <div class="row">
+                <div class="col-sm-8">
+
+
+
+                    <div class="radio">
+                        <label>
+                            <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
+                            Bronze (40 €)
+                        </label>
+                    </div>
+                    <div class="radio">
+                        <label>
+                            <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
+                            Silver (80 €)
+                        </label>
+                    </div>
+                    <div class="radio">
+                        <label>
+                            <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
+                            Gold (100 €)
+                        </label>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <button type="button" class="btn btn-default btn-xs">Extra small button</button>
+                    <button type="button" class="btn btn-default btn-xs">Extra small button</button>
+                    <button type="button" class="btn btn-default btn-xs">Extra small button</button>
+                </div>
+            </div>
+            <br>
+
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Prénom</label>
+                        <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Prénom">
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Nom</label>
+                        <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Nom de famille">
+                    </div>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Email</label>
+                        <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Votre email">
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Confirmation</label>
+                        <input type="email" class="form-control" id="exampleInputPassword1" placeholder="Votre email">
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="form-group">
+                <label for="exampleInputEmail1">Adresse</label>
+                <div class="row">
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" placeholder="Rue">
+                    </div>
+                    <div class="col-xs-3">
+                        <input type="text" class="form-control" placeholder="Numero">
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+
+                    <div class="col-xs-3">
+                        <input type="text" class="form-control" placeholder="Code Postal">
+
+                    </div>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" placeholder="Ville">
+                    </div>
+                </div>
+
+            </div>
+
+            <br>
+            <br>
+
+
+
+
+
+
+            <h2>Appartement
+                <small>
+                    <span class="glyphicon glyphicon-star"></span>
+                    - 4 personnes - 250 euro
+                </small>
+
+            </h2>
+            <hr>
+            <h2>Appartement
+                <small>
+                    <span class="glyphicon glyphicon-star"></span>
+                    - 4 personnes - 250 euro
+                </small>
+
+            </h2>
+            <hr>
+
+        </div>
+        <div class="col-sm-3">
+            <div class="list-group myListGroup">
+                <a href="/benskiv2/web/app_dev.php/catalogue/1/1
+                   " class="list-group-item ok">
+                    <div class="pull-left"><span class="glyphicon glyphicon-book"></span> </div>
+
+                    <h4 class="list-group-item-heading">Sejour</h4>
+                    <p class="list-group-item-text">
+                        Risoul<br>
+                        3 Appartement<br>
+                        10 Personnes
+
+                    </p>
+                </a>
+                <a href="/benskiv2/web/app_dev.php/catalogue/1/1
+                   " class="list-group-item active">
+                    <div class="pull-left"><span class="glyphicon glyphicon-chevron-right"></span> </div>
+
+                    <h4 class="list-group-item-heading">Etape 1</h4>
+                    <p class="list-group-item-text">Choix des options de groupe</p>
+                </a>
+                <a href="/benskiv2/web/app_dev.php/catalogue/1/1
+                   " class="list-group-item ">
+                    <p class="list-group-item-text">
+                        Appartement + piscine <br>
+                        <small>
+                            <span class="glyphicon glyphicon-star"></span>
+                            <span class="glyphicon glyphicon-star"></span>
+                            <span class="glyphicon glyphicon-star"></span>
+                            <span class="glyphicon glyphicon-star"></span>
+                            - 6 personnes - 450 euro
+                        </small>
+                    </p>
+                </a>
+                <a href="/benskiv2/web/app_dev.php/catalogue/1/1
+                   " class="list-group-item ">
+                    <p class="list-group-item-text">
+                        Appartement <br>
+                        <small>
+                            <span class="glyphicon glyphicon-star"></span>
+                            - 4 personnes - 250 euro
+                        </small>
+                    </p>
+                </a>
+                <a href="/benskiv2/web/app_dev.php/catalogue/1/1
+                   " class="list-group-item ">
+                    <p class="list-group-item-text">
+                        Appartement <br>
+                        <small>
+                            <span class="glyphicon glyphicon-star"></span>
+                            - 4 personnes - 250 euro
+                        </small>
+                    </p>
+                </a>
+
+
+                <a href="/benskiv2/web/app_dev.php/catalogue/1/1
+                   " class="list-group-item ">
+                    <div class="pull-left"><span class="glyphicon glyphicon-bookmark"></span> </div>
+
+                    <h4 class="list-group-item-heading">Etape 2</h4>
+                    <p class="list-group-item-text">Choix des options individuelles</p>
+                </a>
+                <a href="/benskiv2/web/app_dev.php/catalogue/1/1
+                   " class="list-group-item ">
+                    <div class="pull-left"><span class="glyphicon glyphicon-user"></span> </div>
+
+                    <h4 class="list-group-item-heading">Etape 3</h4>
+                    <p class="list-group-item-text">Inscriptions des participants</p>
+                </a>
+                <a href="/benskiv2/web/app_dev.php/catalogue/1/1
+                   " class="list-group-item ">
+                    <div class="pull-left"><span class="glyphicon glyphicon-flag"></span> </div>
+
+                    <h4 class="list-group-item-heading">Confirmation</h4>
+                </a>
+                <a href="/benskiv2/web/app_dev.php/catalogue/1/1
+                   " class="list-group-item ">
+                    <div class="pull-left"><span class="glyphicon glyphicon-send"></span> </div>
+
+                    <h4 class="list-group-item-heading">Paiement</h4>
+                </a>
+                <a href="/benskiv2/web/app_dev.php/catalogue/1/1
+                   " class="list-group-item ">
+                    <div class="pull-left"><span class="glyphicon glyphicon-cog"></span> </div>
+
+                    <h4 class="list-group-item-heading">Payement</h4>
+                </a>
+
+
+            </div>
+
+
+        </div>
+
+    </div>
+</form>
+{% endblock %}

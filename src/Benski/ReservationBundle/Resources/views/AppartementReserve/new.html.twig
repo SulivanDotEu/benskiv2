@@ -1,0 +1,15 @@
+{% extends 'BenskiReservationBundle:AppartementReserve:layout.html.twig' %}
+
+{% block body -%}
+    <h1>AppartementReserve creation</h1>
+
+    {{ form(form) }}
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('appartementreserve') }}">
+            Back to the list
+        </a>
+    </li>
+</ul>
+{% endblock %}

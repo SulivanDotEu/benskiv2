@@ -1,0 +1,50 @@
+BenskiReservationBundle_reservation_sejour_process:
+        resource: "@BenskiReservationBundle/Resources/config/routing/reservation_sejour.yml"
+        prefix:   /reserver/sejour
+        
+benski_reservation_sejour_enregistrement:
+    pattern:  /membre/reserver/sejour/{sejour}-{destination}/enregistrement
+    defaults: { _controller: BenskiReservationBundle:ProcessReservationSejour:enregistrerReservation}
+
+
+BenskiReservationBundle_panier:
+        resource: "@BenskiReservationBundle/Resources/config/routing/panier.yml"
+        prefix:   /panier
+
+BenskiReservationBundle_appartementreserve:
+        resource: "@BenskiReservationBundle/Resources/config/routing/appartementreserve.yml"
+        prefix:   /admin/appartementreserve
+        
+BenskiReservationBundle_reservation:
+    resource: "@BenskiReservationBundle/Controller/ReservationImplController.php"
+    type:     annotation
+    prefix:   /
+    
+BenskiReservationBundle_sejourreserve:
+        resource: "@BenskiReservationBundle/Resources/config/routing/sejourreserve.yml"
+        prefix:   /admin/sejourreserve
+
+
+#Paiements et réductions
+BenskiReservationBundle_reduction:
+    resource: "@BenskiReservationBundle/Controller/ReductionController.php"
+    type:     annotation
+    prefix:   /
+
+BenskiReservationBundle_paiement:
+    resource: "@BenskiReservationBundle/Controller/PaiementController.php"
+    type:     annotation
+    prefix:   /admin
+
+
+
+#reservation sejour PUBLIC        
+BenskiReservationBundle_reservation_public:
+    resource: "@BenskiReservationBundle/Controller/PublicReservationImplController.php"
+    type:     annotation
+    prefix:   /
+        
+BenskiReservationBundle_reservation_sejour:
+    resource: "@BenskiReservationBundle/Controller/ReservationSejourController.php"
+    type:     annotation
+    prefix:   /

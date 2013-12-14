@@ -1,0 +1,30 @@
+sejourreserve:
+    pattern:  /
+    defaults: { _controller: "BenskiReservationBundle:SejourReserve:index" }
+
+sejourreserve_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "BenskiReservationBundle:SejourReserve:show" }
+
+sejourreserve_new:
+    pattern:  /new
+    defaults: { _controller: "BenskiReservationBundle:SejourReserve:new" }
+
+sejourreserve_create:
+    pattern:  /create
+    defaults: { _controller: "BenskiReservationBundle:SejourReserve:create" }
+    requirements: { _method: post }
+
+sejourreserve_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "BenskiReservationBundle:SejourReserve:edit" }
+
+sejourreserve_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "BenskiReservationBundle:SejourReserve:update" }
+    requirements: { _method: post|put }
+
+sejourreserve_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "BenskiReservationBundle:SejourReserve:delete" }
+    requirements: { _method: post|delete }

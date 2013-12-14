@@ -1,0 +1,55 @@
+{% extends 'BenskiReservationBundle:Paiement:layout.html.twig' %}
+
+{% block body -%}
+    <h1>Paiement list</h1>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Montant</th>
+                <th>Code</th>
+                <th>Mode</th>
+                <th>Datelimite</th>
+                <th>Datereception</th>
+                <th>Datenotificationreception</th>
+                <th>Comptecrediteur</th>
+                <th>Statut</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td><a href="{{ path('admin_paiement_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                <td>{{ macro.int2prix(entity.montant) }} €</td>
+                <td>{{ entity.code }}</td>
+                <td>{{ ('paiement.mode.'~entity.mode)|trans }}</td>
+                <td>{% if entity.dateLimite %}{{ entity.dateLimite|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if entity.dateReception %}{{ entity.dateReception|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if entity.dateNotificationReception %}{{ entity.dateNotificationReception|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{{ entity.compteCrediteur }}</td>
+                <td>{{ ('paiement.statut.'~entity.statut)|trans }}</td>
+                <td>
+                <ul>
+                    <li>
+                        <a href="{{ path('admin_paiement_show', { 'id': entity.id }) }}">show</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('admin_paiement_edit', { 'id': entity.id }) }}">edit</a>
+                    </li>
+                </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+        <ul>
+        <li>
+            <a href="{{ path('admin_paiement_new') }}">
+                Create a new entry
+            </a>
+        </li>
+    </ul>
+    {% endblock %}

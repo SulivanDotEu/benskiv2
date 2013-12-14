@@ -1,0 +1,31 @@
+link:
+    pattern:  /
+    defaults: { _controller: "BenskiContentBundle:Link:index" }
+
+link_bind:
+    pattern:  /bind/{id}/{class}
+    defaults: { _controller: "BenskiContentBundle:Link:bind" }
+
+link_unbind:
+    pattern:  /unbind/{id}/
+    defaults: { _controller: "BenskiContentBundle:Link:unbind" }
+
+link_unbind:
+    pattern:  /unbind/{id}/
+    defaults: { _controller: "BenskiContentBundle:Link:unbind" }
+
+link_edit:
+    pattern:  /edit/{id}/
+    defaults: { _controller: "BenskiContentBundle:Link:edit" }
+
+link_update:
+    pattern:  /update/{id}/
+    defaults: { _controller: "BenskiContentBundle:Link:update" }
+
+link_show:
+    pattern:  /show/{id}/
+    defaults: { _controller: "BenskiContentBundle:Link:show" }
+
+link_button:
+    pattern:  /show/{id}/
+    defaults: { _controller: "BenskiContentBundle:Link:createButton" }

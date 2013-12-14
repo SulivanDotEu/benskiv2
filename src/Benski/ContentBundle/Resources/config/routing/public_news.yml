@@ -1,0 +1,11 @@
+public_news:
+    pattern:  /
+    defaults: { _controller: "BenskiContentBundle:PublicNews:index" }
+
+public_news_page:
+    pattern:  /page-{page}
+    defaults: { _controller: "BenskiContentBundle:PublicNews:index" }
+
+public_news_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "BenskiContentBundle:PublicNews:show" }

@@ -1,0 +1,98 @@
+{% extends 'BenskiReservationBundle::public.html.twig' %}
+{% import 'BenskiReservationBundle::macro.html.twig' as fo %}
+
+
+
+{% block body %}
+
+<div class="row">
+    <div class="col-sm-9">
+        <form class="form-horizontal"
+              role="form"
+              action="{{ path('benski_reservation_sejour_form_option_individuelle_process', {'destination': destination.id, 'sejour': sejour.id}) }}"
+              method="post" >
+            <h1>Reservez votre séjour</h1>
+            <hr>
+            <div class="alert alert-success">Vous avez choisi les options concernant vos groupes avec succès! Maintenant, le formulaire ci-dessous vous demande de choisir les options relatives aux participants de chaque groupe.</div>
+
+            {% for ar in entity.appartementsReserves %}
+            <h2>{{ar.appartement.nom }}
+                <small>
+                    {% for i in 1..(ar.appartement.qualite) %}
+                    <span class="glyphicon glyphicon-star"></span>
+                    {% endfor %}
+
+                    - {{ ar.nombrePersonnes}} personne(s) - 
+{{ (ar.getPrix()/100)|number_format(2) }} €
+                </small>
+
+            </h2>
+            <hr>
+            {% for option in ar.packReserve.pack.getOptionsIndividuelles %}
+            
+                {{ fo.form_option_indi(option, ar) }}
+            {% endfor %}
+            {% endfor %}
+
+            
+
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" class="btn btn-default">Continuer</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="col-sm-3">
+        <div class="list-group myListGroup">
+            <a class="list-group-item ok" href="{{ path('catalogue_public_sejour', {'destination':destination.id}) }}">
+                <div class="pull-left"><span class="glyphicon glyphicon-book"></span> </div>
+
+                <h4 class="list-group-item-heading">Sejour</h4>
+                <p class="list-group-item-text">
+                    Risoul
+                    <br>
+                    {{ entity.getNombreAppartement }} Appartement(s)<br>
+                    {{ entity.getNombresPersonnes }} Personne(s) 
+                </p>
+            </a>
+            
+            <a href="{{ path('benski_reservation_sejour_form_option_groupe',
+            {'destination':destination.id, 'sejour':sejour.id}) }}"
+            class="list-group-item ok">
+                <div class="pull-left"><span class="glyphicon glyphicon-chevron-right"></span> </div>
+
+                <h4 class="list-group-item-heading">Etape 1</h4>
+                <p class="list-group-item-text">Choix des options de groupe</p>
+            </a>
+
+            <span class="list-group-item active">
+                <div class="pull-left"><span class="glyphicon glyphicon-bookmark"></span> </div>
+
+                <h4 class="list-group-item-heading">Etape 2</h4>
+                <p class="list-group-item-text">Choix des options individuelles</p>
+            </span>
+            <span class="list-group-item ">
+                <div class="pull-left"><span class="glyphicon glyphicon-user"></span> </div>
+
+                <h4 class="list-group-item-heading">Etape 3</h4>
+                <p class="list-group-item-text">Inscriptions des participants</p>
+            </span>
+            <span  class="list-group-item ">
+                <div class="pull-left"><span class="glyphicon glyphicon-flag"></span> </div>
+
+                <h4 class="list-group-item-heading">Confirmation</h4>
+            </span>
+            <span  class="list-group-item ">
+                <div class="pull-left"><span class="glyphicon glyphicon-send"></span> </div>
+
+                <h4 class="list-group-item-heading">Paiement</h4>
+            </span>
+        </div>
+
+
+    </div>
+
+</div>
+
+{% endblock %}

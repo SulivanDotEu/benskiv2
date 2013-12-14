@@ -1,0 +1,65 @@
+{% extends 'BenskiContentBundle:Link:layout.html.twig' %}
+
+{% block body -%}
+<h1>Link</h1>
+
+<table class="table table-striped">
+    <tbody>
+        <tr>
+            <th>Id</th>
+            <td>{{ entity.id }}</td>
+        </tr>
+        <tr>
+            <th>Classname</th>
+            <td>{{ entity.className }}</td>
+        </tr>
+        <tr>
+            <th>Ownerid</th>
+            <td>{{ entity.ownerId }}</td>
+        </tr>
+    </tbody>
+</table>
+
+<h2>Article</h2>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Titre</th>
+            <th>Action</th
+        </tr>
+    </thead>
+    <tbody>
+    {% for article in entity.articles %}
+        <tr>
+            <td>{{ article.id }}</td>
+            <td>{{ article.titre }}</td>
+            
+            <td>
+                <div class="btn-group">
+                    <a class="btn" href="{{ path('article_show', { 'id': article.id }) }} ">
+                        <i class="icon-eye-open"></i> Show</a>
+                    <a class="btn" href="{{ path('article_edit', { 'id': article.id }) }}">
+                        <i class="icon-pencil"></i> Edit</a>
+                </div>
+            </td>
+
+            </td>
+        </tr>
+        {% endfor %}
+
+    </tbody>
+</table>
+<ul class="record_actions">
+    <li>
+        <a href="{{ path('link') }}">
+            Back to the list
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('link_edit', { 'id': entity.id }) }}">
+            Edit
+        </a>
+    </li>
+</ul>
+{% endblock %}

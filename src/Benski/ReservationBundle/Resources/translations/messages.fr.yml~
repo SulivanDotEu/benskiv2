@@ -1,0 +1,7 @@
+'Symfony2 is great': 'J''aime Symfony2'
+
+reservation.statut.50 : 'new'
+reservation.statut.10 : 'approuvé'
+reservation.statut.20 : 'annulé'
+reservation.statut.30 : 'mis à jour'
+reservation.statut.40 : 'cloturé et payé'

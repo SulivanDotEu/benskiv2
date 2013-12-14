@@ -1,0 +1,53 @@
+{% extends 'BenskiReservationBundle:ReservationImpl:layout.html.twig' %}
+
+{% block body -%}
+    <h1>Reservations</h1>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Responsable</th>
+                <th>Total</th>
+                <th>Statut</th>
+                <th>Datecreation</th>
+                <th>Datemodification</th>
+                <th>Reductions</th>
+                <th>Paiements</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td><a href="{{ path('admin_reservation_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                <td>{{ entity.responsable }}</td>
+                <td>{{ macro.int2prix(entity.total) }}€</td>
+                <td>{{ ('reservation.statut.'~entity.statut)|trans }}</td>
+                <td>{% if entity.dateCreation %}{{ entity.dateCreation|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if entity.dateModification %}{{ entity.dateModification|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{{ macro.int2prix(entity.getTotalReductions) }}€</td>
+                <td>{{ macro.int2prix(entity.getTotalMontantRecu) }}€</td>
+                <td>
+                <ul>
+                    <li>
+                        <a href="{{ path('admin_reservation_show', { 'id': entity.id }) }}">show</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('admin_reservation_edit', { 'id': entity.id }) }}">edit</a>
+                    </li>
+                </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+        <ul>
+        <li>
+            <a href="{{ path('admin_reservation_new') }}">
+                Create a new entry
+            </a>
+        </li>
+    </ul>
+    {% endblock %}

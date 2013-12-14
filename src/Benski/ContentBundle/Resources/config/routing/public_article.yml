@@ -1,0 +1,7 @@
+public_article:
+    pattern:  /
+    defaults: { _controller: "BenskiContentBundle:PublicArticle:index" }
+
+public_article_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "BenskiContentBundle:PublicArticle:show" }

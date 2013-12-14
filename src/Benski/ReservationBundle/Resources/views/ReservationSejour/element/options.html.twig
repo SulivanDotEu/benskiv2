@@ -1,0 +1,102 @@
+{# empty Twig template #}
+{% set sejourReserve = entity.sejourReserve %}
+
+
+<table class="table table-bordered table-responsive" style="margin-top: 20px">
+
+    <tbody>
+        <tr>
+            <th>Concerné</th>
+            <th colspan="3">Option</th>
+            <th colspan="2">Choix</th>
+            <th>Total</th>
+        </tr>
+        {% for ar in sejourReserve.appartementsReserves %}
+        {% set appartement = ar.appartement %}
+        {% set optionsReserves = ar.optionsReserves %}
+        {% for optionReserve in optionsReserves %}
+        {% set option = optionReserve.option %}
+        <tr>
+        {% if loop.first %}
+
+            <td rowspan="{{ optionsReserves|length }}">
+                {{appartement.nom }}
+                {{ macro.print_stars_bs2(appartement.qualite) }}
+            </td>
+        {% endif %}
+            <td>
+                {{ option.id }}
+            </td>
+            <td>
+            {% if option.isTypeACocher %}
+                <i class="icon-check"></i>
+                {% else %}
+                <i class="icon-ok-circle"></i>
+                {% endif %}
+            </td>
+            <td>
+                {{ option.nom }}
+            </td>
+            <td>
+            {% if optionReserve.isSelected %}
+                <i class="icon-ok"></i>
+                {% else %}
+                <i class="icon-remove"></i>
+                {% endif %}
+            </td>
+            <td>
+        {{ optionReserve.getIntitule }}
+            </td>
+            <td>
+                ({{ macro.int2prix(optionReserve.prix) }}€)
+            </td>
+        {% endfor %}
+        </tr>
+            {% for participant in ar.participants %}
+            {% set optionsReserves = participant.optionsReserves %}
+            {% for optionReserve in optionsReserves %}
+            {% set option = optionReserve.option %}
+        <tr>
+        {% if loop.first %}
+
+            <td rowspan="{{ optionsReserves|length }}">
+                {{participant.personne.firstName }}
+                {{participant.personne.lastName }}
+            </td>
+        {% endif %}
+            <td>
+                {{ option.id }}
+            </td>
+            <td>
+            {% if option.isTypeACocher %}
+                <i class="icon-check"></i>
+                {% else %}
+                <i class="icon-ok-circle"></i>
+                {% endif %}
+            </td>
+            <td>
+                {{ option.nom }}
+            </td>
+            <td>
+            {% if optionReserve.isSelected %}
+                <i class="icon-ok"></i>
+                {% else %}
+                <i class="icon-remove"></i>
+                {% endif %}
+            </td>
+            <td>
+        {{ optionReserve.getIntitule }}
+            </td>
+            <td>
+                ({{ macro.int2prix(optionReserve.prix) }}€)
+            </td>
+        {% endfor %}
+        </tr>
+            {% endfor %}
+
+
+        {% endfor %}
+    </tbody>
+</table>
+
+

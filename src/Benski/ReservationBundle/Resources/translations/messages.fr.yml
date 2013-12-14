@@ -1,0 +1,16 @@
+'Symfony2 is great': 'J''aime Symfony2'
+reservation.statut.50: new
+reservation.statut.10: approuvé
+reservation.statut.20: annulé
+reservation.statut.30: 'mis à jour'
+reservation.statut.40: 'cloturé et payé'
+
+# PAIEMENT
+paiement.mode.30: Non défini
+paiement.mode.10: Paypal
+paiement.mode.20: Virement
+paiement.mode.40: Liquide
+
+paiement.statut.10: En attente
+paiement.statut.20: Signalé comme réalisé
+paiement.statut.30: Reçu

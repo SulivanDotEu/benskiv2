@@ -1,0 +1,82 @@
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% macro form_row(form_field, label, placeholder) %}
+<div class="form-group">
+        {{ form_label(form_field, label, { 'label_attr': {'class': 'control-label col-sm-2'} }) }}
+    <div class="col-sm-10">
+
+             {{ form_widget(form_field, { 'attr': {'class': 'form-control', 'placeholder' : placeholder} }) }}
+    </div>
+</div>
+{% endmacro %}
+
+{% import _self as myform %}
+
+
+{{ form_errors(form) }}
+
+<form 
+    action="{{ path('fos_user_registration_register') }}"  {{ form_enctype(form) }}
+    method="POST" 
+    class="fos_user_registration_register form-horizontal">
+    {#{ form_widget(form) }#}
+
+    <h3>Votre compte</h3>
+    <hr>
+
+    {{ myform.form_row(form.email, 'Email') }}
+
+    <div class="form-group">
+        <label for="inputEmail3" class="col-sm-2 control-label">Mot de passe</label>
+        <div class="col-sm-10">
+           {{ form_widget(form.plainPassword.first, { 'attr': {'class': 'form-control'} }) }}
+        </div>
+    </div>
+
+    <div class="form-group">
+        {{ form_label(form.plainPassword.second, 'Vérification', { 'label_attr': {'class': 'control-label col-sm-2'} }) }}
+
+
+        <div class="col-sm-10">
+           {{ form_widget(form.plainPassword.second, { 'attr': {'class': 'form-control'} }) }}
+        </div>
+    </div>
+
+    <h3>Informations personnelles</h3>
+    <hr>
+    {{ myform.form_row(form.Person.gender, 'Civilité') }}
+    {{ myform.form_row(form.Person.firstName, 'Prénom') }}
+    {{ myform.form_row(form.Person.lastName, 'Nom') }}
+
+
+    <div class="form-group">
+        {{ form_label(form.plainPassword.second, 'Date de naissance', { 'label_attr': {'class': 'control-label col-sm-2'} }) }}
+
+
+        <div class="col-sm-3">
+           {{ form_widget(form.Person.dateOfBirth.day, { 'attr': {'class': 'form-control'} }) }}
+        </div>
+        <div class="col-sm-3">
+           {{ form_widget(form.Person.dateOfBirth.month, { 'attr': {'class': 'form-control'} }) }}
+        </div>
+        <div class="col-sm-3">
+           {{ form_widget(form.Person.dateOfBirth.year, { 'attr': {'class': 'form-control'} }) }}
+        </div>
+    </div>
+
+    {{ myform.form_row(form.Person.phoneNumber, 'Numéro', 'Numéro de téléphone') }}
+    <h3>Adresse</h3>
+    <hr>
+        {{ myform.form_row(form.Person.address.street, 'Rue') }}
+        {{ myform.form_row(form.Person.address.number, 'Numero') }}
+        {{ myform.form_row(form.Person.address.zipCode, 'Code Postal') }}
+        {{ myform.form_row(form.Person.address.city, 'Ville') }}
+        {{ myform.form_row(form.Person.address.country, 'Pays') }}
+    
+    {{ form_rest(form) }}
+
+
+    <div class="col-sm-10 col-sm-offset-2">
+        <input type="submit" class="btn btn-primary btn-lg btn-block" value="{{ 'registration.submit'|trans }}" />
+    </div>
+</form>

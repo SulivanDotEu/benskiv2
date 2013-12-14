@@ -1,0 +1,163 @@
+{% extends 'BenskiReservationBundle::public.html.twig' %}
+{% import 'BenskiReservationBundle::macro.html.twig' as fo %}
+
+{% block body %}
+<div class="col-sm-9">
+    <form 
+        role="form"
+        action="{{ path('benski_reservation_sejour_form_identification_participant_process', {'destination': destination.id, 'sejour': sejour.id}) }}"
+        method="post" >
+        <h1>Reservez votre séjour</h1>
+        <hr>
+        <div class="alert alert-success">Vous avez choisi les options concernant vos groupes avec succès! Maintenant, le formulaire ci-dessous vous demande de choisir les options relatives aux participants de chaque groupe.</div>
+
+            {% for ar in entity.appartementsReserves %}
+        <h2>{{ar.appartement.nom }}
+            <small>
+                    {% for i in 1..(ar.appartement.qualite) %}
+                <span class="glyphicon glyphicon-star"></span>
+                    {% endfor %}
+                - {{ ar.nombrePersonnes}} personne(s) - 
+{{ (ar.getPrix()/100)|number_format(2) }} €
+            </small>
+        </h2>
+        <hr>
+            {% for participant in ar.participants %}
+            {% set id = ar.numero~"-"~participant.numero%}
+        <h3>Participant n°{{ participant.numero }}</h3>
+        <div class="row">
+            <div class="col-sm-8">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Prénom</label>
+                            <input name="participant-{{ id }}-person-firstName" type="text" class="form-control" placeholder="Prénom"
+                                   value="{{ participant.personne.firstName }}">
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Nom</label>
+                            <input name="participant-{{ id }}-person-lastName" type="text" class="form-control" placeholder="Nom de famille" name="participant-nom"
+                                   value="{{ participant.personne.lastName }}">
+                        </div>
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Email</label>
+                            <input name="participant-{{ id }}-person-email-1" type="email" class="form-control" placeholder="Votre email"
+                                   value="{{ participant.personne.email }}">
+                        </div>
+                    </div>
+
+
+                </div>
+
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Adresse</label>
+                    <div class="row">
+                        <div class="col-sm-9">
+                            <input name="participant-{{ id }}-person-address-street" type="text" class="form-control" placeholder="Rue"
+                                   value="{{ participant.personne.address.street }}">
+                        </div>
+                        <div class="col-xs-3">
+                            <input name="participant-{{ id }}-person-address-number" type="text" class="form-control" placeholder="Numero"
+                                   value="{{ participant.personne.address.number }}">
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+
+                        <div class="col-xs-3">
+                            <input name="participant-{{ id }}-person-address-zipCode" type="text"  class="form-control" placeholder="Code Postal"
+                                   value="{{ participant.personne.address.zipCode }}">
+
+                        </div>
+                        <div class="col-sm-5">
+                            <input name="participant-{{ id }}-person-address-City" type="text" class="form-control" placeholder="Ville"
+                                   value="{{ participant.personne.address.city }}">
+                        </div>
+                        <div class="col-sm-4">
+                            <input name="participant-{{ id }}-person-address-Country" type="text" class="form-control" placeholder="Pays"
+                                   value="{{ participant.personne.address.country }}">
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <h4>Récapitulatif</h4>
+                <hr>
+                <ul>
+                    {% for option in participant.optionsReserves %}
+                    {% if option.isSelected %}
+                    <li>{{ option.getIntitule }} ({{ fo.int2prix(option.prix) }}€)</li>
+                    {% endif %}
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+            {% endfor %}
+            {% endfor %}
+
+
+
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <button type="submit" class="btn btn-default">Continuer</button>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="col-sm-3">
+    <div class="list-group myListGroup">
+        <a class="list-group-item ok" href="{{ path('catalogue_public_sejour', {'destination':destination.id}) }}">
+            <div class="pull-left"><span class="glyphicon glyphicon-book"></span> </div>
+
+            <h4 class="list-group-item-heading">Sejour</h4>
+            <p class="list-group-item-text">
+                Risoul
+                <br>
+                    {{ entity.getNombreAppartement }} Appartement(s)<br>
+                    {{ entity.getNombresPersonnes }} Personne(s) 
+            </p>
+        </a>
+
+        <a href="{{ path('benski_reservation_sejour_form_option_groupe',
+            {'destination':destination.id, 'sejour':sejour.id}) }}"
+           class="list-group-item ok">
+            <div class="pull-left"><span class="glyphicon glyphicon-chevron-right"></span> </div>
+
+            <h4 class="list-group-item-heading">Etape 1</h4>
+            <p class="list-group-item-text">Choix des options de groupe</p>
+        </a>
+
+        <a href="{{ path('benski_reservation_sejour_form_option_individuelle',
+            {'destination':destination.id, 'sejour':sejour.id}) }}" class="list-group-item ok">
+            <div class="pull-left"><span class="glyphicon glyphicon-bookmark"></span> </div>
+
+            <h4 class="list-group-item-heading">Etape 2</h4>
+            <p class="list-group-item-text">Choix des options individuelles</p>
+        </a>
+        <span class="list-group-item active">
+            <div class="pull-left"><span class="glyphicon glyphicon-user"></span> </div>
+
+            <h4 class="list-group-item-heading">Etape 3</h4>
+            <p class="list-group-item-text">Inscriptions des participants</p>
+        </span>
+        <span  class="list-group-item ">
+            <div class="pull-left"><span class="glyphicon glyphicon-flag"></span> </div>
+
+            <h4 class="list-group-item-heading">Confirmation</h4>
+        </span>
+        <span  class="list-group-item ">
+            <div class="pull-left"><span class="glyphicon glyphicon-send"></span> </div>
+
+            <h4 class="list-group-item-heading">Paiement</h4>
+        </span>
+    </div>
+</div>
+{% endblock %}

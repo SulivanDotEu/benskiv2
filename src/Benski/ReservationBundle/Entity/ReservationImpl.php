@@ -1,0 +1,347 @@
+<?php
+
+namespace Benski\ReservationBundle\Entity;
+use Benski\ReservationBundle\Entity\ReservationSejour;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * ReservationImpl
+ *
+ * @ORM\Entity()
+ * @ORM\InheritanceType("JOINED")
+ * @ORM\DiscriminatorColumn(name="class", type="string")
+ * @ORM\HasLifecycleCallbacks
+ */
+class ReservationImpl implements ReservationInterface {
+
+    public static $STATUT_RECENTLY_CREATED = 50;
+    public static $STATUT_APPROVED = 10;
+    public static $STATUT_CANCELED = 20;
+    public static $STATUT_UPDATED = 30;
+    public static $STATUT_DONE_AND_PAIED = 40;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    protected $id;
+
+    /**
+     * @var \stdClass
+     *
+     * @ORM\ManyToOne(
+     *      targetEntity="Benski\UserBundle\Entity\User")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    protected $responsable;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="total", type="integer", nullable=true)
+     */
+    protected $total;
+    
+    /**
+     * @ORM\OneToMany(
+     *      targetEntity="Benski\ReservationBundle\Entity\Paiement",
+     *      mappedBy="reservation",
+     *      cascade="ALL")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    protected $paiements;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="statut", type="integer", nullable=true)
+     */
+    protected $statut;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="dateCreation", type="datetime", nullable=true)
+     */
+    protected $dateCreation;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="dateModification", type="datetime", nullable=true)
+     */
+    protected $dateModification;
+
+    /**
+     * @var \stdClass
+     *
+     * @ORM\Column(name="reductions", type="object", nullable=true)
+     */
+    protected $reductions;
+
+    
+    public function __toString() {
+        return 'reservation #'.$this->getId();
+    }
+    
+    public function getMontantAccompte(){
+        return 0;
+    }
+    
+    public function confirmer(){
+        $paiement = new Paiement();
+        $paiement->setReservation($this);
+        $paiement->setMontant(120*$this->getNombresPersonnes()*100);
+        $this->addPaiement($paiement);
+    }
+    
+    public function getNombresPersonnes(){
+        return 0;
+    }
+
+    public function getTotalMontantRecu(){
+        $total = 0;
+        foreach ($this->paiements as $paiement) {
+            $total += $paiement->getMontantRecu();
+        }
+        return $total;
+    }
+    
+    public function getDateDebut(){
+        return null;
+    }
+    
+    public function getDateFin(){
+        return null;
+    }
+    
+    public function getMontantRestantDu(){
+         return $this->getTotal() - $this->getMontantAcquitte();
+    }
+    
+    public function getMontantAcquitte(){
+         return $this->getTotalMontantRecu();
+    }
+    
+    public function getTotalReductions(){
+         return 0;
+    }
+    
+    function __construct() {
+        $this->total = 0;
+        $this->statut = self::$STATUT_RECENTLY_CREATED;
+        $this->dateCreation = new \DateTime("NOW");
+    }
+
+    /**
+     * @ORM\PrePersist
+     * @ORM\PreUpdate
+     */
+    public function prePersist() {
+        $this->dateModification = new \DateTime("NOW");
+        $this->dateCreation = new \DateTime("NOW");
+    }
+    /**
+     * @ORM\PreUpdate
+     */
+    public function preUpdate() {
+        $this->dateModification = new \DateTime("NOW");
+    }
+
+    /** --- GET AND SET ---- */
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId() {
+        return $this->id;
+    }
+
+    /**
+     * Set total
+     *
+     * @param integer $total
+     * @return ReservationImpl
+     */
+    public function setTotal($total) {
+        $this->total = $total;
+
+        return $this;
+    }
+
+    /**
+     * Get total
+     *
+     * @return integer 
+     */
+    public function getTotal() {
+        return $this->total;
+    }
+
+    /**
+     * Set statut
+     *
+     * @param integer $statut
+     * @return ReservationImpl
+     */
+    public function setStatut($statut) {
+        $this->statut = $statut;
+
+        return $this;
+    }
+
+    /**
+     * Get statut
+     *
+     * @return integer 
+     */
+    public function getStatut() {
+        return $this->statut;
+    }
+
+    /**
+     * Set owner
+     *
+     * @param \stdClass $owner
+     * @return ReservationImpl
+     */
+    public function setOwner($owner) {
+        $this->owner = $owner;
+
+        return $this;
+    }
+
+    /**
+     * Get owner
+     *
+     * @return \stdClass 
+     */
+    public function getOwner() {
+        return $this->owner;
+    }
+
+    /**
+     * Set dateCreation
+     *
+     * @param \DateTime $dateCreation
+     * @return ReservationImpl
+     */
+    public function setDateCreation($dateCreation) {
+        $this->dateCreation = $dateCreation;
+
+        return $this;
+    }
+
+    /**
+     * Get dateCreation
+     *
+     * @return \DateTime 
+     */
+    public function getDateCreation() {
+        return $this->dateCreation;
+    }
+
+    /**
+     * Set dateModification
+     *
+     * @param \DateTime $dateModification
+     * @return ReservationImpl
+     */
+    public function setDateModification($dateModification) {
+        $this->dateModification = $dateModification;
+
+        return $this;
+    }
+
+    /**
+     * Get dateModification
+     *
+     * @return \DateTime 
+     */
+    public function getDateModification() {
+        return $this->dateModification;
+    }
+
+    /**
+     * Set reductions
+     *
+     * @param \stdClass $reductions
+     * @return ReservationImpl
+     */
+    public function setReductions($reductions) {
+        $this->reductions = $reductions;
+
+        return $this;
+    }
+
+    /**
+     * Get reductions
+     *
+     * @return \stdClass 
+     */
+    public function getReductions() {
+        return $this->reductions;
+    }
+
+    /**
+     * Set responsable
+     *
+     * @param \stdClass $responsable
+     * @return ReservationImpl
+     */
+    public function setResponsable($responsable)
+    {
+        $this->responsable = $responsable;
+    
+        return $this;
+    }
+
+    /**
+     * Get responsable
+     *
+     * @return \stdClass 
+     */
+    public function getResponsable()
+    {
+        return $this->responsable;
+    }
+
+    /**
+     * Add paiements
+     *
+     * @param \Benski\ReservationBundle\Entity\Paiement $paiements
+     * @return ReservationImpl
+     */
+    public function addPaiement(\Benski\ReservationBundle\Entity\Paiement $paiements)
+    {
+        $this->paiements[] = $paiements;
+    
+        return $this;
+    }
+
+    /**
+     * Remove paiements
+     *
+     * @param \Benski\ReservationBundle\Entity\Paiement $paiements
+     */
+    public function removePaiement(\Benski\ReservationBundle\Entity\Paiement $paiements)
+    {
+        $this->paiements->removeElement($paiements);
+    }
+
+    /**
+     * Get paiements
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getPaiements()
+    {
+        return $this->paiements;
+    }
+}

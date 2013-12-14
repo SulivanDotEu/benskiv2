@@ -1,0 +1,72 @@
+{% extends 'BenskiReservationBundle:Paiement:layout.html.twig' %}
+
+{% block body -%}
+<h1>Paiement</h1>
+
+<table class="table table-striped">
+    <tbody>
+        <tr>
+            <th>Id</th>
+            <td>{{ entity.id }}</td>
+        </tr>
+        <tr>
+            <th>Reservation</th>
+            <td>
+                <a href="{{ path('admin_reservation_show', {'id':entity.reservation.id}) }}">
+                {{ entity.reservation.id }}
+                </a>
+            </td>
+        </tr>
+        <tr>
+            <th>Utilisateur</th>
+            <td>{{ entity.user }}</td>
+        </tr>
+        <tr>
+            <th>Montant</th>
+            <td>{{ entity.montant }}</td>
+        </tr>
+        <tr>
+            <th>Code</th>
+            <td>{{ entity.code }}</td>
+        </tr>
+        <tr>
+            <th>Mode</th>
+            <td>{{ entity.mode }}</td>
+        </tr>
+        <tr>
+            <th>Datelimite</th>
+            <td>{{ entity.dateLimite|date('Y-m-d H:i:s') }}</td>
+        </tr>
+        <tr>
+            <th>Datereception</th>
+            <td>{{ entity.dateReception|date('Y-m-d H:i:s') }}</td>
+        </tr>
+        <tr>
+            <th>Datenotificationreception</th>
+            <td>{{ entity.dateNotificationReception|date('Y-m-d H:i:s') }}</td>
+        </tr>
+        <tr>
+            <th>Comptecrediteur</th>
+            <td>{{ entity.compteCrediteur }}</td>
+        </tr>
+        <tr>
+            <th>Statut</th>
+            <td>{{ entity.statut }}</td>
+        </tr>
+    </tbody>
+</table>
+
+<ul class="record_actions">
+    <li>
+        <a href="{{ path('admin_paiement') }}">
+            Back to the list
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('admin_paiement_edit', { 'id': entity.id }) }}">
+            Edit
+        </a>
+    </li>
+    <li>{{ form(delete_form) }}</li>
+</ul>
+{% endblock %}

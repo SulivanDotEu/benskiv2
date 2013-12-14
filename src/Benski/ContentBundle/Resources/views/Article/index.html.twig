@@ -1,0 +1,76 @@
+{% extends 'BenskiContentBundle:Article:layout.html.twig' %}
+
+
+
+{% block breadcrumb %}
+{{ parent() }}
+<li class="active">Article list</li>
+{% endblock %}
+
+{% block header %}
+<h1>Liste des articles</h1>
+{% endblock %}
+
+
+{% block body -%}
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Slug</th>
+            <th>Langue</th>
+            <th>Titre</th>
+            <th>creation</th>
+            <th>modification</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+{% for entity in entities %}
+        <tr>
+            <td><a href="{{ path('article_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+            <td>{{ entity.slug }}</td>
+
+            <td>{{ entity.langue }}</td>
+            <td>{{ entity.titre }}</td>
+            <td>{% if entity.dateCreation %}{{ entity.dateCreation|date('d/m/Y H:i') }}{% endif %}</td>
+            <td>{% if entity.dateModification %}{{ entity.dateModification|date('d/m/Y H:i') }}{% endif %}</td>
+            <td>
+                <div class="btn-group">
+                    <a class="btn" href="{{ path('article_show', { 'id': entity.id }) }} ">
+                        <i class="icon-eye-open"></i> Show</a>
+                    <a class="btn" href="{{ path('article_edit', { 'id': entity.id }) }}">
+                        <i class="icon-pencil"></i> Edit</a>
+                </div>
+
+
+            </td>
+        </tr>
+{% endfor %}
+    </tbody>
+</table>
+
+
+{% endblock %}
+
+
+{% block container_header_right %}
+<a class="btn btn-primary" href="{{ path('article_new') }}">
+    <i class="icon-plus icon-white"></i> 
+    Create a new entry
+</a>
+
+{% if (app.session.get('ckeditor_enable') is defined) and 
+(app.session.get('ckeditor_enable') == true) %}
+<a class="btn btn-success" href="{{ path('ckeditor_disable') }}">
+    <i class="icon-ok icon-white"></i> 
+    CKEDITOR Activé
+</a>
+{% else %}
+<a class="btn btn-danger" href="{{ path('ckeditor_enable') }}">
+    <i class="icon-remove icon-white"></i> 
+    CKEDITOR Désactivé
+</a>
+{% endif %}
+{% endblock %}

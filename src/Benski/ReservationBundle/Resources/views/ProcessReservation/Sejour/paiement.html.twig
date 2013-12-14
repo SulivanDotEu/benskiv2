@@ -1,0 +1,52 @@
+{% extends 'BenskiReservationBundle::public.html.twig' %}
+{% import 'BenskiReservationBundle::macro.html.twig' as fo %}
+
+
+
+
+{% block body %}
+
+
+
+<div class="col-sm-12">
+
+    <h1>Félicitation ! Votre commande est enregistrée !</h1>
+    <hr>
+    <p class="lead">
+        Le détail de votre réservation est disponible dans votre <a href="{{ path('public_reservation') }}">espace membre</a>.
+        Vous y trouverez tout les détails, ceci compris le nom des participants, 
+        les options commandées, ainsi de suite.<br>
+        Pour toutes questions, nous sommes à votre entière disponibilité à cette
+        <a href="mailto:ellis.benjamin@outlook.com"> adresse email</a>.
+    </p>
+    <h2>Acompte et validation de la réservation</h2>
+    <hr>
+    <p>Nous vous invitons à payer l'acompte pour valider votre réservation.<p>
+    <dl>
+        <dt>Compte</dt>
+        <dd>BE72651150923316 (code IBAN) et KEYT7980 (code BIC) au nom de Benski.</dd>
+        <dt>Montant</dt>
+        <dd>{{ entity.montant }}</dd>
+        <dt>Communication libre</dt>
+        <dd>Veuillez clairement indiquer ce code lors de votre paiement dans la communication libre:
+        {{ entity.code }}</dd>
+    </dl>
+    <p>Nous vous remercions pour votre temps et vous souhaitons d'ors et deja un agréable séjour
+        avec l'équipe Benski.<p>
+</div>
+
+
+
+
+
+
+{% endblock %}
+
+{% block javascripts_content %}
+<script type = "text/javascript" >
+    $(function() {
+        $('.prixParPersonne').tooltip({title: 'Les prix sont entendus par personne'});
+
+    });
+</script>
+  {% endblock %}

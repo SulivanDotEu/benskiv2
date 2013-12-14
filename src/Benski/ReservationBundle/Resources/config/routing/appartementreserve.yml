@@ -1,0 +1,30 @@
+appartementreserve:
+    pattern:  /
+    defaults: { _controller: "BenskiReservationBundle:AppartementReserve:index" }
+
+appartementreserve_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "BenskiReservationBundle:AppartementReserve:show" }
+
+appartementreserve_new:
+    pattern:  /new
+    defaults: { _controller: "BenskiReservationBundle:AppartementReserve:new" }
+
+appartementreserve_create:
+    pattern:  /create
+    defaults: { _controller: "BenskiReservationBundle:AppartementReserve:create" }
+    requirements: { _method: post }
+
+appartementreserve_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "BenskiReservationBundle:AppartementReserve:edit" }
+
+appartementreserve_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "BenskiReservationBundle:AppartementReserve:update" }
+    requirements: { _method: post|put }
+
+appartementreserve_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "BenskiReservationBundle:AppartementReserve:delete" }
+    requirements: { _method: post|delete }

@@ -1,0 +1,50 @@
+# included routes
+
+content_article:
+        resource: "@BenskiContentBundle/Resources/config/routing/article.yml"
+        prefix:   /admin/article
+
+public_content_article:
+        resource: "@BenskiContentBundle/Resources/config/routing/public_article.yml"
+        prefix:   /article
+
+content_link:
+        resource: "@BenskiContentBundle/Resources/config/routing/link.yml"
+        prefix:   /admin/article/link
+        
+w_haf_image:
+        resource: "@BenskiContentBundle/Resources/config/routing/image.yml"
+        prefix:   /admin/image
+
+BenskiContentBundle_admin_news:
+        resource: "@BenskiContentBundle/Resources/config/routing/news.yml"
+        prefix:   /admin/news
+        
+
+BenskiContentBundle_public_news:
+        resource: "@BenskiContentBundle/Resources/config/routing/public_news.yml"
+        prefix:   /news
+        
+# specific routes
+
+public_article_slug:
+    pattern:  /content/{slug}
+    defaults: { _controller: "BenskiContentBundle:PublicArticle:showBySlug" }
+
+public_article_slug_content:
+    pattern:  /content/{slug}
+    defaults: { _controller: "BenskiContentBundle:PublicArticle:showBySlug" }
+
+public_article_slug_content2:
+    pattern:  /content/{slug}/{content_only}
+    defaults: { _controller: "BenskiContentBundle:PublicArticle:showBySlug" }
+    
+#CKEDITOR
+
+ckeditor_enable:
+    pattern:  /admin/ckeditor/enable
+    defaults: { _controller: "BenskiContentBundle:Article:activerCkEditor" }
+
+ckeditor_disable:
+    pattern:  /admin/ckeditor/disable
+    defaults: { _controller: "BenskiContentBundle:Article:desactiverCkEditor" }

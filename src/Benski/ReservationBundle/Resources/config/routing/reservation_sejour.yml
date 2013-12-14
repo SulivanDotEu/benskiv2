@@ -1,0 +1,33 @@
+benski_reservation_sejour_form_option_groupe:
+    pattern:  /{sejour}-{destination}/options-de-groupe
+    defaults: { _controller: BenskiReservationBundle:ProcessReservationSejour:formOptionsGroupe}
+
+benski_reservation_sejour_form_option_groupe_process:
+    pattern:  /{sejour}-{destination}/options-de-groupe/process
+    defaults: { _controller: BenskiReservationBundle:ProcessReservationSejour:processFormOptionsGroupe}
+
+benski_reservation_sejour_form_option_individuelle:
+    pattern:  /{sejour}-{destination}/options-individuelles
+    defaults: { _controller: BenskiReservationBundle:ProcessReservationSejour:formOptionsIndividuelle}
+
+benski_reservation_sejour_form_option_individuelle_process:
+    pattern:  /{sejour}-{destination}/options-individuelles/process
+    defaults: { _controller: BenskiReservationBundle:ProcessReservationSejour:processFormOptionsIndividuelle}
+
+benski_reservation_sejour_form_identification_participant:
+    pattern:  /{sejour}-{destination}/participant
+    defaults: { _controller: BenskiReservationBundle:ProcessReservationSejour:identificationParticipants}
+
+benski_reservation_sejour_form_identification_participant_process:
+    pattern:  /{sejour}-{destination}/participant/process
+    defaults: { _controller: BenskiReservationBundle:ProcessReservationSejour:processIdentificationParticipants}
+
+benski_reservation_sejour_confirmation:
+    pattern:  /{sejour}-{destination}/confirmation
+    defaults: { _controller: BenskiReservationBundle:ProcessReservationSejour:confirmation}
+
+benski_reservation_sejour_paiement:
+    pattern:  /{paiement}/paiement
+    defaults: { _controller: BenskiReservationBundle:ProcessReservationSejour:afficherPaiement}
+
+

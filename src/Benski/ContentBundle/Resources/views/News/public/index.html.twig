@@ -1,0 +1,46 @@
+{% extends 'BenskiContentBundle::public.html.twig' %}
+
+{% block body %}
+
+
+{% for entity in entities %}
+{% set article = entity.article %}
+<div >
+    <h3>{{ article.titre }} </h3>
+    <small class="pull-right" style="margin-top: -10px" >publié le {{ article.dateCreation|date('d/m/Y') }}</small>
+
+    <hr style="margin-top:5px; margin-bottom: 5px">
+{% if article.image is not null %}
+    <div  class=" img-thumbnail pull-left"  style="margin: 10px; margin-left: 0px;"/>
+    <img src="{{ asset(article.image.webPath) }}"
+         alt="{{ article.image.alt }}"
+         style="max-width: 200px;"/>
+</div>
+{% endif %}
+<div style="margin-top: 10px; min-height: 20px">
+{{ article.resume | raw}}
+</div>
+
+    <div class="clearfix" ></div>
+<div style="position: relative; height: 24px; ">
+    <a href="{{ path('public_news_show', {'id': entity.id}) }}" 
+       style="position: absolute; bottom: 0; right: 0" class="btn btn-default">
+        Plus d'informations</a>
+</div>
+</div>
+{% endfor %}
+
+{% if nombrePage != 0 %}
+<div class="text-center">
+    <ul class="pagination" >
+ {# On utilise la fonction range(a, b) qui crée un tableau de
+valeurs entre a et b #}
+ 
+ {% for p in range(1, nombrePage) %}
+        <li{% if p == page %} class="active"{% endif %}>
+            <a href="{{ path('public_news_page', {'page': p}) }}">{{ p }}</a>
+        </li>
+ {% endfor %}
+    </ul></div>
+{% endif %}
+{% endblock %}

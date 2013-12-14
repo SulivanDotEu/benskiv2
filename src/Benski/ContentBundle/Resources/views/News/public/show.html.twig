@@ -1,0 +1,25 @@
+{% extends 'BenskiContentBundle::public.html.twig' %}
+
+{% block body %}
+   
+{% set article = entity.article %}
+<div >
+    <h1>{{ article.titre }} </h1>
+    <small class="pull-right" style="margin-top: -10px" >publié le {{ article.dateCreation|date('d/m/Y') }}</small>
+
+    <hr >
+{% if article.image is not null %}
+    <div  class=" img-thumbnail pull-left"  style="margin: 10px; margin-left: 0px;"/>
+    <img src="{{ asset(article.image.webPath) }}"
+         alt="{{ article.image.alt }}"
+         style="max-width: 200px;"/>
+</div>
+{% endif %}
+<div style="margin-top: 10px; min-height: 20px">
+{{ article.contenu | raw}}
+</div>
+
+    <div class="clearfix" ></div>
+</div>
+
+{% endblock %}

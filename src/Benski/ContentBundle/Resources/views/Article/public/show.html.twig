@@ -1,0 +1,15 @@
+{% extends 'BenskiContentBundle::public.html.twig' %}
+
+
+{% block breadcrumb %}
+{{ parent() }}
+<li class="">Article</li>
+<li class="active">{{ entity.titre }}</li>
+{% endblock %}
+
+{% block body %}
+<h1>{{ entity.titre }}</h1>
+<hr>
+{{ entity.contenu | raw }}
+
+{% endblock %}

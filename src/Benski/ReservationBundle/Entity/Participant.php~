@@ -1,0 +1,178 @@
+<?php
+
+namespace Benski\ReservationBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Participant
+ *
+ * @ORM\Table()
+ * @ORM\Entity(repositoryClass="Benski\ReservationBundle\Entity\ParticipantRepository")
+ */
+class Participant {
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var \stdClass
+     *
+     * @ORM\Column(name="personne", type="object", nullable=true)
+     */
+    private $personne;
+
+    /**
+     * @var \stdClass
+     *
+     * @ORM\Column(type="integer")
+     */
+    private $numero = 0;
+
+    /**
+     * @var \stdClass
+     *
+     * @ORM\ManyToOne(
+     *      targetEntity="Benski\ReservationBundle\Entity\AppartementReserve",
+     *      inversedBy="participants"
+     * )
+     */
+    private $appartementReserve;
+
+    /**
+     * @var Option\OptionReserve
+     *
+     * @ORM\OneToMany(
+     *      targetEntity="Benski\ReservationBundle\Entity\Option\OptionReserve",
+     *      mappedBy="participant",
+     *      cascade="ALL"
+     * )
+     */
+    private $optionsReserves;
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId() {
+        return $this->id;
+    }
+
+    /**
+     * Set personne
+     *
+     * @param \stdClass $personne
+     * @return Participant
+     */
+    public function setPersonne($personne) {
+        $this->personne = $personne;
+
+        return $this;
+    }
+
+    /**
+     * Get personne
+     *
+     * @return \stdClass 
+     */
+    public function getPersonne() {
+        return $this->personne;
+    }
+
+
+
+    /**
+     * Set appartementReserve
+     *
+     * @param AppartementReserve $appartementReserve
+     * @return Participant
+     */
+    public function setAppartementReserve($appartementReserve) {
+        if ($appartementReserve->equals($this->getAppartementReserve())){
+            return;
+        }
+        $this->appartementReserve = $appartementReserve;
+        $appartementReserve->addParticipant($this);
+        
+
+        return $this;
+    }
+
+    /**
+     * Get appartementReserve
+     *
+     * @return \stdClass 
+     */
+    public function getAppartementReserve() {
+        return $this->appartementReserve;
+    }
+
+    /**
+     * Set numero
+     *
+     * @param integer $numero
+     * @return Participant
+     */
+    public function setNumero($numero) {
+        $this->numero = $numero;
+
+        return $this;
+    }
+
+    /**
+     * Get numero
+     *
+     * @return integer 
+     */
+    public function getNumero() {
+        return $this->numero;
+    }
+    
+    public function equals($object){
+        if ($object == null) return false;
+        if (!$object instanceof Participant) return false;
+        if ($object == $this) return true;
+        if($this->getId() == null) return false;
+        if ($this->getId() != $object->getId()) return false;
+        return true;
+    }
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->optionsReserves = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+    
+    /**
+     * Add optionsReserves
+     *
+     * @param \Benski\ReservationBundle\Entity\Option\OptionReserve $optionsReserves
+     * @return Participant
+     */
+    public function addOptionsReserve(\Benski\ReservationBundle\Entity\Option\OptionReserve $optionsReserves)
+    {
+        if($optionsReserves == null ) return;
+        $this->optionsReserves[] = $optionsReserves;
+    
+        return $this;
+    }
+
+    /**
+     * Remove optionsReserves
+     *
+     * @param \Benski\ReservationBundle\Entity\Option\OptionReserve $optionsReserves
+     */
+    public function removeOptionsReserve(\Benski\ReservationBundle\Entity\Option\OptionReserve $optionsReserves)
+    {
+        $this->optionsReserves->removeElement($optionsReserves);
+    }
+}
