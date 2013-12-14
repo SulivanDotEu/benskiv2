@@ -28,7 +28,9 @@ class PackOption
     /**
     * @var AbstractOption
     * @ORM\Id
-    * @ORM\ManyToOne(targetEntity = "Benski\CatalogueBundle\Entity\Option\AbstractOption")
+    * @ORM\ManyToOne(targetEntity = "Benski\CatalogueBundle\Entity\Option\AbstractOption",
+     * cascade="ALL")
+     * @ORM\JoinColumn(onDelete="CASCADE")
     */
     protected $abstractOption;
 

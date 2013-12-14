@@ -1,0 +1,37 @@
+{% extends "BenskiContentBundle::layout.html.twig" %}
+
+{% block title %}
+Accueil - {{ parent() }}
+{% endblock %}
+
+{% block header %}
+<h1>Article</h1>
+{% endblock %}
+
+
+{% block breadcrumb %}
+{{ parent() }}
+<li><a href="{{path('article')}}">Article</a> <span class="divider">/</span></li>
+
+{% endblock %}
+
+{% block bundle_body %}
+Attention, ce bloc est a définir
+
+{% endblock %}
+
+{% block left_menu %}
+{% endblock %}
+
+{% block javascripts %}
+{{ parent() }}
+{% if (app.session.get('ckeditor_enable') is defined) and 
+(app.session.get('ckeditor_enable') == true) %}
+<script type="text/javascript">
+    window.onload = function() {
+        CKEDITOR.replace('benski_content_article[resume]');
+        CKEDITOR.replace('benski_content_article[contenu]');
+    };
+</script>
+{% endif %}
+{% endblock %}

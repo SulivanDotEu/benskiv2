@@ -88,6 +88,16 @@ class Sejour {
       }
    }
    
+   public function getListePacks(){
+       $sejoursPacks = $this->packs;
+       $packs = array();
+       foreach ($sejoursPacks as $sejourPack) {
+           /* @var $sejourPack SejourPack */
+           $packs[] = $sejourPack->getPack();
+       }
+       return $packs;
+   }
+   
    /**
     * Get id
     *

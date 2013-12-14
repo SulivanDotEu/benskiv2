@@ -1,4 +1,6 @@
 {# app/Resources/views/layout.html.twig #}
+{% import '::macro.html.twig' as macro %}
+
 
 <!DOCTYPE html>
 <html>
@@ -29,9 +31,9 @@
                     </a>
                     <div class="nav-collapse">
                         <ul class="nav">
-                            <li class=""><a href="#"><i class="icon-home"></i> Accueil</a></li>
-                            <li class=""><a href="{{path('news')}}"><i class="icon-comment"></i> News</a></li>
-                            <li class=""><a href="{#{path('user')}#}"><i class="icon-user"></i> Utilisateur</a></li>
+                            <!--<li class=""><a href="#"><i class="icon-home"></i> Accueil</a></li>-->
+                            <li class=""><a href="{{path('news')}}"><i class="icon-book"></i> Réservation</a></li>
+                            <li class=""><a href="{{path('user_list')}}"><i class="icon-user"></i> Utilisateur</a></li>
                             <ul class="nav">
                                 <li class="dropdown">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -48,13 +50,30 @@
                                             <a href="{{path('option')}}"><i class="icon-plus-sign"></i> Options</a>
                                             <ul class="dropdown-menu">
                                                 <li class=""><a href="{{path('pack')}}"><i class="icon-gift"></i> Pack</a></li>
-                                                 <li class="divider"></li>
+                                                <li class="divider"></li>
                                                 <li class=""><a href="{{path('option')}}"><i class="icon-plus-sign"></i> Options</a></li>
                                                 <li class=""><a href="{{path('option_optionacocher')}}"><i class="icon-plus-sign"></i> Options à cocher</a></li>
                                                 <li class=""><a href="{{path('optionchoixmultiple')}}"><i class="icon-plus-sign"></i> Optionsà choix mutliple</a></li>
 
                                             </ul>
                                         </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                            <ul class="nav">
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+
+                                        <i class="icon-folder-open"></i> Contenu<b class="caret"></b>
+                                    </a>
+                                    <ul class="dropdown-menu">
+
+                                        <li class=""><a href="{{path('article')}}"><i class="icon-file"></i> Article</a></li>
+                                        <li class=""><a href="{{path('image')}}"><i class="icon-picture"></i> Image</a></li>
+                                        <li class=""><a href="{{path('link')}}"><i class="icon-magnet"></i> Associations</a></li>
+                                        <li class=""><a href="{{path('news')}}"><i class="icon-comment"></i> News</a></li>
+
+                                       
                                     </ul>
                                 </li>
                             </ul>
@@ -125,10 +144,15 @@
             </footer>
         </div>
 
+
+
   {% block javascripts %}
     {# Ajoutez ces lignes JavaScript si vous comptez vous servir des fonctionnalités du bootstrap Twitter #}
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
         <script type="text/javascript" src="{{ asset('js/bootstrap.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/ckeditor/ckeditor.js') }}"></script>
+
+       
   {% endblock %}
 
     </body>

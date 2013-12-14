@@ -1,7 +1,7 @@
 {% extends 'BenskiCatalogueBundle:Option/OptionACocher:layout.html.twig' %}
 
 {% block body -%}
-    <h1>Option\OptionACocher list</h1>
+    <h1>Option à cocher </h1>
 
     <table class="table table-striped">
         <thead>
@@ -10,12 +10,8 @@
                 <th>Nom</th>
                 <th>Description</th>
                 <th>Type</th>
-                <th>Explication</th>
                 <th>Version</th>
                 <th>Published</th>
-                <th>Intitule</th>
-                <th>Pardefault</th>
-                <th>Inforequis</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -26,21 +22,19 @@
                 <td>{{ entity.nom }}</td>
                 <td>{{ entity.description }}</td>
             <td>{{ ("option.type."~entity.type)|trans }}</td>
-                <td>{{ entity.explication }}</td>
                 <td>{{ entity.version }}</td>
                 <td>{{ entity.published }}</td>
-                <td>{{ entity.intitule }}</td>
-                <td>{{ entity.parDefault }}</td>
-                <td>{{ entity.infoRequis }}</td>
                 <td>
-                <ul>
-                    <li>
-                        <a href="{{ path('option_optionacocher_show', { 'id': entity.id }) }}">show</a>
-                    </li>
-                    <li>
-                        <a href="{{ path('option_optionacocher_edit', { 'id': entity.id }) }}">edit</a>
-                    </li>
-                </ul>
+                    <div class="btn-group">
+                    <a class="btn" href="{{ path('option_optionacocher_show', { 'id': entity.id }) }}">
+                        <i class="icon-eye-open"></i> show
+                    </a>
+                    <a class="btn" href="{{ path('option_optionacocher_edit', { 'id': entity.id }) }}">
+                        <i class="icon-pencil"></i> edit
+                    </a>
+                    {% render(controller("BenskiContentBundle:Link:displayBindButton", { 'object' : entity })) %}
+                </div>
+                
                 </td>
             </tr>
         {% endfor %}

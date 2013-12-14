@@ -16,6 +16,7 @@ class DestinationType extends AbstractType {
       $builder
               ->add('published')
               ->add('nom')
+              ->add('adminId')
               ->add('pays')
       ;
    }

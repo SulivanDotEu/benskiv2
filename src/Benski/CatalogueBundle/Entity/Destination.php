@@ -42,6 +42,13 @@ class Destination extends VersionedObject
      * @ORM\Column(name="pays", type="string", length=255)
      */
     protected $pays;
+    
+    /**
+    * @var string
+    *
+    * @ORM\Column(name="adminId", type="string", length=255, nullable=true)
+    */
+   protected $AdminId;
 
 
     /**
@@ -105,5 +112,28 @@ class Destination extends VersionedObject
         return false;
     }
 
+
+    /**
+     * Set AdminId
+     *
+     * @param string $adminId
+     * @return Destination
+     */
+    public function setAdminId($adminId)
+    {
+        $this->AdminId = $adminId;
+    
+        return $this;
+    }
+
+    /**
+     * Get AdminId
+     *
+     * @return string 
+     */
+    public function getAdminId()
+    {
+        return $this->AdminId;
+    }
 
 }

@@ -41,6 +41,13 @@ class Appartement extends VersionedObject {
     * @ORM\Column(name="nom", type="string", length=255)
     */
    protected $nom;
+   
+   /**
+    * @var string
+    *
+    * @ORM\Column(name="adminId", type="string", length=255, nullable=true)
+    */
+   protected $adminId;
 
    /**
     * @var integer
@@ -204,5 +211,29 @@ class Appartement extends VersionedObject {
    public function getSejours() {
       return $this->sejours;
    }
+   
+       
+    /**
+     * Set AdminId
+     *
+     * @param string $adminId
+     * @return Destination
+     */
+    public function setAdminId($adminId)
+    {
+        $this->adminId = $adminId;
+    
+        return $this;
+    }
+
+    /**
+     * Get AdminId
+     *
+     * @return string 
+     */
+    public function getAdminId()
+    {
+        return $this->adminId;
+    }
 
 }

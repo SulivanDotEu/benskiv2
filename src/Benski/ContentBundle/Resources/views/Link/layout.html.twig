@@ -1,0 +1,24 @@
+{% extends "BenskiContentBundle::layout.html.twig" %}
+
+{% block title %}
+{{ parent() }} - Association d'une entité avec du contenu
+{% endblock %}
+
+{% block header %}
+<h1>Association de contenu</h1>
+{% endblock %}
+
+
+{% block breadcrumb %}
+{{ parent() }}
+<li><a href="{{path('article')}}">Association de contenu</a> <span class="divider">/</span></li>
+
+{% endblock %}
+
+{% block bundle_body %}
+Attention, ce bloc est a définir
+
+{% endblock %}
+
+{% block left_menu %}
+{% endblock %}

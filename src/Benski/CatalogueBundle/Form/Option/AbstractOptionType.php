@@ -16,6 +16,7 @@ class AbstractOptionType extends AbstractType {
    public function buildForm(FormBuilderInterface $builder, array $options) {
       $builder
               ->add('nom')
+              ->add('adminId')
               ->add('description')
               ->add('type', 'choice', array(
                   'choices' => array(

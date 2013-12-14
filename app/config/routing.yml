@@ -1,10 +1,14 @@
+benski_content:
+    resource: "@BenskiContentBundle/Resources/config/routing.yml"
+    prefix:   /
+
 benski_reservation:
     resource: "@BenskiReservationBundle/Resources/config/routing.yml"
     prefix:   /
 
-benski_news:
-    resource: "@BenskiNewsBundle/Resources/config/routing.yml"
-    prefix:   /
+#benski_news:
+#    resource: "@BenskiNewsBundle/Resources/config/routing.yml"
+#    prefix:   /
 
 benski_common:
     resource: "@BenskiCommonBundle/Resources/config/routing.yml"

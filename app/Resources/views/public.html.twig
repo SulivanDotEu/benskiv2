@@ -1,10 +1,4 @@
-{# app/Resources/views/layout.html.twig #}
-
-
-{# app/Resources/views/layout.html.twig #}
-
-
-
+{% import '::macro.html.twig' as macro %}
 <!DOCTYPE html>
 <html>
     <head>
@@ -29,6 +23,39 @@
         <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="container" >
+
+                <div class="dropdown pull-right">
+                    <button class="btn btn-default dropdown-toggle" style="margin-top: 7px" type="button" id="dropdownMenu1" data-toggle="dropdown">
+                        <span class="glyphicon glyphicon-shopping-cart" ></span>
+                    Panier
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu" >
+                        <li ><a href="{{ path('panier_afficher') }}"><span class="glyphicon glyphicon-eye-open"></span> Afficher</a></li>
+                        <li ><a href="{{ path('panier_reset') }}"><span class="glyphicon glyphicon-flash"></span> Réinitialiser</a></li>
+                    </ul>
+                </div>
+                <div class="dropdown pull-right">
+                    <button class="btn btn-primary dropdown-toggle" style="margin-top: 7px; margin-right: 7px" type="button" id="dropdownMenu1" data-toggle="dropdown">
+                        <span class="glyphicon glyphicon-user" ></span>
+                    Mon compte
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu" >
+                        {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                        <li ><a href="{{ path('public_reservation') }}"><span class="glyphicon glyphicon-book"></span> Mes réservations</a></li>
+                        <li ><a href="{{ path('fos_user_security_logout') }}"><span class="glyphicon glyphicon-log-out"></span> Déconnexion</a></li>
+                        {% else %}
+                        
+                        <li ><a href="{{ path('fos_user_security_login') }}"><span class="glyphicon glyphicon-log-in"></span> Connexion</a></li>
+                        <li ><a href="{{ path('fos_user_registration_register') }}"><span class="glyphicon glyphicon-pencil"></span> Inscription</a></li>
+                        {% endif %}
+                    </ul>
+                </div>
+
+
+              
+                
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
                         <span class="sr-only">Toggle navigation</span>
@@ -37,21 +64,21 @@
                         <span class="icon-bar"></span>
                     </button>
                     <a class="navbar-brand" href="#">Benski</a>
+
                 </div>
 
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse navbar-ex1-collapse">
                     <ul class="nav navbar-nav">
-                        <li class="active"><a href="#">Home</a></li>
-                        <li><a href="#">Nos offres</a></li>
-                        <li><a href="#">Actualités</a></li>
-                        <li><a href="#">Nos partenaires</a></li>
-                        <li><a href="#">Contact</a></li>
+                        <li class="active"><a href="{{path('benski_common_home', {'slug':'index'})}}">Home</a></li>
+                        <li><a href="{{ path('public_news') }}">Actualités</a></li>
+                        <li><a href="{{ path('public_article_slug_content', { 'slug': 'partenaires'}) }}">Nos partenaires</a></li>
+                        <li><a href="{{ path('public_article_slug_content', { 'slug': 'contact'}) }}">Contact</a></li>
 
                     </ul>
 
-                    <ul class="nav navbar-nav navbar-right">
+                    <!-- <ul class="nav navbar-nav navbar-right">
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
                             <ul class="dropdown-menu">
@@ -61,7 +88,8 @@
                                 <li><a href="#">Separated link</a></li>
                             </ul>
                         </li>
-                    </ul>
+                    </ul>-->
+
                 </div><!-- /.navbar-collapse -->
             </div>
         </nav>
@@ -94,53 +122,63 @@
             </div>
         </div>
 
+        {% block parent_breadcrumb %}
         <div class="container">
             <ol class="breadcrumb">
-                        {% block breadcrumb %}
+            {% block breadcrumb %}
                 <li><a href="#">Benski.be</a></li>
-                            {% endblock %}
+            {% endblock %}
             </ol>
         </div>
-         {% block parent_container %}
+        {% endblock %}
+        
+        {% block parent_container %}
         <div class="container" id="mainContainer ">
             <div class="row">
-                    {% block container %}
-                  {% block container_header %}
+            {% block container %}
                 <div id="content" class="col-sm-12">
-                               {% include "::flashbag.html.twig" %}
+                {% block container_header %}
+                {% include "::flashbag.html.twig" %}
+
+                {% endblock %}
+                {% block body %}
 
 
 
+
+                {% endblock %}
                 </div>
-                         {% endblock %}
-          {% block body %}
-
-          {% endblock %}
+            {% endblock %}
             </div>
-                        {% endblock %}
         </div>
-          {% endblock %}
+        {% endblock %}
+        {% block footer %}
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <hr>
 
-        <hr>
-
-        <footer>
-            <p>Benski &AMP; Benjamin Ellis © 2013 and beyond.</p>
-        </footer>
-    </div>
+                    <footer>
+                        <p>Benski &AMP; Benjamin Ellis © 2013 and beyond.</p>
+                    </footer>
+                </div>
+            </div>
+        {% endblock %}
+        </div>
 
   {% block javascripts %}
     {# Ajoutez ces lignes JavaScript si vous comptez vous servir des fonctionnalités du bootstrap Twitter #}
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-    <script type="text/javascript" src="{{ asset('bs3/js/bootstrap.min.js') }}"></script>
-    <script>
-        $(function() {
-            $('#myTab a:last').tab('show');
-            $('#popover1').popover();
-        });
-    </script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+        <script type="text/javascript" src="{{ asset('bs3/js/bootstrap.min.js') }}"></script>
+        <script>
+            $(function() {
+                $('#myTab a:last').tab('show');
+                $('#popover1').popover();
+            });
+        </script>
     {% block javascripts_content %}
   {% endblock %}
   {% endblock %}
 
-</body>
+    </body>
 </html>

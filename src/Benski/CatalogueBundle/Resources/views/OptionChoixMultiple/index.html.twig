@@ -1,53 +1,54 @@
 {% extends 'BenskiCatalogueBundle:OptionChoixMultiple:layout.html.twig' %}
 
 {% block body -%}
-    <h1>OptionChoixMultiple list</h1>
+<h1>OptionChoixMultiple list</h1>
 
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>Nom</th>
-                <th>Description</th>
-                <th>Type</th>
-                <th>Explication</th>
-                <th>Id</th>
-                <th>Choixpardefaut</th>
-                <th>Version</th>
-                <th>Published</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Nom</th>
+            <th>Description</th>
+            <th>Type</th>
+            <th>Explication</th>
+            <th>Id</th>
+            <th>Choixpardefaut</th>
+            <th>Version</th>
+            <th>Published</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
         {% for entity in entities %}
-            <tr>
-                <td><a href="{{ path('optionchoixmultiple_show', { 'id': entity.id }) }}">{{ entity.nom }}</a></td>
-                <td>{{ entity.description }}</td>
+        <tr>
+            <td><a href="{{ path('optionchoixmultiple_show', { 'id': entity.id }) }}">{{ entity.nom }}</a></td>
+            <td>{{ entity.description }}</td>
             <td>{{ ("option.type."~entity.type)|trans }}</td>
-                <td>{{ entity.explication }}</td>
-                <td>{{ entity.id }}</td>
-                <td>{{ entity.choixParDefaut }}</td>
-                <td>{{ entity.version }}</td>
-                <td>{{ entity.published }}</td>
-                <td>
-                <ul>
-                    <li>
-                        <a href="{{ path('optionchoixmultiple_show', { 'id': entity.id }) }}">show</a>
-                    </li>
-                    <li>
-                        <a href="{{ path('optionchoixmultiple_edit', { 'id': entity.id }) }}">edit</a>
-                    </li>
-                </ul>
-                </td>
-            </tr>
+            <td>{{ entity.explication }}</td>
+            <td>{{ entity.id }}</td>
+            <td>{{ entity.choixParDefaut }}</td>
+            <td>{{ entity.version }}</td>
+            <td>{{ entity.published }}</td>
+            <td>
+                <div class="btn-group">
+                    <a class="btn" href="{{ path('optionchoixmultiple_show', { 'id': entity.id }) }}">
+                        <i class="icon-eye-open"></i> show
+                    </a>
+                    <a class="btn" href="{{ path('optionchoixmultiple_edit', { 'id': entity.id }) }}">
+                        <i class="icon-pencil"></i> edit
+                    </a>
+                    {% render(controller("BenskiContentBundle:Link:displayBindButton", { 'object' : entity })) %}
+                </div>
+            </td>
+        </tr>
         {% endfor %}
-        </tbody>
-    </table>
+    </tbody>
+</table>
 
-        <ul>
-        <li>
-            <a href="{{ path('optionchoixmultiple_new') }}">
-                Create a new entry
-            </a>
-        </li>
-    </ul>
+<ul>
+    <li>
+        <a href="{{ path('optionchoixmultiple_new') }}">
+            Create a new entry
+        </a>
+    </li>
+</ul>
     {% endblock %}

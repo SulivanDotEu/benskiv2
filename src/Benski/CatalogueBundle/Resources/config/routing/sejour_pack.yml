@@ -1,3 +1,5 @@
+#/admin/sejour-pack
+
 sejour_pack:
     pattern:  /
     defaults: { _controller: "BenskiCatalogueBundle:SejourPack:index" }

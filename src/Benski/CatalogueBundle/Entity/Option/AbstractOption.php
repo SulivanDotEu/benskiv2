@@ -27,6 +27,13 @@ class AbstractOption extends VersionedObject {
     protected $id;
     
     /**
+    * @var string
+    *
+    * @ORM\Column(name="adminId", type="string", length=255, nullable=true)
+    */
+   protected $adminId;
+    
+    /**
      * @var string
      *
      * @ORM\Column(name="nom", type="string", length=255)
@@ -53,6 +60,14 @@ class AbstractOption extends VersionedObject {
      * @ORM\Column(name="explication", type="text", nullable=true)
      */
     private $explication;
+    
+    public function isTypeACocher(){
+        return false;
+    }
+    
+    public function isTypeChoixMultiple(){
+        return false;
+    }
     
     public function equals($option){
         if($option == null) return false;
@@ -157,6 +172,29 @@ class AbstractOption extends VersionedObject {
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * Set AdminId
+     *
+     * @param string $adminId
+     * @return AbstractOption
+     */
+    public function setAdminId($adminId)
+    {
+        $this->adminId = $adminId;
+    
+        return $this;
+    }
+
+    /**
+     * Get AdminId
+     *
+     * @return string 
+     */
+    public function getAdminId()
+    {
+        return $this->adminId;
     }
 
 }

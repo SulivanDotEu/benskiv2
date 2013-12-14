@@ -1,0 +1,14 @@
+# This file is auto-generated during the composer install
+parameters:
+    database_driver: pdo_mysql
+    database_host: mysql51-36.pro
+    database_port: null
+    database_name: benskidev
+    database_user: benskidev
+    database_password: benski0808
+    mailer_transport: smtp
+    mailer_host: ns0.ovh.net
+    mailer_user: null
+    mailer_password: null
+    locale: fr
+    secret: aizrhaoirhiazroh

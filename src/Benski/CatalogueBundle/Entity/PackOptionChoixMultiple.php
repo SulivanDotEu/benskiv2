@@ -33,6 +33,14 @@ class PackOptionChoixMultiple extends PackOption
         $this->prixOption = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
+    public function getPrix($choix){
+        $prixOption = $this->getPrixOption();
+        foreach ($prixOption as $elt){
+            /* @var $elt PrixOptionChoixMultiple */
+            if($elt->getChoix()->getId() == $choix->getId())
+                return $elt->getPrix ();
+        }
+    }
 
     /**
      * Add prixOption

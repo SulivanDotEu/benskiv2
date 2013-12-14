@@ -2,37 +2,41 @@
 
       {% set entities = entity.getPackOptionChoixMultiple() %}
 <table class="table table-condensed">
-   <thead>
-      <tr>
-         <th>Id</th>
-         <th>Nom</th>
-         <th>Choix</th>
-         <th>Prix</th>
-         <th>Actions</th>
-      </tr>
-   </thead>
-   <tbody>
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Nom</th>
+            <th>Choix</th>
+            <th>Prix</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
         {% for entity in entities %}
          {% set rowspan = entity.prixOption|length %}
-         <tr>
+        <tr>
             <td rowspan="{{rowspan}}"><a href="{{ path('option_show', { 'id': entity.option.id }) }}">{{ entity.option.id }}</a></td>
             <td rowspan="{{rowspan}}">{{ entity.option.nom }}</td>
             <td>{{ entity.prixOption[0].choix.intitule }}</td>
-            <td>{{ entity.prixOption[0].prix /100 }} €</td>
+            <td>{{ macro.int2prix(entity.prixOption[0].prix) }} €</td>
             <td rowspan="{{rowspan}}">
-               <ul>
-                  <li>
-                     <a href="{{ path('option_show', { 'id': entity.option.id }) }}">show</a>
-                  </li>
-               </ul>
+                <ul>
+                    <li>
+                        <a href="{{ path('option_show', { 'id': entity.option.id }) }}">show</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('pack_bind_option_edit', { 'pack': entity.pack.id, 'option': entity.option.id }) }}">edit</a>
+
+                    </li>
+                </ul>
             </td>
-         </tr>
+        </tr>
          {% for i in range(1, rowspan-1) %}
-         <tr>
+        <tr>
             <td>{{ entity.prixOption[i].choix.intitule }}</td>
             <td>{{ entity.prixOption[i].prix / 100}} €</td>
-         </tr>
+        </tr>
    {% endfor %}
         {% endfor %}
-      </tbody>
-   </table>
+    </tbody>
+</table>

@@ -107,7 +107,7 @@
                      <div class="list-group choix-nbr-personnes">
 
                         {% for i in range(sejourAppartement.appartement.nombreLits, 1) %}
-                        <a href="{{ path('catalogue_public_pack',
+                        <a href="{{ path('catalogue_public_liste_packs',
                    { 'destination': destination.id, 'sejour' : sejour.id, 'appartement': appartement.id, 'nbrPersonnes':i }) }}                           
                            " class="list-group-item {% if i == sejourAppartement.appartement.nombreLits %}best{%endif%}" style="">
                               <div class="row">

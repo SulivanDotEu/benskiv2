@@ -20,7 +20,7 @@ class PackOptionACocherType extends AbstractType {
              'divisor' => 100,
              'label' => 'Prix',
          ));
-      ;
+      
       
    }
 

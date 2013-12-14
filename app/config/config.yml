@@ -73,3 +73,10 @@ fos_user:
     registration:
       form: 
         type: benski_user_registration
+
+        
+stof_doctrine_extensions:
+    orm:
+        default:
+            sluggable: true
+

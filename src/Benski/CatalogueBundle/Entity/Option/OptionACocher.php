@@ -44,6 +44,15 @@ class OptionACocher extends AbstractOption
     protected $infoRequis;
 
 
+    public function isTypeACocher(){
+        return true;
+    }
+    
+    public function isTypeChoixMultiple(){
+        return false;
+    }
+    
+    
     
     /**
      * Get id

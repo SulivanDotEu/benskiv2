@@ -111,7 +111,7 @@
                   <td><a href="{{ path('option_show', { 'id': entity.option.id }) }}">{{ entity.option.id }}</a></td>
                   <td>{{ entity.option.nom }}</td>
                   <td>{{ ("option.type."~entity.option.type)|trans }}</td>
-                  <td>{{ entity.prix }} €</td>
+                  <td>{{ macro.int2prix(entity.prix) }} €</td>
                   <td>{% if entity.cocheParDefaut == true %}
                      Oui
                         {% else %}Non
@@ -121,6 +121,9 @@
                      <ul>
                         <li>
                            <a href="{{ path('option_show', { 'id': entity.option.id }) }}">show</a>
+                        </li>
+                        <li>
+                           <a href="{{ path('pack_bind_option_edit', { 'pack': entity.pack.id, 'option': entity.option.id }) }}">edit</a>
                         </li>
                      </ul>
                   </td>

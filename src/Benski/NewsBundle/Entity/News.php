@@ -6,7 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * News
- * @ORM\Table(name="news")
+ * @ORM\Table(name="news_old")
  * @ORM\Entity(repositoryClass="Benski\NewsBundle\Entity\NewsRepository")
  */
 class News
@@ -18,56 +18,56 @@ class News
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
+    protected $id;
 
     /**
      * @var \DateTime
      *
      * @ORM\Column(name="date_create", type="datetime")
      */
-    private $date_create;
+    protected $date_create;
     
     /**
      * @var \DateTime
      *
      * @ORM\Column(name="date_update", type="datetime", nullable=true)
      */
-    private $date_update;
+    protected $date_update;
 
     /**
      * @var string
      *
      * @ORM\Column(name="titre", type="string", length=255)
      */
-    private $titre;
+    protected $titre;
 
     /**
      * @var string
      *
      * @ORM\Column(name="contenu", type="text")
      */
-    private $contenu;
+    protected $contenu;
 
     /**
      * @var string
      *
      * @ORM\Column(name="resume", type="text")
      */
-    private $resume;
+    protected $resume;
 
     /**
      * @var string
      *
      * @ORM\Column(name="auteur", type="string", length=255)
      */
-    private $auteur;
+    protected $auteur;
 
     /**
      * @var string
      *
      * @ORM\Column(name="tag", type="string", length=255)
      */
-    private $tag;
+    protected $tag;
 
     
     

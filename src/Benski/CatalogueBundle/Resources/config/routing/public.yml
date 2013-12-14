@@ -15,6 +15,11 @@ catalogue_public_prix_logement:
     pattern:  /catalogue/{destination}/{sejour}/{appartement}
     defaults: { _controller: "BenskiCatalogueBundle:noadmin/Public:afficherPrixLogement" }
 
-catalogue_public_pack:
+catalogue_public_liste_packs:
     pattern:  /catalogue/{destination}/{sejour}/{appartement}/pour-{nbrPersonnes}-personnes
-    defaults: { _controller: "BenskiCatalogueBundle:noadmin/Public:afficherOption" }
+    defaults: { _controller: "BenskiCatalogueBundle:noadmin/Public:afficherListePack" }
+
+catalogue_public_pack:
+    pattern:  /catalogue/{destination}/{sejour}/{appartement}/pour-{nbrPersonnes}-personnes/{pack}
+    defaults: { _controller: "BenskiCatalogueBundle:noadmin/Public:afficherPack" }
+

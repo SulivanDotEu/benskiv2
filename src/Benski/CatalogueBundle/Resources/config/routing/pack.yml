@@ -28,7 +28,9 @@ pack_delete:
     pattern:  /{id}/delete
     defaults: { _controller: "BenskiCatalogueBundle:Pack:delete" }
     requirements: { _method: post|delete }
-    
+
+#bind option
+
 pack_bind_option_form:
     pattern: /{packId}/bind/option
     defaults: { _controller: "BenskiCatalogueBundle:Pack:bindOptionForm" }
@@ -36,3 +38,19 @@ pack_bind_option_form:
 pack_bind_option_create:
     pattern: /{packId}/bind/option/{id}
     defaults: { _controller: "BenskiCatalogueBundle:Pack:createBindOption" }
+
+#edit bind
+
+pack_bind_option_edit:
+    pattern: /{pack}/edit/option/{option}
+    defaults: { _controller: "BenskiCatalogueBundle:Pack:editBindOption" }
+
+pack_bind_option_update:
+    pattern: /{pack}/update/option/{option}
+    defaults: { _controller: "BenskiCatalogueBundle:Pack:updateBundOption" }
+    
+pack_bind_option_remove:
+    pattern: /{pack}/remove/option/{option}
+    defaults: { _controller: "BenskiCatalogueBundle:Pack:removeBind" }
+    
+

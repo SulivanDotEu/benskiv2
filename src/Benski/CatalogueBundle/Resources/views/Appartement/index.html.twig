@@ -13,63 +13,56 @@
 
 {% block container_header_right %}
 <a class="btn btn-primary" href="{{ path('appartement_new') }}">
-   <i class="icon-plus icon-white"></i> 
-   Create a new entry
+    <i class="icon-plus icon-white"></i> 
+    Create a new entry
 </a>
 {% endblock %}
 
 
-{% block body -%}
-    
-    
-    
+{% block body %}
 
-            
-            
-            
-            
-            
-    
-    
 <h1>Appartement list</h1>
 
 <table class="table table-striped table-condensed">
-   <thead>
-      <tr>
-         <th>Id</th>
-         <th>Destination</th>
-         <th>Nom</th>
-         <th>Qualite</th>
-         <th>Nombrelits</th>
-         <th>Actions</th>
-      </tr>
-   </thead>
-   <tbody>
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Identifiant interne</th>
+            <th>Destination</th>
+            <th>Nom</th>
+            <th>Qualite</th>
+            <th>Nombrelits</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
         {% for entity in entities %}
-         <tr>
+        <tr>
             <td><a href="{{ path('appartement_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+            <td>{{ entity.adminId }}</td>
             <td>{{ entity.destination }}</td>
             <td>{{ entity.nom }}</td>
             <td>{{ entity.qualite }}</td>
             <td>{{ entity.nombreLits }}</td>
             <td>
-               <div class="btn-group">
-                  <a class="btn" href="{{ path('appartement_show', { 'id': entity.id }) }} ">
-                     <i class="icon-eye-open"></i> Show</a>
-                  <a class="btn" href="{{ path('appartement_edit', { 'id': entity.id }) }}">
-                     <i class="icon-pencil"></i> Edit</a>
-               </div>
+                <div class="btn-group">
+                    <a class="btn" href="{{ path('appartement_show', { 'id': entity.id }) }} ">
+                        <i class="icon-eye-open"></i> Show</a>
+                    <a class="btn" href="{{ path('appartement_edit', { 'id': entity.id }) }}">
+                        <i class="icon-pencil"></i> Edit</a>
+                     {% render(controller("BenskiContentBundle:Link:displayBindButton", { 'object' : entity })) %}
+                </div>
             </td>
-         </tr>
+        </tr>
         {% endfor %}
-      </tbody>
-   </table>
+    </tbody>
+</table>
 
-   <ul>
-      <li>
-         <a href="{{ path('appartement_new') }}">
+<ul>
+    <li>
+        <a href="{{ path('appartement_new') }}">
             Create a new entry
-         </a>
-      </li>
-   </ul>
+        </a>
+    </li>
+</ul>
     {% endblock %}

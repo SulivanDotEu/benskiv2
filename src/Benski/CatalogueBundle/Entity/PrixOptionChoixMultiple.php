@@ -12,7 +12,11 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class PrixOptionChoixMultiple {
 
-   /**
+    public function __toString() {
+        return $this->getChoix()->getIntitule();
+    }
+
+    /**
     * @var integer
     *
     * @ORM\Column(name="id", type="integer")

@@ -1,57 +1,53 @@
-{% extends 'BenskiUserBundle::layout.html.twig' %}
-
-
-{% block header %}
-<h1>Destination list</h1>
-{% endblock %}
-
-
-{% block breadcrumb %}
-{{ parent() }}
-<li class="active">list</li>
-{% endblock %}
-
-{% block container_header_right %}
-<a class="btn btn-primary" href="{{ path('destination_new') }}">
-   <i class="icon-plus icon-white"></i> 
-   Create a new entry
-</a>
-{% endblock %}
+{% extends 'BenskiUserBundle:User:layout.html.twig' %}
 
 {% block body -%}
+<h1>User list</h1>
 
-<table class="table table-striped table-condensed ">
-   <thead>
-      <tr>
-         <th>Id</th>
-         <th>Login</th>
-         <th>Prénom</th>
-         <th>Nom</th>
-         <th>Adresse</th>
-         <th>Dernière connexion</th>
-         <th>Actions</th>
-      </tr>
-   </thead>
-   <tbody>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Username</th>
+            <th>Enabled</th>
+            <th>Lastlogin</th>
+            <th>Roles</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
         {% for entity in entities %}
-         <tr>
-            <td><a href="">{{ entity.id }}</a></td>
-            <td>{{ entity.username }}</td>
-            <td>{{ entity.person.firstName }}</td>
-            <td>{{ entity.person.lastName }}</td>
-            <td>{{ entity.person.address.city }}</td>
-            <td></td>
+        <tr>
+            <td>{{ entity.id }}</td>
+            <td><a href="{{ path('user_show', { 'id': entity.id }) }}">{{ entity.username }}</a></td>
+            <td>{{ entity.enabled }}</td>
+            <td>{% if entity.lastLogin %}{{ entity.lastLogin|date('d/m/Y H:i:s') }}{% endif %}</td>
             <td>
-               <div class="btn-group">
-                  <a class="btn" href="">
-                     <i class="icon-eye-open"></i> Show</a>
-                  <a class="btn" href="">
-                     <i class="icon-pencil"></i> Edit</a>
-               </div>
-
+                <ul>
+                        {% for role in entity.roles %}
+                    <li>{{ role }}</li>
+                        {% endfor %}
+                </ul>
             </td>
-         </tr>
+            <td>
+                <ul>
+                    <li>
+                        <a href="{{ path('user_show', { 'id': entity.id }) }}">show</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('user_edit', { 'id': entity.id }) }}">edit</a>
+                    </li>
+                </ul>
+            </td>
+        </tr>
         {% endfor %}
-      </tbody>
-   </table>
+    </tbody>
+</table>
+
+<ul>
+    <li>
+        <a href="{{ path('user_new') }}">
+            Create a new entry
+        </a>
+    </li>
+</ul>
     {% endblock %}

@@ -20,6 +20,13 @@ class Pack {
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
+    
+    /**
+    * @var string
+    *
+    * @ORM\Column(name="adminId", type="string", length=255, nullable=true)
+    */
+   protected $adminId;
 
     /**
      * @ORM\OneToMany(targetEntity="Benski\CatalogueBundle\Entity\SejourPack", mappedBy="pack")
@@ -48,18 +55,39 @@ class Pack {
      * @ORM\Column(name="prix", type="integer")
      */
     protected $prix;
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="Benski\ContentBundle\Entity\Article")
+     * 
+     * @var type 
+     */
+    protected $presentation;
 
     /**
      * @var Pack
      * @ORM\OneToMany(
      *      targetEntity = "Benski\CatalogueBundle\Entity\PackOption",
      *      mappedBy="pack",
+     *      cascade="all",
      *      fetch="EAGER")
      */
     protected $packOptions;
 
     public function __toString() {
         return '' . $this->getId() . ' : ' . $this->getNom() . ' (' . $this->getQualite() . ')';
+    }
+    
+    public function getPackOption($option){
+        foreach ($this->packOptions as $packOption) {
+            if($packOption->getOption()->getId() == $option->getId()){
+                return $packOption;
+            }
+        }
+    }
+    
+    public function getContenuPresentation(){
+        if($this->getPresentation() == null ) return "Le contenu sera disponible aussi rapidement que possible";
+        return $this->getPresentation()->getContenu();
     }
     
     public function getOptionsIndividuelles(){
@@ -253,4 +281,50 @@ class Pack {
         return $this->packOptions;
     }
 
+
+    /**
+     * Set presentation
+     *
+     * @param \Benski\ContentBundle\Entity\Article $presentation
+     * @return Pack
+     */
+    public function setPresentation(\Benski\ContentBundle\Entity\Article $presentation = null)
+    {
+        $this->presentation = $presentation;
+    
+        return $this;
+    }
+
+    /**
+     * Get presentation
+     *
+     * @return \Benski\ContentBundle\Entity\Article 
+     */
+    public function getPresentation()
+    {
+        return $this->presentation;
+    }
+    
+    /**
+     * Set AdminId
+     *
+     * @param string $adminId
+     * @return Destination
+     */
+    public function setAdminId($adminId)
+    {
+        $this->adminId = $adminId;
+    
+        return $this;
+    }
+
+    /**
+     * Get AdminId
+     *
+     * @return string 
+     */
+    public function getAdminId()
+    {
+        return $this->adminId;
+    }
 }

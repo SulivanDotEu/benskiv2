@@ -42,6 +42,16 @@ class OptionChoixMultiple extends AbstractOption {
      */
     protected $choix;
     
+    
+    
+    public function isTypeACocher(){
+        return false;
+    }
+    
+    public function isTypeChoixMultiple(){
+        return true;
+    }
+    
 
     /**
      * Get id

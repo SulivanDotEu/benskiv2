@@ -16,6 +16,7 @@ class AppartementType extends AbstractType
     {
         $builder
             ->add('nom')
+                ->add('adminId')
             ->add('qualite')
             ->add('nombreLits')
             ->add('destination')
