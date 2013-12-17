@@ -58,6 +58,7 @@ class Pack {
     
     /**
      * @ORM\ManyToOne(targetEntity="Benski\ContentBundle\Entity\Article")
+     * @ORM\JoinColumn(nullable=true)
      * 
      * @var type 
      */
@@ -68,7 +69,7 @@ class Pack {
      * @ORM\OneToMany(
      *      targetEntity = "Benski\CatalogueBundle\Entity\PackOption",
      *      mappedBy="pack",
-     *      cascade="all",
+     *      cascade={"persist", "remove", "detach"},
      *      fetch="EAGER")
      */
     protected $packOptions;
