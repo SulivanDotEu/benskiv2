@@ -2,4 +2,4 @@ _assetic:
     resource: .
     type: assetic
 _app:
-    resource: 'C:/wamp/www/benskiv2/app/config/routing_dev.yml'
+    resource: 'E:/Mes programmes/wamp/www/benskiv2/app/config/routing_dev.yml'
