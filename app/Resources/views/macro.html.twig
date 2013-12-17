@@ -15,7 +15,7 @@
 {% endmacro %}
 
 {% macro int2prix(integer) %}
-{{ integer/100|number_format(2, '.', ',') }}
+{{ integer/100|number_format(2, ',', ' ') }}
 {% endmacro %}
 
 

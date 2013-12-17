@@ -330,7 +330,9 @@ class ProcessReservationSejourController extends Controller {
         //}
 
         $em = $this->getDoctrine()->getManager();
-        $user = $em->merge($user);
+        //$user = $em->merge($user);
+        //var_dump($user);
+        //die();
         $reservationSejour->setResponsable($user);
         $reservationSejour->confirmer();
         $paiement = $reservationSejour->getPaiements()[0];
@@ -341,7 +343,7 @@ class ProcessReservationSejourController extends Controller {
         $em->persist($reservationSejour);
 
         $em->flush();
-        $panier->removeReservationSejour($reservationSejour);
+        //$panier->removeReservationSejour($reservationSejour);
         return $this->redirect(
                         $this->generateUrl('benski_reservation_sejour_paiement', array(
                             'paiement' => $paiement->getId(),
