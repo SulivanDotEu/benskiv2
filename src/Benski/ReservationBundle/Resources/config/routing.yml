@@ -48,3 +48,29 @@ BenskiReservationBundle_reservation_sejour:
     resource: "@BenskiReservationBundle/Controller/ReservationSejourController.php"
     type:     annotation
     prefix:   /
+    
+#Option Reserve
+BenskiReservationBundle_option_optionreserve:
+    resource: "@BenskiReservationBundle/Resources/config/routing/option_optionreserve.yml"
+    prefix:   /admin/option-reserve
+    
+BenskiReservationBundle_option_optionacocherreserve:
+   resource: "@BenskiReservationBundle/Resources/config/routing/option_optionacocherreserve.yml"
+   prefix:   /admin/option-reserve-coche
+        
+BenskiReservationBundle_option_optionchoixmultiplereserve:
+   resource: "@BenskiReservationBundle/Resources/config/routing/option_optionchoixmultiplereserve.yml"
+   prefix:   /admin/option-reserve-mult
+
+#Option Reserve PUBLIC
+public_BenskiReservationBundle_option_optionreserve:
+   resource: "@BenskiReservationBundle/Resources/config/routing/public_option_optionreserve.yml"
+   prefix:   /membre/option-reserve
+    
+public_BenskiReservationBundle_option_optionacocherreserve:
+   resource: "@BenskiReservationBundle/Resources/config/routing/public_option_optionacocherreserve.yml"
+   prefix:   /membre/option-reserve-coche
+        
+public_BenskiReservationBundle_option_optionchoixmultiplereserve:
+   resource: "@BenskiReservationBundle/Resources/config/routing/public_option_optionchoixmultiplereserve.yml"
+   prefix:   /membre/option-reserve-mult

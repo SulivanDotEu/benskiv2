@@ -134,6 +134,8 @@
          </table>
 
       </div>
+
+
       <div class="tab-pane" id="details">
 {% set sejourReserve = entity.sejourReserve %}
             {% for ar in sejourReserve.appartementsReserves %}
@@ -174,34 +176,40 @@
                 {% endif %}
 
 
+
+
+
+
+
             </div>
             <div class="col-sm-4">
                <h4>Options</h4>
                <ul>
                     {% for option in participant.optionsReserves %}
                     {% if option.isSelected %}
-
-
-
                   <li class="show-hover-content">
-                    
 
                      {{ option.getIntitule }} ({{ fo.int2prix(option.prix) }}€)
-                        <div class="pull-right ">
-                           <a href="{{path('public_option_optionreserve_edit', {'id':option.id})}}">
-                           <span class="glyphicon glyphicon-pencil"></span>
-                           </a>
-                        </div>
-                        <div class="pull-right">
+                     <div class="pull-right hidden-content"><span class="glyphicon glyphicon-pencil"></span></div>
+                     <div class="pull-right">
                     {% render(controller("BenskiContentBundle:Link:displayButton", { 'object' : option.option })) %}
-                        </div>
-                    
+                     </div>
+
+
+
                   </li>
+                  <li class="show-hover-content">
+                     <span class="dropdown">
+                        <span data-toggle="dropdown" href="#">Dropdown trigger</span>
+                        <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                           <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Action</a></li>
+                        </ul>
+                        </div>
 
 
 
 
-
+                  </li>
                     {% endif %}
                     {% endfor %}
                </ul>
@@ -265,6 +273,24 @@
 
    </div>
 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -63,6 +63,19 @@ class OptionReserve {
      * @ORM\Column(name="prix", type="integer")
      */
     protected $prix;
+    
+    public function getReservation(){
+       $this->getPackReserve()->getAppartementReserve()->getSejourReserve()->getReservation();
+    }
+    
+    public function getOwner(){
+       $candidat = $this->getAppartement();
+       if($candidat != null) return $candidat;
+       $candidat = $this->getPackReserve();
+       if($candidat != null) return $candidat;
+       $candidat = $this->getParticipant();
+       if($candidat != null) return $candidat;
+    }
    
 
     /**

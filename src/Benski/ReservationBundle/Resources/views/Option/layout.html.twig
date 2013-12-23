@@ -1,0 +1,24 @@
+{% extends "::layout.html.twig" %}
+
+{% block breadcrumb %}
+{{ parent() }}
+<li><a href="{{path('option_optionreserve')}}">Options Reservées</a>
+   <span class="divider">/</span>
+</li> 
+{% endblock %}
+
+{% block title %}
+Reservation - {{ parent() }}
+{% endblock %}
+
+{% block body %}
+
+  {# On définit un sous-titre commun à toutes les pages du bundle, par exemple #}
+
+
+  {# On définit un nouveau bloc, que les vues du bundle pourront remplir #}
+  {% block bundle_body %}
+
+  {% endblock %}
+
+{% endblock %}

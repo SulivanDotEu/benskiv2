@@ -1,0 +1,30 @@
+option_optionacocherreserve:
+    pattern:  /
+    defaults: { _controller: "BenskiReservationBundle:Option\OptionACocherReserve:index" }
+
+option_optionacocherreserve_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "BenskiReservationBundle:Option\OptionACocherReserve:show" }
+
+option_optionacocherreserve_new:
+    pattern:  /new
+    defaults: { _controller: "BenskiReservationBundle:Option\OptionACocherReserve:new" }
+
+option_optionacocherreserve_create:
+    pattern:  /create
+    defaults: { _controller: "BenskiReservationBundle:Option\OptionACocherReserve:create" }
+    requirements: { _method: post }
+
+option_optionacocherreserve_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "BenskiReservationBundle:Option\OptionACocherReserve:edit" }
+
+option_optionacocherreserve_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "BenskiReservationBundle:Option\OptionACocherReserve:update" }
+    requirements: { _method: post|put }
+
+option_optionacocherreserve_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "BenskiReservationBundle:Option\OptionACocherReserve:delete" }
+    requirements: { _method: post|delete }

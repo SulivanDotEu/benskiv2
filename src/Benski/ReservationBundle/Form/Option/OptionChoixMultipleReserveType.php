@@ -15,12 +15,10 @@ class OptionChoixMultipleReserveType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('prix')
+            ->add('prix', 'money',array(
+                  'divisor' => 100,
+              ))
             ->add('choix')
-            ->add('participant')
-            ->add('appartement')
-            ->add('packReserve')
-            ->add('option')
         ;
     }
     
