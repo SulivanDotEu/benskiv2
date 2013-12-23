@@ -1,0 +1,30 @@
+option_optionchoixmultiplereserve:
+    pattern:  /
+    defaults: { _controller: "BenskiReservationBundle:Option\OptionChoixMultipleReserve:index" }
+
+option_optionchoixmultiplereserve_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "BenskiReservationBundle:Option\OptionChoixMultipleReserve:show" }
+
+option_optionchoixmultiplereserve_new:
+    pattern:  /new
+    defaults: { _controller: "BenskiReservationBundle:Option\OptionChoixMultipleReserve:new" }
+
+option_optionchoixmultiplereserve_create:
+    pattern:  /create
+    defaults: { _controller: "BenskiReservationBundle:Option\OptionChoixMultipleReserve:create" }
+    requirements: { _method: post }
+
+option_optionchoixmultiplereserve_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "BenskiReservationBundle:Option\OptionChoixMultipleReserve:edit" }
+
+option_optionchoixmultiplereserve_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "BenskiReservationBundle:Option\OptionChoixMultipleReserve:update" }
+    requirements: { _method: post|put }
+
+option_optionchoixmultiplereserve_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "BenskiReservationBundle:Option\OptionChoixMultipleReserve:delete" }
+    requirements: { _method: post|delete }

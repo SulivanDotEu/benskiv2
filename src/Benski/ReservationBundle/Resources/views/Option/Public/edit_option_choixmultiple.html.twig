@@ -1,0 +1,59 @@
+{% extends 'BenskiReservationBundle::public.html.twig' %}
+
+
+
+
+{% block body %}
+
+
+
+
+
+<div class="col-sm-12">
+   
+   {{ form(edit_form) }}
+
+   <h1>Modifier votre option</h1>
+   <hr>
+   <form method="post" action="{{ path('public_option_optionchoixmultiplereserve_update', {'id':entity.id}) }}" >
+      <input type="hidden" name="_method" value="PUT">
+      <input name="id" type="hidden" value="{{ entity.id }}" />
+
+      <h4 style="padding-left: 20px;">{{ entity.option.nom}}</h4>
+
+      <p>{{ entity.option.description}}</p>
+      <div class="form-group">
+         <div class="col-sm-offset-2 col-sm-10">
+        {% for choix in entity.option.choix %}
+            <div class="radio">
+               <label>
+                  <input type="radio" name="choice_id" id="optionsRadios1" value="{{choix.id}}" {% if entity.choix == choix %}checked{% endif %}>
+                {{ choix.intitule }} ({{ macro.int2prix(entity.getPrixCatalogueByChoix(choix)) }} €)
+               </label>
+            </div>
+        {% endfor %}
+
+         </div>
+      </div>
+      <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <button type="submit" class="btn btn-default">Valider</button>
+    </div>
+  </div>
+
+
+
+   </form>
+
+</div>
+
+{% endblock %}
+
+{% block javascripts_content %}
+<script type = "text/javascript" >
+   $(function() {
+      $('.prixParPersonne').tooltip({title: 'Les prix sont entendus par personne'});
+
+   });
+</script>
+  {% endblock %}

@@ -1,0 +1,5 @@
+
+public_option_optionreserve_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "BenskiReservationBundle:Option/PublicOptionReserve:edit" }
+

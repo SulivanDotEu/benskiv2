@@ -1,0 +1,9 @@
+
+public_option_optionchoixmultiplereserve_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "BenskiReservationBundle:Option/PublicOptionChoixMultipleReserve:edit" }
+
+public_option_optionchoixmultiplereserve_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "BenskiReservationBundle:Option/PublicOptionChoixMultipleReserve:update" }
+    requirements: { _method: post|put }

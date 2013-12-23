@@ -1,0 +1,26 @@
+{% extends 'BenskiReservationBundle::public.html.twig' %}
+
+
+
+
+{% block body %}
+
+
+
+<div class="col-sm-12">
+
+   <h1>Votre séjour</h1>
+{{ form(edit_form) }}
+   <hr>
+</div>
+
+{% endblock %}
+
+{% block javascripts_content %}
+<script type = "text/javascript" >
+   $(function() {
+      $('.prixParPersonne').tooltip({title: 'Les prix sont entendus par personne'});
+
+   });
+</script>
+  {% endblock %}

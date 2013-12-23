@@ -1,0 +1,26 @@
+{% extends "BenskiReservationBundle:Option:layout.html.twig" %}
+
+{% block title %}
+Accueil - {{ parent() }}
+{% endblock %}
+
+{% block header %}
+<h1>Options Reservées</h1>
+{% endblock %}
+
+
+{% block breadcrumb %}
+{{ parent() }}
+<li><a href="{{path('admin_reservation')}}">Type A Cocher</a>
+   <span class="divider">/</span>
+</li>
+
+{% endblock %}
+
+{% block bundle_body %}
+Attention, ce bloc est a définir
+
+{% endblock %}
+
+{% block left_menu %}
+{% endblock %}

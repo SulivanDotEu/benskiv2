@@ -12,7 +12,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * @ORM\Entity(repositoryClass="Benski\ContentBundle\Entity\ArticleRepository")
  * @ORM\HasLifecycleCallbacks()
  */
-class Article {
+class Article  {
 
     function __construct() {
         $this->dateCreation = new \DateTime('NOW');

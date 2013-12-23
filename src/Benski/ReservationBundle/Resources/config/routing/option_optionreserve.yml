@@ -1,0 +1,12 @@
+option_optionreserve:
+    pattern:  /
+    defaults: { _controller: "BenskiReservationBundle:Option\OptionReserve:index" }
+
+option_optionreserve_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "BenskiReservationBundle:Option\OptionReserve:show" }
+
+option_optionreserve_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "BenskiReservationBundle:Option\OptionReserve:edit" }
+
