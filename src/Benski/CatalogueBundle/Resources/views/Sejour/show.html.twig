@@ -102,6 +102,9 @@
                      <td rowspan="{{rowspan}}">
                         <a class="btn" href="{{ path('sejour_appartement_edit', { 'appartement': appart.appartement.id, 'sejour': appart.sejour.id }) }}">
                            Edit</a>
+                         <a class="btn" href="{{ path('sejour_appartement_delete', { 'appartement': appart.appartement.id, 'sejour': appart.sejour.id }) }}">
+                           Delete
+                         </a>
                      </td>
                   </tr>
       {% for i in range(2, rowspan) %}

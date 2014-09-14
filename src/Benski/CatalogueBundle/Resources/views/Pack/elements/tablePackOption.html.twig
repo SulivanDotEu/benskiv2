@@ -1,4 +1,5 @@
 
+      {% set pack = entity %}
       {% set entities = entity.packOptions() %}
 <table class="table table-striped table-condensed">
    <thead>
@@ -18,11 +19,23 @@
             <td>{{ ("option.type."~entity.option.type)|trans }}</td>
             <td>{{ entity|get_class }}</td>
             <td>
-               <ul>
-                  <li>
-                     <a href="{{ path('option_show', { 'id': entity.option.id }) }}">show</a>
-                  </li>
-               </ul>
+
+
+
+                <div class="btn-group">
+                    <a class="btn btn-default" href="{{ path('option_show', { 'id': entity.option.id }) }}">Show</a>
+                    <a class="btn btn-default" href="{{ path('pack_bind_option_update', { 'pack': pack, 'option': entity.option.id }) }}">Update</a>
+                    <button class="btn dropdown-toggle" data-toggle="dropdown">
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="{{ path('pack_bind_option_remove', { 'pack': pack, 'option': entity.option.id }) }}">Delete</a>
+                        </li>
+                    </ul>
+                </div>
+
+
             </td>
          </tr>
         {% endfor %}

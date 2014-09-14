@@ -1,3 +1,7 @@
+benski_admin_sejour_appartement:
+    resource:    "@BenskiCatalogueBundle/Controller/SejourAppartementController.php"
+    type:         annotation
+
 sejour_appartement:
     pattern:  /
     defaults: { _controller: "BenskiCatalogueBundle:SejourAppartement:index" }
@@ -24,7 +28,7 @@ sejour_appartement_update:
     defaults: { _controller: "BenskiCatalogueBundle:SejourAppartement:update" }
     requirements: { _method: post|put }
 
-sejour_appartement_delete:
-    pattern:  /{id}/delete
-    defaults: { _controller: "BenskiCatalogueBundle:SejourAppartement:delete" }
-    requirements: { _method: post|delete }
+#sejour_appartement_delete:
+#    pattern:  /delete/{appartement}/{sejour}
+#    defaults: { _controller: "BenskiCatalogueBundle:SejourAppartement:delete" }
+#    requirements: { _method: post|delete }

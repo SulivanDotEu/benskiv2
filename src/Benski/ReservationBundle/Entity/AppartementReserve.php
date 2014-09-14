@@ -15,6 +15,90 @@ use Benski\CatalogueBundle\Entity\Appartement;
  * @ORM\Entity(repositoryClass="Benski\ReservationBundle\Entity\AppartementReserveRepository")
  */
 class AppartementReserve {
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    protected $id;
+
+    /**
+     * @var array
+     *
+     * @ORM\Column(type="integer")
+     */
+    protected $numero = 0;
+
+    /**
+     * @var array
+     *
+     * @ORM\OneToMany(
+     *      targetEntity="Benski\ReservationBundle\Entity\Participant",
+     *      mappedBy="appartementReserve",
+     *      orphanRemoval=true,
+     *      cascade="ALL"
+     * )
+     */
+    protected $participants;
+
+    /**
+     * @var array
+     *
+     * @ORM\Column(type="integer")
+     */
+    protected $nombrePersonnes;
+
+    /**
+     * @var array
+     *
+     * @ORM\Column(type="integer")
+     */
+    protected $prix;
+
+    /**
+     * @var \Benski\ReservationBundle\Entity\PackReserve
+     *
+     * @ORM\OneToOne(
+     *      targetEntity="Benski\ReservationBundle\Entity\PackReserve",
+     *      inversedBy="appartementReserve",
+     *      orphanRemoval=true,
+     *      cascade="ALL")
+     */
+    protected $packReserve;
+
+    /**
+     * @var \Benski\CatalogueBundle\Appartement
+     *
+     * @ORM\ManyToOne(
+     *      targetEntity="Benski\CatalogueBundle\Entity\Appartement"
+     * )
+     */
+    protected $appartement;
+
+    /**
+     * @var \Benski\ReservationBundle\Entity\SejourReserve
+     *
+     * @ORM\ManyToOne(
+     *      targetEntity="Benski\ReservationBundle\Entity\SejourReserve",
+     *      inversedBy="appartementsReserves"
+     * )
+     */
+    protected $sejourReserve;
+
+    /**
+     * @var Option\OptionReserve
+     *
+     * @ORM\OneToMany(
+     *      targetEntity="Benski\ReservationBundle\Entity\Option\OptionReserve",
+     *      mappedBy="appartement",
+     *      orphanRemoval=true,
+     *      cascade="ALL"
+     * )
+     */
+    protected $optionsReserves;
     
     public function getTotalOptions(){
         $total = 0;
@@ -114,89 +198,7 @@ class AppartementReserve {
         return $p;
     }
 
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
-    protected $id;
-    
-    /**
-     * @var array
-     *
-     * @ORM\Column(type="integer")
-     */
-    protected $numero = 0;
 
-    /**
-     * @var array
-     *
-     * @ORM\OneToMany(
-     *      targetEntity="Benski\ReservationBundle\Entity\Participant",
-     *      mappedBy="appartementReserve",
-     *      orphanRemoval=true,
-     *      cascade="ALL"
-     * )
-     */
-    protected $participants;
-
-    /**
-     * @var array
-     *
-     * @ORM\Column(type="integer")
-     */
-    protected $nombrePersonnes;
-    
-    /**
-     * @var array
-     *
-     * @ORM\Column(type="integer")
-     */
-    protected $prix;
-
-    /**
-     * @var \Benski\ReservationBundle\Entity\PackReserve
-     *
-     * @ORM\OneToOne(
-     *      targetEntity="Benski\ReservationBundle\Entity\PackReserve",
-     *      inversedBy="appartementReserve",
-     *      orphanRemoval=true,
-     *      cascade="ALL")
-     */
-    protected $packReserve;
-
-    /**
-     * @var \Benski\CatalogueBundle\Appartement
-     *
-     * @ORM\ManyToOne(
-     *      targetEntity="Benski\CatalogueBundle\Entity\Appartement"
-     * )     
-     */
-    protected $appartement;
-
-    /**
-     * @var \Benski\ReservationBundle\Entity\SejourReserve
-     *
-     * @ORM\ManyToOne(
-     *      targetEntity="Benski\ReservationBundle\Entity\SejourReserve",
-     *      inversedBy="appartementsReserves"
-     * )
-     */
-    protected $sejourReserve;
-    
-    /**
-     * @var Option\OptionReserve
-     *
-     * @ORM\OneToMany(
-     *      targetEntity="Benski\ReservationBundle\Entity\Option\OptionReserve",
-     *      mappedBy="appartement",
-     *      orphanRemoval=true,
-     *      cascade="ALL"
-     * )
-     */
-    protected $optionsReserves;
 
     /**
      * Get id

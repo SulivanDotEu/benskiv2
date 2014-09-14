@@ -2,6 +2,8 @@
 
 namespace Benski\CatalogueBundle\Controller;
 
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Benski\CatalogueBundle\Entity\Pack;
@@ -19,26 +21,27 @@ use Benski\CatalogueBundle\Entity\PackOption;
 
 /**
  * Pack controller.
- *
  */
 class PackController extends Controller {
 
     private $packId;
 
     /**
+     * @Route("/{pack}/update/option/{option}", name="pack_bind_option_update")
+     *
      * @Secure(roles="ROLE_ADMIN")
      * @ParamConverter("pack",      class="BenskiCatalogueBundle:Pack")
      * @ParamConverter("option",    class="BenskiCatalogueBundle:Option\AbstractOption")
      */
-    public function updateBundOptionAction(Request $request, $pack, $option) {
+    public function updateBindOptionAction(Request $request, $pack, $option) {
 
         if ($option instanceof \Benski\CatalogueBundle\Entity\Option\OptionACocher)
-            return $this->updateBundOptionACocher($request, $pack, $option);
+            return $this->updateBindOptionACocher($request, $pack, $option);
         if ($option instanceof \Benski\CatalogueBundle\Entity\Option\OptionChoixMultiple)
-            return $this->updateBundOptionChoixMultiple($request, $pack, $option);
+            return $this->updateBindOptionChoixMultiple($request, $pack, $option);
     }
 
-    public function updateBundOptionACocher(Request $request, $pack, $option) {
+    public function updateBindOptionACocher(Request $request, $pack, $option) {
         $packOption = $pack->getPackOption($option);
         $editForm = $this->createFormEditBindOptionACocher($packOption);
 
@@ -49,9 +52,12 @@ class PackController extends Controller {
             $em->flush();
             return $this->redirect($this->generateUrl('pack_show', array('id' => $packOption->getPack()->getId())));
         }
+        return $this->render('BenskiCatalogueBundle:Pack:new.html.twig', array(
+            'form' => $editForm->createView(),
+        ));
     }
 
-    public function updateBundOptionChoixMultiple(Request $request, $pack, $option) {
+    public function updateBindOptionChoixMultiple(Request $request, $pack, $option) {
         $packOption = $pack->getPackOption($option);
         $editForm = $this->createFormEditBindOptionChoixMultiple($packOption);
 
@@ -62,9 +68,14 @@ class PackController extends Controller {
             $em->flush();
             return $this->redirect($this->generateUrl('pack_show', array('id' => $packOption->getPack()->getId())));
         }
+        return $this->render('BenskiCatalogueBundle:Pack:new.html.twig', array(
+            'form' => $editForm->createView(),
+        ));
     }
 
     /**
+     * @Route("/{pack}/edit/option/{option}", name="pack_bind_option_edit")
+     *
      * @Secure(roles="ROLE_ADMIN")
      * @ParamConverter("pack",      class="BenskiCatalogueBundle:Pack")
      * @ParamConverter("option",    class="BenskiCatalogueBundle:Option\AbstractOption")
@@ -106,28 +117,11 @@ class PackController extends Controller {
                 ->add('bind', 'submit', array('label' => 'Edit'));
         ;
         return $form;
-        /*
-          $option = $packOption->getOption();
-          $builder = $this->createFormBuilder(null, array(
-          'action' => $this->generateUrl('pack_bind_option_update', array(
-          'pack' => $packOption->getPack()->getId(),
-          'id' => $option->getId(),
-          )),
-          'method' => 'POST',
-          ))->add('bind', 'submit', array('label' => 'Edit'));
-          ;
-
-          foreach ($option->getChoix() as $choix) {
-          $builder->add($choix->getId() . '', 'money', array(
-          'divisor' => 100,
-          'label' => 'Prix pour "' . $choix->getIntitule() . '"',
-          'data' => $choix->getPrix(),
-          ));
-          }
-          return $builder->getForm(); */
     }
 
     /**
+     *
+     *
      * @Secure(roles="ROLE_ADMIN")
      * @return type
      */
@@ -157,10 +151,6 @@ class PackController extends Controller {
      * @return type
      */
     public function createFormBindOption($entity) {
-
-        if (!$this->get('security.context')->isGranted('ROLE_ADMIN')) {
-            throw new AccessDeniedHttpException('Accès limité aux administrateurs');
-        }
 
         if ($entity instanceof \Benski\CatalogueBundle\Entity\Option\OptionACocher)
             $form = $this->createFormBindOptionACocher($entity);
@@ -221,6 +211,7 @@ class PackController extends Controller {
     }
 
     /**
+     * @Route("/{packId}/bind/option", name="pack_bind_option_form")
      * @Secure(roles="ROLE_ADMIN")
      * @param type $packId
      * @param \Symfony\Component\HttpFoundation\Request $request
@@ -242,23 +233,45 @@ class PackController extends Controller {
         ));
     }
 
-    /*
-     * @ParamConverter('Pack',    class="BenskiCatalogueBundle:Pack")
-     * @ParamConverter('AbstractOption',    class="BenskiCatalogueBundle:AbstractOption")
+    /**
+     * @Route("/{pack}/remove/option/{option}", name="pack_bind_option_remove")
+     *
+     * @param Pack $pack
+     * @param AbstractOption $option
      */
-    public function removeBindAction(Pack $pack, AbstractOption $option) {
+    public function removeOptionBindAction(Pack $pack, AbstractOption $option){
         $packOption = $pack->getPackOption($option);
-        
+
         $em = $this->getDoctrine()->getManager();
         $em->remove($packOption);
         $em->flush();
 
-        return $this->redirect(generateUrl(('pack_show'), array(
+        return $this->redirect($this->generateUrl(('pack_show'), array(
             'id' => $pack->getId()
         )));
     }
 
+//    /*
+//     *
+//     * @ParamConverter('Pack',    class="BenskiCatalogueBundle:Pack")
+//     * @ParamConverter('AbstractOption',    class="BenskiCatalogueBundle:AbstractOption")
+//     *
+//     */
+//    public function removeBindAction(Pack $pack, AbstractOption $option) {
+//        $packOption = $pack->getPackOption($option);
+//
+//        $em = $this->getDoctrine()->getManager();
+//        $em->remove($packOption);
+//        $em->flush();
+//
+//        return $this->redirect(generateUrl(('pack_show'), array(
+//            'id' => $pack->getId()
+//        )));
+//    }
+
     /**
+     * @Route("/{packId}/bind/option/{id}", name="pack_bind_option_create")
+     *
      * @Secure(roles="ROLE_ADMIN")
      * @param type $packId
      * @param \Benski\CatalogueBundle\Entity\Option\AbstractOption $option
@@ -329,6 +342,8 @@ class PackController extends Controller {
     /*     * * CRUD ** */
 
     /**
+     * @Route("/", name="pack")
+     *
      * Lists all Pack entities.
      * @Secure(roles="ROLE_ADMIN")
      */
@@ -348,6 +363,9 @@ class PackController extends Controller {
     }
 
     /**
+     * @Route("/create", name="pack_create")
+     * @Method("POST")
+     *
      * Creates a new Pack entity.
      * @Secure(roles="ROLE_ADMIN")
      */
@@ -394,15 +412,12 @@ class PackController extends Controller {
     }
 
     /**
+     * @Route("/new", name="pack_new")
+     *
      * Displays a form to create a new Pack entity.
      * @Secure(roles="ROLE_ADMIN")
      */
     public function newAction() {
-
-        if (!$this->get('security.context')->isGranted('ROLE_ADMIN')) {
-            throw new AccessDeniedHttpException('Accès limité aux administrateurs');
-        }
-
         $entity = new Pack();
         $form = $this->createCreateForm($entity);
 
@@ -413,15 +428,12 @@ class PackController extends Controller {
     }
 
     /**
+     * @Route("/{id}/show", name="pack_show")
+     *
      * Finds and displays a Pack entity.
      * @Secure(roles="ROLE_ADMIN")
      */
     public function showAction($id) {
-
-        if (!$this->get('security.context')->isGranted('ROLE_ADMIN')) {
-            throw new AccessDeniedHttpException('Accès limité aux administrateurs');
-        }
-
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('BenskiCatalogueBundle:Pack')->find($id);
@@ -438,6 +450,8 @@ class PackController extends Controller {
     }
 
     /**
+     * @Route("pack_edit", name="pack_edit")
+     *
      * Displays a form to edit an existing Pack entity.
      * @Secure(roles="ROLE_ADMIN")
      */
@@ -484,6 +498,8 @@ class PackController extends Controller {
     }
 
     /**
+     * @Route("/{id}/update", name="pack_update")
+     *
      * Edits an existing Pack entity.
      * @Secure(roles="ROLE_ADMIN")
      */
@@ -519,6 +535,8 @@ class PackController extends Controller {
     }
 
     /**
+     * @Route("/{id}/delete", name="pack_delete")
+     *
      * Deletes a Pack entity.
      * @Secure(roles="ROLE_ADMIN")
      */
