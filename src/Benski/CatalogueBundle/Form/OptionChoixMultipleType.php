@@ -17,9 +17,12 @@ class OptionChoixMultipleType extends AbstractType {
    public function buildForm(FormBuilderInterface $builder, array $options) {
       $parentType = new AbstractOptionType();
       $parentType->buildForm($builder, $options);
-      $builder->add('choix', 'collection', array('type' => new ChoixOptionMultipleType(),
+      $builder->add('choix', 'collection', array(
+          'type' => new ChoixOptionMultipleType(),
           'allow_add' => true,
-          'allow_delete' => true));
+          'allow_delete' => true,
+          'by_reference' => false,
+      ));
    }
 
    /**

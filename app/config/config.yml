@@ -1,5 +1,5 @@
 imports:
-    - { resource: parameters.yml }
+    - { resource: parameters.php }
     - { resource: security.yml }
 
 framework:
@@ -75,8 +75,13 @@ fos_user:
         type: benski_user_registration
 
         
-stof_doctrine_extensions:
-    orm:
-        default:
-            sluggable: true
+#stof_doctrine_extensions:
+#    orm:
+#        default:
+#            sluggable: true
 
+
+jms_di_extra:
+    locations:
+        all_bundles: true
+        directories: ["%kernel.root_dir%/../src"]

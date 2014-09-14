@@ -125,7 +125,7 @@ class CodeHelper extends Helper
             if (extension_loaded('fileinfo')) {
                 $finfo = new \Finfo();
 
-                // Check if the file is an application/octet-stream (eg. Phar file) because hightlight_file cannot parse these files
+                // Check if the file is an application/octet-stream (eg. Phar file) because highlight_file cannot parse these files
                 if ('application/octet-stream' === $finfo->file($file, FILEINFO_MIME_TYPE)) {
                     return;
                 }
@@ -151,7 +151,7 @@ class CodeHelper extends Helper
      * Formats a file path.
      *
      * @param string  $file An absolute file path
-     * @param integer $line The line number
+     * @param int     $line The line number
      * @param string  $text Use this text for the link rather than the file path
      *
      * @return string
@@ -180,7 +180,7 @@ class CodeHelper extends Helper
      * Returns the link for a given file/line pair.
      *
      * @param string  $file An absolute file path
-     * @param integer $line The line number
+     * @param int     $line The line number
      *
      * @return string A link of false
      */

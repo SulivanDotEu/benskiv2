@@ -13,59 +13,59 @@ namespace Symfony\Component\Validator\Tests\Constraints;
 
 use Symfony\Component\Validator\Constraints\Image;
 use Symfony\Component\Validator\Constraints\ImageValidator;
+use Symfony\Component\Validator\Validation;
 
-class ImageValidatorTest extends \PHPUnit_Framework_TestCase
+class ImageValidatorTest extends AbstractConstraintValidatorTest
 {
     protected $context;
     protected $validator;
     protected $path;
     protected $image;
+    protected $imageLandscape;
+    protected $imagePortrait;
+
+    protected function getApiVersion()
+    {
+        return Validation::API_VERSION_2_5;
+    }
+
+    protected function createValidator()
+    {
+        return new ImageValidator();
+    }
 
     protected function setUp()
     {
-        $this->context = $this->getMock('Symfony\Component\Validator\ExecutionContext', array(), array(), '', false);
-        $this->validator = new ImageValidator();
-        $this->validator->initialize($this->context);
+        parent::setUp();
+
         $this->image = __DIR__.'/Fixtures/test.gif';
+        $this->imageLandscape = __DIR__.'/Fixtures/test_landscape.gif';
+        $this->imagePortrait = __DIR__.'/Fixtures/test_portrait.gif';
     }
 
     public function testNullIsValid()
     {
-        $this->context->expects($this->never())
-            ->method('addViolation');
-
         $this->validator->validate(null, new Image());
+
+        $this->assertNoViolation();
     }
 
     public function testEmptyStringIsValid()
     {
-        $this->context->expects($this->never())
-            ->method('addViolation');
-
         $this->validator->validate('', new Image());
+
+        $this->assertNoViolation();
     }
 
     public function testValidImage()
     {
-        if (!class_exists('Symfony\Component\HttpFoundation\File\File')) {
-            $this->markTestSkipped('The "HttpFoundation" component is not available');
-        }
-
-        $this->context->expects($this->never())
-            ->method('addViolation');
-
         $this->validator->validate($this->image, new Image());
+
+        $this->assertNoViolation();
     }
 
     public function testValidSize()
     {
-        if (!class_exists('Symfony\Component\HttpFoundation\File\File')) {
-            $this->markTestSkipped('The "HttpFoundation" component is not available');
-        }
-
-        $this->context->expects($this->never())
-            ->method('addViolation');
-
         $constraint = new Image(array(
             'minWidth' => 1,
             'maxWidth' => 2,
@@ -74,90 +74,68 @@ class ImageValidatorTest extends \PHPUnit_Framework_TestCase
         ));
 
         $this->validator->validate($this->image, $constraint);
+
+        $this->assertNoViolation();
     }
 
     public function testWidthTooSmall()
     {
-        if (!class_exists('Symfony\Component\HttpFoundation\File\File')) {
-            $this->markTestSkipped('The "HttpFoundation" component is not available');
-        }
-
         $constraint = new Image(array(
             'minWidth' => 3,
             'minWidthMessage' => 'myMessage',
         ));
 
-        $this->context->expects($this->once())
-            ->method('addViolation')
-            ->with('myMessage', array(
-                '{{ width }}' => '2',
-                '{{ min_width }}' => '3',
-            ));
-
         $this->validator->validate($this->image, $constraint);
+
+        $this->assertViolation('myMessage', array(
+            '{{ width }}' => '2',
+            '{{ min_width }}' => '3',
+        ));
     }
 
     public function testWidthTooBig()
     {
-        if (!class_exists('Symfony\Component\HttpFoundation\File\File')) {
-            $this->markTestSkipped('The "HttpFoundation" component is not available');
-        }
-
         $constraint = new Image(array(
             'maxWidth' => 1,
             'maxWidthMessage' => 'myMessage',
         ));
 
-        $this->context->expects($this->once())
-            ->method('addViolation')
-            ->with('myMessage', array(
-                '{{ width }}' => '2',
-                '{{ max_width }}' => '1',
-            ));
-
         $this->validator->validate($this->image, $constraint);
+
+        $this->assertViolation('myMessage', array(
+            '{{ width }}' => '2',
+            '{{ max_width }}' => '1',
+        ));
     }
 
     public function testHeightTooSmall()
     {
-        if (!class_exists('Symfony\Component\HttpFoundation\File\File')) {
-            $this->markTestSkipped('The "HttpFoundation" component is not available');
-        }
-
         $constraint = new Image(array(
             'minHeight' => 3,
             'minHeightMessage' => 'myMessage',
         ));
 
-        $this->context->expects($this->once())
-            ->method('addViolation')
-            ->with('myMessage', array(
-                '{{ height }}' => '2',
-                '{{ min_height }}' => '3',
-            ));
-
         $this->validator->validate($this->image, $constraint);
+
+        $this->assertViolation('myMessage', array(
+            '{{ height }}' => '2',
+            '{{ min_height }}' => '3',
+        ));
     }
 
     public function testHeightTooBig()
     {
-        if (!class_exists('Symfony\Component\HttpFoundation\File\File')) {
-            $this->markTestSkipped('The "HttpFoundation" component is not available');
-        }
-
         $constraint = new Image(array(
             'maxHeight' => 1,
             'maxHeightMessage' => 'myMessage',
         ));
 
-        $this->context->expects($this->once())
-            ->method('addViolation')
-            ->with('myMessage', array(
-                '{{ height }}' => '2',
-                '{{ max_height }}' => '1',
-            ));
-
         $this->validator->validate($this->image, $constraint);
+
+        $this->assertViolation('myMessage', array(
+            '{{ height }}' => '2',
+            '{{ max_height }}' => '1',
+        ));
     }
 
     /**
@@ -165,10 +143,6 @@ class ImageValidatorTest extends \PHPUnit_Framework_TestCase
      */
     public function testInvalidMinWidth()
     {
-        if (!class_exists('Symfony\Component\HttpFoundation\File\File')) {
-            $this->markTestSkipped('The "HttpFoundation" component is not available');
-        }
-
         $constraint = new Image(array(
             'minWidth' => '1abc',
         ));
@@ -181,10 +155,6 @@ class ImageValidatorTest extends \PHPUnit_Framework_TestCase
      */
     public function testInvalidMaxWidth()
     {
-        if (!class_exists('Symfony\Component\HttpFoundation\File\File')) {
-            $this->markTestSkipped('The "HttpFoundation" component is not available');
-        }
-
         $constraint = new Image(array(
             'maxWidth' => '1abc',
         ));
@@ -197,10 +167,6 @@ class ImageValidatorTest extends \PHPUnit_Framework_TestCase
      */
     public function testInvalidMinHeight()
     {
-        if (!class_exists('Symfony\Component\HttpFoundation\File\File')) {
-            $this->markTestSkipped('The "HttpFoundation" component is not available');
-        }
-
         $constraint = new Image(array(
             'minHeight' => '1abc',
         ));
@@ -213,14 +179,109 @@ class ImageValidatorTest extends \PHPUnit_Framework_TestCase
      */
     public function testInvalidMaxHeight()
     {
-        if (!class_exists('Symfony\Component\HttpFoundation\File\File')) {
-            $this->markTestSkipped('The "HttpFoundation" component is not available');
-        }
-
         $constraint = new Image(array(
             'maxHeight' => '1abc',
         ));
 
         $this->validator->validate($this->image, $constraint);
+    }
+
+    public function testRatioTooSmall()
+    {
+        $constraint = new Image(array(
+            'minRatio' => 2,
+            'minRatioMessage' => 'myMessage',
+        ));
+
+        $this->validator->validate($this->image, $constraint);
+
+        $this->assertViolation('myMessage', array(
+            '{{ ratio }}' => 1,
+            '{{ min_ratio }}' => 2,
+        ));
+    }
+
+    public function testRatioTooBig()
+    {
+        $constraint = new Image(array(
+            'maxRatio' => 0.5,
+            'maxRatioMessage' => 'myMessage',
+        ));
+
+        $this->validator->validate($this->image, $constraint);
+
+        $this->assertViolation('myMessage', array(
+            '{{ ratio }}' => 1,
+            '{{ max_ratio }}' => 0.5,
+        ));
+    }
+
+    /**
+     * @expectedException \Symfony\Component\Validator\Exception\ConstraintDefinitionException
+     */
+    public function testInvalidMinRatio()
+    {
+        $constraint = new Image(array(
+            'minRatio' => '1abc',
+        ));
+
+        $this->validator->validate($this->image, $constraint);
+    }
+
+    /**
+     * @expectedException \Symfony\Component\Validator\Exception\ConstraintDefinitionException
+     */
+    public function testInvalidMaxRatio()
+    {
+        $constraint = new Image(array(
+            'maxRatio' => '1abc',
+        ));
+
+        $this->validator->validate($this->image, $constraint);
+    }
+
+    public function testSquareNotAllowed()
+    {
+        $constraint = new Image(array(
+            'allowSquare' => false,
+            'allowSquareMessage' => 'myMessage',
+        ));
+
+        $this->validator->validate($this->image, $constraint);
+
+        $this->assertViolation('myMessage', array(
+            '{{ width }}' => 2,
+            '{{ height }}' => 2,
+        ));
+    }
+
+    public function testLandscapeNotAllowed()
+    {
+        $constraint = new Image(array(
+            'allowLandscape' => false,
+            'allowLandscapeMessage' => 'myMessage',
+        ));
+
+        $this->validator->validate($this->imageLandscape, $constraint);
+
+        $this->assertViolation('myMessage', array(
+            '{{ width }}' => 2,
+            '{{ height }}' => 1,
+        ));
+    }
+
+    public function testPortraitNotAllowed()
+    {
+        $constraint = new Image(array(
+            'allowPortrait' => false,
+            'allowPortraitMessage' => 'myMessage',
+        ));
+
+        $this->validator->validate($this->imagePortrait, $constraint);
+
+        $this->assertViolation('myMessage', array(
+            '{{ width }}' => 1,
+            '{{ height }}' => 2,
+        ));
     }
 }

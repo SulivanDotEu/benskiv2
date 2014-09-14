@@ -8,7 +8,8 @@ parameters:
     database_password: benski0808
     mailer_transport: smtp
     mailer_host: ns0.ovh.net
-    mailer_user: null
-    mailer_password: null
+    mailer_user: info@benski.be
+    mailer_password: ben141516
     locale: fr
     secret: aizrhaoirhiazroh
+

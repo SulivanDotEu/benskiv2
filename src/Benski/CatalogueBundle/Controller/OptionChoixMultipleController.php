@@ -141,12 +141,6 @@ class OptionChoixMultipleController extends Controller {
      * @Secure(roles="ROLE_ADMIN")
      */
     public function editAction($id) {
-        
-        if (!$this->get('security.context')->isGranted('ROLE_ADMIN')) 
-        {
-            throw new AccessDeniedHttpException('Accès limité aux administrateurs');
-        }
-        
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('BenskiCatalogueBundle:Option\OptionChoixMultiple')->find($id);
@@ -177,7 +171,7 @@ class OptionChoixMultipleController extends Controller {
             'action' => $this->generateUrl('optionchoixmultiple_update', array('id' => $entity->getId())),
             'method' => 'PUT',
         ));
-        $form->remove('choix');
+        //$form->remove('choix');
         
         foreach ($entity->getChoix() as $choix) {
             //$form->add('choix', new ChoixOptionMultipleType());

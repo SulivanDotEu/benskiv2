@@ -25,6 +25,7 @@
         "symfony/class-loader": "*",
         "symfony/yaml": "*",
         "symfony/browser-kit": "*",
+        "symfony/class-loader": "*",
         "symfony/finder": "*",
         "symfony/css-selector": "*",
         "symfony/process": "*",
@@ -40,7 +41,7 @@
     "target-dir": "JMS/SecurityExtraBundle",
     "extra": {
         "branch-alias": {
-            "dev-master": "1.5-dev"
+            "dev-master": "1.4-dev"
         }
     }
 }

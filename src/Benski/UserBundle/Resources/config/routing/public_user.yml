@@ -1,0 +1,6 @@
+## YAML Template.
+
+fos_user_profile_show:
+    pattern:  /
+    defaults: { _controller: "BenskiUserBundle:PublicUser:home" }
+    

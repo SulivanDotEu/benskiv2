@@ -26,3 +26,8 @@ benski_user_bundle:
     resource: "@BenskiUserBundle/Resources/config/routing.yml"
     prefix:   /
     
+#-- admin
+
+admin:
+    resource: "@BenskiUserBundle/Resources/config/routing/user.yml"
+    prefix:   /admin

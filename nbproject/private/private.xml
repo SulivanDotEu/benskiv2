@@ -3,15 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/E:/Mes%20programmes/wamp/www/benskiv2/src/Benski/ReservationBundle/Resources/views/macro.html.twig</file>
-            <file>file:/E:/Mes%20programmes/wamp/www/benskiv2/src/Benski/ReservationBundle/Resources/views/ReservationImpl/Public/show.html.twig</file>
-            <file>file:/E:/Mes%20programmes/wamp/www/benskiv2/src/Benski/ReservationBundle/Entity/Option/OptionReserve.php</file>
-            <file>file:/E:/Mes%20programmes/wamp/www/benskiv2/src/Benski/ReservationBundle/Controller/Option/PublicOptionACocherReserveController.php</file>
-            <file>file:/E:/Mes%20programmes/wamp/www/benskiv2/src/Benski/ReservationBundle/Resources/views/Option/Public/edit_option_choixmultiple.html.twig</file>
-            <file>file:/E:/Mes%20programmes/wamp/www/benskiv2/src/Benski/ReservationBundle/Controller/Option/PublicOptionReserveController.php</file>
-            <file>file:/E:/Mes%20programmes/wamp/www/benskiv2/src/Benski/ReservationBundle/Controller/Option/PublicOptionChoixMultipleReserveController.php</file>
-            <file>file:/E:/Mes%20programmes/wamp/www/benskiv2/src/Benski/ReservationBundle/Resources/views/Option/OptionReserve/index.html.twig</file>
-            <file>file:/E:/Mes%20programmes/wamp/www/benskiv2/src/Benski/ReservationBundle/Resources/config/routing/public_option_optionchoixmultiplereserve.yml</file>
+            <file>file:/C:/wamp/www/benskiv2/src/Benski/CatalogueBundle/Entity/Option/AbstractOption.php</file>
+            <file>file:/C:/wamp/www/benskiv2/src/Benski/ReservationBundle/Entity/Option/OptionReserve.php</file>
+            <file>file:/C:/wamp/www/benskiv2/src/Benski/CatalogueBundle/Entity/Option/OptionACocher.php</file>
         </group>
     </open-files>
 </project-private>

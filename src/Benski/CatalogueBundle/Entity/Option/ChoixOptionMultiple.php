@@ -30,7 +30,9 @@ class ChoixOptionMultiple
     /**
      * @var string
      *
-     * @ORM\ManyToOne(targetEntity="Benski\CatalogueBundle\Entity\Option\OptionChoixMultiple", inversedBy="choix", cascade={"all"})
+     * @ORM\ManyToOne(targetEntity="Benski\CatalogueBundle\Entity\Option\OptionChoixMultiple",
+     *      inversedBy="choix",
+     *      cascade={"all"})
      * @ORM\JoinColumn(onDelete="CASCADE")
      */
     protected $optionChoixMultiple;

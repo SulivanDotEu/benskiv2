@@ -14,7 +14,9 @@ class CommonController extends Controller {
      */
     public function indexAction() {
         $em = $this->getDoctrine()->getManager();
-        $destination = $em->getRepository('BenskiCatalogueBundle:Destination')->findByNom('Risoul')[0];
+        $destination = $em->getRepository('BenskiCatalogueBundle:Destination')->findByNom('Risoul');
+        if(empty($destination)) throw new \Exception("Please init the website");
+        $destination = $destination[0];
         $sejours = $em->getRepository('BenskiCatalogueBundle:Sejour')->findAll();
         $pack = $em->getRepository('BenskiCatalogueBundle:Pack')->findByAdminId('no-appart');
         $appartement = $em->getRepository('BenskiCatalogueBundle:Pack')->findByAdminId('no-appart');

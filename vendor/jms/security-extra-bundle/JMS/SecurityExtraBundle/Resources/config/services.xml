@@ -94,9 +94,7 @@
         
         <service id="security.extra.metadata_factory" class="%security.extra.metadata_factory.class%" public="false">
             <argument type="service" id="security.extra.lazy_loading_driver" />
-            <call method="setCache">
-                <argument type="service" id="security.extra.file_cache"/>
-            </call>
+            <argument type="service" id="security.extra.file_cache" />
             <call method="setIncludeInterfaces">
                 <argument>true</argument>
             </call>

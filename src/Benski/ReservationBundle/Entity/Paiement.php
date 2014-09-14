@@ -43,7 +43,8 @@ class Paiement {
      * @var integer
      *
      * @ORM\ManyToOne(
-     *      targetEntity="Benski\UserBundle\Entity\User")
+     *      targetEntity="Benski\UserBundle\Entity\User",
+     *      inversedBy="paiements")
      */
     private $user;
 
@@ -102,6 +103,35 @@ class Paiement {
      * @ORM\Column(name="statut", type="integer")
      */
     private $statut;
+    
+    public function estEnRetard(){
+        if($this->getStatut() == self::$STATUS_RECU) return false;
+        $today = new \DateTime('NOW');
+        if($today->getTimestamp() > $this->getDateLimite()->getTimestamp()){
+            return true;
+        }
+        return false;
+    }
+    
+    public function bientotAEcheance(){
+        $oneWeek = 60*60*24*7;
+        $today = new \DateTime('NOW');
+        if($this->getStatut() == self::$STATUS_RECU) return false;
+        if($today->getTimestamp() > ($this->getDateLimite()->getTimestamp()-$oneWeek )){
+            return true;
+        }
+        return false;
+    }
+    
+    public function estSolde(){
+        if($this->getStatut() == self::$STATUS_RECU) return true;
+        return false;
+    }
+
+
+    public function getSolde(){
+        return $this->getMontant() - $this->getMontantRecu();
+    }
 
     public function getMontantRecu() {
         if ($this->getStatut() == self::$STATUS_RECU) {

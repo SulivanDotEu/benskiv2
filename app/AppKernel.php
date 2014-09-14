@@ -23,6 +23,7 @@ class AppKernel extends Kernel {
             new Benski\ReservationBundle\BenskiReservationBundle(),
             new Benski\ContentBundle\BenskiContentBundle(),
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
+            new JMS\DiExtraBundle\JMSDiExtraBundle($this),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

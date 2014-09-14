@@ -8,8 +8,8 @@
     },
     "require": {
         "php": ">=5.3.3",
-        "symfony/symfony": "2.3.*",
-        "doctrine/orm": ">=2.2.3,<2.4-dev",
+        "symfony/symfony": "2.*",
+        "doctrine/orm": ">=2.2.3",
         "doctrine/doctrine-bundle": "1.2.*",
         "twig/extensions": "1.0.*",
         "symfony/assetic-bundle": "2.3.*",
@@ -19,11 +19,11 @@
         "sensio/framework-extra-bundle": "2.3.*",
         "sensio/generator-bundle": "2.3.*",
         "incenteev/composer-parameter-handler": "~2.0",
-        
-	"friendsofsymfony/user-bundle": "dev-master",
-	"jms/security-extra-bundle": "dev-master",
-         "stof/doctrine-extensions-bundle": "~1.1@dev",
-         "winzou/console-bundle": "1.*"
+	    "friendsofsymfony/user-bundle": "1.*",
+	    "jms/security-extra-bundle": "1.5.*",
+        "stof/doctrine-extensions-bundle": "1.1.*",
+        "winzou/console-bundle": "1.*",
+        "jms/di-extra-bundle": "1.4.*"
     },
     "scripts": {
         "post-install-cmd": [

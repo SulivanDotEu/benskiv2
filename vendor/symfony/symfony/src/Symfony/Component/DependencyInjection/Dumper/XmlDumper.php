@@ -17,6 +17,7 @@ use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Alias;
 use Symfony\Component\DependencyInjection\Exception\RuntimeException;
+use Symfony\Component\ExpressionLanguage\Expression;
 
 /**
  * XmlDumper dumps a service container as an XML string.
@@ -119,6 +120,9 @@ class XmlDumper extends Dumper
         if ($definition->getFactoryMethod()) {
             $service->setAttribute('factory-method', $definition->getFactoryMethod());
         }
+        if ($definition->getFactoryClass()) {
+            $service->setAttribute('factory-class', $definition->getFactoryClass());
+        }
         if ($definition->getFactoryService()) {
             $service->setAttribute('factory-service', $definition->getFactoryService());
         }
@@ -136,6 +140,13 @@ class XmlDumper extends Dumper
         }
         if ($definition->isLazy()) {
             $service->setAttribute('lazy', 'true');
+        }
+        if (null !== $decorated = $definition->getDecoratedService()) {
+            list ($decorated, $renamedId) = $decorated;
+            $service->setAttribute('decorates', $decorated);
+            if (null !== $renamedId) {
+                $service->setAttribute('decoration-inner-name', $renamedId);
+            }
         }
 
         foreach ($definition->getTags() as $name => $tags) {
@@ -259,6 +270,10 @@ class XmlDumper extends Dumper
             } elseif ($value instanceof Definition) {
                 $element->setAttribute('type', 'service');
                 $this->addService($value, null, $element);
+            } elseif ($value instanceof Expression) {
+                $element->setAttribute('type', 'expression');
+                $text = $this->document->createTextNode(self::phpToXml((string) $value));
+                $element->appendChild($text);
             } else {
                 if (in_array($value, array('null', 'true', 'false'), true)) {
                     $element->setAttribute('type', 'string');

@@ -12,12 +12,11 @@
 namespace Symfony\Component\Validator\Constraints;
 
 use Symfony\Component\Validator\Constraint;
-use Symfony\Component\Validator\Constraints\Required;
-use Symfony\Component\Validator\Constraints\Optional;
 use Symfony\Component\Validator\Exception\ConstraintDefinitionException;
 
 /**
  * @Annotation
+ * @Target({"PROPERTY", "METHOD", "ANNOTATION"})
  *
  * @author Bernhard Schussek <bschussek@gmail.com>
  *
@@ -25,14 +24,14 @@ use Symfony\Component\Validator\Exception\ConstraintDefinitionException;
  */
 class Collection extends Constraint
 {
-    public $fields;
+    public $fields = array();
     public $allowExtraFields = false;
     public $allowMissingFields = false;
     public $extraFieldsMessage = 'This field was not expected.';
     public $missingFieldsMessage = 'This field is missing.';
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function __construct($options = null)
     {
