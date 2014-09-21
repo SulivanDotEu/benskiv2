@@ -1,0 +1,56 @@
+{% extends  'WalvaCrudAdminBundle:Crud:index.html.twig' %}
+
+
+    {% block crud_table_header %}
+        <th>Id</th>
+        <th>Titre</th>
+        <th>Url</th>
+        <th>Header</th>
+        <th>Creationdate</th>
+        <th>Editiondate</th>
+        <th>Internalname</th>
+        <th>Keywords</th>    <th>Action</th>
+    {% endblock %}
+
+
+{% block crud_table_row_content %}
+    
+                        <td><a href="{{ path(routeShow, { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+            <td>{{ entity.titre }}</td>
+            <td>{{ entity.url }}</td>
+            <td>{{ entity.header }}</td>
+            <td>{% if entity.creationDate %}{{ entity.creationDate|date('Y-m-d H:i:s') }}{% endif %}</td>
+            <td>{% if entity.editionDate %}{{ entity.editionDate|date('Y-m-d H:i:s') }}{% endif %}</td>
+            <td>{{ entity.internalName }}</td>
+            <td>{{ entity.keywords }}</td>
+
+{% endblock %}
+
+
+{% block actions %}
+<div class="btn-group">
+    <a href="{{ path(routeShow, { 'id': entity.id }) }}" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-new-window"></span> Show</a>
+    <a href="{{ path(routeEdit, { 'id': entity.id }) }}" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-pencil"></span> Edit</a>
+</div>
+{% endblock %}
+
+{% block body %}
+    {{ parent() }}
+    <hr>
+    <h2>
+        Astuce
+    </h2>
+    <p>
+        Pour que cela fonctionne, il faut impérativement entourer le contenu désirer dans les balises suivantes:
+        (en gros copier coller puis introduisez votre texte au millieu des balises)
+    </p>
+    {{ dump('<div class="container" style="padding-top: 50px; padding-bottom: 50px;">
+    <div class="row">
+        <div class="col-sm-12">
+            REMPLACER-CE-TEXTE-PAR-LE-CONTENU-VOULU
+        </div>
+    </div>
+</div>
+') }}
+
+{% endblock %}

@@ -24,6 +24,10 @@ class AppKernel extends Kernel {
             new Benski\ContentBundle\BenskiContentBundle(),
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
             new JMS\DiExtraBundle\JMSDiExtraBundle($this),
+            new Walva\SimpleCmsBundle\WalvaSimpleCmsBundle(),
+            new Walva\CrudAdminBundle\WalvaCrudAdminBundle(),
+            new Benski\DashBoardBundle\BenskiDashBoardBundle(),
+            new Benski\WebsiteBundle\BenskiWebsiteBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

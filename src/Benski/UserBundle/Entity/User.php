@@ -4,6 +4,7 @@ namespace Benski\UserBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use FOS\UserBundle\Entity\User as BaseUser;
+use Walva\SimpleCmsBundle\Entity\AuthorInterface;
 
 /**
  * User
@@ -11,7 +12,7 @@ use FOS\UserBundle\Entity\User as BaseUser;
  * @ORM\Table(name="fos_user")
  * @ORM\Entity(repositoryClass="Benski\UserBundle\Entity\UserRepository")
  */
-class User extends BaseUser {
+class User extends BaseUser implements AuthorInterface {
 
     public static $ROLE_ADMIN = 'ROLE_ADMIN';
     public static $ROLE_SUPER_ADMIN = 'ROLE_SUPER_ADMIN';

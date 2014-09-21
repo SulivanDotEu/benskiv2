@@ -1,0 +1,22 @@
+benski_website_public_homepage:
+    path:     /
+    defaults: { _controller: "BenskiWebsiteBundle:Public:index" }
+
+benski_common_home:
+    path:     /
+    defaults: { _controller: "BenskiWebsiteBundle:Public:index" }
+
+public_index:
+    path:     /
+    defaults: { _controller: "BenskiWebsiteBundle:Public:index" }
+
+benski_website_admin_page:
+    resource: "@BenskiWebsiteBundle/Controller/PageController.php"
+    type:     annotation
+    prefix:   /admin
+
+benski_website_public_page:
+    resource: "@BenskiWebsiteBundle/Controller/PublicPageController.php"
+    type:     annotation
+
+

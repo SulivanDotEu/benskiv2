@@ -1,0 +1,163 @@
+{% extends 'BenskiWebsiteBundle::layout.html.twig' %}
+
+
+{% block parent_breadcrumb %}
+
+{% endblock %}
+
+
+
+{% block parent_container %}
+    <div class="container"  style="margin-top: 30px; margin-bottom: 50px">
+
+        <div class="row">
+            <div class="col-sm-4">
+                <div style="max-width: 100%">
+                    <img src="{{ asset('img/photo4.jpg') }}" alt="" class=" img-responsive">
+                </div>
+            </div>
+            <div class="col-sm-8">
+                <h1>{{ "home.text.1.title" |trans }}</h1>
+                <hr>
+                <p class="lead">
+                    {{ "home.text.1.content" |trans|raw }}
+                    <br>
+                    <br>
+
+                    <a class="btn btn-primary btn-lg btn-block" href="{{ path('catalogue_public_sejour', {'destination':destination.id}) }}">
+                        Réservez votre séjour
+                    </a>
+                </p>
+            </div>
+        </div>
+    </div>
+    <div style='background-color: #7ab5d3; padding-top: 70px; padding-bottom: 70px;
+            font-weight: bolder;
+            color: black;
+            text-shadow: 1px 1px 1px white;
+            background: url({{ asset('img/wp_ski1.jpg') }}) no-repeat  fixed;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+            '>
+        <div class="container"  >
+
+            <div class="row">
+                <div class="col-sm-12">
+                    <h1 class="text-center">
+                        {{ "home.text.2.title" |trans|raw }}
+                    </h1>
+                    <hr>
+                    <p class="lead">
+                        {{ "home.text.2.content" |trans|raw }}
+
+                        <br>
+                        <br>
+
+                        {% if defined == true  %}
+
+                            <select class="form-control" id="select_no_appart">
+                                {% for i in 1..20 %}
+                                    <option>{{ i }}</option>
+                                {% endfor %}
+                            </select>
+
+                        {% endif %}
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="container" style="padding-top: 50px; padding-bottom: 50px;" >
+        <div class="row" >
+            <div class="col-sm-3">
+                <h4 style="font-weight: bold"><span class="glyphicon glyphicon-asterisk"></span> Découvez nos services</h4>
+                <hr>
+                <p>
+                    {{ "home.text.3.content" |trans|raw }}
+                    <a class=""
+                       href="{{ path('public_article_slug_content', { 'slug': 'services'}) }}
+                   ">
+                        En savoir plus
+                    </a>
+                </p>
+
+
+
+            </div>
+            <div class="col-sm-3">
+                <h4 style="font-weight: bold"><span class="glyphicon glyphicon-home"></span> Visitez nos appartements</h4>
+                <hr>
+                <p>
+                    {{ "home.text.4.content" |trans|raw }}
+                </p>
+                <a class=""
+                   href="{{ path('public_article_slug_content', { 'slug': 'appartements'}) }}
+               ">
+                    En savoir plus
+                </a>
+            </div>
+            <div class="col-sm-3">
+                <h4 style="font-weight: bold"><span class="glyphicon glyphicon-calendar"></span> Planifiez vos vacances </h4>
+                <hr>
+                <p>
+                    {{ "home.text.5.content" |trans|raw }}
+
+
+                </p>
+            </div>
+            <div class="col-sm-3">
+                <h4 style="font-weight: bold"><span class="glyphicon glyphicon-cloud"></span> Que la neige soit! </h4>
+                <hr>
+                <p>
+                    {{ "home.text.6.content" |trans|raw }}
+
+                </p>
+            </div>
+        </div>
+        <div class="row" >
+            <div class="col-sm-6">
+                <h4 style="font-weight: bold"><span class="glyphicon glyphicon-tree-conifer"></span> Maitrisez Risoul</h4>
+                <hr>
+                <img src="{{ asset('img/montagne-graph.jpg') }}" alt="" class="img-thumbnail img-responsive" style="margin-bottom: 10px">
+            </div>
+            <div class="col-sm-3">
+                <h4 style="font-weight: bold"><span class="glyphicon glyphicon-ok"></span> Tout public, vraiment!</h4>
+                <hr>
+                <p>
+                    {{ "home.text.7.content" |trans|raw }}
+                </p>
+                <ul>
+                    <li>18% de pistes pour débutant</li>
+                    <li>39% de pistes pour intérmédiaire</li>
+                    <li>34% de pistes pour avancé</li>
+                    <li>9% de pistes pour expert</li>
+                </ul>
+            </div>
+            <div class="col-sm-3">
+                <h4 style="font-weight: bold"><span class="glyphicon glyphicon-cog"></span> Moderne</h4>
+                <hr>
+                <p>
+                    {{ "home.text.8.content" |trans|raw }}
+                </p>
+
+            </div>
+        </div>
+
+    </div>
+
+
+{% endblock %}
+
+{% block javascripts_content %}
+    <script type="text/javascript">
+        $('#select_no_appart').change(function() {
+
+            // set the window's location property to the value of the option the user has selected
+            window.location = $(this).val("");
+        });
+    </script>
+{% endblock %}
+

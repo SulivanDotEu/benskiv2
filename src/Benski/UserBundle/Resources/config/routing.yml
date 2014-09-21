@@ -22,7 +22,7 @@ fos_user_change_password:
 #-- bundle route
 
 user_list:
-    pattern:  /
+    pattern:  /admin/user
     defaults: { _controller: "BenskiUserBundle:User:index" }
 
 BenskiUserBundle_user:

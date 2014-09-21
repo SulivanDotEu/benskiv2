@@ -1,0 +1,27 @@
+{% extends 'BenskiWebsiteBundle::public_layout.html.twig' %}
+{# entity \Benski\WebsiteBundle\Entity\Page #}
+
+{% block title %}
+    {{ parent() }} - {{ entity.titre }}
+{% endblock %}
+
+
+
+
+    {% block header_content %}
+        {% if (((entity.header |length) > 0) and entity.header != "") %}
+            {{ entity.header }}
+        {% else %}
+            {{ parent() }}
+        {% endif %}
+    {% endblock %}
+
+{% block head_meta_description %}{{ entity.keywords }}{% endblock %}
+
+{% block parent_container %}
+
+    {{ content|raw }}
+
+{% endblock %}
+
+{% block header_bottom %}{% endblock %}

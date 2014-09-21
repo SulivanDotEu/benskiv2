@@ -1,0 +1,27 @@
+{# user \Benski\UserBundle\Entity\User #}
+{% set user = app.user %}
+
+{% if app.user %}
+    <a class="btn btn-link" href="{{ path('fos_user_profile_show') }}" style="color: #ffffff; font-size: 14px;">
+        {{ user.person.firstName }}
+        {{ user.person.lastName }}
+    </a>
+{% elseif not app.user %}
+    <a class="btn btn-link" href="#" style="color: #ffffff; font-size: 14px;">
+        <i class="fa fa-pencil"></i>
+        S'inscrire
+    </a>
+    <a class="btn btn-link" href="{{ path('fos_user_profile_show') }}" style="color: #ffffff; font-size: 14px;">
+        <i class="fa fa-lock"></i>
+        Se connecter
+    </a>
+{% endif %}
+<a class="btn btn-link" href="{{ render(controller('BenskiWebsiteBundle:PublicPage:getHref', { 'internalName': 'CONTACT' })) }}" style="color: #ffffff; font-size: 14px;">
+    <i class="fa fa-paper-plane"></i>
+    Contact
+</a>
+<a class="btn btn-link" href="#" style="color: #ffffff; font-size: 14px;">
+    <i class="fa fa-globe"></i>
+    FR
+    <i class="fa fa-caret-down" style="color: white"></i>
+</a>

@@ -1,0 +1,24 @@
+{% extends 'BenskiWebsiteBundle::public_layout.html.twig' %}
+
+{% block title %}
+    {{ parent() }} - Le ski à Risoul en famille et entre amis en toute facilité !
+{% endblock %}
+
+
+
+{% block parent_container %}
+
+    {{ cms_inclodeBlock('home.content')|raw }}
+
+{% endblock %}
+
+{% block javascripts_content %}
+    <script type="text/javascript">
+        $('#select_no_appart').change(function() {
+
+            // set the window's location property to the value of the option the user has selected
+            window.location = $(this).val("");
+        });
+    </script>
+{% endblock %}
+

@@ -1,3 +1,11 @@
+benski_website:
+    resource: "@BenskiWebsiteBundle/Resources/config/routing.yml"
+    prefix:   /
+
+benski_dashboard:
+    resource: "@BenskiDashBoardBundle/Resources/config/routing.yml"
+    prefix:   /admin
+
 benski_content:
     resource: "@BenskiContentBundle/Resources/config/routing.yml"
     prefix:   /
@@ -10,15 +18,13 @@ benski_reservation:
 #    resource: "@BenskiNewsBundle/Resources/config/routing.yml"
 #    prefix:   /
 
-benski_common:
-    resource: "@BenskiCommonBundle/Resources/config/routing.yml"
-    prefix:   /
+#benski_common:
+#    resource: "@BenskiCommonBundle/Resources/config/routing.yml"
+#    prefix:   /
 
 benski_catalogue:
     resource: "@BenskiCatalogueBundle/Resources/config/routing.yml"
     prefix:   /
-    
-
 
 # -- FOS -- #
 
@@ -31,3 +37,7 @@ benski_user_bundle:
 admin:
     resource: "@BenskiUserBundle/Resources/config/routing/user.yml"
     prefix:   /admin
+
+walva_simple_cms:
+    resource: "@WalvaSimpleCmsBundle/Resources/config/routing.yml"
+    prefix:   /admin/cms

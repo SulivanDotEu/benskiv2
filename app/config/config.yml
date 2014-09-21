@@ -25,6 +25,8 @@ framework:
 twig:
     debug:            %kernel.debug%
     strict_variables: %kernel.debug%
+    globals:
+        cms_view_parent_template: '::admin.html.twig'
 
 # Assetic Configuration
 assetic:
@@ -56,6 +58,8 @@ doctrine:
     orm:
         auto_generate_proxy_classes: %kernel.debug%
         auto_mapping: true
+        resolve_target_entities:
+            Walva\SimpleCmsBundle\Entity\AuthorInterface: Benski\UserBundle\Entity\User
         
 
 # Swiftmailer Configuration

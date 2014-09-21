@@ -1,0 +1,6 @@
+[submodule "src/Walva/SimpleCmsBundle"]
+	path = src/Walva/SimpleCmsBundle
+	url = https://github.com/SulivanDotEu/SimpleCmsBundle.git
+[submodule "src/Walva/CrudAdminBundle"]
+	path = src/Walva/CrudAdminBundle
+	url = https://github.com/SulivanDotEu/CrudAdminBundle.git

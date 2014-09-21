@@ -1,0 +1,3 @@
+benski_dash_board_homepage:
+    resource: "@BenskiDashBoardBundle/Controller/"
+    type:     annotation

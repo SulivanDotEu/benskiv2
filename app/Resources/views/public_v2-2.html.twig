@@ -1,0 +1,96 @@
+{% import '::macro.html.twig' as macro %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>{% block title %}Benski{% endblock %}</title>
+
+    {% block stylesheets %}
+
+        <link rel="stylesheet" href="{{ asset('css/public_v2.css') }}" type="text/css"/>
+        <link rel="stylesheet" href="{{ asset('bs3/css/bootstrap.min.css') }}" type="text/css"/>
+        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-theme.min.css">
+    {% endblock %}
+</head>
+
+<body>
+
+<div style="min-height: 300px;
+        text-shadow: 1px 1px 1px white;
+        background: url({{ asset('img/background2.png') }}) no-repeat;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+            /*-webkit-background-size: cover;*/
+            /*-moz-background-size: cover;*/
+            /*-o-background-size: cover;*/
+            /*background-size: cover;*/
+        ">
+    <h1>Test</h1>
+
+</div>
+
+{% block parent_breadcrumb %}
+    <div class="container">
+        <ol class="breadcrumb">
+            {% block breadcrumb %}
+                <li><a href="#">Benski.be</a></li>
+            {% endblock %}
+        </ol>
+    </div>
+{% endblock %}
+
+{% block parent_container %}
+    <div class="container" id="mainContainer ">
+        <div class="row">
+            {% block container %}
+                <div id="content" class="col-sm-12">
+                    {% block container_header %}
+                        {% include "::flashbag.html.twig" %}
+
+                    {% endblock %}
+                    {% block body %}
+
+
+
+
+                    {% endblock %}
+                </div>
+            {% endblock %}
+        </div>
+    </div>
+{% endblock %}
+{% block footer %}
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12">
+            <hr>
+
+            <footer>
+                <p>Benski &AMP; Benjamin Ellis © 2013 and beyond.</p>
+            </footer>
+        </div>
+    </div>
+    {% endblock %}
+</div>
+
+{% block javascripts %}
+    {# Ajoutez ces lignes JavaScript si vous comptez vous servir des fonctionnalités du bootstrap Twitter #}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="{{ asset('js/walva/functions.js') }}"></script>
+    <script>
+        $(function () {
+            $('#myTab a:last').tab('show');
+            $('#popover1').popover();
+        });
+    </script>
+    {% block javascripts_content %}
+    {% endblock %}
+{% endblock %}
+
+</body>
+</html>
