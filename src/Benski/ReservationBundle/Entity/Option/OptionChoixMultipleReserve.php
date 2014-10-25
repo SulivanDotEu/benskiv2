@@ -2,6 +2,10 @@
 
 namespace Benski\ReservationBundle\Entity\Option;
 
+use Benski\CatalogueBundle\Entity\Option\ChoixOptionMultiple;
+use Benski\CatalogueBundle\Entity\Option\OptionChoixMultiple;
+use Benski\CatalogueBundle\Entity\PackOptionChoixMultiple;
+use Benski\CatalogueBundle\Entity\PrixOptionChoixMultiple;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -62,7 +66,23 @@ class OptionChoixMultipleReserve extends OptionReserve {
                 return $prixOption->getPrix();
             }
         }
-        //throw new \LogicException('Comportement incorrecte dans le business');
+    }
+
+    public function getListChoix(){
+        $array = array();
+        $pack = $this->getPackReserve();
+        /** @var PackOptionChoixMultiple $packOption */
+        $packOption = $pack->getPackOption($this->getOption());
+        $listPrixOption = $packOption->getPrixOption();
+        foreach ($listPrixOption as $prixOption) {
+            /** @var PrixOptionChoixMultiple $prixOption */
+            $choix = $prixOption->getChoix();
+            if($prixOption->isPublished()) {
+                $array[] = $choix;
+            }
+        }
+        return $array;
+
     }
 
     /**

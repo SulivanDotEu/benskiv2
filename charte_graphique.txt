@@ -1,0 +1,8 @@
+Bleu de référence : 0099ff		0,153,255
+Bleu plus clair: 66ccff			
+Bleu plus foncé: 0066cc			0,102,204
+
+Un autre bleu : #3399ff
+
+background-color: rgba(255, 255, 255, 0.5);
+

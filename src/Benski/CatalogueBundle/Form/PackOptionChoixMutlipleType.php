@@ -14,10 +14,12 @@ class PackOptionChoixMutlipleType extends AbstractType {
     * @param array $options
     */
    public function buildForm(FormBuilderInterface $builder, array $options) {
-      $builder->add('prixOption', 'collection', array(
+      $builder
+          ->add('published')
+          ->add('prixOption', 'collection', array(
                 'type' => new PrixOptionChoixMultipleType(),
             ));
-      
+
    }
 
    /**

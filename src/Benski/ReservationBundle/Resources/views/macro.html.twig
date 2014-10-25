@@ -61,7 +61,10 @@
     {% for participant in ar.participants %}
     <label for="inputEmail3" class="col-sm-2 control-label">Participant #{{participant.numero}}</label>
     <div class="col-sm-10">
-        {% for choix in option.choix %}
+        {% set optionreserve = participant.getOptionReserveByOption(option) %}
+        {#{% for choix in option.choix %}#}
+        {% for choix in optionreserve.getListChoix %}
+
         <div class="radio">
             <label>
                 <input type="radio" name="option-{{option.id}}-{{ar.numero}}-{{participant.numero}}" id="optionsRadios1" value="{{choix.id}}" {% if (participant.getOptionReserveByOption(option)).choix == choix %}checked{% endif %}>
@@ -71,7 +74,6 @@
         {% endfor %}
     </div>
     {% endfor %}
-
 </div>
 {% endmacro %}
 

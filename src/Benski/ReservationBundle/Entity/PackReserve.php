@@ -5,6 +5,7 @@ namespace Benski\ReservationBundle\Entity;
 use Benski\CatalogueBundle\Entity\Option\OptionChoixMultiple;
 use Benski\CatalogueBundle\Entity\Option\AbstractOption;
 use Benski\CatalogueBundle\Entity\Option\OptionACocher;
+use Benski\ReservationBundle\Entity\Option\OptionReserve;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -47,7 +48,9 @@ class PackReserve {
      */
     protected $appartementReserve;
 
-  
+
+
+
     
     /**
      * @var array
@@ -99,6 +102,18 @@ class PackReserve {
         }
          *
          */
+    }
+
+    public function getOptionsReservesByType($type){
+        $optionReserve = array();
+        foreach ($this->getOptionsReserves() as $or) {
+            /** @var $or OptionReserve */
+            if($or->getOption()->getType() == $type){
+                $optionReserve[] = $or;
+            }
+        }
+        return $optionReserve;
+
     }
 
     public function getOptionsReservesTypeIndividuelle(){

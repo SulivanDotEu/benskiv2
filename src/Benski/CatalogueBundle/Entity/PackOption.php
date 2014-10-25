@@ -2,6 +2,7 @@
 
 namespace Benski\CatalogueBundle\Entity;
 
+use Benski\CatalogueBundle\Entity\Component\PublishedObject;
 use Doctrine\ORM\Mapping as ORM;
 use Benski\CatalogueBundle\Entity\Pack;
 use Benski\CatalogueBundle\Entity\Option\AbstractOption;
@@ -17,6 +18,8 @@ use Benski\CatalogueBundle\Entity\Option\AbstractOption;
 class PackOption
 {
 
+
+    use PublishedObject;
 
    /**
     * @var Pack

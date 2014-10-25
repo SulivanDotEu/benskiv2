@@ -147,8 +147,12 @@ class AppartementReserve {
         // options de groupes dans le pack et on va les ajouter dans l'appartement
         // qui sert de "groupe"
         $packReserve = $this->getPackReserve();
+        $pack = $packReserve->getPack();
         $optionsDeGroupe = $packReserve->getOptionByType(AbstractOption::$TYPE_GROUPE);
         foreach ($optionsDeGroupe as $option) {
+            /** @var AbstractOption $option */
+            $packOption = $pack->getPackOption($option);
+            if($packOption->isPublished() == false) continue;
             $optionReserve = $this->createOptionReserve($option);
             $optionReserve->setAppartement($this);
         }
@@ -158,11 +162,14 @@ class AppartementReserve {
         $optionsIndiduelles = $packReserve->getOptionByType(AbstractOption::$TYPE_INDIVIDUEL);
         foreach ($this->getParticipants() as $participant) {
             foreach ($optionsIndiduelles as $option) {
+                /** @var AbstractOption $option */
+                $packOption = $pack->getPackOption($option);
+                if($packOption->isPublished() == false) continue;
                 $optionReserve = $this->createOptionReserve($option);
                 $optionReserve->setParticipant($participant);
             }
         }
-        
+
         // maintenant que l'on a la référence catalogue de l'appartement 
         // et du sejour, on peut y placer le prix PAR PERSONNE
         $this->setPrix($this
@@ -194,7 +201,6 @@ class AppartementReserve {
         $p = new Participant();
         $p->setNumero($numero);
         $p->setAppartementReserve($this);
-        //$this->setAppartement($this);
         return $p;
     }
 
@@ -247,7 +253,7 @@ class AppartementReserve {
     /**
      * Get packReserve
      *
-     * @return \stdClass 
+     * @return PackReserve
      */
     public function getPackReserve() {
         return $this->packReserve;

@@ -450,7 +450,7 @@ class PackController extends Controller {
     }
 
     /**
-     * @Route("pack_edit", name="pack_edit")
+     * @Route("edit/{id}", name="pack_edit")
      *
      * Displays a form to edit an existing Pack entity.
      * @Secure(roles="ROLE_ADMIN")

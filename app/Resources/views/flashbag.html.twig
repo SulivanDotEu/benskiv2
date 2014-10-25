@@ -1,6 +1,6 @@
 {# empty Twig template #}
 
-{% for m in app.session.flashbag.get('notification') %}
+{% for m in app.session.flashbag.get('error') %}
 
 <div class="alert alert-{{ m.type }}">
    <button type="button" class="close" data-dismiss="alert">&times;</button>

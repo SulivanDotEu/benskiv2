@@ -2,6 +2,7 @@
 
 namespace Benski\CatalogueBundle\Entity;
 
+use Benski\CatalogueBundle\Entity\Component\PublishedObject;
 use Doctrine\ORM\Mapping as ORM;
 use Benski\CommonBundle\Entity\VersionedObject;
 
@@ -11,7 +12,9 @@ use Benski\CommonBundle\Entity\VersionedObject;
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="Benski\CatalogueBundle\Entity\SejourAppartementRepository")
  */
-class SejourAppartement extends VersionedObject {
+class SejourAppartement {
+
+    use PublishedObject;
 
    /**
     * @var Appartement

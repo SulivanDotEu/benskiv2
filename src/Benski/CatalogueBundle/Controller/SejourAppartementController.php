@@ -178,6 +178,7 @@ class SejourAppartementController extends Controller
         if ($editForm->isValid()) {
             $data = $editForm->getData();
             $entity->setStock($data['stock']);
+            $entity->setPublished($data['published']);
             for ($i = 1; $i <= $appartement->getNombreLits(); $i++) {
                 $entity->definirPrix($i, $data['prix-' . $i]);
             }
@@ -226,12 +227,24 @@ class SejourAppartementController extends Controller
     private function createEditForm(SejourAppartement $entity)
     {
 
+//        $type = new SejourAppartementType($entity);
+//        $form = $this->createForm($type, $entity, array());
+//        $form->add('submit', 'submit', array('label' => 'Update'));
+//        return $form;
+
+
         $builder = $this->createFormBuilder();
+
         $builder->add('stock', 'integer', array(
             'data' => $entity->getStock(),
         ));
+        $builder->add('published', 'checkbox', array(
+            'data' => $entity->isPublished(),
+            'required' => false
+
+        ));
         for ($i = 1; $i <= $entity->getAppartement()->getNombreLits(); $i++) {
-            $builder->add('prix-' . $i . '', 'money', array(
+            $builder->add('prix-' . $i, 'money', array(
                 'divisor' => 100,
                 'label' => 'Prix par personne pour ' . $i . 'p',
                 'data' => $entity->prixParPersonne($i),

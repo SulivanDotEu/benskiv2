@@ -11,18 +11,27 @@
 
     {% block stylesheets %}
 
-        <link rel="stylesheet" href="{{ asset('css/public_v2.css') }}" type="text/css"/>
-        <link rel="stylesheet" href="{{ asset('bs3/css/bootstrap.min.css') }}" type="text/css"/>
+        {#<link rel="stylesheet" href="{{ asset('bs3/css/bootstrap.min.css') }}" type="text/css"/>#}
+        <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
         <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
         {#<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-theme.min.css">#}
+
+        <link rel="stylesheet" href="{{ asset('css/public_v2.css') }}" type="text/css"/>
+        {% if is_granted('ROLE_ADMIN') %}
+            <link rel="stylesheet" href="{{ asset('css/simple_cms.css') }}" type="text/css"/>
+        {% endif %}
     {% endblock %}
+
+
+
 </head>
 
 <body>
 
 <div style="position: absolute; top:0px; padding: 10px; z-index: 5; width: 100%;">
     <div class="pull-left">
-        <a class="btn btn-link" style="font-size: 16px; font-weight: bold; color: #000000;">
+        <a href="{{ path('benski_website_public_homepage') }}" class="btn btn-link"
+           style="font-size: 16px; font-weight: bold; color: #000000;">
             Benski
         </a>
     </div>
@@ -58,12 +67,12 @@
                         text-shadow: 2px 2px 0px rgba(255, 255, 255, 0.5);
                         color: black;
                         text-transform: uppercase;
-                        font-size: 60px;
-                        font-weight: 900;
+                        /*font-size: 60px;*/
+                        font-weight: 600;
                         text-align: center;
                         ">
                             {% block header_content %}
-                            Des séjours en altitude de qualités pour la famille et les amis à Risoul!
+                                Des séjours en altitude de qualités pour la famille et les amis à Risoul!
                             {% endblock %}
                         </h1>
                     {% endblock %}
@@ -77,11 +86,8 @@
                 <div class="col-sm-12">
                     <h4 style="margin: 0px; padding: 10px">
                         {% block header_bottom %}
-                        <a href="{{ path('catalogue_public_sejour', {'destination':destination.id}) }}"
-                           style="color: white">
-                            Réservez votre jour à l'avance et profitez de nos prix avantageux!
-                        </a>
-                        <i class="fa fa-arrow-right"></i>
+                            {{ render(controller('BenskiWebsiteBundle:Public:marketAction')) }}
+
                         {% endblock %}
                     </h4>
                 </div>
@@ -102,36 +108,7 @@
                 </div>
             {% endblock %}
         </div>
-        <div class="row">
-            <div class="col-sm-6">
-                <h4 style="font-weight: bold"><span class="glyphicon glyphicon-tree-conifer"></span> Maitrisez Risoul
-                </h4>
-                <hr>
-                <img src="{{ asset('img/montagne-graph.jpg') }}" alt="" class="img-thumbnail img-responsive"
-                     style="margin-bottom: 10px">
-            </div>
-            <div class="col-sm-3">
-                <h4 style="font-weight: bold"><span class="glyphicon glyphicon-ok"></span> Tout public, vraiment!</h4>
-                <hr>
-                <p>
-                    {{ "home.text.7.content" |trans|raw }}
-                </p>
-                <ul>
-                    <li>18% de pistes pour débutant</li>
-                    <li>39% de pistes pour intérmédiaire</li>
-                    <li>34% de pistes pour avancé</li>
-                    <li>9% de pistes pour expert</li>
-                </ul>
-            </div>
-            <div class="col-sm-3">
-                <h4 style="font-weight: bold"><span class="glyphicon glyphicon-cog"></span> Moderne</h4>
-                <hr>
-                <p>
-                    {{ "home.text.8.content" |trans|raw }}
-                </p>
 
-            </div>
-        </div>
 
     </div>
 {% endblock %}
@@ -139,37 +116,76 @@
 <footer id="footer">
     <div class="container">
         <div class="row">
-            <div class="col-sm-3 col-md-offset-2 col-md-2">
+            <div class="col-sm-3 col-md-offset-2 col-md-2 col-xs-6 col-xs-offset-0">
                 <h5>Benski</h5>
                 <ul class="list-unstyled">
-                    <li>L'équipe</li>
-                    <li>Le concept</li>
-                    <li>Les avantages</li>
-                    <li>Nos partenaires</li>
+                    <li>
+                        <a href="{{ render(controller('BenskiWebsiteBundle:PublicPage:getHref', { 'internalName': 'TEAM' })) }}"
+                           class="footer">
+                            L'équipe</a>
+                    </li>
+                    <li>
+                        <a href="{{ render(controller('BenskiWebsiteBundle:PublicPage:getHref', { 'internalName': 'CONCEPT' })) }}"
+                           class="footer">
+                            Le concept
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ render(controller('BenskiWebsiteBundle:PublicPage:getHref', { 'internalName': 'PARTNERS' })) }}"
+                           class="footer">
+                            Nos partenaires
+                        </a>
+                    </li>
                 </ul>
             </div>
-            <div class="col-sm-3 col-md-2 ">
+            <div class="col-sm-3 col-md-2 col-xs-6">
                 <h5>Nos destinations</h5>
                 <ul class="list-unstyled">
-                    <li>Risoul</li>
+                    <li>
+                        <a href="{{ render(controller('BenskiWebsiteBundle:PublicPage:getHref', { 'internalName': 'RISOUL' })) }}"
+                           class="footer">
+                            Risoul
+                        </a>
+                    </li>
                 </ul>
             </div>
             <div class="clearfix visible-xs"></div>
-            <div class="col-sm-3 col-md-2">
+            <div class="col-sm-3 col-md-2 col-xs-6">
                 <h5>Services</h5>
                 <ul class="list-unstyled">
-                    <li>Nos appartements</li>
-                    <li>Nos options</li>
-                    <li>Nos avantages</li>
+                    <li>
+                        <a href="{{ render(controller('BenskiWebsiteBundle:PublicPage:getHref', { 'internalName': 'APPART' })) }}"
+                           class="footer">
+                            Nos appartements</a></li>
+                    <li>
+                        <a href="{{ render(controller('BenskiWebsiteBundle:PublicPage:getHref', { 'internalName': 'OPTION' })) }}"
+                           class="footer">
+                            Nos options</a></li>
+                    <li>
+                        <a href="{{ render(controller('BenskiWebsiteBundle:PublicPage:getHref', { 'internalName': 'AVANTAGES' })) }}"
+                           class="footer">
+                            Nos avantages</a></li>
+                    <li>
+                        <a href="{{ render(controller('BenskiWebsiteBundle:PublicPage:getHref', { 'internalName': 'SERVICE' })) }}"
+                           class="footer">
+                            Nos services</a></li>
                 </ul>
             </div>
-            <div class="col-sm-3 col-dm-2">
+            <div class="col-sm-3 col-dm-2 col-xs-6">
                 <h5>Aide</h5>
                 <ul class="list-unstyled">
-                    <li><i class="icon-book-1"></i>FAQ</li>
-                    <li><i class="icon-telephone"></i>Contact</li>
-                    <li><i class="icon-fontawesome-webfont-43"></i>Service status</li>
-                    <li><i class="icon-traffic-cone"></i>Work in progress</li>
+                    <li>
+                        <a href="{{ render(controller('BenskiWebsiteBundle:PublicPage:getHref', { 'internalName': 'FAQ' })) }}"
+                           class="footer">
+                            FAQ
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ render(controller('BenskiWebsiteBundle:PublicPage:getHref', { 'internalName': 'CONTACT' })) }}"
+                           class="footer">
+                            Contact
+                        </a>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -183,14 +199,28 @@
     </div>
 </footer>
 
+<script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-51358049-2', 'auto');
+    ga('send', 'pageview');
+
+</script>
+
 <!-- Bootstrap core JavaScript
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
 {% block javascripts %}
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="{{ asset('js/walva/functions.js') }}"></script>
 {% endblock %}
+
+<!-- Google ana -->
+
 
 </body>
 </html>

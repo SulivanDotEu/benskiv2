@@ -1,0 +1,15 @@
+.simplecms.administration {
+    border-color: greenyellow;
+    border-style: dashed;
+    border-width: 1px;
+}
+
+.simplecms.administration > .blockname {
+    background-color: greenyellow;
+    display: block;
+    padding: 2px;
+    padding-left: 10px;
+    color: white;
+    font-weight: bold;
+    margin: 3px;
+}

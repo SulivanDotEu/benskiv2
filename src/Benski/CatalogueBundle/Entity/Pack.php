@@ -2,6 +2,7 @@
 
 namespace Benski\CatalogueBundle\Entity;
 
+use Benski\CatalogueBundle\Entity\Component\ObjectWithContent;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -11,6 +12,8 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity(repositoryClass="Benski\CatalogueBundle\Entity\PackRepository")
  */
 class Pack {
+
+    use ObjectWithContent;
 
     /**
      * @var integer
@@ -55,14 +58,6 @@ class Pack {
      * @ORM\Column(name="prix", type="integer")
      */
     protected $prix;
-    
-    /**
-     * @ORM\ManyToOne(targetEntity="Benski\ContentBundle\Entity\Article")
-     * @ORM\JoinColumn(nullable=true)
-     * 
-     * @var type 
-     */
-    protected $presentation;
 
     /**
      * @var Pack
@@ -77,7 +72,11 @@ class Pack {
     public function __toString() {
         return '' . $this->getId() . ' : ' . $this->getNom() . ' (' . $this->getQualite() . ')';
     }
-    
+
+    /**
+     * @param $option
+     * @return PackOption
+     */
     public function getPackOption($option){
         foreach ($this->packOptions as $packOption) {
             if($packOption->getOption()->getId() == $option->getId()){

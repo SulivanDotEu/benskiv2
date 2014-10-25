@@ -1,42 +1,67 @@
-
-
-      {% set entities = entity.getPackOptionChoixMultiple() %}
+{% set entities = entity.getPackOptionChoixMultiple() %}
 <table class="table table-condensed">
     <thead>
-        <tr>
-            <th>Id</th>
-            <th>Nom</th>
-            <th>Choix</th>
-            <th>Prix</th>
-            <th>Actions</th>
-        </tr>
+    <tr>
+        <th>Id</th>
+        <th>Tag</th>
+        <th>Nom</th>
+        <th>Choix</th>
+        <th>Tag</th>
+        <th>Prix</th>
+        <th>Actions</th>
+    </tr>
     </thead>
     <tbody>
-        {% for entity in entities %}
-         {% set rowspan = entity.prixOption|length %}
+    {% for entity in entities %}
+        {% set rowspan = entity.prixOption|length %}
         <tr>
-            <td rowspan="{{rowspan}}"><a href="{{ path('option_show', { 'id': entity.option.id }) }}">{{ entity.option.id }}</a></td>
-            <td rowspan="{{rowspan}}">{{ entity.option.nom }}</td>
+            <td rowspan="{{ rowspan }}"><a
+                        href="{{ path('option_show', { 'id': entity.option.id }) }}">{{ entity.option.id }}</a></td>
+            <td rowspan="{{ rowspan }}">
+
+                {% if entity.published %}
+                    <span class="label label-success"><span class="glyphicon glyphicon-ok"></span> Public</span>
+                {% else %}
+                    <span class="label label-error"><span class="glyphicon glyphicon-remove"></span> Private</span>
+                {% endif %}
+
+            </td>
+            <td rowspan="{{ rowspan }}">{{ entity.option.nom }}</td>
             <td>{{ entity.prixOption[0].choix.intitule }}</td>
+            <td>
+                {% if entity.prixOption[0].published %}
+                    <span class="label label-success"><span class="glyphicon glyphicon-ok"></span> Public</span>
+                {% else %}
+                    <span class="label label-error"><span class="glyphicon glyphicon-remove"></span> Private</span>
+                {% endif %}
+
+            </td>
             <td>{{ macro.int2prix(entity.prixOption[0].prix) }} €</td>
-            <td rowspan="{{rowspan}}">
+            <td rowspan="{{ rowspan }}">
                 <ul>
                     <li>
                         <a href="{{ path('option_show', { 'id': entity.option.id }) }}">show</a>
                     </li>
                     <li>
                         <a href="{{ path('pack_bind_option_edit', { 'pack': entity.pack.id, 'option': entity.option.id }) }}">edit</a>
-
                     </li>
                 </ul>
             </td>
         </tr>
-         {% for i in range(1, rowspan-1) %}
-        <tr>
-            <td>{{ entity.prixOption[i].choix.intitule }}</td>
-            <td>{{ entity.prixOption[i].prix / 100}} €</td>
-        </tr>
-   {% endfor %}
+        {% for i in range(1, rowspan-1) %}
+            <tr>
+                <td>{{ entity.prixOption[i].choix.intitule }}</td>
+                <td>
+                    {% if entity.prixOption[i].published %}
+                        <span class="label label-success"><span class="glyphicon glyphicon-ok"></span> Public</span>
+                    {% else %}
+                        <span class="label label-error"><span class="glyphicon glyphicon-remove"></span> Private</span>
+                    {% endif %}
+
+                </td>
+                <td>{{ entity.prixOption[i].prix / 100 }} €</td>
+            </tr>
         {% endfor %}
+    {% endfor %}
     </tbody>
 </table>

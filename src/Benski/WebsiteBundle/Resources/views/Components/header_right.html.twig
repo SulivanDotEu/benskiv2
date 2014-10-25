@@ -1,13 +1,34 @@
 {# user \Benski\UserBundle\Entity\User #}
 {% set user = app.user %}
 
-{% if app.user %}
-    <a class="btn btn-link" href="{{ path('fos_user_profile_show') }}" style="color: #ffffff; font-size: 14px;">
+{% if app.user %}    <div class="dropdown" style="display: inline-block;">
+    <button class="btn btn-link" type="button" id="member" data-toggle="dropdown"
+            style="color: #ffffff; font-size: 14px;">
         {{ user.person.firstName }}
         {{ user.person.lastName }}
-    </a>
+        <span class="fa fa-caret-down" style="color: white"></span>
+    </button>
+    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+        <li role="presentation">
+            <a href="{{ path('fos_user_profile_show') }}" role="menuitem" tabindex="-1" >
+                {{ "Mon compte"|trans }}
+            </a></li>
+        <li role="presentation">
+            <a href="{{ path("public_reservation") }}" tabindex="-1" role="menuitem">
+                {{ "Mes réservations"|trans }}
+            </a>
+        </li>
+        <li role="presentation" class="divider"></li>
+        <li role="presentation">
+            <a href="{{ path("fos_user_security_logout") }}" role="menuitem" tabindex="-1">
+                {{ "Me déconnecter"|trans }}
+            </a>
+        </li>
+    </ul>
+</div>
+
 {% elseif not app.user %}
-    <a class="btn btn-link" href="#" style="color: #ffffff; font-size: 14px;">
+    <a class="btn btn-link" href="{{ path('fos_user_registration_register') }}" style="color: #ffffff; font-size: 14px;">
         <i class="fa fa-pencil"></i>
         S'inscrire
     </a>
@@ -16,12 +37,21 @@
         Se connecter
     </a>
 {% endif %}
+
+<a class="btn btn-link" href="{{ path('panier_afficher') }}" style="color: #ffffff; font-size: 14px;">
+    <i class="glyphicon glyphicon-shopping-cart"></i>
+    Panier
+</a>
+
 <a class="btn btn-link" href="{{ render(controller('BenskiWebsiteBundle:PublicPage:getHref', { 'internalName': 'CONTACT' })) }}" style="color: #ffffff; font-size: 14px;">
     <i class="fa fa-paper-plane"></i>
     Contact
 </a>
-<a class="btn btn-link" href="#" style="color: #ffffff; font-size: 14px;">
-    <i class="fa fa-globe"></i>
-    FR
-    <i class="fa fa-caret-down" style="color: white"></i>
-</a>
+
+{#<a class="btn btn-link" href="#" style="color: #ffffff; font-size: 14px;">#}
+    {#<i class="fa fa-globe"></i>#}
+    {#FR#}
+    {#<i class="fa fa-caret-down" style="color: white"></i>#}
+{#</a>#}
+
+

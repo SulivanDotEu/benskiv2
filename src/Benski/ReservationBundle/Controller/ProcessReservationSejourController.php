@@ -35,8 +35,9 @@ class ProcessReservationSejourController extends Controller {
         $error['type'] = 'danger';
         $error['title'] = $title;
         $error['content'] = $content;
-        $this->errors[] = array($title, $content);
-        $this->get('session')->getFlashBag()->add('notification', $error);
+        $entry = array($title, $content);
+        $this->errors[] = $entry;
+        $this->get('session')->getFlashBag()->add('error', $error);
     }
 
     /**
@@ -330,11 +331,11 @@ class ProcessReservationSejourController extends Controller {
         //}
 
         $em = $this->getDoctrine()->getManager();
-        //$user = $em->merge($user);
-        //var_dump($user);
-        //die();
+
         $reservationSejour->setResponsable($user);
+
         $reservationSejour->confirmer();
+
         $paiement = $reservationSejour->getPaiements()[0];
 
         // je merge le séjour car je l'ai mis dans la session

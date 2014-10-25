@@ -44,13 +44,13 @@
         Pour que cela fonctionne, il faut impérativement entourer le contenu désirer dans les balises suivantes:
         (en gros copier coller puis introduisez votre texte au millieu des balises)
     </p>
-    {{ dump('<div class="container" style="padding-top: 50px; padding-bottom: 50px;">
+    {{ '<div class="container" style="padding-top: 50px; padding-bottom: 50px;">
     <div class="row">
         <div class="col-sm-12">
             REMPLACER-CE-TEXTE-PAR-LE-CONTENU-VOULU
         </div>
     </div>
 </div>
-') }}
+'|raw }}
 
 {% endblock %}

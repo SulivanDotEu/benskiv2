@@ -2,6 +2,8 @@
 
 namespace Benski\CatalogueBundle\Entity;
 
+use Benski\CatalogueBundle\Entity\Component\ObjectWithContent;
+use Benski\CatalogueBundle\Entity\Component\PublishedObject;
 use Doctrine\ORM\Mapping as ORM;
 use Benski\CatalogueBundle\Entity\Appartement;
 use Benski\CatalogueBundle\Entity\SejourAppartement;
@@ -12,163 +14,207 @@ use Benski\CatalogueBundle\Entity\SejourAppartement;
  * @ORM\Table()
  * @ORM\Entity
  */
-class Sejour {
-   
-   public function __toString() {
-      return $this->getNom()." du ".$this->getDateDebut()->format('d/m/Y').
-              " au ".$this->getDateFin()->format('d/m/Y');
-   }
+class Sejour
+{
 
-      function __construct() {
-      $this->dateDebut = new \DateTime('NOW');
-      $this->dateFin = new \DateTime('NOW');
-   }
+    use PublishedObject;
+    use ObjectWithContent;
 
-   /**
-    * @var integer
-    *
-    * @ORM\Column(name="id", type="integer")
-    * @ORM\Id
-    * @ORM\GeneratedValue(strategy="AUTO")
-    */
-   protected $id;
+    public function __toString()
+    {
+        return $this->getNom() . " du " . $this->getDateDebut()->format('d/m/Y') .
+        " au " . $this->getDateFin()->format('d/m/Y');
+    }
 
-   /**
-    * @var string
-    *
-    * @ORM\Column(name="nom", type="string", length=255)
-    */
-   protected $nom;
+    function __construct()
+    {
+        $this->dateDebut = new \DateTime('NOW');
+        $this->dateFin = new \DateTime('NOW');
+    }
 
-   /**
-    * @var \stdClass
-    *
-    * @ORM\Column(name="dateDebut", type="datetime")
-    */
-   protected $dateDebut;
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    protected $id;
 
-   /**
-    * @var \DateTime
-    *
-    * @ORM\Column(name="dateFin", type="datetime")
-    */
-   protected $dateFin;
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="nom", type="string", length=255)
+     */
+    protected $nom;
 
-   /**
-    * @ORM\OneToMany(targetEntity="Benski\CatalogueBundle\Entity\SejourAppartement", mappedBy="sejour")
-    * 
-    * @var type 
-    */
-   protected $appartements;
-   
-   /**
-    * @ORM\OneToMany(targetEntity="Benski\CatalogueBundle\Entity\SejourPack",
-    *       mappedBy="sejour",
-    *       fetch="EAGER")
-    * 
-    * @var type 
-    */
-   protected $packs;
-   
-   public function getAllAppartementsByDestination($destination){
-      $temp = array();
-      foreach ($this->getAppartements()->getValues() as $appartement){
-         if($appartement->getAppartement()->getDestination() == $destination){
-            $temp[] = $appartement;
-         }
-      }
-      return $temp;
-   }
+    /**
+     * @var \stdClass
+     *
+     * @ORM\Column(name="dateDebut", type="datetime")
+     */
+    protected $dateDebut;
 
-   public function getSejourAppartementByAppartement($appartementToCompare){
-      foreach ($this->getAppartements()->getValues() as $appartement){
-         if($appartement->getAppartement() == $appartementToCompare){
-            return $appartement;
-         }
-      }
-   }
-   
-   public function getListePacks(){
-       $sejoursPacks = $this->packs;
-       $packs = array();
-       foreach ($sejoursPacks as $sejourPack) {
-           /* @var $sejourPack SejourPack */
-           $packs[] = $sejourPack->getPack();
-       }
-       return $packs;
-   }
-   
-   /**
-    * Get id
-    *
-    * @return integer 
-    */
-   public function getId() {
-      return $this->id;
-   }
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="dateFin", type="datetime")
+     */
+    protected $dateFin;
 
-   /**
-    * Set nom
-    *
-    * @param string $nom
-    * @return Sejour
-    */
-   public function setNom($nom) {
-      $this->nom = $nom;
+    /**
+     * @ORM\OneToMany(targetEntity="Benski\CatalogueBundle\Entity\SejourAppartement", mappedBy="sejour")
+     *
+     * @var type
+     */
+    protected $appartements;
 
-      return $this;
-   }
+    /**
+     * @ORM\OneToMany(targetEntity="Benski\CatalogueBundle\Entity\SejourPack",
+     *       mappedBy="sejour",
+     *       fetch="EAGER")
+     *
+     * @var type
+     */
+    protected $packs;
 
-   /**
-    * Get nom
-    *
-    * @return string 
-    */
-   public function getNom() {
-      return $this->nom;
-   }
 
-   /**
-    * Set dateDebut
-    *
-    * @param \DateTime $dateDebut
-    * @return Sejour
-    */
-   public function setDateDebut($dateDebut) {
-      $this->dateDebut = $dateDebut;
+    public function aPartirDe(){
+        $min = PHP_INT_MAX;
+        $sejoursAppartements = $this->getAppartements();
+        foreach ($sejoursAppartements as $sa) {
+            /** @var $sa SejourAppartement */
+            if(!$sa->isPublished()) continue;
+            $price = $sa->getPrixMinimum();
+            if($price < $min){
+                $min = $price;
+            }
+        }
+        if($min == PHP_INT_MAX) return 0;
+        return $min;
+    }
 
-      return $this;
-   }
+    public function getAllAppartementsByDestination($destination)
+    {
+        $temp = array();
+        foreach ($this->getAppartements()->getValues() as $appartement) {
+            if ($appartement->getAppartement()->getDestination() == $destination) {
+                $temp[] = $appartement;
+            }
+        }
+        return $temp;
+    }
 
-   /**
-    * Get dateDebut
-    *
-    * @return \DateTime 
-    */
-   public function getDateDebut() {
-      return $this->dateDebut;
-   }
+    public function getAllPublishedAppartementsByDestination($destination)
+    {
+        $temp = array();
+        foreach ($this->getAppartements()->getValues() as $appartement) {
+            if ($appartement->getAppartement()->getDestination() == $destination
+            AND $appartement->isPublished()) {
+                $temp[] = $appartement;
+            }
+        }
+        return $temp;
+    }
 
-   /**
-    * Set dateFin
-    *
-    * @param \DateTime $dateFin
-    * @return Sejour
-    */
-   public function setDateFin($dateFin) {
-      $this->dateFin = $dateFin;
+    public function getSejourAppartementByAppartement($appartementToCompare)
+    {
+        foreach ($this->getAppartements()->getValues() as $appartement) {
+            if ($appartement->getAppartement() == $appartementToCompare) {
+                return $appartement;
+            }
+        }
+    }
 
-      return $this;
-   }
+    public function getListePacks()
+    {
+        $sejoursPacks = $this->packs;
+        $packs = array();
+        foreach ($sejoursPacks as $sejourPack) {
+            /* @var $sejourPack SejourPack */
+            $packs[] = $sejourPack->getPack();
+        }
+        return $packs;
+    }
 
-   /**
-    * Get dateFin
-    *
-    * @return \DateTime 
-    */
-   public function getDateFin() {
-      return $this->dateFin;
-   }
+    /**
+     * Get id
+     *
+     * @return integer
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set nom
+     *
+     * @param string $nom
+     * @return Sejour
+     */
+    public function setNom($nom)
+    {
+        $this->nom = $nom;
+
+        return $this;
+    }
+
+    /**
+     * Get nom
+     *
+     * @return string
+     */
+    public function getNom()
+    {
+        return $this->nom;
+    }
+
+    /**
+     * Set dateDebut
+     *
+     * @param \DateTime $dateDebut
+     * @return Sejour
+     */
+    public function setDateDebut($dateDebut)
+    {
+        $this->dateDebut = $dateDebut;
+
+        return $this;
+    }
+
+    /**
+     * Get dateDebut
+     *
+     * @return \DateTime
+     */
+    public function getDateDebut()
+    {
+        return $this->dateDebut;
+    }
+
+    /**
+     * Set dateFin
+     *
+     * @param \DateTime $dateFin
+     * @return Sejour
+     */
+    public function setDateFin($dateFin)
+    {
+        $this->dateFin = $dateFin;
+
+        return $this;
+    }
+
+    /**
+     * Get dateFin
+     *
+     * @return \DateTime
+     */
+    public function getDateFin()
+    {
+        return $this->dateFin;
+    }
 
 
     /**
@@ -180,7 +226,7 @@ class Sejour {
     public function addAppartement(\Benski\CatalogueBundle\Entity\SejourAppartement $appartements)
     {
         $this->appartements[] = $appartements;
-    
+
         return $this;
     }
 
@@ -197,7 +243,7 @@ class Sejour {
     /**
      * Get appartements
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getAppartements()
     {
@@ -213,7 +259,7 @@ class Sejour {
     public function addPack(\Benski\CatalogueBundle\Entity\SejourPack $packs)
     {
         $this->packs[] = $packs;
-    
+
         return $this;
     }
 
@@ -230,15 +276,16 @@ class Sejour {
     /**
      * Get packs
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getPacks()
     {
         return $this->packs;
     }
-    
-    public function equals(Sejour $var){
-        if($var->getId() == $this->getId()) return true;
+
+    public function equals(Sejour $var)
+    {
+        if ($var->getId() == $this->getId()) return true;
         return false;
     }
 }

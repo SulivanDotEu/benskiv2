@@ -25,11 +25,10 @@ abstract class VersionedObject
      *
      * @ORM\Column(name="published", type="boolean", nullable=true)
      */
-    protected $published = false;
+    protected $published;
     
     public function isPublished(){
-       if($this->published) return "yes";
-       return "no";
+       return $this->published;
     }
 
     public function incrementVersion(){

@@ -2,6 +2,8 @@
 
 namespace Benski\CatalogueBundle\Entity;
 
+use Benski\CatalogueBundle\Entity\Component\PublishedObject;
+use Benski\CatalogueBundle\Entity\Option\ChoixOptionMultiple;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -11,6 +13,8 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity(repositoryClass="Benski\CatalogueBundle\Entity\PrixOptionChoixMultipleRepository")
  */
 class PrixOptionChoixMultiple {
+
+    use PublishedObject;
 
     public function __toString() {
         return $this->getChoix()->getIntitule();
@@ -33,7 +37,7 @@ class PrixOptionChoixMultiple {
    protected $prix;
 
    /**
-    * @var Benski\CatalogueBundle\Entity\Option\ChoixOptionMultiple
+    * @var ChoixOptionMultiple
     *
     * @ORM\ManyToOne(
     *       targetEntity = "Benski\CatalogueBundle\Entity\Option\ChoixOptionMultiple")
@@ -41,12 +45,12 @@ class PrixOptionChoixMultiple {
    protected $choix;
 
    /**
-    * @var Benski\CatalogueBundle\Entity\PrixOptionChoixMultiple
+    * @var PrixOptionChoixMultiple
     *
     * @ORM\ManyToOne(targetEntity = "Benski\CatalogueBundle\Entity\PackOptionChoixMultiple", inversedBy="prixOption")
     * @ORM\JoinColumns({
     *   @ORM\JoinColumn(name="pack_id", referencedColumnName="pack_id"),
-    *   @ORM\JoinColumn(name="abstractOption_id", referencedColumnName="abstractOption_id")
+    *   @ORM\JoinColumn(name="abstractOption_id", referencedColumnName="abstract_option_id")
     * })
     */
    protected $packOption;
@@ -117,7 +121,7 @@ class PrixOptionChoixMultiple {
    /**
     * Get choix
     *
-    * @return \stdClass 
+    * @return ChoixOptionMultiple
     */
    public function getChoix() {
       return $this->choix;

@@ -2,6 +2,7 @@
 
 namespace Benski\CatalogueBundle\Form;
 
+use Benski\WebsiteBundle\Form\BusinessContentType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
@@ -18,6 +19,8 @@ class SejourType extends AbstractType
             ->add('nom')
             ->add('dateDebut')
             ->add('dateFin')
+            ->add('content', new BusinessContentType())
+            ->add('published')
         ;
     }
     

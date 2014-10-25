@@ -1,26 +1,29 @@
 {% if appartement is not defined %}
-{% set appartement = null %}
+    {% set appartement = null %}
 {% endif %}
 
 <div class="list-group">
-               {% for element in appartements %}
-      <a href="{{ path('catalogue_public_prix_logement',
-                   { 'destination': destination.id, 'sejour' : sejour.id, 'appartement': element.appartement.id }) }}" 
-         class="list-group-item
-         {%if element.appartement == appartement%} active {% endif %}">
+    {% for element in appartements %}
+        <a href="{{ path('catalogue_public_prix_logement',
+        { 'destination': destination.id, 'sejour' : sejour.id, 'appartement': element.appartement.id }) }}"
+           class="list-group-item
+         {% if element.appartement == appartement %} active {% endif %}">
             <div class="row">
-               <div class="col-xs-4 text-left">{{ element.appartement.nom }}</div>
-               <div class="col-xs-3">
-                        {% for i in range(1, element.appartement.qualite) %}<span class="glyphicon glyphicon-star"></span>{% endfor %}
-                  </div>
-                  <div class="col-xs-2">
-                        {{ element.appartement.nombreLits}}
-                        <span class="glyphicon glyphicon-user"></span>
-                     </div>
-                     <div class="col-xs-3"> {{ element.getPrixMinimum()/100|number_format  }} <span class="glyphicon glyphicon-euro"></span> par <span class="glyphicon glyphicon-user"></span></div>
-                  </div>
-               </a>
-                  {% endfor %}
-
-
+                <div class="col-xs-4 text-left">{{ element.appartement.nom }}</div>
+                <div class="col-xs-3">
+                    {% for i in range(1, element.appartement.qualite) %}<span
+                            class="glyphicon glyphicon-star"></span>{% endfor %}
+                </div>
+                <div class="col-xs-2">
+                    {{ element.appartement.nombreLits }}
+                    <span class="glyphicon glyphicon-user"></span>
+                </div>
+                <div class="col-xs-3">{{ element.getPrixMinimum()/100|number_format }} <span
+                            class="glyphicon glyphicon-euro"></span> par <span class="glyphicon glyphicon-user"></span>
+                </div>
             </div>
+        </a>
+    {% endfor %}
+
+
+</div>

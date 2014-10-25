@@ -12,7 +12,7 @@
 
 
 
-<div class="container" >
+<div class="container" style="padding-top: 50px">
     <div class="row process-catalogue" style=" ">
         <div class="col-sm-3 " style="">
 
@@ -131,9 +131,7 @@
         </div>
 
         <div class="col-sm-8 ">
-            <p class="lead">
-                {{ 'catalogue.choix.option.intro'|trans|raw }}
-            </p>
+                {{ cms_inclodeBlock('pack_selection')|raw }}
 
         </div>
 

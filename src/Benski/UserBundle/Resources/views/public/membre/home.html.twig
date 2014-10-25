@@ -1,146 +1,173 @@
 {% extends "::public.html.twig" %}
 
+{% block title %}Benski - Espace membre de {{ app.user.person.firstName }} {{ app.user.person.lastName }}{% endblock %}
+
+{% block header_content %}
+    Bonjour {{ entity.person.firstName }} {{ entity.person.lastName }} {% endblock %}
+
+
+
+{% block parent_container %}
+    <div class="container" style="padding-top: 20px; padding-bottom: 50px;">
+        <div class="row">
+            <div class="col-sm-3">
+
+                <div class="list-group">
+                    <a class="list-group-item" href="{{ path("public_reservation") }}">
+                            <span class="badge badge-primary">{{ reservations| length }}</span>{{ 'Mes réservations'|trans }}
+                    </a>
+                    <a class="list-group-item disabled" href="#"><span
+                                class="badge badge-primary">{{ paiements| length }}</span>{{ 'Mes paiements'|trans }}
+                    </a>
+                    <a class="list-group-item disabled">{{ 'Mes informations'|trans }}</a>
+                    <a class="list-group-item disabled">{{ 'Modifier mon mot de passe'|trans }}</a>
+                </div>
+
+
+            </div>
+            <div class="col-sm-9">
+                <div class="row">
+                    <div class="col-lg-6 col-sm-12">
+                        <h4 style=""><span class="glyphicon glyphicon-book"></span> {{ 'Mes réservations'|trans }}</h4>
+                        <hr>
+                        <p>
+                            {% if (reservations| length) > 0 %}
+                            {{ 'Vous avez fait à ce jour'|trans }} {{ reservations| length }}
+                            réservation(s), {{ 'merci pour votre confiance !'|trans }}
+
+                            {#<a href='{{ path('public_reservation') }}' >#}
+                            {#En savoir plus#}
+                            {#</a>#}
+
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th>{{ 'Date'|trans }}</th>
+                                <th>{{ 'Montant dû'|trans }}</th>
+                                <th>{{ 'Status'|trans }}</th>
+                                <th></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for reservation in reservations %}
+                                <tr>
+                                    <td>{{ reservation.getDateDebut|date("d/m/Y") }}</td>
+                                    <td>{{ macro.int2prix(reservation.getMontantRestantDu) }}
+                                        sur {{ macro.int2prix(reservation.total) }} €
+                                    </td>
+                                    <td>{{ ('reservation.statut.'~reservation.statut)|trans }}</td>
+                                    <td><a href="{{ path('public_reservation_show', { 'id': reservation.id }) }}">
+                                            <span class="glyphicon glyphicon-chevron-right"></span>
+                                        </a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+
+                            </tbody>
+                        </table>
+
+
+                        {% endif %}
+                        </p>
+                    </div>
+
+                    <div class="col-lg-6 col-sm-12">
+                        <h4 style=""><span class="glyphicon glyphicon-bell"></span> Votre solde</h4>
+                        <hr>
+                        <p>
+                            {{ 'Votre solde restant du est de'|trans }} {{ macro.int2prix(entity.getSolde) }} €. <br>
+                            {#<a class="" href="/benskiv2/web/app_dev.php/content/services#}
+                            {#">#}
+                            {#En savoir plus#}
+                            {#</a>#}
+
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th></th>
+                                <th>{{ 'Montant'|trans }}</th>
+                                <th>{{ 'Statut'|trans }}</th>
+                                <th>{{ 'Date limite'|trans }}</th>
+                                <th></th>
+                            </tr>
+                            </thead>
+
+                            <tbody>
+                            {% for paiement in paiements %}
+                                {% if paiement.estEnRetard() %}
+                                    <tr class="danger">
+                                {% elseif paiement.bientotAEcheance() %}
+                                    <tr class="warning">
+                                {% elseif paiement.estSolde() %}
+                                    <tr class="success">
+
+                                {% else %}
+                                    <tr>
+                                {% endif %}
+
+                                <td>
+                                    {% if paiement.estEnRetard() %}
+                                        <span class="label label-danger"><span
+                                                    class="glyphicon glyphicon-remove"></span> Retard</span>
+                                    {% elseif paiement.bientotAEcheance() %}
+                                        <span class="label label-warning"><span class="glyphicon glyphicon-bell"></span> Bientot a échéance</span>
+                                    {% endif %}
+                                    {% if paiement.estSolde() %}
+                                        <span class="label label-success"><span
+                                                    class="glyphicon glyphicon-ok"></span></span>
+                                    {% endif %}
+
+
+                                </td>
+                                <td>{{ macro.int2prix(paiement.montant) }} €</td>
+                                <td>{{ ('paiement.statut.'~paiement.statut)|trans }}</td>
+                                <td>{% if paiement.dateLimite %}{{ paiement.dateLimite|date('d/m/Y') }}{% endif %}</td>
+                                <td><span class="glyphicon glyphicon-chevron-right"></span></td>
+                                </tr>
+                            {% endfor %}
+
+                            </tbody>
+                        </table>
+                        </p>
+                    </div>
+
+                </div>
+                <!-- 2ieme ligne -->
+                {#<div class="row">#}
+                {#<div class="col-sm-6">#}
+                {#<h4 style=""><span class="glyphicon glyphicon-asterisk"></span> Découvez nos services</h4>#}
+                {#<hr>#}
+                {#<p>#}
+                {#Nous assurons un service à ce jour inégalé. Nous sommes la pour vous divertir, nourrir et vous équiper dans les meilleurs conditions.<br> Nous nous portons garant de votre confort pour une liberté totale. Un service n'est rien s'il n'est pas personnalisé. C'est pourquoi vous avez le contrôle intégral sur les services que nous allons vous apporter.#}
+                {#<a class="" href="/benskiv2/web/app_dev.php/content/services#}
+                {#">#}
+                {#En savoir plus#}
+                {#</a>#}
+                {#</p>  #}
+                {#</div>#}
+                {#<div class="col-sm-6">#}
+                {#<h4 style=""><span class="glyphicon glyphicon-asterisk"></span> Découvez nos services</h4>#}
+                {#<hr>#}
+                {#<p>#}
+                {#Nous assurons un service à ce jour inégalé. Nous sommes la pour vous divertir, nourrir et vous équiper dans les meilleurs conditions.<br> Nous nous portons garant de votre confort pour une liberté totale. Un service n'est rien s'il n'est pas personnalisé. C'est pourquoi vous avez le contrôle intégral sur les services que nous allons vous apporter.#}
+                {#<a class="" href="/benskiv2/web/app_dev.php/content/services#}
+                {#">#}
+                {#En savoir plus#}
+                {#</a>#}
+                {#</p>  #}
+                {#</div>#}
+                {#</div>#}
+
+            </div>
+        </div>
+
+
+    </div>
+{% endblock %}
+
+
+
 {% block body %}
 
-<div class="row">
-    <div class="col-sm-3">
-        <ul class="list-group">
-            <li class="list-group-item"><span class="badge badge-primary">{{ reservations| length }}</span>{{'Mes réservations'|trans}}</li>
-            <li class="list-group-item"><span class="badge badge-primary">{{ paiements| length }}</span>{{'Mes paiements'|trans}}</li>
-            <li class="list-group-item">{{'Mes informations'|trans}}</li>
-            <li class="list-group-item">{{'Modifier mon mot de passe'|trans}}</li>
-        </ul>
-    </div>
-    <div class="col-sm-9">
-        <h1>Bonjour {{ entity.person.firstName }} {{ entity.person.lastName }}</h1>
-        <hr>
-        <div class="row">
-            <div class="col-sm-6">
-                <h4 style=""><span class="glyphicon glyphicon-book"></span> {{'Mes réservations'|trans}}</h4>
-                <hr>
-                <p>
-                    {% if (reservations| length) > 0 %}
-                    {{'Vous avez fait à ce jour'|trans}} {{ reservations| length}} réservation(s), {{'merci pour votre confiance !'|trans}}
 
-                    <a href='{{ path('public_reservation') }}' >
-                        En savoir plus
-                    </a>
-                    
-                    <table class="table">
-                    <thead>
-                        <tr>
-                            <th>{{ 'Date'|trans }}</th>
-                            <th>{{ 'Montant dû'|trans }}</th>
-                            <th>{{ 'Status'|trans }}</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for reservation in reservations %}
-                        <tr>
-                            <td>{{ reservation.getDateDebut|date("d/m/Y") }}</td>
-                            <td>{{ macro.int2prix(reservation.getMontantRestantDu) }} sur {{ macro.int2prix(reservation.total) }} €</td>
-                            <td>{{ ('reservation.statut.'~reservation.statut)|trans }}</td>
-                            <td><a href="{{ path('public_reservation_show', { 'id': reservation.id }) }}">
-                                    <span class="glyphicon glyphicon-chevron-right"></span>
-                                </a>
-                            </td>
-                        </tr>
-                        {% endfor %}
-                        
-                    </tbody>
-                    </table>
-                    
-                    
-                    {% endif %}
-                </p>  
-            </div>
-
-            <div class="col-sm-6">
-                <h4 style=""><span class="glyphicon glyphicon-bell"></span> Votre solde</h4>
-                <hr>
-                <p>
-                    {{ 'Votre solde restant du est de'|trans}} {{ macro.int2prix(entity.getSolde) }} €. <br>
-                    <a class="" href="/benskiv2/web/app_dev.php/content/services
-                       ">
-                        En savoir plus
-                    </a>
-
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th></th>
-                            <th>{{ 'Montant'|trans }}</th>
-                            <th>{{ 'Statut'|trans }}</th>
-                            <th>{{ 'Date limite'|trans }}</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-
-                    <tbody>
-                        {% for paiement in paiements %}
-                        {% if paiement.estEnRetard() %}
-                        <tr class="danger">
-                        {% elseif paiement.bientotAEcheance() %}
-                        <tr class="warning">
-                        {% elseif paiement.estSolde() %}
-                        <tr class="success">
-                            
-                        {% else %}
-                        <tr>
-                        {% endif %}
-
-                            <td>
-                                {% if paiement.estEnRetard() %}
-                                <span class="label label-danger"><span class="glyphicon glyphicon-remove"></span> Retard</span>
-                                {% elseif paiement.bientotAEcheance() %}
-                                <span class="label label-warning"><span class="glyphicon glyphicon-bell"></span> Bientot a échéance</span>
-                                {% endif %}
-                                {% if paiement.estSolde() %}
-                                <span class="label label-success"><span class="glyphicon glyphicon-ok"></span></span>
-                                {% endif %}
-
-
-                            </td>
-                            <td>{{ macro.int2prix(paiement.montant) }} €</td>
-                            <td>{{ ('paiement.statut.'~paiement.statut)|trans }}</td>
-                            <td>{% if paiement.dateLimite %}{{ paiement.dateLimite|date('d/m/Y') }}{% endif %}</td>
-                            <td><span class="glyphicon glyphicon-chevron-right"></span></td>
-                        </tr>
-                       {% endfor %}
-
-                    </tbody>
-                </table>
-                </p>  
-            </div>
-
-        </div>
-        <!-- 2ieme ligne -->
-        <div class="row">
-            <div class="col-sm-6">
-                <h4 style=""><span class="glyphicon glyphicon-asterisk"></span> Découvez nos services</h4>
-                <hr>
-                <p>
-                    Nous assurons un service à ce jour inégalé. Nous sommes la pour vous divertir, nourrir et vous équiper dans les meilleurs conditions.<br> Nous nous portons garant de votre confort pour une liberté totale. Un service n'est rien s'il n'est pas personnalisé. C'est pourquoi vous avez le contrôle intégral sur les services que nous allons vous apporter.
-                    <a class="" href="/benskiv2/web/app_dev.php/content/services
-                       ">
-                        En savoir plus
-                    </a>
-                </p>  
-            </div>
-            <div class="col-sm-6">
-                <h4 style=""><span class="glyphicon glyphicon-asterisk"></span> Découvez nos services</h4>
-                <hr>
-                <p>
-                    Nous assurons un service à ce jour inégalé. Nous sommes la pour vous divertir, nourrir et vous équiper dans les meilleurs conditions.<br> Nous nous portons garant de votre confort pour une liberté totale. Un service n'est rien s'il n'est pas personnalisé. C'est pourquoi vous avez le contrôle intégral sur les services que nous allons vous apporter.
-                    <a class="" href="/benskiv2/web/app_dev.php/content/services
-                       ">
-                        En savoir plus
-                    </a>
-                </p>  
-            </div>
-        </div>
-
-    </div>
-</div>
 {% endblock body %}

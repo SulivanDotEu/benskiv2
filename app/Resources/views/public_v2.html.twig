@@ -10,10 +10,16 @@
 
     {% block stylesheets %}
 
-        <link rel="stylesheet" href="{{ asset('css/public_v2.css') }}" type="text/css"/>
+
         <link rel="stylesheet" href="{{ asset('bs3/css/bootstrap.min.css') }}" type="text/css"/>
         <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
         {#<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-theme.min.css">#}
+
+        <link rel="stylesheet" href="{{ asset('css/public_v2.css') }}" type="text/css"/>
+        {% if app.user.granted('ROLE_ADMIN') %}
+            <link rel="stylesheet" href="{{ asset('css/simple_cms.css') }}" type="text/css"/>
+        {% endif %}
+
     {% endblock %}
 </head>
 
@@ -89,9 +95,10 @@
             <div class="container">
                 <div class="col-sm-12">
                     <h4 style="margin: 0px; padding: 10px">
-                        <a href="{{ path('catalogue_public_sejour', {'destination':destination.id}) }}" style="color: white">
+                        <a href="{{ path('catalogue_public_sejour', {'destination':destination.id}) }}"
+                           style="color: white">
                             Réservez votre jour à l'avance et profitez de nos prix avantageux!
-                            </a>
+                        </a>
                         <i class="fa fa-arrow-right"></i>
                     </h4>
                 </div>

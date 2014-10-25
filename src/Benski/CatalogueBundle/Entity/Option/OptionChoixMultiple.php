@@ -37,7 +37,8 @@ class OptionChoixMultiple extends AbstractOption {
      *      targetEntity="Benski\CatalogueBundle\Entity\Option\ChoixOptionMultiple",
      *      cascade={"all"},
      *      mappedBy="optionChoixMultiple",
-     *      fetch="EAGER")
+     *      fetch="EAGER",
+     *      orphanRemoval=true)
      * 
      */
     protected $choix;
@@ -118,7 +119,9 @@ class OptionChoixMultiple extends AbstractOption {
      * @return OptionChoixMultiple
      */
     public function addChoix(\Benski\CatalogueBundle\Entity\Option\ChoixOptionMultiple $choix) {
+        if($this->choix->contains($choix)) return;
         $this->choix[] = $choix;
+        $choix->setOptionChoixMultiple($this);
         return $this;
     }
 
@@ -128,7 +131,9 @@ class OptionChoixMultiple extends AbstractOption {
      * @param \Benski\CatalogueBundle\Entity\Option\ChoixOptionMultiple $choix
      */
     public function removeChoix(\Benski\CatalogueBundle\Entity\Option\ChoixOptionMultiple $choix) {
+        if(!$this->choix->contains($choix)) return;
         $this->choix->removeElement($choix);
+        $choix->setOptionChoixMultiple(null);
     }
 
 }

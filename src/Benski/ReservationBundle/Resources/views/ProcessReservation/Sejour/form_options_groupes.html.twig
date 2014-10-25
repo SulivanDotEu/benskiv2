@@ -11,10 +11,11 @@
               role="form"
               action="{{ path('benski_reservation_sejour_form_option_groupe_process', {'destination': destination.id, 'sejour': sejour.id}) }}"
               method="post" >
-            <h1>Reservez votre séjour</h1>
+            <h1>{{ "Reservez votre séjour"|trans }}</h1>
             <hr>
-            <div class="alert alert-info">Dans un premier temps, le site vous demande de choisir 
-                les options que vous désirez. Ces options dépendent du pack</div>
+            {% include "::flashbag.html.twig" %}
+            <div class="alert alert-info">{{ "Dans un premier temps, le site vous demande de choisir
+                les options que vous désirez. Ces options dépendent du pack"|trans }}</div>
 
             {% for ar in entity.appartementsReserves %}
             <h2>{{ar.appartement.nom }}
@@ -30,14 +31,7 @@
                 <div class="pull-right">
                 {% render(controller("BenskiContentBundle:Link:displayButton", { 'object' : destination })) %}
                 </div>
-                
-
             </h2>
-
-
-
-
-
             <hr>
             {% for option in ar.optionsReserves %}
                 {{ fo.form_option(option, ar) }}
@@ -68,31 +62,31 @@
             <span href="" class="list-group-item active">
                 <div class="pull-left"><span class="glyphicon glyphicon-chevron-right"></span> </div>
 
-                <h4 class="list-group-item-heading">Etape 1</h4>
-                <p class="list-group-item-text">Choix des options de groupe</p>
+                <h4 class="list-group-item-heading">{{ "Etape 1"|trans }}</h4>
+                <p class="list-group-item-text">{{ "Choix des options de groupe"|trans }}</p>
             </span>
 
             <span  class="list-group-item ">
                 <div class="pull-left"><span class="glyphicon glyphicon-bookmark"></span> </div>
 
-                <h4 class="list-group-item-heading">Etape 2</h4>
-                <p class="list-group-item-text">Choix des options individuelles</p>
+                <h4 class="list-group-item-heading">{{ "Etape 2"|trans }}</h4>
+                <p class="list-group-item-text">{{ "Choix des options individuelles"|trans }}</p>
             </span>
             <span class="list-group-item ">
                 <div class="pull-left"><span class="glyphicon glyphicon-user"></span> </div>
 
-                <h4 class="list-group-item-heading">Etape 3</h4>
-                <p class="list-group-item-text">Inscriptions des participants</p>
+                <h4 class="list-group-item-heading">{{ "Etape 3"|trans }}</h4>
+                <p class="list-group-item-text">{{ "Inscriptions des participants"|trans }}</p>
             </span>
             <span  class="list-group-item ">
                 <div class="pull-left"><span class="glyphicon glyphicon-flag"></span> </div>
 
-                <h4 class="list-group-item-heading">Confirmation</h4>
+                <h4 class="list-group-item-heading">{{ "Confirmation"|trans }}</h4>
             </span>
             <span  class="list-group-item ">
                 <div class="pull-left"><span class="glyphicon glyphicon-send"></span> </div>
 
-                <h4 class="list-group-item-heading">Paiement</h4>
+                <h4 class="list-group-item-heading">{{ "Paiement"|trans }}</h4>
             </span>
         </div>
 

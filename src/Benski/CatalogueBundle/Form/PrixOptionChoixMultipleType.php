@@ -18,7 +18,8 @@ class PrixOptionChoixMultipleType extends AbstractType
             ->add('prix', 'money', array(
              'divisor' => 100,
              'label' => 'Prix',
-         ));
+         ))
+        ->add('published');
     }
     
     /**

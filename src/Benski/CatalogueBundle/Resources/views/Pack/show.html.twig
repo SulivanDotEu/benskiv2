@@ -98,6 +98,7 @@
          <thead>
             <tr>
                <th>Id</th>
+               <th>Tag</th>
                <th>Nom</th>
                <th>{{ "Type"|trans}}</th>
                <th>Prix</th>
@@ -109,6 +110,13 @@
         {% for entity in entities %}
                <tr>
                   <td><a href="{{ path('option_show', { 'id': entity.option.id }) }}">{{ entity.option.id }}</a></td>
+                  <td>
+                      {% if entity.published %}
+                          <span class="label label-success"><span class="glyphicon glyphicon-ok"></span> Public</span>
+                      {% else %}
+                          <span class="label label-error"><span class="glyphicon glyphicon-remove"></span> Private</span>
+                      {% endif %}
+                  </td>
                   <td>{{ entity.option.nom }}</td>
                   <td>{{ ("option.type."~entity.option.type)|trans }}</td>
                   <td>{{ macro.int2prix(entity.prix) }} €</td>

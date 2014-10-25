@@ -148,7 +148,7 @@ class OptionReserve {
     /**
      * Get option
      *
-     * @return \Benski\CatalogueBundle\Entity\AbstractOption 
+     * @return AbstractOption
      */
     public function getOption()
     {

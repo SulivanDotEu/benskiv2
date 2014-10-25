@@ -17,8 +17,6 @@ class Person
         $this->setAddress(new Address());
     }
 
-    
-    
     /**
      * @var integer
      *

@@ -9,6 +9,7 @@
         method="post" >
         <h1>Reservez votre séjour</h1>
         <hr>
+        {% include "::flashbag.html.twig" %}
         <div class="alert alert-success">Vous avez choisi les options concernant vos groupes avec succès! Maintenant, le formulaire ci-dessous vous demande de choisir les options relatives aux participants de chaque groupe.</div>
 
             {% for ar in entity.appartementsReserves %}

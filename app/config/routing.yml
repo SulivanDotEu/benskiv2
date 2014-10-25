@@ -1,7 +1,3 @@
-benski_website:
-    resource: "@BenskiWebsiteBundle/Resources/config/routing.yml"
-    prefix:   /
-
 benski_dashboard:
     resource: "@BenskiDashBoardBundle/Resources/config/routing.yml"
     prefix:   /admin
@@ -41,3 +37,7 @@ admin:
 walva_simple_cms:
     resource: "@WalvaSimpleCmsBundle/Resources/config/routing.yml"
     prefix:   /admin/cms
+
+benski_website:
+    resource: "@BenskiWebsiteBundle/Resources/config/routing.yml"
+    prefix:   /

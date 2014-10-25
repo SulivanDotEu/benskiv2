@@ -56,10 +56,15 @@ doctrine:
         # path:     %database_path%
 
     orm:
+#        naming_strategy: doctrine.orm.naming_strategy.underscore
         auto_generate_proxy_classes: %kernel.debug%
         auto_mapping: true
+#        naming_strategy: doctrine.orm.naming_strategy.underscore
         resolve_target_entities:
             Walva\SimpleCmsBundle\Entity\AuthorInterface: Benski\UserBundle\Entity\User
+            Benski\CatalogueBundle\Entity\ContentInterface: Benski\WebsiteBundle\Entity\BusinessContent
+
+
         
 
 # Swiftmailer Configuration

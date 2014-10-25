@@ -2,6 +2,8 @@
 
 namespace Benski\CatalogueBundle\Entity;
 
+use Benski\CatalogueBundle\Entity\Component\ObjectWithContent;
+use Benski\CatalogueBundle\Entity\Component\PublishedObject;
 use Doctrine\ORM\Mapping as ORM;
 use Benski\CommonBundle\Entity\VersionedObject;
 
@@ -12,14 +14,18 @@ use Benski\CommonBundle\Entity\VersionedObject;
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="Benski\CatalogueBundle\Entity\DestinationRepository")
  */
-class Destination extends VersionedObject
+class Destination
 {
-   
-   public function __toString() {
-      return $this->getNom();
-   }
 
-   
+    use PublishedObject;
+    use ObjectWithContent;
+
+    public function __toString()
+    {
+        return $this->getNom();
+    }
+
+
     /**
      * @var integer
      *
@@ -42,19 +48,21 @@ class Destination extends VersionedObject
      * @ORM\Column(name="pays", type="string", length=255)
      */
     protected $pays;
-    
+
     /**
-    * @var string
-    *
-    * @ORM\Column(name="adminId", type="string", length=255, nullable=true)
-    */
-   protected $AdminId;
+     * @var string
+     *
+     * @ORM\Column(name="adminId", type="string", length=255, nullable=true)
+     */
+    protected $AdminId;
+
+
 
 
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -70,14 +78,14 @@ class Destination extends VersionedObject
     public function setNom($nom)
     {
         $this->nom = $nom;
-    
+
         return $this;
     }
 
     /**
      * Get nom
      *
-     * @return string 
+     * @return string
      */
     public function getNom()
     {
@@ -93,22 +101,23 @@ class Destination extends VersionedObject
     public function setPays($pays)
     {
         $this->pays = $pays;
-    
+
         return $this;
     }
 
     /**
      * Get pays
      *
-     * @return string 
+     * @return string
      */
     public function getPays()
     {
         return $this->pays;
     }
 
-    public function equals(Destination $var){
-        if($var->getId() == $this->getId()) return true;
+    public function equals(Destination $var)
+    {
+        if ($var->getId() == $this->getId()) return true;
         return false;
     }
 
@@ -122,18 +131,19 @@ class Destination extends VersionedObject
     public function setAdminId($adminId)
     {
         $this->AdminId = $adminId;
-    
+
         return $this;
     }
 
     /**
      * Get AdminId
      *
-     * @return string 
+     * @return string
      */
     public function getAdminId()
     {
         return $this->AdminId;
     }
+
 
 }

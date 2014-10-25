@@ -2,11 +2,13 @@
 {% import 'BenskiReservationBundle::macro.html.twig' as fo %}
 
 
+{% block header_content %}
+    {{'Vos réservations'|trans}}
+{% endblock %}
+
 
 
 {% block body -%}
-<h1>{{'Reservations'|trans}}</h1>
-<hr>
 
 <table class="table table-striped table-responsive">
     <thead>
@@ -40,8 +42,7 @@
             <td>{{ macro.int2prix(entity.getMontantRestantDu) }} €</td>
             <td>
                 <a href="{{ path('public_reservation_show', { 'id': entity.id }) }}" class="btn btn-primary">
-                    <span class="glyphicon glyphicon-eye-open"></span>
-                    show
+                    {{  "Plus d'informations"|trans }}
                 </a>
             </td>
         </tr>

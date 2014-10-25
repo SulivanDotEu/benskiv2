@@ -28,9 +28,9 @@
 
             </h2>
             <hr>
-            {% for option in ar.packReserve.pack.getOptionsIndividuelles %}
-            
-                {{ fo.form_option_indi(option, ar) }}
+            {% for optionreserve in ar.packReserve.getOptionsReservesTypeIndividuelle %}
+                {# optionreserve \Benski\ReservationBundle\Entity\Option\OptionReserve #}
+                {{ fo.form_option_indi(optionreserve.option, ar) }}
             {% endfor %}
             {% endfor %}
 

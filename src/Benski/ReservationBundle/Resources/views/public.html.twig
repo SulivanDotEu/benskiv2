@@ -8,8 +8,10 @@
 {% endblock %}
  
 {% block body %}
- 
-  {# On définit un sous-titre commun à toutes les pages du bundle, par exemple #}
+    {% include "::flashbag.html.twig" %}
+
+
+    {# On définit un sous-titre commun à toutes les pages du bundle, par exemple #}
 
  
   {# On définit un nouveau bloc, que les vues du bundle pourront remplir #}

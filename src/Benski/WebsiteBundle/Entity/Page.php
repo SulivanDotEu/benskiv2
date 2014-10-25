@@ -80,6 +80,11 @@ class Page
      */
     private $keywords;
 
+    function __toString()
+    {
+        return 'Page '.$this->getInternalName();
+    }
+
 
     /**
      * @ORM\PreUpdate()

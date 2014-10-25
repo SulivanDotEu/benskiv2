@@ -35,7 +35,7 @@ class PublicController extends Controller {
                 ->find($destination);
 
         $sejours = $em->getRepository('BenskiCatalogueBundle:Sejour')
-                ->findAll();
+                ->findByPublished(true);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Destination entity.');
@@ -54,11 +54,13 @@ class PublicController extends Controller {
 
         $destination = $em->getRepository('BenskiCatalogueBundle:Destination')
                 ->find($destination);
+        if($destination->isPublished() == false) throw new \Exception('Cet objet n\'est pas publié.');
         $sejours = $em->getRepository('BenskiCatalogueBundle:Sejour')
-                ->findAll();
+                ->findByPublished(true);
         $sejour = $em->getRepository('BenskiCatalogueBundle:Sejour')
                 ->find($sejour);
-        $appartements = $sejour->getAllAppartementsByDestination($destination);
+        if($sejour->isPublished() == false) throw new \Exception('Cet objet n\'est pas publié.');
+        $appartements = $sejour->getAllPublishedAppartementsByDestination($destination);
 
         if (!$destination OR !$sejour) {
             throw $this->createNotFoundException('Unable to find Destination entity.');
@@ -83,7 +85,7 @@ class PublicController extends Controller {
                 ->find($sejour);
         $appartement = $em->getRepository('BenskiCatalogueBundle:Appartement')
                 ->find($appartement);
-        $appartements = $sejour->getAllAppartementsByDestination($destination);
+        $appartements = $sejour->getAllPublishedAppartementsByDestination($destination);
         $sejourAppartement = $sejour->getSejourAppartementByAppartement($appartement);
 
         if (!$destination OR !$sejour OR !$appartement) {

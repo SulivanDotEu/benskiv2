@@ -1,19 +1,34 @@
 {% if sejour is not defined %}
-{% set sejour = null %}
+    {% set sejour = null %}
 {% endif %}
 
 <div class="list-group myListGroup">
-{% for element in sejours %}
-      <a href="{{ path('catalogue_public_logement',
-                   { 'destination': destination.id, 'sejour' : element.id }) }}
+    {% for element in sejours %}
+        <a href="{{ path('catalogue_public_logement',
+        { 'destination': destination.id, 'sejour' : element.id }) }}
          " class="list-group-item 
           {% if element == sejour %} active {% endif %}
          ">
             <!--<p class="pull-right prix" > à partir de <span class="prix">1000€</span></p>-->
-            <div class="pull-left"><span class="glyphicon glyphicon-bookmark"></span> </div>
+            <div class="pull-left"><span class="glyphicon glyphicon-bookmark"></span></div>
 
-            <h4 class="list-group-item-heading" >{{ element.nom }}</h4>
-            <p class="list-group-item-text">Du {{ element.dateDebut|date('d/m/Y') }} au {{ element.dateFin|date('d/m/Y') }}</p>
-         </a>
-{% endfor %}
-      </div>
+            {% if element.aPartirDe != 0 %}
+            <h5 class="pull-right list-group-item-heading hidden-sm">
+                {{ 'à partir de'|trans }}  <b>{{ element.aPartirDe / 100 }} €</b> {{ ' par personne'|trans }}
+            </h5>
+            {% endif %}
+            <h4 class="list-group-item-heading">
+                {{ element.nom }}
+            </h4>
+
+
+            <p class="list-group-item-text">
+                Du {{ element.dateDebut|date('d/m/Y') }} au {{ element.dateFin|date('d/m/Y') }}
+                {% if element.aPartirDe != 0 %}
+                    <br>
+                    <span class="visible-sm">{{ 'à partir de'|trans }} <b>{{ element.aPartirDe / 100 }} €</b> {{ ' par personne'|trans }}</span>
+                {% endif %}
+            </p>
+        </a>
+    {% endfor %}
+</div>
