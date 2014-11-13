@@ -52,6 +52,10 @@ class OptionChoixMultiple extends AbstractOption {
     public function isTypeChoixMultiple(){
         return true;
     }
+
+    public function getShortClass(){
+        return "Multiple";
+    }
     
 
     /**

@@ -2,6 +2,7 @@
 
 namespace Benski\ReservationBundle\Entity;
 
+use Benski\CatalogueBundle\Entity\Sejour;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -187,7 +188,7 @@ class SejourReserve {
     /**
      * Get sejour
      *
-     * @return \Benski\CatalogueBundle\Sejour 
+     * @return Sejour
      */
     public function getSejour() {
         return $this->sejour;

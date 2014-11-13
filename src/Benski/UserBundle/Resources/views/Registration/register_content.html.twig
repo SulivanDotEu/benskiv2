@@ -65,7 +65,7 @@
     </div>
 
     {{ myform.form_row(form.Person.phoneNumber, 'Numéro', 'Numéro de téléphone') }}
-    <h3>Adresse</h3>
+    <h3>{{ "Adresse"|trans }}</h3>
     <hr>
         {{ myform.form_row(form.Person.address.street, 'Rue') }}
         {{ myform.form_row(form.Person.address.number, 'Numero') }}

@@ -1,5 +1,10 @@
 #/admin/sejour-pack
 
+#sejour_pack_controller:
+#    prefix:  /
+#    type:     annotation
+#    resource: "@BenskiCatalogueBundle/Controller/SejourPackController.php"
+
 sejour_pack:
     pattern:  /
     defaults: { _controller: "BenskiCatalogueBundle:SejourPack:index" }
@@ -26,7 +31,7 @@ sejour_pack_update:
     defaults: { _controller: "BenskiCatalogueBundle:SejourPack:update" }
     requirements: { _method: post|put }
 
-sejour_pack_delete:
-    pattern:  /{id}/delete
-    defaults: { _controller: "BenskiCatalogueBundle:SejourPack:delete" }
-    requirements: { _method: post|delete }
+#sejour_pack_delete:
+#    pattern:  /{id}/delete
+#    defaults: { _controller: "BenskiCatalogueBundle:SejourPack:delete" }
+#    requirements: { _method: post|delete }

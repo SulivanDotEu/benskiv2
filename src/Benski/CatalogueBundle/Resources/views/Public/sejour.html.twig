@@ -21,7 +21,7 @@
                     <span class="glyphicon glyphicon-chevron-right arrow"></span>
 
                     <div class="panel-header2"><h4 style="   "><span class="glyphicon glyphicon-map-marker"></span>
-                            Destination</h4></div>
+                            {{ "Destination"|trans }}</h4></div>
                     <div class="panel-body" style="padding-right: 5px; padding-right: 5px">
 
 
@@ -39,11 +39,11 @@
 
                     <span class="glyphicon glyphicon-chevron-right arrow"></span>
 
-                    <div class="panel-header2"><h4><span class="glyphicon glyphicon-calendar"></span> Date</h4></div>
+                    <div class="panel-header2"><h4><span class="glyphicon glyphicon-calendar"></span> {{ "Date"|trans }}</h4></div>
 
                     <div class="panel-body" style="">
 
-                        faites votre choix <span class="glyphicon glyphicon-arrow-down"></span>
+                        {{ "faites votre choix"|trans }} <span class="glyphicon glyphicon-arrow-down"></span>
                     </div>
                     <!---<div class="panel-body" style="font-weight: bold; font-size: 16px">
                         Du 21/10/2013<br>
@@ -57,7 +57,7 @@
                 <div class="panel panel-default text-center myPanel " style="">
                     <span class="glyphicon glyphicon-chevron-right arrow"></span>
 
-                    <div class="panel-header2"><h4><span class="glyphicon glyphicon-home"></span> Logement</h4></div>
+                    <div class="panel-header2"><h4><span class="glyphicon glyphicon-home"></span> {{ "Logement"|trans }}</h4></div>
                     <div class="panel-body">
 
                     </div>
@@ -67,7 +67,7 @@
 
                 <div class="panel panel-default text-center myPanel">
 
-                    <div class="panel-header2"><h4><span class="glyphicon glyphicon-gift"></span> Options</h4></div>
+                    <div class="panel-header2"><h4><span class="glyphicon glyphicon-gift"></span> {{ "Options"|trans }}</h4></div>
                     <div class="panel-body">
 
                     </div>
@@ -81,8 +81,8 @@
         <div class="row">
             <div class="col-sm-6">
                 <div class="page-header" style="">
-                    <h1>Nos séjours
-                        <small>Choisissez votre date</small>
+                    <h1>{{ "Nos séjours"|trans }}
+                        <small>{{ "Choisissez votre date"|trans }}</small>
                     </h1>
                 </div>
                 {% include 'BenskiCatalogueBundle:Public:component/sejour-list-groupe.html.twig' %}

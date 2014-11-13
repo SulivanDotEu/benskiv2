@@ -51,9 +51,13 @@ class OptionACocher extends AbstractOption
     public function isTypeChoixMultiple(){
         return false;
     }
-    
-    
-    
+
+    public function getShortClass(){
+        return "Cocher";
+    }
+
+
+
     /**
      * Get id
      *

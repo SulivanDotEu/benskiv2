@@ -3,7 +3,7 @@
 namespace Benski\ReservationBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use \Walva\CrudAdminBundle\Controller\CrudController as Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -13,53 +13,62 @@ use Benski\ReservationBundle\Form\ReductionType;
 /**
  * Reduction controller.
  *
- * @Route("/admin/reduction")
+ * @Route("/reduction")
  */
 class ReductionController extends Controller
 {
 
+function __construct() {
+    $this->setRoutes(array(
+        self::$ROUTE_INDEX_ADD => 'reduction_new',
+        self::$ROUTE_INDEX_INDEX => 'reduction',
+        self::$ROUTE_INDEX_DELETE => 'reduction_show',
+        self::$ROUTE_INDEX_EDIT => 'reduction_edit',
+        self::$ROUTE_INDEX_SHOW => 'reduction_show',
+    ));
+
+    $this->setLayoutPath('BenskiReservationBundle:Reduction:layout.html.twig');
+    $this->setIndexPath("BenskiReservationBundle:Reduction:index.html.twig");
+    $this->setShowPath("BenskiReservationBundle:Reduction:show.html.twig");
+    $this->setEditPath("BenskiReservationBundle:Reduction:edit.html.twig");
+
+    $this->setColumnsHeader(array(
+        "Id",
+        ));
+}
+
+public function createEntity() {
+        return new Reduction();
+    }
+
+public function getRepository() {
+        $em = $this->getDoctrine()->getManager();
+        return $em->getRepository('BenskiReservationBundle:Reduction');
+    }
+
     /**
      * Lists all Reduction entities.
      *
-     * @Route("/", name="admin_reduction")
+     * @Route("/", name="reduction")
      * @Method("GET")
      * @Template()
      */
     public function indexAction()
     {
-        $em = $this->getDoctrine()->getManager();
+        return parent::indexAction();
 
-        $entities = $em->getRepository('BenskiReservationBundle:Reduction')->findAll();
-
-        return array(
-            'entities' => $entities,
-        );
     }
     /**
      * Creates a new Reduction entity.
      *
-     * @Route("/", name="admin_reduction_create")
+     * @Route("/", name="reduction_create")
      * @Method("POST")
      * @Template("BenskiReservationBundle:Reduction:new.html.twig")
      */
     public function createAction(Request $request)
     {
-        $entity = new Reduction();
-        $form = $this->createCreateForm($entity);
-        $form->handleRequest($request);
+        return parent::createAction($request);
 
-        if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($entity);
-            $em->flush();
-
-            return $this->redirect($this->generateUrl('admin_reduction_show', array('id' => $entity->getId())));
-        }
-
-        return array(
-            'entity' => $entity,
-            'form'   => $form->createView(),
-        );
     }
 
     /**
@@ -69,10 +78,10 @@ class ReductionController extends Controller
     *
     * @return \Symfony\Component\Form\Form The form
     */
-    private function createCreateForm(Reduction $entity)
+    public function createCreateForm(Reduction $entity)
     {
         $form = $this->createForm(new ReductionType(), $entity, array(
-            'action' => $this->generateUrl('admin_reduction_create'),
+            'action' => $this->generateUrl('reduction_create'),
             'method' => 'POST',
         ));
 
@@ -84,71 +93,40 @@ class ReductionController extends Controller
     /**
      * Displays a form to create a new Reduction entity.
      *
-     * @Route("/new", name="admin_reduction_new")
+     * @Route("/new", name="reduction_new")
      * @Method("GET")
      * @Template()
      */
     public function newAction()
     {
-        $entity = new Reduction();
-        $form   = $this->createCreateForm($entity);
+        return parent::newAction();
 
-        return array(
-            'entity' => $entity,
-            'form'   => $form->createView(),
-        );
     }
 
     /**
      * Finds and displays a Reduction entity.
      *
-     * @Route("/{id}", name="admin_reduction_show")
+     * @Route("/{id}", name="reduction_show")
      * @Method("GET")
      * @Template()
      */
     public function showAction($id)
     {
-        $em = $this->getDoctrine()->getManager();
+        return parent::showAction($id);
 
-        $entity = $em->getRepository('BenskiReservationBundle:Reduction')->find($id);
-
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Reduction entity.');
-        }
-
-        $deleteForm = $this->createDeleteForm($id);
-
-        return array(
-            'entity'      => $entity,
-            'delete_form' => $deleteForm->createView(),
-        );
     }
 
     /**
      * Displays a form to edit an existing Reduction entity.
      *
-     * @Route("/{id}/edit", name="admin_reduction_edit")
+     * @Route("/{id}/edit", name="reduction_edit")
      * @Method("GET")
      * @Template()
      */
     public function editAction($id)
     {
-        $em = $this->getDoctrine()->getManager();
+        return parent::editAction($id);
 
-        $entity = $em->getRepository('BenskiReservationBundle:Reduction')->find($id);
-
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Reduction entity.');
-        }
-
-        $editForm = $this->createEditForm($entity);
-        $deleteForm = $this->createDeleteForm($id);
-
-        return array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
-        );
     }
 
     /**
@@ -158,10 +136,10 @@ class ReductionController extends Controller
     *
     * @return \Symfony\Component\Form\Form The form
     */
-    private function createEditForm(Reduction $entity)
+    public function createEditForm(Reduction $entity)
     {
         $form = $this->createForm(new ReductionType(), $entity, array(
-            'action' => $this->generateUrl('admin_reduction_update', array('id' => $entity->getId())),
+            'action' => $this->generateUrl('reduction_update', array('id' => $entity->getId())),
             'method' => 'PUT',
         ));
 
@@ -172,60 +150,25 @@ class ReductionController extends Controller
     /**
      * Edits an existing Reduction entity.
      *
-     * @Route("/{id}", name="admin_reduction_update")
+     * @Route("/{id}", name="reduction_update")
      * @Method("PUT")
      * @Template("BenskiReservationBundle:Reduction:edit.html.twig")
      */
     public function updateAction(Request $request, $id)
     {
-        $em = $this->getDoctrine()->getManager();
+        return parent::updateAction($request, $id);
 
-        $entity = $em->getRepository('BenskiReservationBundle:Reduction')->find($id);
-
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Reduction entity.');
-        }
-
-        $deleteForm = $this->createDeleteForm($id);
-        $editForm = $this->createEditForm($entity);
-        $editForm->handleRequest($request);
-
-        if ($editForm->isValid()) {
-            $em->flush();
-
-            return $this->redirect($this->generateUrl('admin_reduction_edit', array('id' => $id)));
-        }
-
-        return array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
-        );
     }
     /**
      * Deletes a Reduction entity.
      *
-     * @Route("/{id}", name="admin_reduction_delete")
+     * @Route("/{id}", name="reduction_delete")
      * @Method("DELETE")
      */
     public function deleteAction(Request $request, $id)
     {
-        $form = $this->createDeleteForm($id);
-        $form->handleRequest($request);
+return parent::deleteAction($request, $id);
 
-        if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $entity = $em->getRepository('BenskiReservationBundle:Reduction')->find($id);
-
-            if (!$entity) {
-                throw $this->createNotFoundException('Unable to find Reduction entity.');
-            }
-
-            $em->remove($entity);
-            $em->flush();
-        }
-
-        return $this->redirect($this->generateUrl('admin_reduction'));
     }
 
     /**
@@ -235,10 +178,10 @@ class ReductionController extends Controller
      *
      * @return \Symfony\Component\Form\Form The form
      */
-    private function createDeleteForm($id)
+    public function createDeleteForm($id)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('admin_reduction_delete', array('id' => $id)))
+            ->setAction($this->generateUrl('reduction_delete', array('id' => $id)))
             ->setMethod('DELETE')
             ->add('submit', 'submit', array('label' => 'Delete'))
             ->getForm()

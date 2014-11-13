@@ -2,6 +2,8 @@
 
 namespace Benski\CatalogueBundle\Controller;
 
+use Benski\CatalogueBundle\Entity\Pack;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Benski\CatalogueBundle\Entity\Appartement;
@@ -60,12 +62,6 @@ class SejourPackController extends Controller {
     * @return \Symfony\Component\Form\Form The form
     */
    private function createCreateForm(SejourPack $sp) {
-
-        if (!$this->get('security.context')->isGranted('ROLE_ADMIN')) 
-        {
-            throw new AccessDeniedHttpException('Accès limité aux administrateurs');
-        }
-        
       $builder = $this->createFormBuilder($sp);
       $builder->add('pack', 'entity', array(
           'class' => 'BenskiCatalogueBundle:Pack',
@@ -81,12 +77,6 @@ class SejourPackController extends Controller {
     * @Secure(roles="ROLE_ADMIN")
     */
    public function bindAction(Sejour $sejour, Request $request) {
-       
-        if (!$this->get('security.context')->isGranted('ROLE_ADMIN')) 
-        {
-            throw new AccessDeniedHttpException('Accès limité aux administrateurs');
-        }
-        
       $entity = new SejourPack();
       $entity->setSejour($sejour);
       $form = $this->createCreateForm($entity);
@@ -112,38 +102,27 @@ class SejourPackController extends Controller {
          }
       }
 
-
       return $this->render('BenskiCatalogueBundle:Sejour:bindAppartement.html.twig', array(
                   'entity' => $entity,
                   'form' => $form->createView(),
               ));
    }
 
-   
 
    /**
-    * Displays a form to edit an existing Appartement entity.
-    * @Secure(roles="ROLE_ADMIN")
-    */
-
-   /**
-    * @ParamConverter("appartement", class="BenskiCatalogueBundle:Appartement")
+    * @todo
+    * @ParamConverter("pack", class="BenskiCatalogueBundle:Pack")
     * @ParamConverter("sejour", class="BenskiCatalogueBundle:Sejour")
+    * @Route("/edit/sejour-{sejour}/pack-{pack}")
     */
-   public function editAction($sejour, $appartement, Request $request) {
-       
-        if (!$this->get('security.context')->isGranted('ROLE_ADMIN')) 
-        {
-            throw new AccessDeniedHttpException('Accès limité aux administrateurs');
-        }
-        
+   public function editAction(Sejour $sejour, Pack $pack, Request $request) {
       $em = $this->getDoctrine()->getManager();
 
       $entity = $em->getRepository('BenskiCatalogueBundle:SejourPack')
-              ->myFindByAppartementAndSejour($sejour, $appartement);
+              ->myFindBySejourAndPack($sejour, $pack);
       /* @var $entity SejourPack */
       if (!$entity) {
-         throw $this->createNotFoundException('Unable to find Appartement entity.');
+         throw $this->createNotFoundException('Unable to find SejourPack entity.');
       }
 
       $editForm = $this->createEditForm($entity);
@@ -168,6 +147,7 @@ class SejourPackController extends Controller {
    }
 
    /**
+    * @todo
     * Creates a form to edit a Appartement entity.
     * @Secure(roles="ROLE_ADMIN")
     * @param Appartement $entity The entity
@@ -175,12 +155,6 @@ class SejourPackController extends Controller {
     * @return \Symfony\Component\Form\Form The form
     */
    private function createEditForm(SejourPack $entity) {
-
-        if (!$this->get('security.context')->isGranted('ROLE_ADMIN')) 
-        {
-            throw new AccessDeniedHttpException('Accès limité aux administrateurs');
-        }
-        
       $builder = $this->createFormBuilder();
       $builder->add('stock', 'integer', array(
           'data' => $entity->getStock(),
@@ -198,6 +172,7 @@ class SejourPackController extends Controller {
    }
 
    /**
+    * @todo
     * Edits an existing Appartement entity.
     * @Secure(roles="ROLE_ADMIN")
     */
@@ -233,33 +208,24 @@ class SejourPackController extends Controller {
               ));
    }
 
-   /**
-    * Deletes a Appartement entity.
-    * @Secure(roles="ROLE_ADMIN")
-    */
-   public function deleteAction(Request $request, $id) {
-       
-        if (!$this->get('security.context')->isGranted('ROLE_ADMIN')) 
-        {
-            throw new AccessDeniedHttpException('Accès limité aux administrateurs');
-        }
-        
-      $form = $this->createDeleteForm($id);
-      $form->handleRequest($request);
+    /**
+     * @ParamConverter("pack", class="BenskiCatalogueBundle:Pack")
+     * @ParamConverter("sejour", class="BenskiCatalogueBundle:Sejour")
+     * @Route("/delete/sejour-{sejour}/pack-{pack}", name="sejour_pack_delete")
+     */
+   public function deleteAction(Pack $pack, Sejour $sejour, Request $request) {
+       $em = $this->getDoctrine()->getManager();
 
-      if ($form->isValid()) {
-         $em = $this->getDoctrine()->getManager();
-         $entity = $em->getRepository('BenskiCatalogueBundle:Appartement')->find($id);
+       $entity = $em->getRepository('BenskiCatalogueBundle:SejourPack')
+           ->myFindBySejourAndPack($sejour, $pack);
+       /* @var $entity SejourPack */
+       if (!$entity) {
+           throw $this->createNotFoundException('Unable to find SejourPack entity.');
+       }
+       $em->remove($entity);
+       $em->flush();
 
-         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Appartement entity.');
-         }
-
-         $em->remove($entity);
-         $em->flush();
-      }
-
-      return $this->redirect($this->generateUrl('appartement'));
+      return $this->redirect($this->generateUrl('sejour_show', array('id' => $sejour->getId())));
    }
 
    /**

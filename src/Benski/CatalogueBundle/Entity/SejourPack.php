@@ -29,8 +29,6 @@ class SejourPack
     */
     protected $pack;
 
-
-
     /**
      * Set sejour
      *

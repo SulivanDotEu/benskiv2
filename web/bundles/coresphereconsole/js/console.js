@@ -215,16 +215,6 @@ window.CoreSphereConsole = (function (window) {
                 this_console.focus();
             })
 
-            .on('mouseover.coresphere_console', '.console_suggestions li', function (e) {
-                var $this = $(this);
-
-                this_console.suggestion_box.find('.' + this_console.options.active_suggestion_class).removeClass(this_console.options.active_suggestion_class);
-                $this.addClass(this_console.options.active_suggestion_class);
-                this_console.setActiveSuggestion($this.text());
-
-                this_console.focus();
-            })
-
             .on('click.coresphere_console', '.console_suggestions li', function (e) {
                 e.stopPropagation();
                 var $this = $(this);
@@ -243,7 +233,8 @@ window.CoreSphereConsole = (function (window) {
                     filter,
                     current_suggestions,
                     active_suggestion,
-                    next;
+                    next,
+                    scrollToEl;
 
                 if (this_console.isLocked()) {
                     return;
@@ -306,6 +297,7 @@ window.CoreSphereConsole = (function (window) {
                     e.preventDefault();
 
                 } else if (e.which === keys.up || e.which === keys.down) {
+                    e.preventDefault();
 
                     current_suggestions = this_console.suggestion_box.find('li');
                     active_suggestion = current_suggestions.filter('.' + this_console.options.active_suggestion_class);
@@ -315,6 +307,7 @@ window.CoreSphereConsole = (function (window) {
                             next = active_suggestion.size() ? active_suggestion.removeClass(this_console.options.active_suggestion_class).prev() : current_suggestions.last();
                             next = next.size() ? next : current_suggestions.last();
                             this_console.setActiveSuggestion(next.addClass(this_console.options.active_suggestion_class).text());
+                            scrollToEl = next[0];
                         } else {
                             this_console.history_position -= 1;
                             if (this_console.history_position < 0) {
@@ -331,6 +324,7 @@ window.CoreSphereConsole = (function (window) {
                             next = next.size() ? next : current_suggestions.first();
 
                             this_console.setActiveSuggestion(next.addClass(this_console.options.active_suggestion_class).text());
+                            scrollToEl = next[0];
                         } else {
                             this_console.history_position += 1;
                             if (this_console.history_position >= this_console.history.length) {
@@ -343,10 +337,16 @@ window.CoreSphereConsole = (function (window) {
 
                     }
 
+                    if(scrollToEl) {
+                        var rects = scrollToEl.getClientRects()[0];
+                        if(document.elementFromPoint(Math.ceil(rects.left),Math.ceil(rects.top)) !== scrollToEl
+                        || document.elementFromPoint(Math.floor(rects.right),Math.floor(rects.bottom)) !== scrollToEl) {
+                            scrollToEl.scrollIntoView(false);
+                        }
+                    }
                     this_console.focus();
                     enable_suggestions = false;
 
-                    e.preventDefault();
 
                 } else if (e.which === keys.escape) {
 
@@ -568,7 +568,7 @@ window.CoreSphereConsole = (function (window) {
             this.options.templates.error
                 .replace("%message%", msg)
                 .replace("%error%", error)
-                .replace("%command%", helpers.htmlEscape(command))
+                .replace("%command%", '')
         );
     };
 
@@ -594,7 +594,7 @@ window.CoreSphereConsole = (function (window) {
 
             .fail(this.commandError.bind(this))
 
-            .then(this.commandAfter.bind(this));
+            .always(this.commandAfter.bind(this));
     };
 
     return Console;

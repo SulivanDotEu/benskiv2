@@ -99,11 +99,13 @@
                         <td rowspan="{{ rowspan }}">{{ appart.appartement.nombreLits }}</td>
 
                         <td rowspan="{{ rowspan }}">
-                            <span class="text-info">133 / </span>{{ appart.stock }}
-                            <span class="label label-success commande-reserve">101</span>
-                            <span class="label label-info commande-commande">7</span>
-                            <span class="label label-warning commande-attente">23</span>
-                            <span class="label label-important commande-annule">2</span>
+                            {{ appart.stock }}
+
+                            {#<span class="text-info">133 / </span>#}
+                            {#<span class="label label-success commande-reserve">101</span>#}
+                            {#<span class="label label-info commande-commande">7</span>#}
+                            {#<span class="label label-warning commande-attente">23</span>#}
+                            {#<span class="label label-important commande-annule">2</span>#}
                         </td>
 
                         <td>1 <i class="icon-user"></i></td>
@@ -167,8 +169,10 @@
                             <div class="btn-group">
                                 <a class="btn" href="{{ path('pack_show', { 'id': pack.id }) }} ">
                                     <i class="icon-eye-open"></i> Show</a>
-                                <a class="btn" href="{{ path('pack_edit', { 'id': pack.id }) }}">
-                                    <i class="icon-pencil"></i> Edit</a>
+                                <a class="btn" href="{{ path('sejour_pack_delete', { 'sejour': entity.id, 'pack': pack.id }) }}">
+                                    <i class="icon-remove"></i> Delete</a>
+                                <a class="btn" href="{{ path('sejour_pack_delete', { 'sejour': entity.id, 'pack': pack.id }) }}">
+                                    <i class="icon-remove"></i> Delete</a>
                             </div>
                         </td>
                     </tr>

@@ -1,3 +1,11 @@
+
+
+
+
+BenskiReservationBundle_admin:
+    resource: "@BenskiReservationBundle/Resources/config/admin.yml"
+    prefix: /admin
+
 BenskiReservationBundle_reservation_sejour_process:
         resource: "@BenskiReservationBundle/Resources/config/routing/reservation_sejour.yml"
         prefix:   /reserver/sejour
@@ -26,10 +34,7 @@ BenskiReservationBundle_sejourreserve:
 
 
 #Paiements et réductions
-BenskiReservationBundle_reduction:
-    resource: "@BenskiReservationBundle/Controller/ReductionController.php"
-    type:     annotation
-    prefix:   /
+
 
 BenskiReservationBundle_paiement:
     resource: "@BenskiReservationBundle/Controller/PaiementController.php"

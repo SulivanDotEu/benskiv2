@@ -13,6 +13,8 @@ _configurator:
 _main:
     resource: routing.yml
 
-console:
+#app/config/routing_dev.yml
+_console:
     resource: "@CoreSphereConsoleBundle/Resources/config/routing.yml"
-    
+    prefix: /console
+

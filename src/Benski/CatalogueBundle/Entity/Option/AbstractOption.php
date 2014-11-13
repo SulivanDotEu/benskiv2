@@ -60,6 +60,13 @@ class AbstractOption extends VersionedObject {
      * @ORM\Column(name="explication", type="text", nullable=true)
      */
     private $explication;
+
+    /**
+     * @return string
+     */
+    public function getShortClass(){
+        return "Abstract";
+    }
     
     public function isTypeACocher(){
         return false;

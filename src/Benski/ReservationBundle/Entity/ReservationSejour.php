@@ -41,7 +41,62 @@ class ReservationSejour extends ReservationImpl {
     public function getNombresPersonnes(){
         return $this->getSejourReserve()->getNombresPersonnes();
     }
-    
+
+    public function confirmer(){
+        $this->calculateTotal();
+        $total = $this->getTotal();
+        $dateSejour = $this->getSejourReserve()->getSejour()->getDateDebut();
+        $today = new \DateTime();
+        $diff = $dateSejour->diff($today);
+        $days = $today->diff($dateSejour)->format('%a');
+
+        $this->paiements = array();
+
+        if($days >= 40){
+            // si + de 40 j => 2 paiement
+            $paiement = new Paiement();
+            $paiement->setReservation($this);
+            $acompte = round($total/100*30);
+            $paiement->setMontant($acompte);
+            // je donne 5 jours pour exécuter le paiement.
+            $today->add(new \DateInterval('P5D'));
+            $paiement->setDateLimite(clone $today);
+            $this->addPaiement($paiement);
+
+            $paiement = new Paiement();
+            $paiement->setReservation($this);
+            $paiement->setMontant($total-$acompte);
+            $dateSolde = clone $dateSejour;
+            $dateSolde->sub(new \DateInterval('P30D'));
+            $paiement->setDateLimite($dateSolde);
+            $this->addPaiement($paiement);
+        } else{
+            // un seul paiement
+            $paiement = new Paiement();
+            $paiement->setReservation($this);
+            $paiement->setMontant($total);
+
+            // si dépard dans + de 10 jours => on laisse 3 jours
+            if($days > 10){
+                $today->add(new \DateInterval('P3D'));
+            } elseif($days > 5){
+                // si dépard dans + de 10 jours => on laisse 2 jours
+                $today->add(new \DateInterval('P2D'));
+            } else{
+                // si dépard dans + de 10 jours => on laisse 1 jours
+                $today->add(new \DateInterval('P1D'));
+            }
+            $paiement->setDateLimite($today);
+            $this->addPaiement($paiement);
+        }
+        $paiements = $this->getPaiements();
+        foreach ($paiements as $paiement) {
+            /** @var $paiement Paiement */
+            $paiement->setUser($this->getResponsable());
+            $paiement->initCode();
+        }
+    }
+
     public function equals($object) {
         if ($object == null)
             return false;
@@ -56,15 +111,16 @@ class ReservationSejour extends ReservationImpl {
         return true;
     }
 
+
     /**
-     * @ORM\PrePersist
-     * @ORM\PreUpdate
+     * This method calculate the total and set it to the entity.
+     * @return int the total of the reservation
      */
-    public function prePersist() {
+    public function calculateTotal() {
         $this->total = $this->sejourReserve->getTotal();
+        return $this->total;
     }
-    
-    
+
     public function getDateDebut(){
         return $this->getSejourReserve()->getDateDebut();
     }

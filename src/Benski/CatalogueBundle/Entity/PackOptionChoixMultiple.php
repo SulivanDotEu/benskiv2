@@ -2,6 +2,7 @@
 
 namespace Benski\CatalogueBundle\Entity;
 
+use Benski\CatalogueBundle\Entity\Option\ChoixOptionMultiple;
 use Doctrine\ORM\Mapping as ORM;
 use Benski\CatalogueBundle\Entity\PackOption;
 
@@ -40,6 +41,24 @@ class PackOptionChoixMultiple extends PackOption
             if($elt->getChoix()->getId() == $choix->getId())
                 return $elt->getPrix();
         }
+    }
+
+    public function isChoixPublished(ChoixOptionMultiple $choix){
+        return $this->getPrixOptionChoixMultipleForChoix($choix)->isPublished();
+    }
+
+    /**
+     * @param ChoixOptionMultiple $choix
+     * @return PrixOptionChoixMultiple|mixed
+     */
+    public function getPrixOptionChoixMultipleForChoix(ChoixOptionMultiple $choix){
+        $prixOption = $this->getPrixOption();
+        foreach ($prixOption as $elt){
+            /* @var $elt PrixOptionChoixMultiple */
+            if($elt->getChoix()->getId() == $choix->getId())
+                return $elt;
+        }
+        return null;
     }
 
     /**

@@ -14,3 +14,38 @@ paiement.mode.40: Liquide
 paiement.statut.10: En attente
 paiement.statut.20: Signalé comme réalisé
 paiement.statut.30: Reçu
+
+generalterm:
+    title: "Conditions générales :"
+    message: "Veuillez accepter les conditions générales afin de confirmer votre réservation"
+    accept: "J'accèpte les %s conditions générales %s de vente."
+
+confirm_reservation: "Je confirme ma réservation"
+
+confirmation:
+    title: "Félicitations ! Votre commande est enregistrée !"
+    content:
+        1: "Les détails de votre réservation sont accessibles via votre %s espace membre %s. Vous y trouverez tous les détails de celle-ci, y compris le nom des participants, les options commandées, la période, etc."
+        2: "Nous restons à votre entière disponibilité, n'hésitez pas à %s nous contacter %s si vous avez la moindre question."
+    thanks: "Nous vous remercions pour votre commande et vous souhaitons d'ores et déjà un agréable séjour avec l'équipe Benski !"
+payment:
+    title: "Paiement et validation de la réservation"
+    content:
+        1: "Un acompte de 30% sera nécessaire pour valider votre réservation. Le solde restant dû devra être payé au plus tard 30 jours avant le départ. En cas de réservation moins de 30 jours avant le séjour, nous vous prions de bien vouloir payer l'intégralité du prix du voyage directement."
+        2: "Nous vous invitons à effecter à réaliser un virement bancaire avec les informations suivantes :"
+    account: "Compte bénéficiaire au nom de Benski :"
+    iban:
+        title: "IBAN"
+        content: "BE15651137228330"
+    bic:
+        title: "BIC"
+        content: "KEYT BE BB"
+    amount: "Montant :"
+    communication:
+        title: "Communication"
+        content: "Veuillez indiquer ce code dans la communication libre de votre virement : "
+
+    1: "Premier versement : l'acompte"
+    2: "Deuxième versement : le solde restant"
+
+

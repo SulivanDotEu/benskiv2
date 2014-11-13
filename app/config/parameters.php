@@ -12,8 +12,6 @@ $dir = __DIR__.
 //echo (realpath(__DIR__.'/../../../shared/config/database.php'));
 
 
-
-
 $dataBaseParameters = include($dir);
 
 $container->setParameter('facebook_client_id', '262093937323580');

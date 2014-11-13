@@ -13,13 +13,13 @@ class ReductionControllerTest extends WebTestCase
         $client = static::createClient();
 
         // Create a new entry in the database
-        $crawler = $client->request('GET', '/admin/reduction/');
-        $this->assertEquals(200, $client->getResponse()->getStatusCode(), "Unexpected HTTP status code for GET /admin/reduction/");
+        $crawler = $client->request('GET', '/reduction/');
+        $this->assertEquals(200, $client->getResponse()->getStatusCode(), "Unexpected HTTP status code for GET /reduction/");
         $crawler = $client->click($crawler->selectLink('Create a new entry')->link());
 
         // Fill in the form and submit it
         $form = $crawler->selectButton('Create')->form(array(
-            'benski_reservationbundle_reductiontype[field_name]'  => 'Test',
+            'benski_reservationbundle_reduction[field_name]'  => 'Test',
             // ... other fields to fill
         ));
 
@@ -33,7 +33,7 @@ class ReductionControllerTest extends WebTestCase
         $crawler = $client->click($crawler->selectLink('Edit')->link());
 
         $form = $crawler->selectButton('Edit')->form(array(
-            'benski_reservationbundle_reductiontype[field_name]'  => 'Foo',
+            'benski_reservationbundle_reduction[field_name]'  => 'Foo',
             // ... other fields to fill
         ));
 

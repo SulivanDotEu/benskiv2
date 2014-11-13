@@ -140,20 +140,38 @@ class Paiement {
         return 0;
     }
 
+    public function toArray(){
+        return array(
+            'id' => $this->getId(),
+//            'reservationId' => $this->getReservation()->getId(),
+            'montant' => $this->getMontant(),
+            "code" => $this->getCode(),
+            "mode" => $this->getMode(),
+            "dateLimite" => $this->getDateLimite()->format("d/m/Y"),
+        );
+    }
+
     function __construct() {
         $this->statut = self::$STATUS_EN_ATTENTE;
         $this->mode = self::$MODE_NON_DEFINI;
         $this->dateLimite = new \DateTime("NOW");
         $this->dateLimite->add(new \DateInterval('P1W'));
-        $this->initCode();
     }
-    
+
+    public function __toString()
+    {
+        return "Paiement #".$this->getId().' ('.$this->getMontant().' €)';
+    }
+
+
     public function initCode(){
-        $this->setCode($this->generateRandomString(8));
+        $randomCode = ($this->generateRandomString(10));
+        $verif = bcmod($randomCode, 97);
+        $this->setCode($randomCode.$verif);
     }
 
     public function generateRandomString($length = 10) {
-        $characters = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $characters = '0123456789';
         $randomString = '';
         for ($i = 0; $i < $length; $i++) {
             $randomString .= $characters[rand(0, strlen($characters) - 1)];

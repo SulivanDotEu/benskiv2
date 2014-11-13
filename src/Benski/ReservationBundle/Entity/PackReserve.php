@@ -104,16 +104,28 @@ class PackReserve {
          */
     }
 
+    /**
+     * Cette methode renvoie la liste des options multiples
+     * Attention, quand il y a plusieurs participant, le pack réservé recoit
+     * les optionsReserve de chaque participant. Il ne faut renvoyé qu'une option.
+     * @param $type
+     * @return array
+     *
+     */
     public function getOptionsReservesByType($type){
-        $optionReserve = array();
+        $list = array();
+        $idOptionAdded = array();
         foreach ($this->getOptionsReserves() as $or) {
             /** @var $or OptionReserve */
+            if(in_array($or->getOption()->getId(), $idOptionAdded)){
+                continue;
+            }
             if($or->getOption()->getType() == $type){
-                $optionReserve[] = $or;
+                $list[] = $or;
+                $idOptionAdded[] = $or->getOption()->getId();
             }
         }
-        return $optionReserve;
-
+        return $list;
     }
 
     public function getOptionsReservesTypeIndividuelle(){

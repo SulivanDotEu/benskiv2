@@ -1,0 +1,26 @@
+<div class="row">
+
+    {% for item in list %}
+        {# item \Benski\ReservationBundle\Entity\Reduction #}
+    <div class="col-sm-6">
+        <div class="panel panel-default">
+            <!-- Default panel contents -->
+            <div class="panel-heading">
+                <h3 style="margin-top: 5px;margin-bottom: 5px;">
+                    Réduction de {{ item.montant/100 }} €
+                </h3>
+            </div>
+            <div class="panel-body">
+                <p>
+                    {{ item.description|nl2br }}
+                </p>
+            </div>
+        </div>
+    </div>
+        {% if (loop.index % 2) == 0 %}
+            <div class="clearfix"></div>
+        {% endif %}
+    {% endfor %}
+
+</div>
+

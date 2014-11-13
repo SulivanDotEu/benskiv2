@@ -22,7 +22,7 @@
 	    "friendsofsymfony/user-bundle": "1.*",
 	    "jms/security-extra-bundle": "1.5.*",
         "stof/doctrine-extensions-bundle": "1.1.*",
-        "winzou/console-bundle": "1.*",
+        "coresphere/console-bundle": "dev-master",
         "jms/di-extra-bundle": "1.4.*"
     },
     "scripts": {
@@ -56,3 +56,4 @@
         }
     }
 }
+

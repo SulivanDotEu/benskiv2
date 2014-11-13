@@ -1,0 +1,7 @@
+
+
+
+
+BenskiReservationBundle_reduction:
+    resource: "@BenskiReservationBundle/Controller/ReductionController.php"
+    type:     annotation

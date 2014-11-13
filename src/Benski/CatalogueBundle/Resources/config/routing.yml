@@ -37,3 +37,16 @@ BenskiCatalogueBundle_pack:
 BenskiCatalogueBundle_public:
         resource: "@BenskiCatalogueBundle/Resources/config/routing/public.yml"
         prefix:   /
+
+BenskiCatalogueBundle_sejour:
+    resource: "@BenskiCatalogueBundle/Resources/config/routing/sejour.yml"
+    prefix:   /admin/sejour
+
+
+# SEJOUR PACK
+
+
+sejour_pack_controller:
+    prefix:  /
+    type:     annotation
+    resource: "@BenskiCatalogueBundle/Controller/SejourPackController.php"

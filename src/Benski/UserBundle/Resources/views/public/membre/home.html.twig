@@ -1,6 +1,6 @@
 {% extends "::public.html.twig" %}
 
-{% block title %}Benski - Espace membre de {{ app.user.person.firstName }} {{ app.user.person.lastName }}{% endblock %}
+{% block title %}Benski - {{ "Espace membre de"|trans }} {{ app.user.person.firstName }} {{ app.user.person.lastName }}{% endblock %}
 
 {% block header_content %}
     Bonjour {{ entity.person.firstName }} {{ entity.person.lastName }} {% endblock %}
@@ -33,7 +33,7 @@
                         <p>
                             {% if (reservations| length) > 0 %}
                             {{ 'Vous avez fait à ce jour'|trans }} {{ reservations| length }}
-                            réservation(s), {{ 'merci pour votre confiance !'|trans }}
+                            {{ "réservation(s)"|trans }}, {{ 'merci pour votre confiance !'|trans }}
 
                             {#<a href='{{ path('public_reservation') }}' >#}
                             {#En savoir plus#}
@@ -72,7 +72,7 @@
                     </div>
 
                     <div class="col-lg-6 col-sm-12">
-                        <h4 style=""><span class="glyphicon glyphicon-bell"></span> Votre solde</h4>
+                        <h4 style=""><span class="glyphicon glyphicon-bell"></span> {{ "Votre solde"|trans }}</h4>
                         <hr>
                         <p>
                             {{ 'Votre solde restant du est de'|trans }} {{ macro.int2prix(entity.getSolde) }} €. <br>
@@ -108,9 +108,9 @@
                                 <td>
                                     {% if paiement.estEnRetard() %}
                                         <span class="label label-danger"><span
-                                                    class="glyphicon glyphicon-remove"></span> Retard</span>
+                                                    class="glyphicon glyphicon-remove"></span> {{ "Retard"|trans }}</span>
                                     {% elseif paiement.bientotAEcheance() %}
-                                        <span class="label label-warning"><span class="glyphicon glyphicon-bell"></span> Bientot a échéance</span>
+                                        <span class="label label-warning"><span class="glyphicon glyphicon-bell"></span> {{ "Bientot a échéance"|trans }}</span>
                                     {% endif %}
                                     {% if paiement.estSolde() %}
                                         <span class="label label-success"><span

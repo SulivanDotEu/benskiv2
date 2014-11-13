@@ -1,0 +1,6 @@
+{% extends '::admin.html.twig' %}
+
+{% block breadcrumb %}
+    {{ parent() }}
+    <li class=""><a href="{{ path('admin_reservation') }}">Réservation</a></li>
+{% endblock %}

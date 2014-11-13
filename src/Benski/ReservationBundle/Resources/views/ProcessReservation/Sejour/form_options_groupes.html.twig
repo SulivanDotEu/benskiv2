@@ -55,8 +55,9 @@
                 <p class="list-group-item-text">
                     Risoul
                     <br>
-                    {{ entity.getNombreAppartement }} Appartement(s)<br>
-                    {{ entity.getNombresPersonnes }} Personne(s) 
+                    {{ entity.getNombreAppartement }} {{ "Appartement(s)"|trans }}<br>
+                    {{ entity.getNombresPersonnes }} {{ "Personne(s)"|trans }}
+                    {# todo handle plurial #}
                 </p>
             </a>
             <span href="" class="list-group-item active">

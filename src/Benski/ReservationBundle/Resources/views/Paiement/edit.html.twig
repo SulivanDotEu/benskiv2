@@ -1,16 +1,54 @@
 {% extends 'BenskiReservationBundle:Paiement:layout.html.twig' %}
 
 {% block body -%}
-    <h1>Paiement edit</h1>
 
-    {{ form(edit_form) }}
+    <div class="span12">
+        <div class="row">
+            <div class="span6">
+                <h1>Paiement edit</h1>
 
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('admin_paiement') }}">
-            Back to the list
-        </a>
-    </li>
-    <li>{{ form(delete_form) }}</li>
-</ul>
+                {{ form(edit_form) }}
+
+                <ul class="record_actions">
+                    <li>
+                        <a href="{{ path('admin_paiement') }}">
+                            Back to the list
+                        </a>
+                    </li>
+                    <li>{{ form(delete_form) }}</li>
+                </ul>
+            </div>
+            <div class="span4">
+                <h3>Explications</h3>
+                <hr>
+                <ul>
+                    <li>
+                        <b>Code : </b>
+                        C'est la communication structurée.
+                    </li>
+                    <li>
+                        <b>Date limite : </b>
+                        Est la date qui est affichée à l'utilisateur et aussi la date qui est utilisé pour envoyé les
+                        éventuelles rappels.
+                    </li>
+                    <li>
+                        <b>Date Réception : </b>
+                        C'est la date de la reception réel du paiement (celui que la banque affiche) ou la date de quand
+                        la
+                        transaction main à main s'est effectuée.
+                    </li>
+                    <li>
+                        <b>Date notification: </b>
+                        C'est la date où les employés de Benski ont constaté le paiement.
+                    </li>
+                    <li>
+                        <b>Compte créditeur : </b>
+                        Il faut absolument reprendre le compte qui a payé (dans le cas des remboursements, etc...)
+                    </li>
+
+                </ul>
+
+            </div>
+        </div>
+    </div>
 {% endblock %}

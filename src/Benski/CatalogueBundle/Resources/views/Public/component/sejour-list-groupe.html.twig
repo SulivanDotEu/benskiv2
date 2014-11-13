@@ -2,15 +2,23 @@
     {% set sejour = null %}
 {% endif %}
 
+
+
 <div class="list-group myListGroup">
     {% for element in sejours %}
+        <div style="position: absolute;margin-left: 20px;margin-top: 11px;z-index: 200;float: left;" >
+            {% if element == sejour %}
+                {% include('@BenskiWebsite/Components/more_informations.html.twig') with {'informable' : element, color : "white"} %}
+            {% else  %}
+                {% include('@BenskiWebsite/Components/more_informations.html.twig') with {'informable' : element} %}
+            {% endif %}
+        </div>
         <a href="{{ path('catalogue_public_logement',
         { 'destination': destination.id, 'sejour' : element.id }) }}
-         " class="list-group-item 
+         " class="list-group-item
           {% if element == sejour %} active {% endif %}
          ">
             <!--<p class="pull-right prix" > à partir de <span class="prix">1000€</span></p>-->
-            <div class="pull-left"><span class="glyphicon glyphicon-bookmark"></span></div>
 
             {% if element.aPartirDe != 0 %}
             <h5 class="pull-right list-group-item-heading hidden-sm">
@@ -32,3 +40,4 @@
         </a>
     {% endfor %}
 </div>
+

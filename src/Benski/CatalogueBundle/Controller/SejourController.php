@@ -23,11 +23,7 @@ class SejourController extends Controller
      */
     public function indexAction()
     {
-        if (!$this->get('security.context')->isGranted('ROLE_ADMIN')) 
-        {
-            throw new AccessDeniedHttpException('Accès limité aux administrateurs');
-        }
-        
+
         $em = $this->getDoctrine()->getManager();
 
         $entities = $em->getRepository('BenskiCatalogueBundle:Sejour')->findAll();
@@ -42,11 +38,7 @@ class SejourController extends Controller
      */
     public function createAction(Request $request)
     {
-        if (!$this->get('security.context')->isGranted('ROLE_ADMIN')) 
-        {
-            throw new AccessDeniedHttpException('Accès limité aux administrateurs');
-        }
-        
+
         $entity = new Sejour();
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);

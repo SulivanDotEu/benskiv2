@@ -27,7 +27,5 @@ benski_reservation_sejour_confirmation:
     defaults: { _controller: BenskiReservationBundle:ProcessReservationSejour:confirmation}
 
 benski_reservation_sejour_paiement:
-    pattern:  /{paiement}/paiement
+    pattern:  /paiement/{reservation}
     defaults: { _controller: BenskiReservationBundle:ProcessReservationSejour:afficherPaiement}
-
-

@@ -1,33 +1,37 @@
 {% macro print_stars(nbr) %}
-{% if nbr != 0 %}
-{% for i in 1..nbr %}
-<span class="glyphicon glyphicon-star"></span>
-{% endfor %}
-{% endif %}
+    {% if nbr != 0 %}
+        {% for i in 1..nbr %}
+            <span class="glyphicon glyphicon-star"></span>
+        {% endfor %}
+    {% endif %}
 {% endmacro %}
 
 {% macro print_stars_bs2(nbr) %}
-{% if nbr != 0 %}
-{% for i in 1..nbr %}
-<i class="icon-star"></i>
-{% endfor %}
-{% endif %}
+    {% if nbr != 0 %}
+        {% for i in 1..nbr %}
+            <i class="icon-star"></i>
+        {% endfor %}
+    {% endif %}
 {% endmacro %}
 
 {% macro int2prix(integer) %}
-{{ integer/100|number_format(2, ',', ' ') }}
+    {{ integer/100|number_format(2, ',', ' ') }}
 {% endmacro %}
 
 
 
 {% macro display_option(option, pack) %}
-<h4 >{{ option.nom}} 
-    <span class="pull-right">
+    {# option \Benski\CatalogueBundle\Entity\Option\AbstractOption #}
+    {# pack \Benski\CatalogueBundle\Entity\Pack #}
+    {% set packoption = pack.packOption(option) %}
+    {# packoption \Benski\CatalogueBundle\Entity\PackOption #}
+    <h4>{{ option.nom }}
+        <span class="pull-right">
 {% render(controller("BenskiContentBundle:Link:displayButton", { 'object' : option })) %}
     </span>
-</h4>
-<hr style="margin: 0; margin-bottom: 10px">
-<p>{{ option.description}}</p>
+    </h4>
+    <hr style="margin: 0; margin-bottom: 10px">
+    <p>{{ option.description }}</p>
     {% if ((option|get_class) == "Benski\\CatalogueBundle\\Entity\\Option\\OptionACocher") %}
         {{ _self.display_option_acocher(option, pack) }}
     {% elseif (option|get_class == "Benski\\CatalogueBundle\\Entity\\Option\\OptionChoixMultiple") %}
@@ -38,18 +42,26 @@
 {% endmacro %}
 
 {% macro display_option_acocher(option, pack) %}
-Prix de l'option : <strong>{{ _self.int2prix(pack.getPackOption(option).prix) }} €</strong>
+
+
+    {{ "Prix de l'option"|trans }} : <strong>{{ _self.int2prix(pack.getPackOption(option).prix) }} €</strong>
 {% endmacro %}
 
 {% macro display_option_choixmult(option, pack) %}
-<ul>
-    {% for choix in option.choix %}
-    <li>
-        {{ choix.intitule }} : 
-    <strong>{{ _self.int2prix(pack.getPackOption(option).getPrix(choix)) }}€</strong>
-    </li>
-    {% endfor %}
-</ul>
+    {# option \Benski\CatalogueBundle\Entity\Option\AbstractOption #}
+    {# pack \Benski\CatalogueBundle\Entity\Pack #}
+    {% set packoption = pack.packOption(option) %}
+    {# packoption \Benski\CatalogueBundle\Entity\PackOptionChoixMultiple #}
+    <ul>
+        {% for choix in option.choix %}
+            {% if packoption.choixPublished(choix) %}
+            <li>
+                {{ choix.intitule }} :
+                <strong>{{ _self.int2prix(pack.getPackOption(option).getPrix(choix)) }}€</strong>
+            </li>
+            {% endif %}
+        {% endfor %}
+    </ul>
 {% endmacro %}
 
 

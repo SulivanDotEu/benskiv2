@@ -1,0 +1,9 @@
+
+{% if informable.content != null %}
+{% if informable.content.page != null %}
+    <a href="{{ path("benski_page", {"url":informable.content.page.url}) }}">
+        <span class="glyphicon glyphicon-info-sign blue"
+    {% if color is defined %} style="color: {{ color }}"{% endif %} ></span>
+    </a>
+{% endif %}
+{% endif %}

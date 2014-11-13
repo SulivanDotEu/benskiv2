@@ -35,6 +35,10 @@ class Reduction
      */
     private $description;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="Benski\ReservationBundle\Entity\ReservationImpl", inversedBy="reductions")
+     */
+    private $reservation;
 
     /**
      * Get id
@@ -45,6 +49,13 @@ class Reduction
     {
         return $this->id;
     }
+
+    function __toString()
+    {
+        return "Reduction #".$this->getId();
+        // TODO: Implement __toString() method.
+    }
+
 
     /**
      * Set montant
@@ -90,5 +101,28 @@ class Reduction
     public function getDescription()
     {
         return $this->description;
+    }
+
+    /**
+     * Set reservation
+     *
+     * @param \Benski\ReservationBundle\Entity\ReservationImpl $reservation
+     * @return Reduction
+     */
+    public function setReservation(\Benski\ReservationBundle\Entity\ReservationImpl $reservation = null)
+    {
+        $this->reservation = $reservation;
+
+        return $this;
+    }
+
+    /**
+     * Get reservation
+     *
+     * @return \Benski\ReservationBundle\Entity\ReservationImpl 
+     */
+    public function getReservation()
+    {
+        return $this->reservation;
     }
 }

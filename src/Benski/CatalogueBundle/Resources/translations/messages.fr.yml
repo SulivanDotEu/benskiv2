@@ -1,9 +1,20 @@
-'Symfony2 is great': 'J''aime Symfony2'
 Type: Type
 option.type.2: Individuelle
 option.type.3: Groupe
 catalogue.choix.option.intro: "Nous vous avons préparé une liste de packs d'options répondant aux besoins de chacun. Vous voulez passer de vraies vacances,  sur les pistes de ski et pas ailleurs? Prenez un pack de qualités supérieures pour que vous ne vous souciez de rien !\n\n<br> Au contraire, vous aimez vous occupé de tout ou vous avez votre matériel?  Alors le pack de base est fait pour vous!\n"
-'à partir de': '__à partir de'
-'par personne': '__par personne'
-'Nos séjours': '__Nos séjours'
-'Choisissez votre date': '__Choisissez votre date'
+'à partir de': ' à partir de'
+'par personne': ' par personne'
+'Nos séjours': ' Nos séjours'
+'Choisissez votre date': ' Choisissez votre date'
+'Faites votre choix': ' Faites votre choix'
+'Nos Packs': ' Nos Packs'
+'Choisissez votre pack': ' Choisissez votre pack'
+Destination:  Destination
+Risoul:  Risoul
+Logement:  Logement
+Options:  Options
+Date:  Date
+'Ajouter votre sélection au panier': ' Ajouter votre sélection au panier'
+Présentation:  Présentation
+'Sélectionnez le nombre de participants': ' Sélectionnez le nombre de participants'
+

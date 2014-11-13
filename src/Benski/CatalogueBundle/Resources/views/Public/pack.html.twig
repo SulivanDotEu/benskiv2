@@ -21,12 +21,12 @@
                     <span class="glyphicon glyphicon-chevron-right arrow"></span>
 
                     <div class="panel-header2"><h4 style="   "><span class="glyphicon glyphicon-map-marker"></span>
-                            Destination</h4></div>
+                            {{ "Destination"|trans }}</h4></div>
                     <div class="panel-body" style="padding-right: 5px; padding-right: 5px">
 
 
                         <p style="font-size: 25px; font-weight: bolder">
-                            Risoul</p>
+                            {{ "Risoul"|trans }}</p>
 
 
                     </div>
@@ -40,7 +40,7 @@
 
                     <span class="glyphicon glyphicon-chevron-right arrow"></span>
 
-                    <div class="panel-header2"><h4><span class="glyphicon glyphicon-calendar"></span> Date</h4></div>
+                    <div class="panel-header2"><h4><span class="glyphicon glyphicon-calendar"></span> {{ "Date"|trans }}</h4></div>
 
                     <div class="panel-body" style="font-weight: bold; font-size: 18px">
                         Du {{ sejour.dateDebut|date('d/m/Y') }}<br>
@@ -79,7 +79,7 @@
 
                 <div class="panel panel-default text-center myPanel ok">
 
-                    <div class="panel-header2"><h4><span class="glyphicon glyphicon-gift"></span> Options</h4></div>
+                    <div class="panel-header2"><h4><span class="glyphicon glyphicon-gift"></span> {{ "Options"|trans }}</h4></div>
                     <div class="panel-body" style="">
                         {{ pack.nom }}
                         {{ macro.print_stars(pack.qualite) }}
@@ -96,7 +96,7 @@
                 <a class="btn btn-primary btn-lg btn-block "
                    href="{{ path('panier_ajouter_sejour',
                    { 'destination': destination.id, 'sejour' : sejour.id, 'appartement': appartement.id, 'nbrPersonnes' : nombrePersonnes, 'pack':pack.id }) }}">
-                    Ajouter votre selection au panier</a>
+                    {{ "add_to_cart"|trans }}</a>
             </div>
         </div>
     </div>
@@ -110,6 +110,13 @@
                 <div class="list-group" style="margin-top: 50px">
 
                     {% for item in packs %}
+                        <div style="position: absolute;margin-left: 13px;margin-top: 14px;z-index: 200;float: left;" >
+                            {% if pack.id == item.id %}
+                                {% include('@BenskiWebsite/Components/more_informations.html.twig') with {'informable' : item, color : "white"} %}
+                            {% else  %}
+                                {% include('@BenskiWebsite/Components/more_informations.html.twig') with {'informable' : item} %}
+                            {% endif %}
+                        </div>
 
                         <a href="{{ path('catalogue_public_pack',
                         { 'destination': destination.id, 'sejour' : sejour.id, 'appartement': appartement.id, 'nbrPersonnes' : nombrePersonnes, 'pack':item.id }) }}"
@@ -129,7 +136,6 @@
                         </a>
                     {% endfor %}
 
-
                 </div>
 
             </div>
@@ -145,13 +151,13 @@
                     <li class="active">
                         <a href="#presentation" data-toggle="tab">
                             <span class="glyphicon glyphicon-gift"></span>
-                            Présentation
+                            {{ "pack.selected.presentation"|trans }}
                         </a>
                     </li>
                     <li>
                         <a href="#options" data-toggle="tab">
                             <span class="glyphicon glyphicon-check"></span>
-                            Options
+                            {{ "pack.selected.option"|trans }}
                         </a>
                     </li>
 
@@ -174,7 +180,8 @@
 
                     </div>
                     <div class="tab-pane" id="options">
-                        {% for option in pack.getOptions %}
+                        {% for option in pack.getPublishedOptions %}
+
                             {% if (loop.index%2) ==0 %}
                                 <div class="row">
                             {% endif %}
@@ -196,14 +203,14 @@
 
         </div>
         <br>
-        <div class="row" style="margin-bottom: 50px">
-            <div class="col-sm-12 ">
-                <a class="btn btn-success btn-lg btn-block"
-                   href="{{ path('panier_ajouter_sejour',
-                   { 'destination': destination.id, 'sejour' : sejour.id, 'appartement': appartement.id, 'nbrPersonnes' : nombrePersonnes, 'pack':pack.id }) }}">
-                    Ajouter votre selection au panier</a>
-            </div>
-        </div>
+        {#<div class="row" style="margin-bottom: 50px">#}
+        {#<div class="col-sm-12 ">#}
+        {#<a class="btn btn-success btn-lg btn-block"#}
+        {#href="{{ path('panier_ajouter_sejour',#}
+        {#{ 'destination': destination.id, 'sejour' : sejour.id, 'appartement': appartement.id, 'nbrPersonnes' : nombrePersonnes, 'pack':pack.id }) }}">#}
+        {#Ajouter votre selection au panier</a>#}
+        {#</div>#}
+        {#</div>#}
 
     </div>
 

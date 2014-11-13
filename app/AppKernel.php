@@ -28,6 +28,7 @@ class AppKernel extends Kernel {
             new Walva\CrudAdminBundle\WalvaCrudAdminBundle(),
             new Benski\DashBoardBundle\BenskiDashBoardBundle(),
             new Benski\WebsiteBundle\BenskiWebsiteBundle(),
+            new JMS\SecurityExtraBundle\JMSSecurityExtraBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

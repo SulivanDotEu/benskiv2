@@ -17,8 +17,6 @@ use Benski\CatalogueBundle\Entity\Option\AbstractOption;
  */
 class PackOption
 {
-
-
     use PublishedObject;
 
    /**

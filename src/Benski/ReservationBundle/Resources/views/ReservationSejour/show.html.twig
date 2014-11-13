@@ -1,62 +1,74 @@
 {% extends 'BenskiReservationBundle:ReservationSejour:layout.html.twig' %}
 
 {% block body -%}
-<h1>ReservationSejour</h1>
+    <h1>ReservationSejour</h1>
 
 
-<ul class="nav nav-tabs">
-    <li class="active"><a href="#home" data-toggle="tab">Général</a></li>
-  <li><a href="#profile" data-toggle="tab">Résumé</a></li>
-  <li><a href="#messages" data-toggle="tab">Total</a></li>
-  <li><a href="#settings" data-toggle="tab">Options</a></li>
-</ul>
+    <ul class="nav nav-tabs">
+        <li class="active"><a href="#home" data-toggle="tab">Général</a></li>
+        <li><a href="#profile" data-toggle="tab">Résumé</a></li>
+        <li><a href="#messages" data-toggle="tab">Total</a></li>
+        <li><a href="#settings" data-toggle="tab">Options</a></li>
+    </ul>
 
 
-<div class="tab-content">
-    <div class="tab-pane active" id="home">
-        <table class="table table-striped">
-            <tbody>
-                <tr>
-                    <th>Id</th>
-                    <td>{{ entity.id }}</td>
-                </tr>
-                <tr>
-                    <th>Responsable</th>
-                    <td>{{ entity.responsable }}</td>
-                </tr>
-                <tr>
-                    <th>Total</th>
-                    <td>{{ macro.int2prix(entity.total) }}</td>
-                </tr>
-                <tr>
-                    <th>Statut</th>
-                    <td>{{ entity.statut }}</td>
-                </tr>
-                <tr>
-                    <th>Datecreation</th>
-                    <td>{{ entity.dateCreation|date('Y-m-d H:i:s') }}</td>
-                </tr>
-                <tr>
-                    <th>Datemodification</th>
-                    <td>{{ entity.dateModification|date('Y-m-d H:i:s') }}</td>
-                </tr>
-                <tr>
-                    <th>Reductions</th>
-                    <td>{#{ entity.reductions }#}</td>
-                </tr>
-                <tr>
-                    <th>Paiements</th>
-                    <td>{#{ entity.paiements }#}</td>
-                </tr>
-            </tbody>
-        </table>
+    <div class="tab-content">
+        <div class="tab-pane active" id="home">
+            <div class="span6">
+                <h3>Les informations générales</h3>
+                <hr>
+                <table class="table table-striped">
+                    <tbody>
+                    <tr>
+                        <th>Id</th>
+                        <td>{{ entity.id }}</td>
+                    </tr>
+                    <tr>
+                        <th>Responsable</th>
+                        <td>{{ entity.responsable }}</td>
+                    </tr>
+                    <tr>
+                        <th>Total</th>
+                        <td>{{ macro.int2prix(entity.total) }}</td>
+                    </tr>
+                    <tr>
+                        <th>Statut</th>
+                        <td>{{ entity.statut }}</td>
+                    </tr>
+                    <tr>
+                        <th>Datecreation</th>
+                        <td>{{ entity.dateCreation|date('Y-m-d H:i:s') }}</td>
+                    </tr>
+                    <tr>
+                        <th>Datemodification</th>
+                        <td>{{ entity.dateModification|date('Y-m-d H:i:s') }}</td>
+                    </tr>
+                    <tr>
+                        <th>Reductions</th>
+                        <td>{#{ entity.reductions }#}</td>
+                    </tr>
+                    <tr>
+                        <th>Paiements</th>
+                        <td>{#{ entity.paiements }#}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="span6">
+                <h3>Les paiements liés</h3>
+                <hr>
+                {% include 'BenskiReservationBundle:Components:list_payments.html.twig'
+                with {'list':entity.paiements }%}
 
-    </div>
-    <!-- NEW TAB PANE ------------------------------ -->
-    <div class="tab-pane" id="profile">
-        <table class="table table-bordered table-responsive" style="margin-top: 20px">
+            </div>
 
-            <tbody>
+
+        </div>
+        <!-- NEW TAB PANE ------------------------------ -->
+        <div class="tab-pane" id="profile">
+            <table class="table table-bordered table-responsive" style="margin-top: 20px">
+
+                <tbody>
                 <tr>
                     <th>Destination</th>
                     <th>Date</th>
@@ -65,113 +77,117 @@
                     <th>Pack</th>
                     <th>Total</th>
                 </tr>
-            {% set reservationSejour = entity %}
-            {% set sejourReserve = reservationSejour.sejourReserve  %}
-            {% set destination = sejourReserve.destination  %}
-            {% set sejour = sejourReserve.sejour %}
-            {% for appartementReserve in sejourReserve.appartementsReserves %}
-            {% set appartement = appartementReserve.appartement %}
-            {% set count = (sejourReserve.appartementsReserves|length) %}
+                {% set reservationSejour = entity %}
+                {% set sejourReserve = reservationSejour.sejourReserve %}
+                {% set destination = sejourReserve.destination %}
+                {% set sejour = sejourReserve.sejour %}
+                {% for appartementReserve in sejourReserve.appartementsReserves %}
+                    {% set appartement = appartementReserve.appartement %}
+                    {% set count = (sejourReserve.appartementsReserves|length) %}
 
-                <tr>
+                    <tr>
 
-                    {% if loop.first %}
-                    <td rowspan="{{ count }}">{{ destination }}
-                        <div class="pull-right">
-                    {% render(controller("BenskiContentBundle:Link:displayButton", { 'object' : destination })) %}
-                        </div>
-                    </td>
-                    <td rowspan="{{ count }}">Du {{ sejour.dateDebut|date("d/m/Y") }}<br>
-                        Au {{ sejour.dateFin|date("d/m/Y") }}
-                        <div class="pull-right">
-                    {% render(controller("BenskiContentBundle:Link:displayButton", { 'object' : sejour })) %}
-                        </div>
-                    </td>
-                    {% endif %}
+                        {% if loop.first %}
+                            <td rowspan="{{ count }}">{{ destination }}
+                                <div class="pull-right">
+                                    {% render(controller("BenskiContentBundle:Link:displayButton", { 'object' : destination })) %}
+                                </div>
+                            </td>
+                            <td rowspan="{{ count }}">Du {{ sejour.dateDebut|date("d/m/Y") }}<br>
+                                Au {{ sejour.dateFin|date("d/m/Y") }}
+                                <div class="pull-right">
+                                    {% render(controller("BenskiContentBundle:Link:displayButton", { 'object' : sejour })) %}
+                                </div>
+                            </td>
+                        {% endif %}
 
-                    <td>{{ appartement.nom }}
-                    {{ macro.print_stars_bs2(appartement.qualite) }}
-                        (<a href="#" class="prixParPersonne" >{{ macro.int2prix(appartementReserve.prix) }}€</a>)
-                        <div class="pull-right">
-                    {% render(controller("BenskiContentBundle:Link:displayButton", { 'object' : appartement })) %}
-                        </div>
-                    </td>
-                    <td>{{ appartementReserve.nombrePersonnes }}</td>
-                    <td>{{ appartementReserve.packReserve.pack.nom }}
-                    {{ macro.print_stars_bs2(appartementReserve.packReserve.pack.qualite) }}
+                        <td>{{ appartement.nom }}
+                            {{ macro.print_stars_bs2(appartement.qualite) }}
+                            (<a href="#" class="prixParPersonne">{{ macro.int2prix(appartementReserve.prix) }}€</a>)
+                            <div class="pull-right">
+                                {% render(controller("BenskiContentBundle:Link:displayButton", { 'object' : appartement })) %}
+                            </div>
+                        </td>
+                        <td>{{ appartementReserve.nombrePersonnes }}</td>
+                        <td>{{ appartementReserve.packReserve.pack.nom }}
+                            {{ macro.print_stars_bs2(appartementReserve.packReserve.pack.qualite) }}
 
-                        (<a href="#" class="prixParPersonne" >{{ macro.int2prix(appartementReserve.packReserve.pack.prix) }}€</a>)
-                        <div class="pull-right">     
-                    {% render(controller("BenskiContentBundle:Link:displayButton", { 'object' : appartementReserve.packReserve.pack })) %}
-                        </div>
-                    </td>
-                    {% if loop.first %}
-                    <td rowspan="{{ count }}">{{ macro.int2prix(sejourReserve.getTotal) }} €</td>
-                    {% endif %}
-                </tr>
-                    {% endfor %}
-
-
-            </tbody>
-        </table>
-        {% include "BenskiReservationBundle:ReservationSejour:element/appartements.html.twig" %}
-    </div>
-    <!-- NEW TAB PANE ------------------------------ -->
-    <div class="tab-pane" id="messages">
-        {% set sejourReserve = entity.sejourReserve %}
-        <table class="table table-bordered table-responsive">
-
-            <tbody>
-                {% for ar in sejourReserve.appartementsReserves %}
-                <tr>
-                    <th>{{ar.appartement.nom }}
-                        <small>
-                    {% for i in 1..(ar.appartement.qualite) %}
-                            <span class="glyphicon glyphicon-star"></span>
-                    {% endfor %}
-                        </small></th>
-                    <th>Logement</th>
-                    <th>Option</th>
-                    <th>Total</th>
-                </tr> 
-                {% for participant in ar.participants %}
-                <tr>
-                    <td>{{participant.personne.firstName}} {{participant.personne.lastName}}</td>
-                    <td>{{macro.int2prix(ar.prix)}} €</td>
-                    <td>{{macro.int2prix(participant.getTotalOptions)}} €</td>
-                    <td>{{macro.int2prix(participant.getTotal)}} €</td>
-                </tr>
+                            (<a href="#"
+                                class="prixParPersonne">{{ macro.int2prix(appartementReserve.packReserve.pack.prix) }}
+                                €</a>)
+                            <div class="pull-right">
+                                {% render(controller("BenskiContentBundle:Link:displayButton", { 'object' : appartementReserve.packReserve.pack })) %}
+                            </div>
+                        </td>
+                        {% if loop.first %}
+                            <td rowspan="{{ count }}">{{ macro.int2prix(sejourReserve.getTotal) }} €</td>
+                        {% endif %}
+                    </tr>
                 {% endfor %}
-                <tr>
-                    <td colspan="3">Options de groupe</td>
-                    <td><strong>{{macro.int2prix(ar.getTotalOptions())}} €</strong></td>
-                </tr>
-                <tr>
-                    <td colspan="2">Prix du pack </td>
-                    <td>{{ar.nombrePersonnes}} x
- {{macro.int2prix(ar.packReserve.prix)}} €</td>
-                    <td><strong> {{macro.int2prix(ar.packReserve.getTotal)}} €</strong></td>
-                </tr>
-                <tr>
-                    <td colspan="3">Sous total</td>
-                    <td><strong>{{macro.int2prix(ar.getTotal())}} €</strong></td>
-                </tr>
+
+
+                </tbody>
+            </table>
+            {% include "BenskiReservationBundle:ReservationSejour:element/appartements.html.twig" %}
+        </div>
+        <!-- NEW TAB PANE ------------------------------ -->
+        <div class="tab-pane" id="messages">
+            {% set sejourReserve = entity.sejourReserve %}
+            <table class="table table-bordered table-responsive">
+
+                <tbody>
+                {% for ar in sejourReserve.appartementsReserves %}
+                    <tr>
+                        <th>{{ ar.appartement.nom }}
+                            <small>
+                                {% for i in 1..(ar.appartement.qualite) %}
+                                    <span class="glyphicon glyphicon-star"></span>
+                                {% endfor %}
+                            </small>
+                        </th>
+                        <th>Logement</th>
+                        <th>Option</th>
+                        <th>Total</th>
+                    </tr>
+                    {% for participant in ar.participants %}
+                        <tr>
+                            <td>{{ participant.personne.firstName }} {{ participant.personne.lastName }}</td>
+                            <td>{{ macro.int2prix(ar.prix) }} €</td>
+                            <td>{{ macro.int2prix(participant.getTotalOptions) }} €</td>
+                            <td>{{ macro.int2prix(participant.getTotal) }} €</td>
+                        </tr>
+                    {% endfor %}
+                    <tr>
+                        <td colspan="3">Options de groupe</td>
+                        <td><strong>{{ macro.int2prix(ar.getTotalOptions()) }} €</strong></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">Prix du pack</td>
+                        <td>{{ ar.nombrePersonnes }} x
+                            {{ macro.int2prix(ar.packReserve.prix) }} €
+                        </td>
+                        <td><strong> {{ macro.int2prix(ar.packReserve.getTotal) }} €</strong></td>
+                    </tr>
+                    <tr>
+                        <td colspan="3">Sous total</td>
+                        <td><strong>{{ macro.int2prix(ar.getTotal()) }} €</strong></td>
+                    </tr>
                 {% endfor %}
 
                 <tr class="active">
                     <th colspan="3">Total de votre séjour</th>
-                    <td><strong>{{macro.int2prix(entity.getTotal())}} €</strong></td>
+                    <td><strong>{{ macro.int2prix(entity.getTotal()) }} €</strong></td>
                 </tr>
-            </tbody>
-        </table>
+                </tbody>
+            </table>
+        </div>
+        <!-- NEW TAB PANE ------------------------------ -->
+        <div class="tab-pane" id="settings">
+
+            {% include "BenskiReservationBundle:ReservationSejour:element/options.html.twig" %}
+
+        </div>
     </div>
-    <!-- NEW TAB PANE ------------------------------ -->
-    <div class="tab-pane" id="settings">
-
-        {% include "BenskiReservationBundle:ReservationSejour:element/options.html.twig" %}
-        
-    </div>
-</div>
 
 
 
@@ -179,26 +195,26 @@
 
 
 
-<ul class="record_actions">
-    <li>
-        <a href="{{ path('admin_reservation-sejour') }}">
-            Back to the list
-        </a>
-    </li>
-    <li>
-        <a href="{{ path('admin_reservation-sejour_edit', { 'id': entity.id }) }}">
-            Edit
-        </a>
-    </li>
-    <li>{{ form(delete_form) }}</li>
-</ul>
+    <ul class="record_actions">
+        <li>
+            <a href="{{ path('admin_reservation-sejour') }}">
+                Back to the list
+            </a>
+        </li>
+        <li>
+            <a href="{{ path('admin_reservation-sejour_edit', { 'id': entity.id }) }}">
+                Edit
+            </a>
+        </li>
+        <li>{{ form(delete_form) }}</li>
+    </ul>
 {% endblock %}
 
   {% block javascripts %}
-{{ parent() }}
+      {{ parent() }}
 
 
-</script>
+      </script>
 
 
   {% endblock %}

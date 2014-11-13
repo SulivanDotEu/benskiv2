@@ -25,13 +25,13 @@ class PublicPageController extends Controller
     public $contentManager;
 
     /**
-     * @Route("/{_locale}/{url}", name="benski_page", defaults={"_locale":"fr"})
+     * @Route("/{_locale}/{url}", name="benski_page", defaults={"_locale":"fr"}, requirements={"_locale" = "en|de|fr|es|nl"})
      */
     public function pageAction($url)
     {
         $repository = $this->getDoctrine()->getManager()->getRepository("BenskiWebsiteBundle:Page");
         $result = $repository->findByUrl($url);
-        if($result == null){
+        if($result == null OR empty($result)){
             if($this->get('security.context')->isGranted('ROLE_ADMIN')){
                 return $this->processPageNotFoundForAdmin($url);
             }

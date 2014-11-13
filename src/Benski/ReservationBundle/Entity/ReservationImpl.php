@@ -15,11 +15,12 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class ReservationImpl implements ReservationInterface {
 
-    public static $STATUT_RECENTLY_CREATED = 50;
-    public static $STATUT_APPROVED = 10;
-    public static $STATUT_CANCELED = 20;
-    public static $STATUT_UPDATED = 30;
-    public static $STATUT_DONE_AND_PAIED = 40;
+    // todo correct the misspelling
+    const STATUT_RECENTLY_CREATED = 50;
+    const STATUT_APPROVED = 10;
+    const STATUT_CANCELED = 20;
+    const STATUT_UPDATED = 30;
+    const STATUT_DONE_AND_PAIED = 40;
 
     /**
      * @var integer
@@ -79,7 +80,7 @@ class ReservationImpl implements ReservationInterface {
     /**
      * @var \stdClass
      *
-     * @ORM\Column(name="reductions", type="object", nullable=true)
+     * @ORM\OneToMany(targetEntity="Benski\ReservationBundle\Entity\Reduction", mappedBy="reservation", orphanRemoval=true)
      */
     protected $reductions;
 
@@ -91,12 +92,14 @@ class ReservationImpl implements ReservationInterface {
     public function getMontantAccompte(){
         return 0;
     }
-    
+
     public function confirmer(){
-        $paiement = new Paiement();
-        $paiement->setReservation($this);
-        $paiement->setMontant(120*$this->getNombresPersonnes()*100);
-        $this->addPaiement($paiement);
+        throw new \Exception('Please override this method');
+//        $this->getTotal();
+//        $paiement = new Paiement();
+//        $paiement->setReservation($this);
+//        $paiement->setMontant(120*$this->getNombresPersonnes()*100);
+//        $this->addPaiement($paiement);
     }
     
     public function getNombresPersonnes(){
@@ -128,12 +131,21 @@ class ReservationImpl implements ReservationInterface {
     }
     
     public function getTotalReductions(){
-         return 0;
+        $total = 0;
+        foreach ($this->reductions as $reduction) {
+            /** @var $reduction Reduction */
+            $total += $reduction->getMontant();
+        }
+        return $total;
+    }
+
+    public function getTotalApresReduction(){
+        return $this->getTotal() - $this->getTotalReductions();
     }
     
     function __construct() {
         $this->total = 0;
-        $this->statut = self::$STATUT_RECENTLY_CREATED;
+        $this->statut = self::STATUT_RECENTLY_CREATED;
         $this->dateCreation = new \DateTime("NOW");
     }
 
@@ -343,5 +355,28 @@ class ReservationImpl implements ReservationInterface {
     public function getPaiements()
     {
         return $this->paiements;
+    }
+
+    /**
+     * Add reductions
+     *
+     * @param \Benski\ReservationBundle\Entity\Reduction $reductions
+     * @return ReservationImpl
+     */
+    public function addReduction(\Benski\ReservationBundle\Entity\Reduction $reductions)
+    {
+        $this->reductions[] = $reductions;
+
+        return $this;
+    }
+
+    /**
+     * Remove reductions
+     *
+     * @param \Benski\ReservationBundle\Entity\Reduction $reductions
+     */
+    public function removeReduction(\Benski\ReservationBundle\Entity\Reduction $reductions)
+    {
+        $this->reductions->removeElement($reductions);
     }
 }

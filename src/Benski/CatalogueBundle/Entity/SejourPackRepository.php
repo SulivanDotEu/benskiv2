@@ -12,4 +12,19 @@ use Doctrine\ORM\EntityRepository;
  */
 class SejourPackRepository extends EntityRepository
 {
+
+    public function myFindBySejourAndPack(Sejour $sejour, Pack $pack) {
+
+        $qb = $this->getEntityManager()->createQuery('SELECT sp
+         FROM BenskiCatalogueBundle:SejourPack sp
+         WHERE sp.pack = :pack
+         AND sp.sejour = :sejour');
+
+        $qb->setParameter('pack', $pack);
+        $qb->setParameter('sejour', $sejour);
+
+        $resultats = $qb->getSingleResult();
+
+        return $resultats;
+    }
 }

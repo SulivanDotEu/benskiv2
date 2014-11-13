@@ -38,7 +38,7 @@
                 {% if entity.dateModification %}{{ entity.dateModification|date('d/m/Y') }}{% endif %} à<br>
                 {% if entity.dateModification %}{{ entity.dateModification|date('H:i:s') }}{% endif %}
             </td>
-            <td>{{ macro.int2prix(entity.total) }} €</td>
+            <td>{{ macro.int2prix(entity.getTotalApresReduction) }} €</td>
             <td>{{ macro.int2prix(entity.getMontantRestantDu) }} €</td>
             <td>
                 <a href="{{ path('public_reservation_show', { 'id': entity.id }) }}" class="btn btn-primary">

@@ -17,6 +17,7 @@ class ReductionType extends AbstractType
         $builder
             ->add('montant')
             ->add('description')
+            ->add('reservation')
         ;
     }
     

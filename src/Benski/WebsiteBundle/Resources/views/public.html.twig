@@ -72,13 +72,16 @@
                         text-align: center;
                         ">
                             {% block header_content %}
-                                Des séjours en altitude de qualités pour la famille et les amis à Risoul!
+                                {{ "main.title"|trans }}
+
                             {% endblock %}
                         </h1>
                     {% endblock %}
                 </div>
             </div>
         </div>
+
+        {{ ""|trans }}
 
         <div style="position: absolute; width: 100%; background-color: rgba(0,102,204, 0.8); min-height: 30px; z-index: 5;bottom: 0;"
              class="text-center">
@@ -120,31 +123,30 @@
                 <h5>Benski</h5>
                 <ul class="list-unstyled">
                     <li>
-                        <a href="{{ render(controller('BenskiWebsiteBundle:PublicPage:getHref', { 'internalName': 'TEAM' })) }}"
-                           class="footer">
-                            L'équipe</a>
+                        <a href="{{ render(controller('BenskiWebsiteBundle:PublicPage:getHref', { 'internalName': 'TEAM' })) }}" class="footer">
+                            {{ "L'équipe"|trans }}</a>
                     </li>
                     <li>
                         <a href="{{ render(controller('BenskiWebsiteBundle:PublicPage:getHref', { 'internalName': 'CONCEPT' })) }}"
                            class="footer">
-                            Le concept
+                            {{ "Le concept"|trans }}
                         </a>
                     </li>
                     <li>
                         <a href="{{ render(controller('BenskiWebsiteBundle:PublicPage:getHref', { 'internalName': 'PARTNERS' })) }}"
                            class="footer">
-                            Nos partenaires
+                            {{ "Nos partenaires"|trans }}
                         </a>
                     </li>
                 </ul>
             </div>
             <div class="col-sm-3 col-md-2 col-xs-6">
-                <h5>Nos destinations</h5>
+                <h5>{{ "Nos destinations"|trans }}</h5>
                 <ul class="list-unstyled">
                     <li>
                         <a href="{{ render(controller('BenskiWebsiteBundle:PublicPage:getHref', { 'internalName': 'RISOUL' })) }}"
                            class="footer">
-                            Risoul
+                            {{ "Risoul"|trans }}
                         </a>
                     </li>
                 </ul>
@@ -156,44 +158,49 @@
                     <li>
                         <a href="{{ render(controller('BenskiWebsiteBundle:PublicPage:getHref', { 'internalName': 'APPART' })) }}"
                            class="footer">
-                            Nos appartements</a></li>
+                            {{ "Nos appartements"|trans }}</a></li>
                     <li>
                         <a href="{{ render(controller('BenskiWebsiteBundle:PublicPage:getHref', { 'internalName': 'OPTION' })) }}"
                            class="footer">
-                            Nos options</a></li>
+                            {{ "Nos options"|trans }}</a></li>
                     <li>
                         <a href="{{ render(controller('BenskiWebsiteBundle:PublicPage:getHref', { 'internalName': 'AVANTAGES' })) }}"
                            class="footer">
-                            Nos avantages</a></li>
+                            {{ "Nos avantages"|trans }}</a></li>
                     <li>
                         <a href="{{ render(controller('BenskiWebsiteBundle:PublicPage:getHref', { 'internalName': 'SERVICE' })) }}"
                            class="footer">
-                            Nos services</a></li>
+                            {{ "Nos services"|trans }}</a></li>
                 </ul>
             </div>
             <div class="col-sm-3 col-dm-2 col-xs-6">
-                <h5>Aide</h5>
+                <h5>{{ "Aide"|trans }}</h5>
                 <ul class="list-unstyled">
                     <li>
                         <a href="{{ render(controller('BenskiWebsiteBundle:PublicPage:getHref', { 'internalName': 'FAQ' })) }}"
                            class="footer">
-                            FAQ
+                            {{ "FAQ"|trans }}
                         </a>
                     </li>
                     <li>
                         <a href="{{ render(controller('BenskiWebsiteBundle:PublicPage:getHref', { 'internalName': 'CONTACT' })) }}"
                            class="footer">
-                            Contact
+                            {{ "Contact"|trans }}
                         </a>
                     </li>
                 </ul>
             </div>
         </div>
         <div class="credit">
-            <p>© Benski 2014 All Rights Reserved. - Conditions Générales - Design by Benjamin Ellis</p>
+            <p>© Benski 2014 {{ "All Rights Reserved"|trans }}. -
+
+                <a href="{{ render(controller('BenskiWebsiteBundle:PublicPage:getHref', { 'internalName': 'CG' })) }}" class="footer">
+                    {{ "Conditions Générales"|trans }} </a>
+
+                - Design and code by Benjamin Ellis</p>
 
             <p>
-                <a href="#">Back to top</a>
+                <a href="#" class="footer">Back to top</a>
             </p>
         </div>
     </div>

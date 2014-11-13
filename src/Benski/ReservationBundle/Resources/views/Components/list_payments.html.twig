@@ -1,0 +1,39 @@
+{# list \Benski\ReservationBundle\Entity\Paiement #}
+
+<table class="table table-striped">
+    <thead>
+    <th>Id</th>
+    <th>Montant</th>
+    <th>Montant reçu</th>
+    <th>Status</th>
+    <th>Date limite</th>
+    <th>Date reception</th>
+    <th>Action</th>
+    </thead>
+
+    <tbody>
+    {% for item in list %}
+        {# item \Benski\ReservationBundle\Entity\Paiement #}
+
+        <tr>
+            <td>{{ item.id }}</td>
+            <td>{{ item.montant /100 }} €</td>
+            <td>{{ item.montantRecu/100 }} €</td>
+            <td>{{ item.statut }}</td>
+            <td>
+                {% if item.dateLimite != null %}
+                    {{ item.dateLimite|date('d/m/Y') }}
+                {% endif %}
+            </td>
+            <td>
+                {% if item.dateReception != null %}
+                    {{ item.dateReception|date('d/m/Y') }}
+                {% endif %}
+            </td>
+            <td>
+                <a href="{{ path('admin_paiement_edit', {'id': item.id}) }}" class="btn btn-small">modifier</a>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>

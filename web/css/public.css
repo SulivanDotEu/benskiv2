@@ -130,5 +130,7 @@
     color: #ffffff;
 }
 
-
+.glyphicon.blue{
+    color: rgba(0,102,204, 0.8);
+}
 /*  */

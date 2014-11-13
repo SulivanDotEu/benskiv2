@@ -1,6 +1,36 @@
 'Mon compte': 'Mon compte'
 'Mes réservations': 'Mes réservations'
 'Me déconnecter': 'Me déconnecter'
+main.title: 'DES SÉJOURS DE QUALITÉ POUR LA FAMILLE ET LES AMIS À RISOUL!'
+home.text.1.title: home.text.1.title
+home.text.1.content: home.text.1.content
+home.text.2.title: home.text.2.title
+home.text.2.content: home.text.2.content
+home.text.3.content: home.text.3.content
+home.text.4.content: home.text.4.content
+home.text.5.content: home.text.5.content
+home.text.6.content: home.text.6.content
+home.text.7.content: home.text.7.content
+home.text.8.content: home.text.8.content
+'Le ski à Risoul en famille et entre amis en toute facilité !': 'Le ski à Risoul en famille et entre amis en toute facilité !'
+'': 
+'L''équipe': 'L''équipe'
+'Le concept': 'Le concept'
+'Nos partenaires': 'Nos partenaires'
+'Nos destinations': 'Nos destinations'
+Risoul: Risoul
+'Nos appartements': 'Nos appartements'
+'Nos options': 'Nos options'
+'Nos avantages': 'Nos promotions'
+'Nos services': 'Nos services'
+Aide: Aide
+FAQ: FAQ
+Contact: Contact
+'All Rights Reserved': 'All Rights Reserved'
+'Conditions Générales': 'Conditions Générales'
+'Des séjours de qualité en altitude à Risoul!': 'Des séjours de qualités en altitude à Risoul!'
 
-
-"text principal": "DES SÉJOURS EN ALTITUDE DE QUALITÉS POUR LA FAMILLE ET LES AMIS À RISOUL!"
+marketing : "RÉSERVEZ VOTRE SÉJOUR À L'AVANCE ET PROFITEZ DE TARIFS AVANTAGEUX !"
+pack.selected.presentation: Présensation
+pack.selected.option: Aperçu des options
+add_to_cart: "Ajouter votre sélection au panier avant de choisir vos options"

@@ -1,10 +1,10 @@
 {% extends 'BenskiCatalogueBundle::Public/layout.html.twig' %}
 
 {% block breadcrumb %}
-{{ parent() }}
-<li>Catalogue</li>
-<li><a href="#" class="active">{{ destination.nom }}</a></li>
-<li><a href="#" class="active">{{ sejour.nom }}</a></li>
+    {{ parent() }}
+    <li>Catalogue</li>
+    <li><a href="#" class="active">{{ destination.nom }}</a></li>
+    <li><a href="#" class="active">{{ sejour.nom }}</a></li>
 {% endblock %}
 
 
@@ -12,133 +12,137 @@
 
 
 
-<div class="container" style="padding-top: 50px">
-    <div class="row process-catalogue" style=" ">
-        <div class="col-sm-3 " style="">
+    <div class="container" style="padding-top: 50px">
+        <div class="row process-catalogue" style=" ">
+            <div class="col-sm-3 " style="">
 
-            <div class="panel panel-default text-center myPanel ok">
-                <div class="ok" ><span class="glyphicon glyphicon-ok"></span></div>
-                <span class="glyphicon glyphicon-chevron-right arrow"></span>
-                <div class="panel-header2"><h4 style="   "><span class="glyphicon glyphicon-map-marker"></span> Destination</h4></div>
-                <div class="panel-body" style="padding-right: 5px; padding-right: 5px">
+                <div class="panel panel-default text-center myPanel ok">
+                    <div class="ok"><span class="glyphicon glyphicon-ok"></span></div>
+                    <span class="glyphicon glyphicon-chevron-right arrow"></span>
 
-
-                    <p style="font-size: 25px; font-weight: bolder" >
-                        Risoul</p>
+                    <div class="panel-header2"><h4 style="   "><span class="glyphicon glyphicon-map-marker"></span>
+                            Destination</h4></div>
+                    <div class="panel-body" style="padding-right: 5px; padding-right: 5px">
 
 
+                        <p style="font-size: 25px; font-weight: bolder">
+                            Risoul</p>
+
+
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="col-sm-3 " style="">
+            <div class="col-sm-3 " style="">
 
-            <div class="panel panel-default text-center  myPanel ok" >
+                <div class="panel panel-default text-center  myPanel ok">
 
-                <div class="ok" ><span class="glyphicon glyphicon-ok"></span></div>
+                    <div class="ok"><span class="glyphicon glyphicon-ok"></span></div>
 
-                <span class="glyphicon glyphicon-chevron-right arrow"></span>
+                    <span class="glyphicon glyphicon-chevron-right arrow"></span>
 
-                <div class="panel-header2"><h4><span class="glyphicon glyphicon-calendar"></span> Date</h4></div>
+                    <div class="panel-header2"><h4><span class="glyphicon glyphicon-calendar"></span> Date</h4></div>
 
-                <div class="panel-body" style="font-weight: bold; font-size: 18px">
-                    Du {{ sejour.dateDebut|date('d/m/Y') }}<br>
-                    au {{ sejour.dateFin|date('d/m/Y') }} 
+                    <div class="panel-body" style="font-weight: bold; font-size: 18px">
+                        Du {{ sejour.dateDebut|date('d/m/Y') }}<br>
+                        au {{ sejour.dateFin|date('d/m/Y') }}
+                    </div>
+                    <!---<div class="panel-body" style="font-weight: bold; font-size: 16px">
+                        Du 21/10/2013<br>
+                       au 28/10/2013
+                       faites votre choix <span class="glyphicon glyphicon-arrow-down"></span>
+                    </div>-->
                 </div>
-                <!---<div class="panel-body" style="font-weight: bold; font-size: 16px">
-                    Du 21/10/2013<br>
-                   au 28/10/2013 
-                   faites votre choix <span class="glyphicon glyphicon-arrow-down"></span>
-                </div>-->
             </div>
-        </div>
-        <div class="col-sm-3 " style="">
+            <div class="col-sm-3 " style="">
 
-            <div class="panel panel-default text-center myPanel ok " style="">
-                <div class="ok" ><span class="glyphicon glyphicon-ok"></span></div>
-                <span class="glyphicon glyphicon-chevron-right arrow"></span>
+                <div class="panel panel-default text-center myPanel ok " style="">
+                    <div class="ok"><span class="glyphicon glyphicon-ok"></span></div>
+                    <span class="glyphicon glyphicon-chevron-right arrow"></span>
 
-                <div class="panel-header2"><h4><span class="glyphicon glyphicon-home"></span> Logement</h4></div>
-                <div class="panel-body" style="">
-                    <div class="panel-body2" style="padding-right: 5px;
+                    <div class="panel-header2"><h4><span class="glyphicon glyphicon-home"></span> Logement</h4></div>
+                    <div class="panel-body" style="">
+                        <div class="panel-body2" style="padding-right: 5px;
                          padding-right: 5px">
-                       {{ appartement.nom }}<br>
-                      {% for i in range(1, appartement.qualite) %}<span class="glyphicon glyphicon-star"></span>{% endfor %}
-                        <br>
+                            {{ appartement.nom }}<br>
+                            {% for i in range(1, appartement.qualite) %}<span
+                                    class="glyphicon glyphicon-star"></span>{% endfor %}
+                            <br>
 
 
-                        <b style="font-weight: bolder">{{ nombrePersonnes }}</b> <span class="glyphicon glyphicon-user"></span> x <b>{{prixLogement/100}}€</b>
+                            <b style="font-weight: bolder">{{ nombrePersonnes }}</b> <span
+                                    class="glyphicon glyphicon-user"></span> x <b>{{ prixLogement/100 }}€</b>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="col-sm-3 " style="">
+            <div class="col-sm-3 " style="">
 
-            <div class="panel panel-default text-center myPanel active" >
+                <div class="panel panel-default text-center myPanel active">
 
-                <div class="panel-header2"><h4><span class="glyphicon glyphicon-gift"></span> Options</h4></div>
-                <div class="panel-body" style="">
+                    <div class="panel-header2"><h4><span class="glyphicon glyphicon-gift"></span> Options</h4></div>
+                    <div class="panel-body" style="">
 
-                    faites votre choix <span class="glyphicon glyphicon-arrow-down"></span>
+                        {{ "faites votre choix"|trans }} <span class="glyphicon glyphicon-arrow-down"></span>
+                    </div>
                 </div>
             </div>
+
+
         </div>
 
 
-
-
-    </div>
-
-
-
-
-    <div class="row"  >
-        <div class="col-sm-12">
-            <div class="page-header" style="">
-                <h1>Nos Packs <small>Choisissez votre pack</small></h1>
-            </div>
-
-        </div>
-    </div>
-
-    <div class="row">
-
-        <div class="col-sm-4 text-center">
-            <div class="list-group">
-{% for pack in packs %}
-
-                <a href="{{ path('catalogue_public_pack',
-                   { 'destination': destination.id, 'sejour' : sejour.id, 'appartement': appartement.id, 'nbrPersonnes' : nombrePersonnes, 'pack':pack.id }) }}"
-                   class="list-group-item ">
-                    <div class="row">
-                        <div class="col-xs-7 text-right">{{ pack.nom }} 
-                            {{ macro.print_stars(pack.qualite) }}
-                        </div>
-                        <div class="col-xs-4 text-left">
-                            <b>{{ macro.int2prix(pack.prix) }}€</b>
-                        </div>
-
-                        <div class="pull-right" style="padding-right: 10px">
-                            <span class="glyphicon glyphicon-chevron-right"></span>
-                        </div>
-                    </div>
-                </a>
-                {% endfor %}
-                
-
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="page-header" style="">
+                    <h1>{{ "Nos Packs"|trans }}
+                        <small>{{ "Choisissez votre pack"|trans }}</small>
+                    </h1>
+                </div>
 
             </div>
-
         </div>
 
-        <div class="col-sm-8 ">
+        <div class="row">
+
+            <div class="col-sm-4 text-center">
+                <div class="list-group">
+                    {% for pack in packs %}
+
+                        <div style="position: absolute;margin-left: 13px;margin-top: 14px;z-index: 200;float: left;">
+                            {% include('@BenskiWebsite/Components/more_informations.html.twig') with {'informable' : pack} %}
+                        </div>
+                        <a href="{{ path('catalogue_public_pack',
+                        { 'destination': destination.id, 'sejour' : sejour.id, 'appartement': appartement.id, 'nbrPersonnes' : nombrePersonnes, 'pack':pack.id }) }}"
+                           class="list-group-item ">
+                            <div class="row">
+                                <div class="col-xs-7 text-right">{{ pack.nom }}
+                                    {{ macro.print_stars(pack.qualite) }}
+                                </div>
+                                <div class="col-xs-4 text-left">
+                                    <b>{{ macro.int2prix(pack.prix) }}€</b>
+                                </div>
+
+                                <div class="pull-right" style="padding-right: 10px">
+                                    <span class="glyphicon glyphicon-chevron-right"></span>
+                                </div>
+                            </div>
+                        </a>
+                    {% endfor %}
+
+
+                </div>
+
+            </div>
+
+            <div class="col-sm-8 ">
                 {{ cms_inclodeBlock('pack_selection')|raw }}
 
+            </div>
+
         </div>
+        <br>
 
     </div>
-    <br>
-    
-</div>
 
 
 

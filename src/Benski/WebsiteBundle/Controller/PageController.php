@@ -18,30 +18,33 @@ use Benski\WebsiteBundle\Form\PageType;
 class PageController extends Controller
 {
 
-function __construct() {
-    $this->setRoutes(array(
-        self::$ROUTE_INDEX_ADD => 'page_new',
-        self::$ROUTE_INDEX_INDEX => 'page',
-        self::$ROUTE_INDEX_DELETE => 'page_show',
-        self::$ROUTE_INDEX_EDIT => 'page_edit',
-        self::$ROUTE_INDEX_SHOW => 'page_show',
-    ));
-
-    $this->setLayoutPath('BenskiWebsiteBundle:Page:layout.html.twig');
-    $this->setIndexPath("BenskiWebsiteBundle:Page:index.html.twig");
-    $this->setShowPath("BenskiWebsiteBundle:Page:show.html.twig");
-    $this->setEditPath("BenskiWebsiteBundle:Page:edit.html.twig");
-
-    $this->setColumnsHeader(array(
-        "Id",
+    function __construct()
+    {
+        $this->setRoutes(array(
+            self::$ROUTE_INDEX_ADD => 'page_new',
+            self::$ROUTE_INDEX_INDEX => 'page',
+            self::$ROUTE_INDEX_DELETE => 'page_show',
+            self::$ROUTE_INDEX_EDIT => 'page_edit',
+            self::$ROUTE_INDEX_SHOW => 'page_show',
         ));
-}
 
-public function createEntity() {
+        $this->setLayoutPath('BenskiWebsiteBundle:Page:layout.html.twig');
+        $this->setIndexPath("BenskiWebsiteBundle:Page:index.html.twig");
+        $this->setShowPath("BenskiWebsiteBundle:Page:show.html.twig");
+        $this->setEditPath("BenskiWebsiteBundle:Page:edit.html.twig");
+
+        $this->setColumnsHeader(array(
+            "Id",
+        ));
+    }
+
+    public function createEntity()
+    {
         return new Page();
     }
 
-public function getRepository() {
+    public function getRepository()
+    {
         $em = $this->getDoctrine()->getManager();
         return $em->getRepository('BenskiWebsiteBundle:Page');
     }
@@ -58,6 +61,7 @@ public function getRepository() {
         return parent::indexAction();
 
     }
+
     /**
      * Creates a new Page entity.
      *
@@ -72,12 +76,12 @@ public function getRepository() {
     }
 
     /**
-    * Creates a form to create a Page entity.
-    *
-    * @param Page $entity The entity
-    *
-    * @return \Symfony\Component\Form\Form The form
-    */
+     * Creates a form to create a Page entity.
+     *
+     * @param Page $entity The entity
+     *
+     * @return \Symfony\Component\Form\Form The form
+     */
     public function createCreateForm(Page $entity)
     {
         $form = $this->createForm(new PageType(), $entity, array(
@@ -130,12 +134,12 @@ public function getRepository() {
     }
 
     /**
-    * Creates a form to edit a Page entity.
-    *
-    * @param Page $entity The entity
-    *
-    * @return \Symfony\Component\Form\Form The form
-    */
+     * Creates a form to edit a Page entity.
+     *
+     * @param Page $entity The entity
+     *
+     * @return \Symfony\Component\Form\Form The form
+     */
     public function createEditForm(Page $entity)
     {
         $form = $this->createForm(new PageType(), $entity, array(
@@ -147,6 +151,7 @@ public function getRepository() {
 
         return $form;
     }
+
     /**
      * Edits an existing Page entity.
      *
@@ -159,6 +164,7 @@ public function getRepository() {
         return parent::updateAction($request, $id);
 
     }
+
     /**
      * Deletes a Page entity.
      *
@@ -167,7 +173,7 @@ public function getRepository() {
      */
     public function deleteAction(Request $request, $id)
     {
-return parent::deleteAction($request, $id);
+        return parent::deleteAction($request, $id);
 
     }
 
@@ -184,7 +190,6 @@ return parent::deleteAction($request, $id);
             ->setAction($this->generateUrl('page_delete', array('id' => $id)))
             ->setMethod('DELETE')
             ->add('submit', 'submit', array('label' => 'Delete'))
-            ->getForm()
-        ;
+            ->getForm();
     }
 }

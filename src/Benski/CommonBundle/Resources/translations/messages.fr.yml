@@ -1,39 +1,17 @@
 home.text.1.title: 'Vivez une expérience incroyable sur les pistes de Risoul'
-home.text.1.content: >
-    Notre équipe vous propose des séjours ski personnalisées avec 
-    un service que jamais vous n'auriez cru possible.<br>
-    Réservez votre séjour et profitez de la neige, c'est aussi simple que cela!
+home.text.1.content: "Notre équipe vous propose des séjours ski personnalisées avec  un service que jamais vous n'auriez cru possible.<br> Réservez votre séjour et profitez de la neige, c'est aussi simple que cela!\n"
 home.text.2.title: 'Profitez de notre service <i>au petit soin</i> au sein de la station'
-home.text.2.content: >
-    Notre équipe vous propose des séjours ski personnalisées avec un service que jamais vous n'auriez cru possible.
-    Réservez votre séjour et profitez de la neige, c'est aussi simple que cela!
-
-
-
-home.text.3.title: Découvez nos services
-home.text.3.content: >
-    Nous assurons un service à ce jour inégalé. Nous sommes la pour vous divertir, nourrir et vous équiper dans les meilleurs conditions.<br>
-    Nous nous portons garant de votre confort pour une liberté totale.
-    Un service n'est rien s'il n'est pas personnalisé. C'est pourquoi vous avez le contrôle intégral
-    sur les services que nous allons vous apporter.
-home.text.4.title: Découvez nos services
-home.text.4.content: >
-    Nous avons une gamme d'appartements de choix à votre disposition.
-    Nous sommes persuadé qu'ils vous conviendront, surtout quand ils sont en pied de piste.
-home.text.5.title: Découvez nos services
-home.text.5.content: >
-    Nous sommes conscient que votre agenda est surchargé et qu'il est difficile de trouver une date qui vous convient.
-    Mais chez Benski, nous croyons que les vacances sont un droit fondamental! Surtout quand il s'agit de faire du bien
-    à votre corps avec l'air de la montagne et l'exercices des pistes. C'est pourquoi il est de notre devoir de vous proposer
-    les dates qui vous conviennent!
-home.text.6.title: Découvez nos services
-home.text.6.content: >
-    La nature de Risoul est remplie de trésors incroyables! Bénie par sa situation particulière, Risoul est rarement privée de neige, même quand les températures sont positives!
-home.text.7.title: Découvez nos services
-home.text.7.content: >
-    Les pistes de Risoul sont vraiment pour tout le monde: du plus petit au plus grand.
-    Risoul c'est 116 pistes:
-home.text.8.title: Découvez nos services
-home.text.8.content: >
-    L'infrastructure est à la hauteur des pistes: agréable, rapide, sûre et éfficace!
-    Il n'y a pas moins de 59 remontées mécaniques à votre entière disposition.
+home.text.2.content: "Notre équipe vous propose des séjours ski personnalisées avec un service que jamais vous n'auriez cru possible. Réservez votre séjour et profitez de la neige, c'est aussi simple que cela!\n"
+home.text.3.title: 'Découvez nos services'
+home.text.3.content: "Nous assurons un service à ce jour inégalé. Nous sommes la pour vous divertir, nourrir et vous équiper dans les meilleurs conditions.<br> Nous nous portons garant de votre confort pour une liberté totale. Un service n'est rien s'il n'est pas personnalisé. C'est pourquoi vous avez le contrôle intégral sur les services que nous allons vous apporter.\n"
+home.text.4.title: 'Découvez nos services'
+home.text.4.content: "Nous avons une gamme d'appartements de choix à votre disposition. Nous sommes persuadé qu'ils vous conviendront, surtout quand ils sont en pied de piste.\n"
+home.text.5.title: 'Découvez nos services'
+home.text.5.content: "Nous sommes conscient que votre agenda est surchargé et qu'il est difficile de trouver une date qui vous convient. Mais chez Benski, nous croyons que les vacances sont un droit fondamental! Surtout quand il s'agit de faire du bien à votre corps avec l'air de la montagne et l'exercices des pistes. C'est pourquoi il est de notre devoir de vous proposer les dates qui vous conviennent!\n"
+home.text.6.title: 'Découvez nos services'
+home.text.6.content: "La nature de Risoul est remplie de trésors incroyables! Bénie par sa situation particulière, Risoul est rarement privée de neige, même quand les températures sont positives!\n"
+home.text.7.title: 'Découvez nos services'
+home.text.7.content: "Les pistes de Risoul sont vraiment pour tout le monde: du plus petit au plus grand. Risoul c'est 116 pistes:\n"
+home.text.8.title: 'Découvez nos services'
+home.text.8.content: "L'infrastructure est à la hauteur des pistes: agréable, rapide, sûre et éfficace! Il n'y a pas moins de 59 remontées mécaniques à votre entière disposition.\n"
+'Symfony2 is great': 'J''aime Symfony2'

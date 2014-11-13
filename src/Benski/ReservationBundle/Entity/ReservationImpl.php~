@@ -15,11 +15,12 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class ReservationImpl implements ReservationInterface {
 
-    public static $STATUT_RECENTLY_CREATED = 50;
-    public static $STATUT_APPROVED = 10;
-    public static $STATUT_CANCELED = 20;
-    public static $STATUT_UPDATED = 30;
-    public static $STATUT_DONE_AND_PAIED = 40;
+    // todo correct the misspelling
+    const STATUT_RECENTLY_CREATED = 50;
+    const STATUT_APPROVED = 10;
+    const STATUT_CANCELED = 20;
+    const STATUT_UPDATED = 30;
+    const STATUT_DONE_AND_PAIED = 40;
 
     /**
      * @var integer
@@ -49,7 +50,8 @@ class ReservationImpl implements ReservationInterface {
     /**
      * @ORM\OneToMany(
      *      targetEntity="Benski\ReservationBundle\Entity\Paiement",
-     *      mappedBy="reservation")
+     *      mappedBy="reservation",
+     *      cascade="ALL")
      * @ORM\JoinColumn(nullable=true)
      */
     protected $paiements;
@@ -78,7 +80,7 @@ class ReservationImpl implements ReservationInterface {
     /**
      * @var \stdClass
      *
-     * @ORM\Column(name="reductions", type="object", nullable=true)
+     * @ORM\OneToMany(targetEntity="Benski\ReservationBundle\Entity\Reduction", mappedBy="reservation", orphanRemoval=true)
      */
     protected $reductions;
 
@@ -86,7 +88,31 @@ class ReservationImpl implements ReservationInterface {
     public function __toString() {
         return 'reservation #'.$this->getId();
     }
+    
+    public function getMontantAccompte(){
+        return 0;
+    }
 
+    public function confirmer(){
+        throw new \Exception('Please override this method');
+//        $this->getTotal();
+//        $paiement = new Paiement();
+//        $paiement->setReservation($this);
+//        $paiement->setMontant(120*$this->getNombresPersonnes()*100);
+//        $this->addPaiement($paiement);
+    }
+    
+    public function getNombresPersonnes(){
+        return 0;
+    }
+
+    public function getTotalMontantRecu(){
+        $total = 0;
+        foreach ($this->paiements as $paiement) {
+            $total += $paiement->getMontantRecu();
+        }
+        return $total;
+    }
     
     public function getDateDebut(){
         return null;
@@ -97,20 +123,24 @@ class ReservationImpl implements ReservationInterface {
     }
     
     public function getMontantRestantDu(){
-         return 0;
+         return $this->getTotal() - $this->getMontantAcquitte();
     }
     
     public function getMontantAcquitte(){
-         return 0;
+         return $this->getTotalMontantRecu();
     }
     
     public function getTotalReductions(){
          return 0;
     }
+
+    public function getTotalApresReduction(){
+        return $this->getTotal() - $this->getTotalReductions();
+    }
     
     function __construct() {
         $this->total = 0;
-        $this->statut = self::$STATUT_RECENTLY_CREATED;
+        $this->statut = self::STATUT_RECENTLY_CREATED;
         $this->dateCreation = new \DateTime("NOW");
     }
 
@@ -287,5 +317,38 @@ class ReservationImpl implements ReservationInterface {
     public function getResponsable()
     {
         return $this->responsable;
+    }
+
+    /**
+     * Add paiements
+     *
+     * @param \Benski\ReservationBundle\Entity\Paiement $paiements
+     * @return ReservationImpl
+     */
+    public function addPaiement(\Benski\ReservationBundle\Entity\Paiement $paiements)
+    {
+        $this->paiements[] = $paiements;
+    
+        return $this;
+    }
+
+    /**
+     * Remove paiements
+     *
+     * @param \Benski\ReservationBundle\Entity\Paiement $paiements
+     */
+    public function removePaiement(\Benski\ReservationBundle\Entity\Paiement $paiements)
+    {
+        $this->paiements->removeElement($paiements);
+    }
+
+    /**
+     * Get paiements
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getPaiements()
+    {
+        return $this->paiements;
     }
 }

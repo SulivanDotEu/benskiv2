@@ -2,7 +2,11 @@
 
 namespace Benski\ReservationBundle\Controller;
 
+use Benski\ReservationBundle\Entity\ReservationImpl;
+use JMS\DiExtraBundle\Annotation\Inject;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Form\Form;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Benski\ReservationBundle\Entity\AppartementReserve;
@@ -15,22 +19,33 @@ use Benski\ReservationBundle\Entity\Option\OptionChoixMultipleReserve;
 use Benski\ReservationBundle\Entity\ReservationSejour;
 use JMS\SecurityExtraBundle\Annotation\Secure;
 use Benski\ReservationBundle\Entity\Paiement;
+use Symfony\Component\Translation\Translator;
 
-class ProcessReservationSejourController extends Controller {
+class ProcessReservationSejourController extends Controller
+{
+
+    /**
+     * @Inject("translator")
+     * @var Translator
+     */
+    private $translator;
 
     private $errors;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->errors = array();
     }
 
-    public function isThereErrors() {
+    public function isThereErrors()
+    {
         if (empty($this->errors))
             return false;
         return true;
     }
 
-    public function addError($title, $content) {
+    public function addError($title, $content)
+    {
         $error = array();
         $error['type'] = 'danger';
         $error['title'] = $title;
@@ -46,10 +61,10 @@ class ProcessReservationSejourController extends Controller {
      * @ParamConverter("sejour",        class="BenskiCatalogueBundle:Sejour")
      * @ParamConverter("destination",   class="BenskiCatalogueBundle:Destination")
      */
-    public function formOptionsGroupeAction(Sejour $sejour, Destination $destination) {
+    public function formOptionsGroupeAction(Sejour $sejour, Destination $destination)
+    {
         $panier = PanierController::getPanier();
         $reservationSejour = $panier->getReservationSejour($sejour, $destination);
-        //var_dump($sejour);
         $entity = $reservationSejour->getSejourReserve();
 
         /*
@@ -63,9 +78,9 @@ class ProcessReservationSejourController extends Controller {
          */
 
         return $this->render('BenskiReservationBundle:ProcessReservation\Sejour:form_options_groupes.html.twig', array(
-                    'entity' => $entity,
-                    'sejour' => $sejour,
-                    'destination' => $destination,
+            'entity' => $entity,
+            'sejour' => $sejour,
+            'destination' => $destination,
         ));
     }
 
@@ -82,7 +97,8 @@ class ProcessReservationSejourController extends Controller {
      * @ParamConverter("sejour",        class="BenskiCatalogueBundle:Sejour")
      * @ParamConverter("destination",   class="BenskiCatalogueBundle:Destination")
      */
-    public function processFormOptionsGroupeAction(Sejour $sejour, Destination $destination) {
+    public function processFormOptionsGroupeAction(Sejour $sejour, Destination $destination)
+    {
         $panier = PanierController::getPanier();
         $reservationSejour = $panier->getReservationSejour($sejour, $destination);
         $entity = $reservationSejour->getSejourReserve();
@@ -97,18 +113,19 @@ class ProcessReservationSejourController extends Controller {
         }
         if ($this->isThereErrors()) {
             return $this->redirect($this->generateUrl('benski_reservation_sejour_form_option_groupe', array(
-                                'sejour' => $sejour->getId(),
-                                'destination' => $destination->getId(),
+                'sejour' => $sejour->getId(),
+                'destination' => $destination->getId(),
             )));
         }
         return $this->redirect(
-                        $this->generateUrl('benski_reservation_sejour_form_option_individuelle', array(
-                            'destination' => $destination->getId(),
-                            'sejour' => $sejour->getId()
-        )));
+            $this->generateUrl('benski_reservation_sejour_form_option_individuelle', array(
+                'destination' => $destination->getId(),
+                'sejour' => $sejour->getId()
+            )));
     }
 
-    private function processFormForOptionGroupe($optionReserve) {
+    private function processFormForOptionGroupe($optionReserve)
+    {
         $varName = 'option-' . $optionReserve->getOption()->getId();
         $varName .= '-' . $optionReserve->getAppartement()->getNumero();
         if ($optionReserve instanceof OptionACocherReserve)
@@ -117,7 +134,8 @@ class ProcessReservationSejourController extends Controller {
             $this->processFormForOptionChoixMultiple($optionReserve, $varName);
     }
 
-    private function processFormForOptionACocher(OptionACocherReserve $optionReserve, $varName) {
+    private function processFormForOptionACocher(OptionACocherReserve $optionReserve, $varName)
+    {
         if (isset($_REQUEST[$varName])) {
             $optionReserve->setCoche(true);
         } else {
@@ -125,10 +143,11 @@ class ProcessReservationSejourController extends Controller {
         }
     }
 
-    private function processFormForOptionChoixMultiple(OptionChoixMultipleReserve $optionReserve, $varName) {
+    private function processFormForOptionChoixMultiple(OptionChoixMultipleReserve $optionReserve, $varName)
+    {
         if (!isset($_REQUEST[$varName])) {
             $this->addError('Formulaire incomplet!', 'Veuillez remplir le formulaire au complet, ceci compris les'
-                    . ' options à choix multiple');
+                . ' options à choix multiple');
             return;
         }
         $choixId = $_REQUEST[$varName];
@@ -151,16 +170,17 @@ class ProcessReservationSejourController extends Controller {
      * @ParamConverter("sejour",        class="BenskiCatalogueBundle:Sejour")
      * @ParamConverter("destination",   class="BenskiCatalogueBundle:Destination")
      */
-    public function formOptionsIndividuelleAction(Sejour $sejour, Destination $destination) {
+    public function formOptionsIndividuelleAction(Sejour $sejour, Destination $destination)
+    {
         $panier = PanierController::getPanier();
         $reservationSejour = $panier->getReservationSejour($sejour, $destination);
         $entity = $reservationSejour->getSejourReserve();
 
 
         return $this->render('BenskiReservationBundle:ProcessReservation\Sejour:form_options_individuelles.html.twig', array(
-                    'entity' => $entity,
-                    'sejour' => $sejour,
-                    'destination' => $destination,
+            'entity' => $entity,
+            'sejour' => $sejour,
+            'destination' => $destination,
         ));
     }
 
@@ -170,7 +190,8 @@ class ProcessReservationSejourController extends Controller {
      * @ParamConverter("sejour",        class="BenskiCatalogueBundle:Sejour")
      * @ParamConverter("destination",   class="BenskiCatalogueBundle:Destination")
      */
-    public function processFormOptionsIndividuelleAction(Sejour $sejour, Destination $destination) {
+    public function processFormOptionsIndividuelleAction(Sejour $sejour, Destination $destination)
+    {
         $panier = PanierController::getPanier();
         $reservationSejour = $panier->getReservationSejour($sejour, $destination);
         $entity = $reservationSejour->getSejourReserve();
@@ -183,18 +204,19 @@ class ProcessReservationSejourController extends Controller {
         }
         if ($this->isThereErrors()) {
             return $this->redirect($this->generateUrl('benski_reservation_sejour_form_option_individuelle', array(
-                                'sejour' => $sejour->getId(),
-                                'destination' => $destination->getId(),
+                'sejour' => $sejour->getId(),
+                'destination' => $destination->getId(),
             )));
         }
         return $this->redirect(
-                        $this->generateUrl('benski_reservation_sejour_form_identification_participant', array(
-                            'destination' => $destination->getId(),
-                            'sejour' => $sejour->getId()
-        )));
+            $this->generateUrl('benski_reservation_sejour_form_identification_participant', array(
+                'destination' => $destination->getId(),
+                'sejour' => $sejour->getId()
+            )));
     }
 
-    private function processFormForOptionIndividuelle($optionReserve) {
+    private function processFormForOptionIndividuelle($optionReserve)
+    {
         $varName = 'option-' . $optionReserve->getOption()->getId();
         $varName .= '-' . $optionReserve->getParticipant()->getAppartementReserve()->getNumero();
         $varName .= '-' . $optionReserve->getParticipant()->getNumero();
@@ -204,7 +226,8 @@ class ProcessReservationSejourController extends Controller {
             $this->processFormForOptionChoixMultiple($optionReserve, $varName);
     }
 
-    private function processFormForOptionACocherIndividuelle(OptionACocherReserve $optionReserve, $varName) {
+    private function processFormForOptionACocherIndividuelle(OptionACocherReserve $optionReserve, $varName)
+    {
         if (isset($_REQUEST[$varName])) {
             $optionReserve->setCoche(true);
         } else {
@@ -212,7 +235,8 @@ class ProcessReservationSejourController extends Controller {
         }
     }
 
-    private function processFormForOptionChoixMultipleIndividuelle(OptionChoixMultipleReserve $optionReserve, $varName) {
+    private function processFormForOptionChoixMultipleIndividuelle(OptionChoixMultipleReserve $optionReserve, $varName)
+    {
         $choixId = $_REQUEST[$varName];
         $listChoix = $optionReserve->getOption()->getChoix();
         foreach ($listChoix as $choix) {
@@ -229,15 +253,16 @@ class ProcessReservationSejourController extends Controller {
      * @ParamConverter("sejour",        class="BenskiCatalogueBundle:Sejour")
      * @ParamConverter("destination",   class="BenskiCatalogueBundle:Destination")
      */
-    public function identificationParticipantsAction(Sejour $sejour, Destination $destination) {
+    public function identificationParticipantsAction(Sejour $sejour, Destination $destination)
+    {
         $panier = PanierController::getPanier();
         $reservationSejour = $panier->getReservationSejour($sejour, $destination);
         $entity = $reservationSejour->getSejourReserve();
 
         return $this->render('BenskiReservationBundle:ProcessReservation\Sejour:form_participants.html.twig', array(
-                    'entity' => $entity,
-                    'sejour' => $sejour,
-                    'destination' => $destination,
+            'entity' => $entity,
+            'sejour' => $sejour,
+            'destination' => $destination,
         ));
     }
 
@@ -247,7 +272,8 @@ class ProcessReservationSejourController extends Controller {
      * @ParamConverter("sejour",        class="BenskiCatalogueBundle:Sejour")
      * @ParamConverter("destination",   class="BenskiCatalogueBundle:Destination")
      */
-    public function processIdentificationParticipantsAction(Sejour $sejour, Destination $destination) {
+    public function processIdentificationParticipantsAction(Sejour $sejour, Destination $destination)
+    {
         $panier = PanierController::getPanier();
         $reservationSejour = $panier->getReservationSejour($sejour, $destination);
         $entity = $reservationSejour->getSejourReserve();
@@ -259,20 +285,21 @@ class ProcessReservationSejourController extends Controller {
         }
         if ($this->isThereErrors()) {
             return $this->render('BenskiReservationBundle:ProcessReservation\Sejour:form_participants.html.twig', array(
-                        'entity' => $entity,
-                        'sejour' => $sejour,
-                        'destination' => $destination,
+                'entity' => $entity,
+                'sejour' => $sejour,
+                'destination' => $destination,
             ));
         } else {
             return $this->redirect(
-                            $this->generateUrl('benski_reservation_sejour_confirmation', array(
-                                'destination' => $destination->getId(),
-                                'sejour' => $sejour->getId()
-            )));
+                $this->generateUrl('benski_reservation_sejour_confirmation', array(
+                    'destination' => $destination->getId(),
+                    'sejour' => $sejour->getId()
+                )));
         }
     }
 
-    private function processFormForParticipant($participant) {
+    private function processFormForParticipant($participant)
+    {
         /* @var $participant \Benski\ReservationBundle\Entity\Participant */
         $var = "participant-" . $participant->getAppartementReserve()->getNumero() . "-" . $participant->getNumero() . "-";
         $personne = $participant->getPersonne();
@@ -287,7 +314,8 @@ class ProcessReservationSejourController extends Controller {
         $address->setCountry($this->getFormInput($var . "person-address-Country", true));
     }
 
-    private function getFormInput($varName, $nullable = false) {
+    private function getFormInput($varName, $nullable = false)
+    {
         if (isset($_REQUEST[$varName]) AND !empty($_REQUEST[$varName]))
             return $_REQUEST[$varName];
         else {
@@ -303,16 +331,39 @@ class ProcessReservationSejourController extends Controller {
      * @ParamConverter("sejour",        class="BenskiCatalogueBundle:Sejour")
      * @ParamConverter("destination",   class="BenskiCatalogueBundle:Destination")
      */
-    public function confirmationAction(Sejour $sejour, Destination $destination) {
+    public function confirmationAction(Sejour $sejour, Destination $destination)
+    {
         $panier = PanierController::getPanier();
         $reservationSejour = $panier->getReservationSejour($sejour, $destination);
         $entity = $reservationSejour->getSejourReserve();
 
+        // ajout du formulaire accepeter condition générale
+        $generalTermsForm = $this->createGeneralTermsFrom();
+
         return $this->render('BenskiReservationBundle:ProcessReservation\Sejour:confirmation.html.twig', array(
-                    'entity' => $entity,
-                    'sejour' => $sejour,
-                    'destination' => $destination,
+            'entity' => $entity,
+            'sejour' => $sejour,
+            'destination' => $destination,
+            'form' => $generalTermsForm->createView()
         ));
+    }
+
+    /**
+     * @return Form
+     */
+    private function createGeneralTermsFrom()
+    {
+        $builder = $this->createFormBuilder()
+            ->add('generalTerms', 'checkbox', array(
+                'required' => false
+            ))
+            ->add('submit', 'submit')
+            ->setMethod('POST')
+//            ->setAction('')
+        ;
+
+        $form = $builder->getForm();
+        return $form;
     }
 
     // --------- ENREGISTREMENT
@@ -321,19 +372,39 @@ class ProcessReservationSejourController extends Controller {
      * @ParamConverter("sejour",        class="BenskiCatalogueBundle:Sejour")
      * @ParamConverter("destination",   class="BenskiCatalogueBundle:Destination")
      */
-    public function enregistrerReservationAction(Sejour $sejour, Destination $destination) {
+    public function enregistrerReservationAction(Sejour $sejour, Destination $destination, Request $request)
+    {
+
+        $form = $this->createGeneralTermsFrom();
+        $form->handleRequest($request);
+        $errorTitle = $this->translator->trans("generalterm.title");
+        $errorMessage = $this->translator->trans("generalterm.message");
+        if(!$form->isValid()){
+            $this->addError($errorTitle, $errorMessage);
+            return $this->redirect($this->generateUrl('benski_reservation_sejour_confirmation', array(
+                'sejour' => $sejour->getId(),
+                'destination' => $destination->getId()
+            )));
+        }
+        $generalTerms = $form->getData()['generalTerms'];
+
+        if($generalTerms == false){
+            $this->addError($errorTitle, $errorMessage);
+            return $this->redirect($this->generateUrl('benski_reservation_sejour_confirmation', array(
+                'sejour' => $sejour->getId(),
+                'destination' => $destination->getId()
+            )));
+        }
+
         $panier = PanierController::getPanier();
         $reservationSejour = $panier->getReservationSejour($sejour, $destination);
         $sejourReserve = $reservationSejour->getSejourReserve();
         $user = $this->get('security.context')->getToken()->getUser();
-        //if ($securityContext->isGranted('ROLE_USER')) {
-        //  return $this->re($router->generate('admin_home'));
-        //}
 
         $em = $this->getDoctrine()->getManager();
 
+        /** @var $reservationSejour ReservationSejour */
         $reservationSejour->setResponsable($user);
-
         $reservationSejour->confirmer();
 
         $paiement = $reservationSejour->getPaiements()[0];
@@ -346,9 +417,9 @@ class ProcessReservationSejourController extends Controller {
         $em->flush();
         //$panier->removeReservationSejour($reservationSejour);
         return $this->redirect(
-                        $this->generateUrl('benski_reservation_sejour_paiement', array(
-                            'paiement' => $paiement->getId(),
-        )));
+            $this->generateUrl('benski_reservation_sejour_paiement', array(
+                'reservation' => $reservationSejour->getId(),
+            )));
 
         /*
           return $this->render('BenskiReservationBundle:ProcessReservation\Sejour:paiement.html.twig', array(
@@ -362,11 +433,15 @@ class ProcessReservationSejourController extends Controller {
     }
 
     /**
-     * @ParamConverter("paiement",        class="BenskiReservationBundle:Paiement")
+     * @ParamConverter("reservation", class="BenskiReservationBundle:ReservationImpl")
+     * @Secure(roles="ROLE_USER")
      */
-    public function afficherPaiementAction(Paiement $paiement) {
+    public function afficherPaiementAction(ReservationImpl $reservation)
+    {
+        if($this->getUser() != $reservation->getResponsable()) throw new \Exception("You are not allow to do that.");
+
         return $this->render('BenskiReservationBundle:ProcessReservation\Sejour:paiement.html.twig', array(
-                    'entity' => $paiement,
+            'entities' => $reservation->getPaiements(),
         ));
     }
 
@@ -375,21 +450,21 @@ class ProcessReservationSejourController extends Controller {
     // -------------- MERGE
     // -------------- MERGE
 
-    private function mergeExistantEntitiesInPaiement(Paiement $paiement) {
+    private function mergeExistantEntitiesInPaiement(Paiement $paiement)
+    {
         $em = $this->getDoctrine()->getManager();
         $user = $em->merge($paiement->getUser());
         $paiement->setUser($user);
     }
 
-    private function mergeExistantEntitiesInReservationSejour(ReservationSejour $reservationSejour) {
+    private function mergeExistantEntitiesInReservationSejour(ReservationSejour $reservationSejour)
+    {
         $paiements = $reservationSejour->getPaiements();
         foreach ($paiements as $paiement) {
             $this->mergeExistantEntitiesInPaiement($paiement);
         }
         $em = $this->getDoctrine()->getManager();
-
         $sejourReserve = $reservationSejour->getSejourReserve();
-
         $sejour = $em->merge($sejourReserve->getSejour());
         $sejourReserve->setSejour($sejour);
         $destination = $em->merge($sejourReserve->getDestination());
@@ -400,15 +475,14 @@ class ProcessReservationSejourController extends Controller {
         }
     }
 
-    private function mergeExistantEntitiesInAppartementReserve($appartementReserve) {
+    private function mergeExistantEntitiesInAppartementReserve($appartementReserve)
+    {
         $em = $this->getDoctrine()->getManager();
         /* @var $appartementReserve AppartementReserve */
         $appartement = $em->merge($appartementReserve->getAppartement());
         $appartementReserve->setAppartement($appartement);
 
-        
         $this->mergeExistantEntitiesInPackReserve($appartementReserve->getPackReserve());
-
         foreach ($appartementReserve->getOptionsReserves() as $optionReserve) {
             /* @var $optionReserve \Benski\ReservationBundle\Entity\Option\OptionReserve */
             $this->mergeExistantEntitiesInOptionReserve($optionReserve);
@@ -419,8 +493,8 @@ class ProcessReservationSejourController extends Controller {
     }
 
     // PARTICIPANT
-    private function mergeExistantEntitiesInPackReserve($packReserve) {
-        var_dump($packReserve->getPack());
+    private function mergeExistantEntitiesInPackReserve($packReserve)
+    {
         $em = $this->getDoctrine()->getManager();
         /* @var $packReserve \Benski\ReservationBundle\Entity\PackReserve */
         $pack = $em->merge($packReserve->getPack());
@@ -428,18 +502,17 @@ class ProcessReservationSejourController extends Controller {
     }
 
     // PARTICIPANT
-    private function mergeExistantEntitiesInParticipant($participant) {
+    private function mergeExistantEntitiesInParticipant($participant)
+    {
         /* @var $participant \Benski\ReservationBundle\Entity\Participant */
         foreach ($participant->getOptionsReserves() as $optionReserve) {
-
             $this->mergeExistantEntitiesInOptionReserve($optionReserve);
         }
     }
 
-    private function mergeExistantEntitiesInOptionReserve($optionReserve) {
+    private function mergeExistantEntitiesInOptionReserve($optionReserve)
+    {
         /* @var $optionReserve \Benski\ReservationBundle\Entity\Option\OptionReserve */
-
-
         $em = $this->getDoctrine()->getManager();
         /* @var $optionReseve \Benski\ReservationBundle\Entity\Option\OptionReserve */
 
@@ -450,10 +523,10 @@ class ProcessReservationSejourController extends Controller {
         }
     }
 
-    private function mergeExistantEntitiesInOptionChoixMultipleReserve($optionReseve) {
+    private function mergeExistantEntitiesInOptionChoixMultipleReserve($optionReseve)
+    {
         $em = $this->getDoctrine()->getManager();
         /* @var $optionReseve \Benski\ReservationBundle\Entity\Option\OptionChoixMultipleReserve */
-
         $choix = $em->merge($optionReseve->getChoix());
         $optionReseve->setChoix($choix);
     }

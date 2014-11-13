@@ -1,9 +1,9 @@
 {# empty Twig template #}
 
 {% macro form_option(option, ar) %}
-<h4 style="padding-left: 20px;">{{ option.option.nom}}</h4>
+    <h4 style="padding-left: 20px;">{{ option.option.nom }}</h4>
 
-<p>{{ option.option.description}}</p>
+    <p>{{ option.option.description }}</p>
     {% if ((option|get_class) == "Benski\\ReservationBundle\\Entity\\Option\\OptionACocherReserve") %}
         {{ _self.form_option_acocher(option, ar) }}
     {% elseif (option|get_class == "Benski\\ReservationBundle\\Entity\\Option\\OptionChoixMultipleReserve") %}
@@ -14,38 +14,41 @@
 {% endmacro %}
 
 {% macro form_option_acocher(option, ar) %}
-<div class="form-group">
-    <div class="col-sm-offset-2 col-sm-10">
-        <div class="checkbox">
-            <label>
-                <input type="checkbox" name="option-{{option.option.id}}-{{ar.numero}}" {% if option.coche %}checked{% endif %}> {{ option.option.intitule}} ({{ _self.int2prix(option.getPrixCatalogue) }} €)
-            </label>
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" name="option-{{ option.option.id }}-{{ ar.numero }}"
+                           {% if option.coche %}checked{% endif %}> {{ option.option.intitule }}
+                    ({{ _self.int2prix(option.getPrixCatalogue) }} €)
+                </label>
+            </div>
         </div>
     </div>
-</div>
 {% endmacro %}
 
 {% macro form_option_choixmult(option, ar) %}
-<div class="form-group">
-    <div class="col-sm-offset-2 col-sm-10">
-        {% for choix in option.option.choix %}
-        <div class="radio">
-            <label>
-                <input type="radio" name="option-{{option.option.id}}-{{ar.numero}}" id="optionsRadios1" value="{{choix.id}}" {% if option.choix == choix %}checked{% endif %}>
-                {{ choix.intitule }} ({{ _self.int2prix(option.getPrixCatalogueByChoix(choix)) }} €)
-            </label>
-        </div>
-        {% endfor %}
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            {% for choix in option.option.choix %}
+                <div class="radio">
+                    <label>
+                        <input type="radio" name="option-{{ option.option.id }}-{{ ar.numero }}" id="optionsRadios1"
+                               value="{{ choix.id }}" {% if option.choix == choix %}checked{% endif %}>
+                        {{ choix.intitule }} ({{ _self.int2prix(option.getPrixCatalogueByChoix(choix)) }} €)
+                    </label>
+                </div>
+            {% endfor %}
 
+        </div>
     </div>
-</div>
 {% endmacro %}
 
 
 
 {% macro form_option_indi(option, ar) %}
-<h4 style="">{{ option.nom}}</h4>
-<p>{{ option.description}}</p>
+    <h4 style="">{{ option.nom }}</h4>
+    <p>{{ option.description }}</p>
 
     {% if ((option|get_class) == "Benski\\CatalogueBundle\\Entity\\Option\\OptionACocher") %}
         {{ _self.form_option_indi_acocher(option, ar) }}
@@ -57,47 +60,58 @@
 {% endmacro %}
 
 {% macro form_option_indi_choixmult(option, ar) %}
-<div class="form-group">
-    {% for participant in ar.participants %}
-    <label for="inputEmail3" class="col-sm-2 control-label">Participant #{{participant.numero}}</label>
-    <div class="col-sm-10">
-        {% set optionreserve = participant.getOptionReserveByOption(option) %}
-        {#{% for choix in option.choix %}#}
-        {% for choix in optionreserve.getListChoix %}
+    <div class="form-group">
+        {% for participant in ar.participants %}
+                <label for="inputEmail3" class="col-sm-2 control-label">Participant #{{ participant.numero }}</label>
 
-        <div class="radio">
-            <label>
-                <input type="radio" name="option-{{option.id}}-{{ar.numero}}-{{participant.numero}}" id="optionsRadios1" value="{{choix.id}}" {% if (participant.getOptionReserveByOption(option)).choix == choix %}checked{% endif %}>
-                {{ choix.intitule }} ({{ _self.int2prix((participant.getOptionReserveByOption(option)).getPrixCatalogueByChoix(choix)) }} €)
-            </label>
-        </div>
+                <div class="col-sm-10">
+                    {% set optionreserve = participant.getOptionReserveByOption(option) %}
+                    {#{% for choix in option.choix %}#}
+                    {% for choix in optionreserve.getListChoix %}
+
+                        <div class="radio">
+                            <label>
+                                <input type="radio"
+                                       name="option-{{ option.id }}-{{ ar.numero }}-{{ participant.numero }}"
+                                       id="optionsRadios1" value="{{ choix.id }}"
+                                       {% if (participant.getOptionReserveByOption(option)).choix == choix %}checked{% endif %}>
+                                {{ choix.intitule }}
+                                ({{ _self.int2prix((participant.getOptionReserveByOption(option)).getPrixCatalogueByChoix(choix)) }}
+                                €)
+                            </label>
+                        </div>
+                    {% endfor %}
+                </div>
         {% endfor %}
     </div>
-    {% endfor %}
-</div>
 {% endmacro %}
 
 {% macro form_option_indi_acocher(option, ar) %}
-<div class="form-group">
-    {% for participant in ar.participants %}
-    <label for="inputEmail3" class="col-sm-2 control-label">Participant #{{participant.numero}}</label>
-    <div class="col-sm-10">
-        <div class="radio">
-            <label>
-                <input type="checkbox" name="option-{{option.id}}-{{ar.numero}}-{{participant.numero}}" id="optionsRadios1" value="1" {% if (participant.getOptionReserveByOption(option)).coche %}checked{% endif %}>
-                {{ option.intitule}}  ({{ _self.int2prix(participant.getOptionReserveByOption(option).getPrixCatalogue) }} €)
 
-            </label>
+    {% for participant in ar.participants %}
+        <div class="form-group">
+            <label for="inputEmail3" class="col-sm-2 control-label">Participant #{{ participant.numero }}</label>
+
+            <div class="col-sm-10">
+                <div class="radio">
+                    <label>
+                        <input type="checkbox" name="option-{{ option.id }}-{{ ar.numero }}-{{ participant.numero }}"
+                               id="optionsRadios1" value="1"
+                               {% if (participant.getOptionReserveByOption(option)).coche %}checked{% endif %}>
+                        {{ option.intitule }}
+                        ({{ _self.int2prix(participant.getOptionReserveByOption(option).getPrixCatalogue) }} €)
+
+                    </label>
+                </div>
+            </div>
         </div>
-    </div>
     {% endfor %}
 
-</div>
 {% endmacro %}
 
 
 
 {% macro int2prix(integer) %}
-{{ integer/100|number_format(2, ',', ' ') }}
+    {{ integer/100|number_format(2, ',', ' ') }}
 {% endmacro %}
 

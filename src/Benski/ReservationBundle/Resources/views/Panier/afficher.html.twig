@@ -4,81 +4,80 @@
 {% block body %}
 
 
-<h1>Votre panier</h1><hr>
-<table class="table table-bordered">
+    <h1>Votre panier</h1>
+    <hr>
+    <table class="table table-bordered">
 
-    <tbody>
+        <tbody>
         <tr>
-            <th>Destination</th>
-            <th>Date</th>
-            <th colspan="2">Appartement</th>
-            <th>Participants</th>
-            <th>Pack</th>
-            <th>Total</th>
-            <th>Action</th>
+            <th>{{ "Destination"|trans }}</th>
+            <th>{{ "Date"|trans }}</th>
+            <th colspan="2">{{ "Appartement"|trans }}</th>
+            <th>{{ "Participants"|trans }}</th>
+            <th>{{ "Pack"|trans }}</th>
+            <th>{{ "Total"|trans }}</th>
+            <th>{{ "Action"|trans }}</th>
         </tr>
-            {% for reservationSejour in entity.getReservationsSejours %}
-            {% set sejourReserve = reservationSejour.sejourReserve  %}
-            {% set destination = sejourReserve.destination  %}
+        {% for reservationSejour in entity.getReservationsSejours %}
+            {% set sejourReserve = reservationSejour.sejourReserve %}
+            {% set destination = sejourReserve.destination %}
             {% set sejour = sejourReserve.sejour %}
             {% for appartementReserve in sejourReserve.appartementsReserves %}
-            {% set appartement = appartementReserve.appartement %}
-            {% set count = (sejourReserve.appartementsReserves|length) %}
+                {% set appartement = appartementReserve.appartement %}
+                {% set count = (sejourReserve.appartementsReserves|length) %}
 
-        <tr>
-            
-{% if loop.first %}
-            <td rowspan="{{ count }}">{{ destination }}
-                <div class="pull-right">
-{% render(controller("BenskiContentBundle:Link:displayButton", { 'object' : destination })) %}
-                </div>
-            </td>
-            <td rowspan="{{ count }}">Du {{ sejour.dateDebut|date("d/m/Y") }}<br>
-                Au {{ sejour.dateFin|date("d/m/Y") }}
-                <div class="pull-right">
-            {% render(controller("BenskiContentBundle:Link:displayButton", { 'object' : sejour })) %}
-                </div>
-            </td>
-{% endif %}
-            <td>
-                <a href="{{ path('panier_supprimer_appartement_reserve', {'destination': destination.id, 'sejour': sejour.id, 'numero':appartementReserve.numero }) }}">
-                <span class="glyphicon glyphicon-remove supprimer" style="color: red"></span>
-                </a>
-            </td>
-            <td>{{ appartement.nom }}
-                {{ macro.print_stars(appartement.qualite) }}
-                (<a href="#" class="prixParPersonne" >{{ fo.int2prix(appartementReserve.prix) }}€</a>)
-                <div class="pull-right">
-{% render(controller("BenskiContentBundle:Link:displayButton", { 'object' : appartement })) %}
-                </div>
-            </td>
-            <td>{{ appartementReserve.nombrePersonnes }}</td>
-            <td>{{ appartementReserve.packReserve.pack.nom }}
-                {{ macro.print_stars(appartementReserve.packReserve.pack.qualite) }}
-                
-                (<a href="#" class="prixParPersonne" >{{ fo.int2prix(appartementReserve.packReserve.pack.prix) }}€</a>)
-                <div class="pull-right">     
-{% render(controller("BenskiContentBundle:Link:displayButton", { 'object' : appartementReserve.packReserve.pack })) %}
-                </div>
-            </td>
-                {% if loop.first %}
-            <td rowspan="{{ count }}">{{ fo.int2prix(sejourReserve.getTotal) }} €</td>
-            <td rowspan="{{ count }}">
-                <a class="btn btn-primary btn-xs" 
-                   href="{{ path('benski_reservation_sejour_form_option_groupe', {'destination': destination.id, 'sejour': sejour.id}) }}">
-                    Commander</a></td>
-            {% endif %}
-        </tr>
+                <tr>
 
-             {% endfor %}
-             {% endfor %}
+                    {% if loop.first %}
+                        <td rowspan="{{ count }}">{{ destination }}
+                            <div class="pull-right">
+                                {% render(controller("BenskiContentBundle:Link:displayButton", { 'object' : destination })) %}
+                            </div>
+                        </td>
+                        <td rowspan="{{ count }}">Du {{ sejour.dateDebut|date("d/m/Y") }}<br>
+                            Au {{ sejour.dateFin|date("d/m/Y") }}
+                            <div class="pull-right">
+                                {% render(controller("BenskiContentBundle:Link:displayButton", { 'object' : sejour })) %}
+                            </div>
+                        </td>
+                    {% endif %}
+                    <td>
+                        <a href="{{ path('panier_supprimer_appartement_reserve', {'destination': destination.id, 'sejour': sejour.id, 'numero':appartementReserve.numero }) }}">
+                            <span class="glyphicon glyphicon-remove supprimer" style="color: red"></span>
+                        </a>
+                    </td>
+                    <td>{{ appartement.nom }}
+                        {{ macro.print_stars(appartement.qualite) }}
+                        (<a href="#" class="prixParPersonne">{{ fo.int2prix(appartementReserve.prix) }}€</a>)
+                        <div class="pull-right">
+                            {% render(controller("BenskiContentBundle:Link:displayButton", { 'object' : appartement })) %}
+                        </div>
+                    </td>
+                    <td>{{ appartementReserve.nombrePersonnes }}</td>
+                    <td>{{ appartementReserve.packReserve.pack.nom }}
+                        {{ macro.print_stars(appartementReserve.packReserve.pack.qualite) }}
 
+                        (<a href="#" class="prixParPersonne">{{ fo.int2prix(appartementReserve.packReserve.pack.prix) }}
+                            €</a>)
+                        <div class="pull-right">
+                            {% render(controller("BenskiContentBundle:Link:displayButton", { 'object' : appartementReserve.packReserve.pack })) %}
+                        </div>
+                    </td>
+                    {% if loop.first %}
+                        <td rowspan="{{ count }}">{{ fo.int2prix(sejourReserve.getTotal) }} €</td>
+                        <td rowspan="{{ count }}">
+                            <a class="btn btn-primary btn-xs"
+                               href="{{ path('benski_reservation_sejour_form_option_groupe', {'destination': destination.id, 'sejour': sejour.id}) }}">
+                                {{ "Commander"|trans }}</a></td>
+                    {% endif %}
+                </tr>
 
-
+            {% endfor %}
+        {% endfor %}
 
 
-    </tbody>
-</table>
+        </tbody>
+    </table>
 
 
 
@@ -91,11 +90,11 @@
 
 
 {% block javascripts_content %}
-<script type = "text/javascript" >
-    $(function() {
-        $('.prixParPersonne').tooltip({title: 'Ce prix est entendu par personne.'});
-        $('.supprimer').tooltip({title: 'Cliquer pour supprimer cet élément.'});
+    <script type="text/javascript">
+        $(function () {
+            $('.prixParPersonne').tooltip({title: 'Ce prix est entendu par personne.'});
+            $('.supprimer').tooltip({title: 'Cliquer pour supprimer cet élément.'});
 
-    });
-</script>
-  {% endblock %}
+        });
+    </script>
+{% endblock %}

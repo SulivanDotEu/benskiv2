@@ -251,6 +251,17 @@ class Pack {
         return $list;
     }
 
+    public function getPublishedOptions(){
+        $list = array();
+        $packOptions = $this->getPackOptions();
+        foreach ($packOptions as $packOption) {
+            /* @var packOption PackOption */
+            if(!$packOption->isPublished()) continue;
+            $list[] = $packOption->getAbstractOption();
+        }
+        return $list;
+    }
+
     /**
      * Add packOptions
      *

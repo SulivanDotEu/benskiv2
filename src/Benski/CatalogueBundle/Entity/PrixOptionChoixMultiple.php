@@ -50,7 +50,7 @@ class PrixOptionChoixMultiple {
     * @ORM\ManyToOne(targetEntity = "Benski\CatalogueBundle\Entity\PackOptionChoixMultiple", inversedBy="prixOption")
     * @ORM\JoinColumns({
     *   @ORM\JoinColumn(name="pack_id", referencedColumnName="pack_id"),
-    *   @ORM\JoinColumn(name="abstractOption_id", referencedColumnName="abstract_option_id")
+    *   @ORM\JoinColumn(name="abstract_option_id", referencedColumnName="abstract_option_id")
     * })
     */
    protected $packOption;
