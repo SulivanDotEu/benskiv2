@@ -153,6 +153,11 @@
 
     </div>
     <div class="tab-pane" id="details">
+        <br>
+        <div class="alert alert-info" role="alert">
+            Benski tentera de satisfaire toute demande de modification concernant la destination, les dates, le logement et/ou les options. Ces demandes sont sujettes à notre approbation et doivent faire l'objet d'un mail spécifique à l'attention de  modifications@benski.be
+
+        </div>
         {% set sejourReserve = entity.sejourReserve %}
         {% for ar in sejourReserve.appartementsReserves %}
             <h2>{{ ar.appartement.nom }}
@@ -204,9 +209,9 @@
 
                                         {{ option.getIntitule }} ({{ fo.int2prix(option.prix) }}€)
                                         <div class="pull-right ">
-                                            <a href="{{ path('public_option_optionreserve_edit', {'id':option.id}) }}">
-                                                <span class="glyphicon glyphicon-pencil"></span>
-                                            </a>
+                                            {#<a href="{{ path('public_option_optionreserve_edit', {'id':option.id}) }}">#}
+                                                {#<span class="glyphicon glyphicon-pencil"></span>#}
+                                            {#</a>#}
                                         </div>
                                         <div class="pull-right">
                                             {% render(controller("BenskiContentBundle:Link:displayButton", { 'object' : option.option })) %}
@@ -289,6 +294,8 @@
     </div>
 
     </div>
+
+
     </div>
 
 

@@ -41,7 +41,9 @@
         </dd>
         <dt>{{ "payment.communication.title"|trans }}</dt>
         <dd>{{ "payment.communication.content"|trans }}
-        {#{{ entity.code }}#}
+            {% if entity.code is defined %}
+                {{ entity.code }}
+             {% endif %}
         </dd>
     </dl>
     {% endfor %}

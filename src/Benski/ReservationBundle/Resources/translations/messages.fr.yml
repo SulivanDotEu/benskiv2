@@ -1,3 +1,13 @@
+Destination: Destination
+Date: Date
+Appartement: Appartement
+Participants: Participants
+Pack: Pack
+Total: Total
+Action: Action
+Commander: Commander
+'Reservez votre séjour': 'Réservez votre séjour'
+'Vous avez choisi les options concernant vos groupes avec succès! Maintenant, le formulaire ci-dessous vous demande de choisir les options relatives aux participants de chaque groupe.': 'Vous avez choisi les options concernant vos groupes avec succès! Maintenant, le formulaire ci-dessous vous demande de choisir les options relatives aux participants de chaque groupe.'
 'Symfony2 is great': 'J''aime Symfony2'
 reservation.statut.50: new
 reservation.statut.10: approuvé
@@ -36,10 +46,10 @@ payment:
     account: "Compte bénéficiaire au nom de Benski :"
     iban:
         title: "IBAN"
-        content: "BE15651137228330"
+        content: "BE94 6511 5386 2214"
     bic:
         title: "BIC"
-        content: "KEYT BE BB"
+        content: "KEYTBEBB"
     amount: "Montant :"
     communication:
         title: "Communication"
@@ -48,4 +58,49 @@ payment:
     1: "Premier versement : l'acompte"
     2: "Deuxième versement : le solde restant"
 
-
+'Participant n°': 'Participant n°'
+Nom: Nom
+Email: Email
+Adresse: Adresse
+Options: Options
+Logement: Logement
+Option: Option
+'Options de groupe': 'Options de groupe'
+'Prix du pack': 'Prix du pack'
+'Sous total': 'Sous total'
+'Total de votre séjour': 'Total de votre séjour'
+Sejour: Sejour
+'Etape 1': 'Etape 1'
+'Choix des options de groupe': 'Choix des options de groupe'
+'Etape 2': 'Etape 2'
+'Choix des options individuelles': 'Choix des options individuelles'
+'Etape 3': 'Etape 3'
+'Inscriptions des participants': 'Inscriptions des participants'
+Confirmation: Confirmation
+Paiement: Paiement
+"Les prix sont entendus par personne": 'Les prix sont entendus par personne'
+"Dans un premier temps, le site vous demande de choisir les options que vous désirez. Ces options dépendent du pack" : "Dans un premier temps, le site vous demande de choisir les options que vous désirez. Ces options dépendent du pack"
+"Appartement(s)": Appartement(s)
+"Personne(s)": Personne(s)
+Continuer: Continuer
+personne(s): personne(s)
+Prénom: Prénom
+'Nom de famille': 'Nom de famille'
+'Votre email': 'Votre email'
+Rue: Rue
+Numero: Numero
+'Code Postal': 'Code Postal'
+Ville: Ville
+Pays: Pays
+Récapitulatif: Récapitulatif
+'Vos réservations': 'Vos réservations'
+Statut: Statut
+'Fait le': 'Fait le'
+'Modifié le': 'Modifié le'
+'Solde dû': 'Solde dû'
+Actions: Actions
+'Plus d''informations': 'Plus d''informations'
+Résumé: Résumé
+Détails:
+Détails
+Réductions: Réductions

@@ -14,7 +14,7 @@
 
                 <div class="list-group">
                     <a class="list-group-item" href="{{ path("public_reservation") }}">
-                            <span class="badge badge-primary">{{ reservations| length }}</span>{{ 'Mes réservations'|trans }}
+                        <span class="badge badge-primary">{{ reservations| length }}</span>{{ 'Mes réservations'|trans }}
                     </a>
                     <a class="list-group-item disabled" href="#"><span
                                 class="badge badge-primary">{{ paiements| length }}</span>{{ 'Mes paiements'|trans }}
@@ -27,7 +27,7 @@
             </div>
             <div class="col-sm-9">
                 <div class="row">
-                    <div class="col-lg-6 col-sm-12">
+                    <div class="col-lg-12 col-sm-12">
                         <h4 style=""><span class="glyphicon glyphicon-book"></span> {{ 'Mes réservations'|trans }}</h4>
                         <hr>
                         <p>
@@ -71,15 +71,22 @@
                         </p>
                     </div>
 
-                    <div class="col-lg-6 col-sm-12">
+                    <div class="col-lg-12 col-sm-12">
                         <h4 style=""><span class="glyphicon glyphicon-bell"></span> {{ "Votre solde"|trans }}</h4>
                         <hr>
                         <p>
-                            {{ 'Votre solde restant du est de'|trans }} {{ macro.int2prix(entity.getSolde) }} €. <br>
-                            {#<a class="" href="/benskiv2/web/app_dev.php/content/services#}
-                            {#">#}
-                            {#En savoir plus#}
-                            {#</a>#}
+                            {{ 'Votre solde restant dû est de'|trans }} {{ macro.int2prix(entity.getSolde) }} €.
+                            {{ "payment_instruction"|trans }}
+                        <dl class="dl-horizontal">
+                            <dt>{{ "payment.iban.title"|trans }}</dt>
+                            <dd>{{ "payment.iban.content"|trans }}</dd>
+                            <dt>{{ "payment.bic.title"|trans }}</dt>
+                            <dd>{{ "payment.bic.content"|trans }}</dd>
+                        </dl>
+                        {#<a class="" href="/benskiv2/web/app_dev.php/content/services#}
+                        {#">#}
+                        {#En savoir plus#}
+                        {#</a>#}
 
                         <table class="table">
                             <thead>
@@ -88,6 +95,7 @@
                                 <th>{{ 'Montant'|trans }}</th>
                                 <th>{{ 'Statut'|trans }}</th>
                                 <th>{{ 'Date limite'|trans }}</th>
+                                <th>{{ 'Communication'|trans }}</th>
                                 <th></th>
                             </tr>
                             </thead>
@@ -110,7 +118,8 @@
                                         <span class="label label-danger"><span
                                                     class="glyphicon glyphicon-remove"></span> {{ "Retard"|trans }}</span>
                                     {% elseif paiement.bientotAEcheance() %}
-                                        <span class="label label-warning"><span class="glyphicon glyphicon-bell"></span> {{ "Bientot a échéance"|trans }}</span>
+                                        <span class="label label-warning"><span
+                                                    class="glyphicon glyphicon-bell"></span> {{ "Bientot a échéance"|trans }}</span>
                                     {% endif %}
                                     {% if paiement.estSolde() %}
                                         <span class="label label-success"><span
@@ -122,6 +131,7 @@
                                 <td>{{ macro.int2prix(paiement.montant) }} €</td>
                                 <td>{{ ('paiement.statut.'~paiement.statut)|trans }}</td>
                                 <td>{% if paiement.dateLimite %}{{ paiement.dateLimite|date('d/m/Y') }}{% endif %}</td>
+                                <td>{% if paiement.code is defined %}{{ paiement.code }}{% endif %}</td>
                                 <td><span class="glyphicon glyphicon-chevron-right"></span></td>
                                 </tr>
                             {% endfor %}
